@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make, u as uniqueId } from '../chunks/moments-Cg_NlOYG.js';
-import { o as ownChildren } from '../chunks/kit-Dmjuhvd8.js';
+import { o as ownChildren } from '../chunks/kit-DugHPVcq.js';
 import { c as css } from '../chunks/motion-surfaces-D35JWuaW.js';
 
 const SVG = 'http://www.w3.org/2000/svg';

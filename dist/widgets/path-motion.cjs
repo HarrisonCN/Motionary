@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_pathMotion = require('../chunks/path-motion-Cnf5MHzn.cjs');
+var widgets_pathMotion = require('../chunks/path-motion-BJ5jD7yj.cjs');
 
 
 

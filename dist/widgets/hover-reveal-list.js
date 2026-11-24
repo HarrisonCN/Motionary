@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { c as createSpring } from '../chunks/spring-Bu3AwUgu.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { o as ownChildren, s as safeImageUrl } from '../chunks/kit-Dmjuhvd8.js';
+import { o as ownChildren, s as safeImageUrl } from '../chunks/kit-DugHPVcq.js';
 import { c as css } from '../chunks/motion-surfaces-D35JWuaW.js';
 
 function defineHoverRevealList(tag = 'usa-hover-reveal-list') {

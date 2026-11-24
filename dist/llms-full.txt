@@ -890,6 +890,19 @@ Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 <usa-blobs colors="#7c5cff,#22d3ee,#f472b6">…</usa-blobs>
 ```
 
+### <mo-border-beam> (legacy <usa-border-beam>) — Border beam
+
+A beam of light that runs around a card's border, with an optional glow.
+
+- Import: `import { defineBorderBeam } from 'motionary/components/widgets'; defineBorderBeam();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `duration`, `colors`, `length`, `width`, `radius`, `glow`, `reverse`
+- Methods: `mount()`, `defineMoName()`
+
+```html
+<mo-border-beam glow><strong>New</strong></mo-border-beam>
+```
+
 ### <mo-bottom-sheet> (legacy <usa-bottom-sheet>) — Bottom sheet
 
 A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS / Android pattern for web and Windows web-view apps.
@@ -1209,6 +1222,20 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 </script>
 ```
 
+### <mo-clothesline> (legacy <usa-clothesline>) — Clothesline
+
+Photos pegged to a sagging line that swing when the pointer brushes past.
+
+- Import: `import { defineClothesline } from 'motionary/components/widgets'; defineClothesline();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `sag`, `item-width`, `strength`, `label`
+- Events: `usa:swing`
+- Methods: `swing()`
+
+```html
+<mo-clothesline><figure><img src="assets/demo-photo.jpg" alt="Photo 1"></figure><figure><img src="assets/demo-photo.jpg" alt="Photo 1"></figure><figure><img src="assets/demo-photo.jpg" alt="Photo 1"></figure></mo-clothesline>
+```
+
 ### <mo-code-export> (legacy <usa-code-export>) — Code export
 
 8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one click.
@@ -1326,6 +1353,20 @@ Explicit essential and optional choices; no cookies, storage or services are cha
 
 ```html
 <mo-consent label="Your preferences"></mo-consent>
+```
+
+### <mo-context-menu> (legacy <usa-context-menu>) — Context menu
+
+Right-click, long press or the Menu key opens an ARIA menu that grows from the pointer.
+
+- Import: `import { defineContextMenu } from 'motionary/components/widgets'; defineContextMenu();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `long-press`
+- Events: `usa:close`, `usa:open`, `usa:select`
+- Methods: `show()`, `close()`
+
+```html
+<mo-context-menu><div>Right-click here</div><menu><button type="button">Copy</button><button type="button">Rename</button><hr><button type="button">Delete</button></menu></mo-context-menu>
 ```
 
 ### <mo-contour-relief> (legacy <usa-contour-relief>) — Contour relief
@@ -1538,6 +1579,20 @@ Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, t
 </usa-depth>
 ```
 
+### <mo-desktop-windows> (legacy <usa-desktop-windows>) — Desktop windows
+
+Draggable, stackable windows with a dock; close pops toward the dock and back.
+
+- Import: `import { defineDesktopWindows } from 'motionary/components/widgets'; defineDesktopWindows();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `height`, `label`, `close-label`
+- Events: `usa:focus`, `usa:open`, `usa:close`, `usa:move`
+- Methods: `open()`, `close()`
+
+```html
+<mo-desktop-windows height="320px"><div data-title="Notes">Hello</div><div data-title="Music">Playing</div></mo-desktop-windows>
+```
+
 ### <mo-dialog> (legacy <usa-dialog>) — Modal & drawer
 
 Animated modal, side drawers and bottom sheet on the native <dialog>: top layer, focus trap, Esc, backdrop click.
@@ -1668,6 +1723,20 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 </usa-double-tap>
 ```
 
+### <mo-download-button> (legacy <usa-download-button>) — Download button
+
+A button that fills with progress, reads it out in tens and ends on a drawn tick.
+
+- Import: `import { defineDownloadButton } from 'motionary/components/widgets'; defineDownloadButton();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `done-label`, `progress`, `duration`, `once`
+- Events: `usa:done`, `usa:start`
+- Methods: `reset()`
+
+```html
+<mo-download-button duration="2400"></mo-download-button>
+```
+
 ### <mo-download-menu> (legacy <usa-download-menu>) — Download menu
 
 Choose a download format. Escape closes the picker and returns focus.
@@ -1751,6 +1820,19 @@ A disclosure whose body opens on a spring, overshooting a little before it settl
 
 ```html
 <mo-elastic-accordion heading="Shipping"><p>Free over $50.</p></mo-elastic-accordion>
+```
+
+### <mo-elastic-frame> (legacy <usa-elastic-frame>) — Elastic frame
+
+A rubber frame whose edges bow toward the pointer and wobble back.
+
+- Import: `import { defineElasticFrame } from 'motionary/components/widgets'; defineElasticFrame();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `stretch`, `reach`, `radius`, `fill`, `stroke`, `stroke-width`
+- Methods: `mount()`, `draw()`, `settle()`, `size()`, `defineMoName()`
+
+```html
+<mo-elastic-frame><h3>Stretch me</h3></mo-elastic-frame>
 ```
 
 ### <mo-elastic-mesh> (legacy <usa-elastic-mesh>) — Elastic mesh
@@ -2497,6 +2579,33 @@ Pictures drop behind the pointer as it moves across the area and fade away.
 <mo-image-trail><img src="assets/demo-photo.jpg" alt="Photo 1" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 2" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 3" data-full="assets/demo-photo.jpg"><h2>Move here</h2></mo-image-trail>
 ```
 
+### <mo-image-tunnel> (legacy <usa-image-tunnel>) — Image tunnel
+
+Pictures fly out of the distance toward you, left and right, as the page scrolls.
+
+- Import: `import { defineImageTunnel } from 'motionary/components/widgets'; defineImageTunnel();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `depth`, `length`, `size`, `min-width`, `label`
+- Events: `usa:change`
+
+```html
+<mo-image-tunnel><img src="assets/demo-photo.jpg" alt="Photo 1"><img src="assets/demo-photo.jpg" alt="Photo 2"><img src="assets/demo-photo.jpg" alt="Photo 3"><img src="assets/demo-photo.jpg" alt="Photo 4"></mo-image-tunnel>
+```
+
+### <mo-infinite-scroll> (legacy <usa-infinite-scroll>) — Infinite scroll
+
+Asks for the next page near the end, rises new items in and keeps a Load more button.
+
+- Import: `import { defineInfiniteScroll } from 'motionary/components/widgets'; defineInfiniteScroll();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `root-margin`, `auto`, `label`, `button-label`, `end-label`, `stagger`
+- Events: `usa:load`, `usa:end`
+- Methods: `done()`, `end()`, `reset()`
+
+```html
+<mo-infinite-scroll auto="false"><ul><li>One</li><li>Two</li></ul></mo-infinite-scroll>
+```
+
 ### <mo-infinity-loop> (legacy <usa-infinity-loop>) — Infinity loop
 
 A short stroke runs along a figure-eight track.
@@ -3143,6 +3252,20 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
   paths="M50 10 C75 10 90 30 90 50 C90 75 70 90 50 90 C25 90 10 70 10 50 C10 30 25 10 50 10 Z | M50 4 C80 20 96 26 86 54 C78 84 64 96 44 86 C14 80 4 64 14 44 C20 20 30 0 50 4 Z"></usa-morph>
 ```
 
+### <mo-morph-card> (legacy <usa-morph-card>) — Morphing card
+
+A card that grows into its detail dialog in one shared-element morph and shrinks back.
+
+- Import: `import { defineMorphCard } from 'motionary/components/widgets'; defineMorphCard();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `close-label`
+- Events: `usa:open`, `usa:close`
+- Methods: `show()`, `close()`
+
+```html
+<mo-morph-card><div>Open me</div><div data-detail hidden><h3>Details</h3><p>More text.</p></div></mo-morph-card>
+```
+
 ### <mo-motion> (legacy <usa-motion>) — Motion DSL
 
 9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data-motion, no JavaScript per element.
@@ -3399,6 +3522,19 @@ Decimal steps, native numeric input, bounded buttons and form reset.
 ```html
 <usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>
 <!-- el.value = 2048 rolls every digit -->
+```
+
+### <mo-orbit-gallery> (legacy <usa-orbit-gallery>) — Orbit gallery
+
+Pictures on a slowly turning 3D ring; drag to spin with inertia, arrows to step.
+
+- Import: `import { defineOrbitGallery } from 'motionary/components/widgets'; defineOrbitGallery();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `speed`, `tilt`, `item-width`, `height`, `label`, `pause-label`, `play-label`
+- Events: `usa:change`, `usa:select`
+
+```html
+<mo-orbit-gallery label="Gallery"><img src="assets/demo-photo.jpg" alt="Photo 1"><img src="assets/demo-photo.jpg" alt="Photo 2"><img src="assets/demo-photo.jpg" alt="Photo 3"><img src="assets/demo-photo.jpg" alt="Photo 4"><img src="assets/demo-photo.jpg" alt="Photo 5"><img src="assets/demo-photo.jpg" alt="Photo 6"></mo-orbit-gallery>
 ```
 
 ### <mo-orbit-pass> (legacy <usa-orbit-pass>) — Orbit flyover
@@ -4063,6 +4199,19 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 </usa-reveal>
 ```
 
+### <mo-reveal-footer> (legacy <usa-reveal-footer>) — Reveal footer
+
+A footer that is uncovered from beneath the page as it rises into view.
+
+- Import: `import { defineRevealFooter } from 'motionary/components/widgets'; defineRevealFooter();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `shift`, `landmark`
+- Events: `usa:reveal`
+
+```html
+<mo-reveal-footer><p>© Motionary</p><a href="#">Back to top</a></mo-reveal-footer>
+```
+
 ### <mo-revision-reveal> (legacy <usa-revision-reveal>) — Revision reveal
 
 Slide between supplied draft and final text, with accessible copies of both.
@@ -4198,6 +4347,31 @@ Decodes text out of random glyphs, left to right. Trigger on view, hover/focus o
 <usa-scramble trigger="hover">ACCESS GRANTED</usa-scramble>
 ```
 
+### <mo-scroll-bg> (legacy <usa-scroll-bg>) — Scroll background
+
+Background and text colors ease from section to section as you scroll.
+
+- Import: `import { defineScrollBg } from 'motionary/components/widgets'; defineScrollBg();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `target`, `line`
+- Events: `usa:change`
+
+```html
+<mo-scroll-bg><section data-bg="#f1f0ec">One</section><section data-bg="#1b1b1a" data-fg="#f4f3ef">Two</section></mo-scroll-bg>
+```
+
+### <mo-scroll-cue> (legacy <usa-scroll-cue>) — Scroll cue
+
+A mouse, chevrons or a falling line that invites a scroll and fades once the page moves.
+
+- Import: `import { defineScrollCue } from 'motionary/components/widgets'; defineScrollCue();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `kind`, `label`, `target`, `hide-after`, `text`
+
+```html
+<mo-scroll-cue kind="mouse" text="Scroll"></mo-scroll-cue>
+```
+
 ### <mo-scroll-highlight> (legacy <usa-scroll-highlight>) — Scroll highlight
 
 Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
@@ -4290,6 +4464,19 @@ Content that skews, stretches, blurs or tilts with how fast the page scrolls, th
 <mo-scroll-velocity mode="skew"><h2>Scroll me</h2></mo-scroll-velocity>
 ```
 
+### <mo-scroll-zoom> (legacy <usa-scroll-zoom>) — Scroll zoom
+
+A rounded media card grows to fill the screen as you scroll, then a caption rises.
+
+- Import: `import { defineScrollZoom } from 'motionary/components/widgets'; defineScrollZoom();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `from`, `radius`, `length`, `min-width`, `label`
+- Events: `usa:progress`
+
+```html
+<mo-scroll-zoom><img src="assets/demo-photo.jpg" alt="Coast"><h2>Full bleed</h2></mo-scroll-zoom>
+```
+
 ### <mo-scrollspy> (legacy <usa-scrollspy>) — Scrollspy table of contents
 
 A table of contents that follows the reader: a marker slides to the section on screen; links scroll smoothly and move focus.
@@ -4333,6 +4520,19 @@ Editable bounded numbers, horizontal drag, precision mode and keyboard stepping.
 
 ```html
 <mo-scrub-number label="Stiffness" value="180" min="1" max="800" unit="N/m"></mo-scrub-number>
+```
+
+### <mo-search-bar> (legacy <usa-search-bar>) — Expanding search bar
+
+A search button that widens into a field; / focuses it, suggestions follow the combobox pattern.
+
+- Import: `import { defineSearchBar } from 'motionary/components/widgets'; defineSearchBar();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `placeholder`, `suggestions`, `shortcut`, `expanded`, `width`, `name`
+- Events: `usa:toggle`, `usa:search`
+
+```html
+<mo-search-bar label="Search docs" suggestions="Sidebar, Search bar, Split pane, Scroll zoom"></mo-search-bar>
 ```
 
 ### <mo-search-field> (legacy <usa-search-field>) — Cancelable async search
@@ -4412,6 +4612,19 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 <usa-shader-backdrop preset="aurora" post="bloom,vignette,grain">
   <h1>Hello</h1>
 </usa-shader-backdrop>
+```
+
+### <mo-shape-divider> (legacy <usa-shape-divider>) — Shape divider
+
+Wave, curve, tilt, arrow, zigzag or steps between sections; layered waves can drift.
+
+- Import: `import { defineShapeDivider } from 'motionary/components/widgets'; defineShapeDivider();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `shape`, `height`, `position`, `flip`, `color`, `layers`, `animate`
+- Methods: `mount()`, `defineMoName()`
+
+```html
+<mo-shape-divider shape="wave" layers="3" animate></mo-shape-divider>
 ```
 
 ### <mo-sheet> (legacy <usa-sheet>) — Drawer / bottom sheet
@@ -4676,6 +4889,19 @@ An app launch screen that leaves (fade, scale, slide-up, circle) once the page h
 </usa-splash>
 ```
 
+### <mo-split-pane> (legacy <usa-split-pane>) — Split pane
+
+Two panes with a handle you drag or move with the arrow keys; double click springs back.
+
+- Import: `import { defineSplitPane } from 'motionary/components/widgets'; defineSplitPane();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `orientation`, `position`, `min`, `max`, `step`, `height`, `label`
+- Events: `usa:change`
+
+```html
+<mo-split-pane position="40" height="200px"><div>Left</div><div>Right</div></mo-split-pane>
+```
+
 ### <mo-split-text> (legacy <usa-split-text>) — Split-text reveal
 
 Splits a headline into letters or words and cascades them in: rise, fade, blur, flip or pop. Words never break.
@@ -4778,6 +5004,20 @@ Squishy − / + keys around a rolling number; hold to repeat.
 
 ```html
 <mo-squish-stepper label="Players" value="2" min="1" max="8"></mo-squish-stepper>
+```
+
+### <mo-stack-slider> (legacy <usa-stack-slider>) — Stack slider
+
+Cards stacked with the next ones peeking out; swipe or press next to send the front one away.
+
+- Import: `import { defineStackSlider } from 'motionary/components/widgets'; defineStackSlider();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `index`, `visible`, `loop`, `label`, `prev-label`, `next-label`
+- Events: `usa:change`
+- Methods: `next()`, `prev()`
+
+```html
+<mo-stack-slider label="Cards"><div>One</div><div>Two</div><div>Three</div></mo-stack-slider>
 ```
 
 ### <mo-stagger> (legacy <usa-stagger>) — Stagger list
@@ -4953,6 +5193,20 @@ A password field whose four segments fill and change colour with strength.
 
 ```html
 <mo-strength-meter label="Password"></mo-strength-meter>
+```
+
+### <mo-subscribe> (legacy <usa-subscribe>) — Newsletter sign-up
+
+An email pill that shakes on a bad address and morphs its button into a drawn tick when done.
+
+- Import: `import { defineSubscribe } from 'motionary/components/widgets'; defineSubscribe();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `placeholder`, `button-label`, `success`, `invalid`
+- Events: `usa:done`, `usa:error`, `usa:subscribe`
+- Methods: `done()`, `error()`, `reset()`
+
+```html
+<mo-subscribe button-label="Subscribe"></mo-subscribe>
 ```
 
 ### <mo-suggestion-chips> (legacy <usa-suggestion-chips>) — Suggestion chips
@@ -5478,6 +5732,20 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
   <section data-view="home">…</section>
   <section data-view="about">…</section>
 </usa-view-switch>
+```
+
+### <mo-virtual-list> (legacy <usa-virtual-list>) — Virtual list
+
+Renders only the rows on screen, so tens of thousands of items scroll smoothly.
+
+- Import: `import { defineVirtualList } from 'motionary/components/widgets'; defineVirtualList();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `row-height`, `height`, `overscan`, `label`
+- Events: `usa:range`
+- Methods: `scrollToIndex()`
+
+```html
+<mo-virtual-list label="Items" height="240px"><ul><li>Alpha</li><li>Beta</li><li>Gamma</li><li>Delta</li></ul></mo-virtual-list>
 ```
 
 ### <mo-vital-wave> (legacy <usa-vital-wave>) — Vital dot wave

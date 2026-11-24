@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_scrollVelocity = require('../chunks/scroll-velocity-CSuKfsbf.cjs');
+var widgets_scrollVelocity = require('../chunks/scroll-velocity-BcyZDMbw.cjs');
 
 
 

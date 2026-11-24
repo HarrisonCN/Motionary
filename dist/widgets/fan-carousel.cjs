@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_fanCarousel = require('../chunks/fan-carousel-Dwfgjc-j.cjs');
+var widgets_fanCarousel = require('../chunks/fan-carousel-zpoSnwJE.cjs');
 
 
 

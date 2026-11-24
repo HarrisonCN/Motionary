@@ -51,29 +51,67 @@ import { definePricing } from '../widgets/pricing.js';
 import { defineAnnouncementBar } from '../widgets/announcement-bar.js';
 import { defineStickyCta } from '../widgets/sticky-cta.js';
 import { defineBento } from '../widgets/bento.js';
-import { d as defineEmptyState } from '../chunks/empty-state-Djzoa78-.js';
-export { E as EMPTY_ICONS } from '../chunks/empty-state-Djzoa78-.js';
+import { d as defineEmptyState } from '../chunks/empty-state-D0-KDB64.js';
+export { E as EMPTY_ICONS } from '../chunks/empty-state-D0-KDB64.js';
 import { defineLightbox } from '../widgets/lightbox.js';
-import { d as defineDataTable } from '../chunks/data-table-C3hZnfmk.js';
-export { c as compareKeys, s as sortKey } from '../chunks/data-table-C3hZnfmk.js';
+import { d as defineDataTable } from '../chunks/data-table-Cdsau26n.js';
+export { c as compareKeys, s as sortKey } from '../chunks/data-table-Cdsau26n.js';
 import { defineFilterChips } from '../widgets/filter-chips.js';
 import { defineHotspots } from '../widgets/hotspots.js';
-import { d as defineFanCarousel } from '../chunks/fan-carousel-Dfr62AcM.js';
-export { f as fanPose } from '../chunks/fan-carousel-Dfr62AcM.js';
+import { d as defineFanCarousel } from '../chunks/fan-carousel-CtgvcZFi.js';
+export { f as fanPose } from '../chunks/fan-carousel-CtgvcZFi.js';
 import { defineExpandCards } from '../widgets/expand-cards.js';
 import { d as defineJsonViewer } from '../chunks/json-viewer-BKmhjpUE.js';
 export { j as jsonPath } from '../chunks/json-viewer-BKmhjpUE.js';
-import { d as defineScrollVelocity } from '../chunks/scroll-velocity-DCrSpnCK.js';
-export { v as velocityAmount } from '../chunks/scroll-velocity-DCrSpnCK.js';
-import { d as defineHorizontalScroll } from '../chunks/horizontal-scroll-CJhjKnJ6.js';
-export { t as trackOffset } from '../chunks/horizontal-scroll-CJhjKnJ6.js';
+import { d as defineScrollVelocity } from '../chunks/scroll-velocity-_jHQaDlb.js';
+export { v as velocityAmount } from '../chunks/scroll-velocity-_jHQaDlb.js';
+import { d as defineHorizontalScroll } from '../chunks/horizontal-scroll-DcyF-4Fv.js';
+export { t as trackOffset } from '../chunks/horizontal-scroll-DcyF-4Fv.js';
 import { defineImageTrail } from '../widgets/image-trail.js';
 import { defineHoverRevealList } from '../widgets/hover-reveal-list.js';
 import { defineLiquidGlass } from '../widgets/liquid-glass.js';
-import { d as definePathMotion } from '../chunks/path-motion-BuSBJVUn.js';
-export { c as cleanPathData } from '../chunks/path-motion-BuSBJVUn.js';
-import { d as defineCutReveal } from '../chunks/cut-reveal-CUPr9hXg.js';
-export { s as stripClips } from '../chunks/cut-reveal-CUPr9hXg.js';
+import { d as definePathMotion } from '../chunks/path-motion-d44oe21m.js';
+export { c as cleanPathData } from '../chunks/path-motion-d44oe21m.js';
+import { d as defineCutReveal } from '../chunks/cut-reveal-BcvCv8g2.js';
+export { s as stripClips } from '../chunks/cut-reveal-BcvCv8g2.js';
+import { d as defineSearchBar } from '../chunks/search-bar-BSGQpNy1.js';
+export { m as matchSuggestions } from '../chunks/search-bar-BSGQpNy1.js';
+import { d as defineSubscribe } from '../chunks/subscribe-DcNOw0-p.js';
+export { i as isEmail } from '../chunks/subscribe-DcNOw0-p.js';
+import { d as defineDownloadButton } from '../chunks/download-button-CJlTB8Jt.js';
+export { p as percentLabel } from '../chunks/download-button-CJlTB8Jt.js';
+import { d as defineRevealFooter } from '../chunks/reveal-footer-D4XagLBU.js';
+export { r as riseProgress } from '../chunks/reveal-footer-D4XagLBU.js';
+import { d as defineShapeDivider } from '../chunks/shape-divider-GrE4bUeu.js';
+export { D as DIVIDER_SHAPES, a as dividerPath } from '../chunks/shape-divider-GrE4bUeu.js';
+import { d as defineScrollCue } from '../chunks/scroll-cue-C3Nq-6wT.js';
+export { C as CUE_KINDS } from '../chunks/scroll-cue-C3Nq-6wT.js';
+import { d as defineVirtualList } from '../chunks/virtual-list-BtMGgH6C.js';
+export { v as virtualWindow } from '../chunks/virtual-list-BtMGgH6C.js';
+import { defineInfiniteScroll } from '../widgets/infinite-scroll.js';
+import { d as defineContextMenu } from '../chunks/context-menu-DrPL6AWX.js';
+export { p as placeMenu } from '../chunks/context-menu-DrPL6AWX.js';
+import { d as defineSplitPane } from '../chunks/split-pane-Cw1f4uyU.js';
+export { c as clampSplit } from '../chunks/split-pane-Cw1f4uyU.js';
+import { d as defineDesktopWindows } from '../chunks/desktop-windows-DSSLc2Y7.js';
+export { c as clampWindow } from '../chunks/desktop-windows-DSSLc2Y7.js';
+import { d as defineStackSlider } from '../chunks/stack-slider-BhWT-TGt.js';
+export { s as stackPose } from '../chunks/stack-slider-BhWT-TGt.js';
+import { d as defineMorphCard } from '../chunks/morph-card-DAIXZMvz.js';
+export { i as invertRect } from '../chunks/morph-card-DAIXZMvz.js';
+import { d as defineScrollZoom } from '../chunks/scroll-zoom-DE8VpRov.js';
+export { z as zoomAt } from '../chunks/scroll-zoom-DE8VpRov.js';
+import { d as defineScrollBg } from '../chunks/scroll-bg-DPoFf5QF.js';
+export { s as sectionAt } from '../chunks/scroll-bg-DPoFf5QF.js';
+import { d as defineImageTunnel } from '../chunks/image-tunnel-Gb3BjZyO.js';
+export { t as tunnelPose } from '../chunks/image-tunnel-Gb3BjZyO.js';
+import { d as defineOrbitGallery } from '../chunks/orbit-gallery-u-bREsXS.js';
+export { f as frontIndex, r as ringRadius } from '../chunks/orbit-gallery-u-bREsXS.js';
+import { d as defineClothesline } from '../chunks/clothesline-De6L_92K.js';
+export { s as sagAt, a as swingStep } from '../chunks/clothesline-De6L_92K.js';
+import { d as defineElasticFrame } from '../chunks/elastic-frame-Cej0plXD.js';
+export { e as elasticPath } from '../chunks/elastic-frame-Cej0plXD.js';
+import { defineBorderBeam } from '../widgets/border-beam.js';
 import { defineSquishStepper } from '../widgets/squish-stepper.js';
 import { d as defineAnalogStick } from '../chunks/analog-stick-5SEt1E92.js';
 export { a as deadZone } from '../chunks/analog-stick-5SEt1E92.js';
@@ -290,7 +328,7 @@ import { defineParticleButton } from '../widgets/particle-button.js';
 import { defineHaloSegmented } from '../widgets/halo-segmented.js';
 import { defineHaloSlider } from '../widgets/halo-slider.js';
 import { defineOrbitProgress } from '../widgets/orbit-progress.js';
-export { f as flip, m as measure, s as safeImageUrl, t as tween } from '../chunks/kit-Dmjuhvd8.js';
+export { c as cleanColor, f as flip, m as measure, s as safeImageUrl, t as tween } from '../chunks/kit-DugHPVcq.js';
 export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXHhZLV.js';
 
 const WIDGETS = {
@@ -338,6 +376,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
     '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
     '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+    '17.11': { 'usa-search-bar': defineSearchBar, 'usa-subscribe': defineSubscribe, 'usa-download-button': defineDownloadButton, 'usa-reveal-footer': defineRevealFooter, 'usa-shape-divider': defineShapeDivider, 'usa-scroll-cue': defineScrollCue, 'usa-virtual-list': defineVirtualList, 'usa-infinite-scroll': defineInfiniteScroll, 'usa-context-menu': defineContextMenu, 'usa-split-pane': defineSplitPane, 'usa-desktop-windows': defineDesktopWindows, 'usa-stack-slider': defineStackSlider, 'usa-morph-card': defineMorphCard, 'usa-scroll-zoom': defineScrollZoom, 'usa-scroll-bg': defineScrollBg, 'usa-image-tunnel': defineImageTunnel, 'usa-orbit-gallery': defineOrbitGallery, 'usa-clothesline': defineClothesline, 'usa-elastic-frame': defineElasticFrame, 'usa-border-beam': defineBorderBeam },
     '17.10': { 'usa-sidebar': defineSidebar, 'usa-scrollspy': defineScrollspy, 'usa-pricing': definePricing, 'usa-announcement-bar': defineAnnouncementBar, 'usa-sticky-cta': defineStickyCta, 'usa-bento': defineBento, 'usa-empty-state': defineEmptyState, 'usa-lightbox': defineLightbox, 'usa-data-table': defineDataTable, 'usa-filter-chips': defineFilterChips, 'usa-hotspots': defineHotspots, 'usa-fan-carousel': defineFanCarousel, 'usa-expand-cards': defineExpandCards, 'usa-json-viewer': defineJsonViewer, 'usa-scroll-velocity': defineScrollVelocity, 'usa-horizontal-scroll': defineHorizontalScroll, 'usa-image-trail': defineImageTrail, 'usa-hover-reveal-list': defineHoverRevealList, 'usa-liquid-glass': defineLiquidGlass, 'usa-path-motion': definePathMotion, 'usa-cut-reveal': defineCutReveal },
     '17.9': { 'usa-eclipse-toggle': defineEclipseToggle, 'usa-hue-orbit': defineHueOrbit, 'usa-notch-slider': defineNotchSlider, 'usa-bulge-volume': defineBulgeVolume, 'usa-copy-button': defineCopyButton, 'usa-tile-relay': defineTileRelay, 'usa-squish-key': defineSquishKey, 'usa-squish-stepper': defineSquishStepper, 'usa-analog-stick': defineAnalogStick, 'usa-transfer-button': defineTransferButton, 'usa-six-dot-orbit': defineSixDotOrbit, 'usa-center-bars': defineCenterBars, 'usa-quarter-ring': defineQuarterRing, 'usa-triple-pulse': defineTriplePulse, 'usa-breath-orb': defineBreathOrb, 'usa-three-dot-bounce': defineThreeDotBounce, 'usa-infinity-loop': defineInfinityLoop, 'usa-sweep-lines': defineSweepLines, 'usa-wifi-signal': defineWifiSignal, 'usa-text-reveal': defineTextReveal, 'usa-jelly-button': defineJellyButton, 'usa-bounce-button': defineBounceButton, 'usa-tada-button': defineTadaButton, 'usa-groove-toggle': defineGrooveToggle, 'usa-cart-badge': defineCartBadge, 'usa-chip-input': defineChipInput, 'usa-plan-picker': definePlanPicker, 'usa-align-switch': defineAlignSwitch, 'usa-elastic-slider': defineElasticSlider, 'usa-code-shake': defineCodeShake, 'usa-strength-meter': defineStrengthMeter, 'usa-step-track': defineStepTrack, 'usa-elastic-accordion': defineElasticAccordion, 'usa-squish-indicator': defineSquishIndicator },
     '17.8': { 'usa-lens-stack': defineLensStack, 'usa-iris-diaphragm': defineIrisDiaphragm, 'usa-contour-relief': defineContourRelief },
@@ -360,5 +399,5 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
-export { WIDGETS, WIDGET_TAGS, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBento, defineBezierLab, defineBgGenerator, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChipInput, defineClockControl, defineCodeExport, defineCodeShake, defineCoffeeTimer, defineColorPicker, defineCombobox, defineCommandPalette, defineCompare, defineConsent, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDisclosure, defineDock, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticMesh, defineElasticSlider, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineImageTrail, defineInfinityLoop, defineInkFlow, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLightbox, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMeterCountdown, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitPass, defineOrbitProgress, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRangeSlider, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRevisionReveal, defineRideStatus, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollspy, defineScrubNumber, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineSheet, defineShortcut, defineSidebar, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineSpringLab, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTerminal, defineTextLoupe, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTransferButton, defineTransitProgress, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar };
+export { WIDGETS, WIDGET_TAGS, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBento, defineBezierLab, defineBgGenerator, defineBorderBeam, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChipInput, defineClockControl, defineClothesline, defineCodeExport, defineCodeShake, defineCoffeeTimer, defineColorPicker, defineCombobox, defineCommandPalette, defineCompare, defineConsent, defineContextMenu, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDesktopWindows, defineDisclosure, defineDock, defineDownloadButton, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticFrame, defineElasticMesh, defineElasticSlider, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineImageTrail, defineImageTunnel, defineInfiniteScroll, defineInfinityLoop, defineInkFlow, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLightbox, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMeterCountdown, defineMilestones, defineModal, defineMorphCard, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitGallery, defineOrbitPass, defineOrbitProgress, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRangeSlider, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRevealFooter, defineRevisionReveal, defineRideStatus, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScrollBg, defineScrollCue, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollZoom, defineScrollspy, defineScrubNumber, defineSearchBar, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineShapeDivider, defineSheet, defineShortcut, defineSidebar, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineSplitPane, defineSpringLab, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStackSlider, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSubscribe, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTerminal, defineTextLoupe, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTransferButton, defineTransitProgress, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVirtualList, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar };
 //# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/widgets.js.map

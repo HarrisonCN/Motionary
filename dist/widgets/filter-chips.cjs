@@ -3,7 +3,7 @@
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
-var kit = require('../chunks/kit-D8ZWl5Wc.cjs');
+var kit = require('../chunks/kit-CujTUbPK.cjs');
 var dataMedia = require('../chunks/data-media-CzBZCPJg.cjs');
 
 function defineFilterChips(tag = 'usa-filter-chips') {
