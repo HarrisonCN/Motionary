@@ -223,9 +223,14 @@ describe('Copy as AI prompt', () => {
     expect(fenceFor('react')).toBe('tsx');
   });
   it('lists each playground layer with only the values that differ from the default', () => {
+    // a new tilt layer keeps its numeric defaults out and writes only the flag that is on by default
     const layer = newLayer('usa-tilt');
-    const rows = playgroundParams({ layers: [layer] });
-    expect(rows).toEqual([['1. <mo-tilt>', '(defaults)']]);
+    expect(playgroundParams({ layers: [layer] })).toEqual([['1. <mo-tilt>', 'glare']]);
+    layer.attrs.max = 18;
+    layer.attrs.glare = false;
+    expect(playgroundParams({ layers: [layer] })).toEqual([['1. <mo-tilt>', 'max="18"']]);
+    layer.attrs.max = 10;
+    expect(playgroundParams({ layers: [layer] })).toEqual([['1. <mo-tilt>', '(defaults)']]);
   });
 });
 
