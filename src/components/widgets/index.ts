@@ -354,6 +354,21 @@ export { tunnelPose } from './image-tunnel';
 export { frontIndex, ringRadius } from './orbit-gallery';
 export { sagAt, swingStep } from './clothesline';
 export { elasticPath } from './elastic-frame';
+export {
+  LOOK_PALETTES,
+  LOOK_TREATMENTS,
+  LOOK_FAMILIES,
+  lookNames,
+  lookInfo,
+  lookTokens,
+  lookRule,
+  looksCss,
+  adoptLooks,
+  applyLook,
+  type LookFamily,
+  type LookPalette,
+  type LookInfo,
+} from './looks';
 export { flip, measure, tween, safeImageUrl } from './kit';
 export { EMPTY_ICONS } from './empty-state';
 export { sortKey, compareKeys, type SortDirection } from './data-table';

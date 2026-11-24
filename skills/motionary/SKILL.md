@@ -63,6 +63,7 @@ A few starting points:
 | Page furniture | `<mo-search-bar>`, `<mo-subscribe>`, `<mo-download-button>`, `<mo-reveal-footer>`, `<mo-shape-divider>`, `<mo-scroll-cue>` |
 | App parts | `<mo-virtual-list>`, `<mo-infinite-scroll>`, `<mo-context-menu>`, `<mo-split-pane>`, `<mo-desktop-windows>`, `<mo-stack-slider>`, `<mo-morph-card>` |
 | Depth and scroll scenes | `<mo-scroll-zoom>`, `<mo-scroll-bg>`, `<mo-image-tunnel>`, `<mo-orbit-gallery>`, `<mo-clothesline>`, `<mo-elastic-frame>`, `<mo-border-beam>` |
+| Ready-made looks for those widgets | `look="neon-ocean"` (324 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
 
 ## 3. Rules
 

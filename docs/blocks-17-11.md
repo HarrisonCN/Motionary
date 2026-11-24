@@ -64,7 +64,8 @@ when invalid. `mo-scroll-bg` does not check contrast, so pick pairs that read we
 ## Theming
 
 The widgets share the kit tokens, overridable on any ancestor: `--mo-kit-ink`, `--mo-kit-paper`, `--mo-kit-accent`,
-`--mo-kit-on-accent`, `--mo-kit-soft`, `--mo-kit-line` and `--mo-kit-radius`.
+`--mo-kit-on-accent`, `--mo-kit-soft`, `--mo-kit-line` and `--mo-kit-radius`, plus border, shadow, glow, backdrop,
+button, state, picture and speed tokens. [Looks](looks-17-11.md) has 324 ready-made combinations of them.
 
 ## Use
 
@@ -81,3 +82,4 @@ custom layouts: `matchSuggestions`, `isEmail`, `percentLabel`, `riseProgress`, `
 ## Showcase
 
 - [Blocks, Parts & Depth](../showcase/blocks.html): all twenty on one page, in Chinese.
+- [Looks](../showcase/looks.html): 324 ready-made styles for these widgets.

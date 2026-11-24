@@ -91,7 +91,8 @@ export function defineDesktopWindows(tag = 'usa-desktop-windows'): CustomElement
         wins.forEach((o, n) => { o.win.toggleAttribute('data-focused', n === i); o.task.setAttribute('aria-pressed', String(n === i && o.open)); });
         if (tell && changed) this.emit('focus', { index: i });
       };
-      const pop = (s: (typeof wins)[number], opening: boolean) => {
+      const pop = (s: (typeof wins)[number], opening: boolean): Animation | null => {
+        if (this.reduced) return null;
         const t = s.task.getBoundingClientRect(), r = s.win.getBoundingClientRect();
         const dx = t.left + t.width / 2 - (r.left + r.width / 2), dy = t.top - r.top;
         const away = { transform: `translate3d(${s.px + dx}px, ${s.py + dy}px, 0) scale(.2)`, opacity: 0 };

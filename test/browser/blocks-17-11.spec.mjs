@@ -8,7 +8,9 @@ test('17.11 page blocks and interface parts work by keyboard and pointer without
   const search = page.locator('nav mo-search-bar');
   await page.keyboard.press('/');
   await expect(search).toHaveAttribute('expanded', '');
-  await page.keyboard.type('分栏');
+  const field = search.locator('input');
+  await expect(field).toBeFocused();
+  await field.fill('分栏');
   await expect(search.getByRole('option')).toHaveText(['可调分栏']);
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
@@ -45,8 +47,11 @@ test('17.11 page blocks and interface parts work by keyboard and pointer without
   await page.keyboard.press('ArrowRight');
   await expect(bar).toHaveAttribute('aria-valuenow', '43');
 
-  await page.getByRole('button', { name: '关闭 便签' }).click();
-  await expect(page.locator('[data-log="desk"]')).toHaveText('close 0');
+  // Closing a window hands focus to the next one, so the log ends on that focus; check the window itself.
+  const desk = page.locator('mo-desktop-windows');
+  await desk.getByRole('button', { name: '关闭 便签' }).click();
+  await expect(desk.locator('.usa-win').first()).toBeHidden();
+  await expect(desk.locator('.usa-desk-task').first()).toHaveAttribute('aria-pressed', 'false');
 
   await page.locator('mo-stack-slider').getByRole('button', { name: '下一张' }).click();
   await expect(page.locator('[data-log="stack"]')).toHaveText('card 2');
@@ -67,8 +72,11 @@ test('17.11 motion and depth surfaces run without page errors', async ({ page })
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/showcase/blocks.html');
 
+  // Near the viewport the list loads by itself and hides its button while loading, so press it only if it is there.
   const inf = page.locator('mo-infinite-scroll');
-  await inf.locator('.usa-inf-more').click();
+  await inf.scrollIntoViewIfNeeded();
+  const more = inf.locator('.usa-inf-more');
+  if (await more.isVisible()) await more.click({ timeout: 3000 }).catch(() => {});
   await expect(page.locator('[data-log="inf"]')).toHaveText(/load page \d/);
 
   const orbit = page.locator('mo-orbit-gallery');

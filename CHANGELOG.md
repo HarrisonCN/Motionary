@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added seven interface parts: `mo-virtual-list` (renders only the rows on screen), `mo-infinite-scroll` (with a real Load more button), `mo-context-menu` (ARIA menu from the pointer), `mo-split-pane`, `mo-desktop-windows`, `mo-stack-slider` and `mo-morph-card` (a card that morphs into a native dialog).
 - Added seven motion and depth surfaces: `mo-scroll-zoom`, `mo-scroll-bg`, `mo-image-tunnel`, `mo-orbit-gallery`, `mo-clothesline`, `mo-elastic-frame` and `mo-border-beam`.
 - All twenty register under `defineWidgets('17.11')`, keep their content usable without JavaScript and stand still under reduced motion. Details in docs/blocks-17-11.md; demo page at showcase/blocks.html.
+- Added 324 looks for the 17.11 widgets: twelve palettes × nine treatments in each of three families (UI, components, motion), 108 each. Treatments change borders, radius, shadows, glow, frosted glass, type, picture filters, frames and loop speed, not only colors; every look passes WCAG AA text contrast. Use `look="neon-ocean"` or `data-mo-look` after `adoptLooks()`, or `applyLook(el, name)`. The 17.11 kit stylesheets read new `--mo-kit-*` tokens (border, shadow, glow, backdrop, button fill, success / error, picture filter, frame, speed), with defaults that keep today's look. Details in docs/looks-17-11.md; demo page at showcase/looks.html.
 
 ## [17.9.0] - 2026-11-24 — Moments & Tactile
 

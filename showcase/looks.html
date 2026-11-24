@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>样式预设 · 324 种 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1180px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(38px,6vw,72px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.03em; padding-top:48px}
+    .lead {max-width:46em; margin-top:16px; line-height:1.65; color:#55544e}
+    .tabs {display:flex; flex-wrap:wrap; gap:8px; margin:32px 0 18px}
+    .tabs button, .pals button {padding:8px 16px; border:1px solid #cfccc2; border-radius:999px; background:#fbfaf7; font:inherit; cursor:pointer}
+    .tabs button[aria-selected="true"] {background:#1b1b1a; color:#f4f3ef; border-color:#1b1b1a}
+    .pals {display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px}
+    .pals button {padding:5px 12px; font-size:.85rem}
+    .pals button[aria-pressed="true"] {background:#2c3a6b; color:#fff; border-color:#2c3a6b}
+    .stage {position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:16px; padding:24px; border-radius:24px; background:var(--stage-bg, #fbfaf7); border:1px solid #e2e0d8; transition:background .4s ease}
+    .stage-head {grid-column:1/-1; display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap}
+    .stage-head strong {font:600 1.2rem ui-monospace,monospace}
+    .stage-head span {font-size:.85rem; opacity:.75}
+    .cell {display:grid; align-content:start; gap:10px; min-width:0}
+    .cell > small {font-size:.75rem; opacity:.7}
+    .area {display:grid; place-items:center; min-height:100px; border:2px dashed currentColor; border-radius:12px; opacity:.85}
+    .face {padding:16px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:10px; margin:24px 0 64px}
+    .tile {display:grid; gap:10px; align-content:space-between; min-height:150px; padding:12px; border-radius:16px; border:1px solid rgb(0 0 0 / .08)}
+    .tile header {display:flex; justify-content:space-between; align-items:center; gap:6px}
+    .tile code {font:12px ui-monospace,monospace; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+    .tile .pick {flex:none; padding:3px 9px; border:1px solid currentColor; border-radius:999px; background:transparent; color:inherit; font:12px system-ui; cursor:pointer}
+    .tile[data-current] {outline:3px solid #2c3a6b; outline-offset:2px}
+    .photo {display:block; width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--mo-kit-media-radius,14px); filter:var(--mo-kit-media-filter,none)}
+    .count {font-variant-numeric:tabular-nums}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:3px}
+    [hidden] {display:none !important}
+  </style>
+</head>
+<body>
+  <nav><a href="./index.html">← Motionary</a><a href="./blocks.html">页面块、组件与纵深动效 ↗</a></nav>
+  <main>
+    <h1>样式预设</h1>
+    <p class="lead">12 套配色 × 每类 9 种效果，界面、组件、动效各 108 种，共 324 种。每种预设改的是颜色、边框、阴影、发光、毛玻璃、字体、图片滤镜和循环速度，不只是换色。点任意一格的“试用”，上方的真实组件会换上这种样式。</p>
+
+    <div class="tabs" role="tablist" aria-label="预设类别">
+      <button type="button" role="tab" id="tab-ui" aria-controls="stage" aria-selected="true" data-family="ui">界面 <span class="count" data-count="ui"></span></button>
+      <button type="button" role="tab" id="tab-parts" aria-controls="stage" aria-selected="false" data-family="parts">组件 <span class="count" data-count="parts"></span></button>
+      <button type="button" role="tab" id="tab-motion" aria-controls="stage" aria-selected="false" data-family="motion">动效 <span class="count" data-count="motion"></span></button>
+    </div>
+    <div class="pals" role="group" aria-label="按配色筛选"></div>
+
+    <section class="stage" id="stage" role="tabpanel" aria-labelledby="tab-ui">
+      <div class="stage-head"><strong data-current-name></strong><span data-current-desc></span></div>
+      <div data-stage="ui" class="cell"><small>mo-search-bar</small><mo-search-bar label="搜索" placeholder="搜索组件…" suggestions="搜索栏, 订阅表单, 下载按钮, 分栏, 窗口" expanded></mo-search-bar></div>
+      <div data-stage="ui" class="cell"><small>mo-subscribe</small><mo-subscribe label="邮箱地址" placeholder="you@example.com" button-label="订阅" success="已订阅。"></mo-subscribe></div>
+      <div data-stage="ui" class="cell"><small>mo-download-button</small><mo-download-button label="下载" done-label="已下载" duration="1800"></mo-download-button></div>
+      <div data-stage="ui" class="cell"><small>mo-scroll-cue · mo-shape-divider</small><mo-scroll-cue kind="mouse" text="向下" label="向下滚动"></mo-scroll-cue><mo-shape-divider shape="wave" layers="3" height="50"></mo-shape-divider></div>
+
+      <div data-stage="parts" class="cell" hidden><small>mo-context-menu</small><mo-context-menu label="操作"><div class="area">右键或长按这里</div><menu><button type="button">复制</button><button type="button">重命名</button><hr><button type="button">删除</button></menu></mo-context-menu></div>
+      <div data-stage="parts" class="cell" hidden><small>mo-split-pane</small><mo-split-pane label="调整分栏" position="45" height="150px"><div class="face">左栏</div><div class="face">右栏</div></mo-split-pane></div>
+      <div data-stage="parts" class="cell" hidden><small>mo-desktop-windows</small><mo-desktop-windows label="桌面" height="220px" close-label="关闭"><div data-title="便签" data-width="170">今天要做的事</div><div data-title="音乐" data-width="170">正在播放</div></mo-desktop-windows></div>
+      <div data-stage="parts" class="cell" hidden><small>mo-stack-slider · mo-infinite-scroll</small><mo-stack-slider label="叠卡" prev-label="上一张" next-label="下一张" loop><div>第一张</div><div>第二张</div><div>第三张</div></mo-stack-slider></div>
+
+      <div data-stage="motion" class="cell" hidden><small>mo-border-beam（光束速度随预设变）</small><mo-border-beam glow><img class="photo" src="assets/demo-photo.jpg" alt="海边"></mo-border-beam></div>
+      <div data-stage="motion" class="cell" hidden><small>mo-clothesline（图片滤镜和相框随预设变）</small><mo-clothesline label="晾衣绳" sag="18" item-width="110px"><figure><img src="assets/demo-photo.jpg" alt="海边"></figure><figure><img src="assets/demo-photo.jpg" alt="森林"></figure><figure><img src="assets/demo-photo.jpg" alt="城市"></figure></mo-clothesline></div>
+      <div data-stage="motion" class="cell" hidden><small>mo-elastic-frame</small><mo-elastic-frame><p style="margin:0">把指针移到边框上</p></mo-elastic-frame></div>
+      <div data-stage="motion" class="cell" hidden><small>mo-orbit-gallery</small><mo-orbit-gallery label="环绕画廊" height="220px" item-width="90" pause-label="暂停旋转" play-label="继续旋转"><img src="assets/demo-photo.jpg" alt="照片 1"><img src="assets/demo-photo.jpg" alt="照片 2"><img src="assets/demo-photo.jpg" alt="照片 3"><img src="assets/demo-photo.jpg" alt="照片 4"><img src="assets/demo-photo.jpg" alt="照片 5"><img src="assets/demo-photo.jpg" alt="照片 6"></mo-orbit-gallery></div>
+    </section>
+
+    <div class="grid" data-grid aria-live="polite"></div>
+  </main>
+  <script type="module">
+    import { defineWidgets, adoptLooks, lookNames, lookInfo, LOOK_PALETTES } from '../dist/components/widgets.js';
+    defineWidgets('17.11');
+    adoptLooks();
+
+    const TREAT = {
+      solid: '实心', outline: '描边', soft: '柔和', glass: '玻璃', neon: '霓虹', brutal: '粗野', paper: '纸张', gradient: '渐变', terminal: '终端',
+      flat: '扁平', elevated: '浮起', outlined: '线框', frosted: '磨砂', cyber: '赛博', blocky: '方块', pastel: '马卡龙', window: '窗口', console: '控制台',
+      vivid: '鲜艳', noir: '黑白', sepia: '怀旧', duotone: '双色', glow: '光晕', polaroid: '拍立得', film: '胶片', blueprint: '蓝图', holo: '全息',
+    };
+    const PAL = { indigo: '靛蓝', ocean: '海洋', forest: '森林', sunset: '日落', rose: '玫瑰', grape: '葡萄', amber: '琥珀', slate: '石板', mint: '薄荷', coral: '珊瑚', midnight: '午夜', ember: '余烬' };
+    const FIRST = { ui: 'solid-indigo', parts: 'flat-indigo', motion: 'vivid-indigo' };
+
+    const stage = document.getElementById('stage');
+    const grid = document.querySelector('[data-grid]');
+    const pals = document.querySelector('.pals');
+    let family = 'ui';
+    let palette = '';
+    let current = FIRST.ui;
+
+    for (const f of ['ui', 'parts', 'motion']) document.querySelector(`[data-count="${f}"]`).textContent = `(${lookNames(f).length})`;
+
+    const label = (l) => `${TREAT[l.treatment]} · ${PAL[l.palette]}`;
+    const select = (name) => {
+      const l = lookInfo(name);
+      if (!l) return;
+      current = name;
+      stage.dataset.moLook = name;
+      stage.style.setProperty('--stage-bg', l.bg);
+      stage.querySelector('[data-current-name]').textContent = name;
+      stage.querySelector('[data-current-desc]').textContent = label(l) + (l.dark ? ' · 深色' : '');
+      for (const t of grid.children) t.toggleAttribute('data-current', t.dataset.moLook === name);
+    };
+
+    const sample = (f) => f === 'ui'
+      ? '<mo-download-button label="下载" done-label="完成" duration="1200"></mo-download-button>'
+      : f === 'parts'
+        ? '<mo-split-pane label="分栏" position="50" height="56px"><div></div><div></div></mo-split-pane>'
+        : '<img class="photo" src="assets/demo-photo.jpg" alt="">';
+
+    const renderGrid = () => {
+      grid.textContent = '';
+      for (const name of lookNames(family)) {
+        const l = lookInfo(name);
+        if (palette && l.palette !== palette) continue;
+        const tile = document.createElement('article');
+        tile.className = 'tile';
+        tile.dataset.moLook = name;
+        tile.style.background = l.bg;
+        tile.innerHTML = `<header><code title="${name}">${name}</code><button type="button" class="pick" aria-label="试用 ${name}">试用</button></header>${sample(family)}<small>${label(l)}</small>`;
+        tile.querySelector('.pick').addEventListener('click', () => select(name));
+        grid.append(tile);
+      }
+      select(current);
+    };
+
+    pals.innerHTML = ['', ...Object.keys(LOOK_PALETTES)].map((p) => `<button type="button" aria-pressed="${p === ''}" data-palette="${p}">${p ? PAL[p] : '全部配色'}</button>`).join('');
+    pals.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      palette = b.dataset.palette;
+      for (const x of pals.children) x.setAttribute('aria-pressed', String(x === b));
+      renderGrid();
+    });
+
+    for (const tab of document.querySelectorAll('[role="tab"]')) {
+      tab.addEventListener('click', () => {
+        family = tab.dataset.family;
+        for (const t of document.querySelectorAll('[role="tab"]')) t.setAttribute('aria-selected', String(t === tab));
+        stage.setAttribute('aria-labelledby', tab.id);
+        for (const cell of stage.querySelectorAll('[data-stage]')) cell.hidden = cell.dataset.stage !== family;
+        current = FIRST[family];
+        renderGrid();
+      });
+    }
+    renderGrid();
+  </script>
+</body>
+</html>
