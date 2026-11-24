@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_subscribe = require('../chunks/subscribe-B4LNqL9Q.cjs');
+var widgets_subscribe = require('../chunks/subscribe-TcPIBfdP.cjs');
 
 
 

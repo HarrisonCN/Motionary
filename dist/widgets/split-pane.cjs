@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_splitPane = require('../chunks/split-pane-CoScl19P.cjs');
+var widgets_splitPane = require('../chunks/split-pane-Dq5DmrWt.cjs');
 
 
 

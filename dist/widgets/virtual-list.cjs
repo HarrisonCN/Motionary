@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_virtualList = require('../chunks/virtual-list-vkLe9NDB.cjs');
+var widgets_virtualList = require('../chunks/virtual-list-CoLIIDf7.cjs');
 
 
 

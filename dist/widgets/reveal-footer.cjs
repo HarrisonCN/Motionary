@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_revealFooter = require('../chunks/reveal-footer-Dl6ALUvp.cjs');
+var widgets_revealFooter = require('../chunks/reveal-footer-BvjeDtHz.cjs');
 
 
 

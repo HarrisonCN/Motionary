@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_scrollCue = require('../chunks/scroll-cue-CRzg-X58.cjs');
+var widgets_scrollCue = require('../chunks/scroll-cue-DaNtu4QG.cjs');
 
 
 

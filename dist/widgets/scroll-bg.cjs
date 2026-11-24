@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_scrollBg = require('../chunks/scroll-bg-BVnTSelN.cjs');
+var widgets_scrollBg = require('../chunks/scroll-bg-CzwEiH56.cjs');
 
 
 

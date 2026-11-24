@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_elasticFrame = require('../chunks/elastic-frame-DoCb3gOm.cjs');
+var widgets_elasticFrame = require('../chunks/elastic-frame-Bgj6xpbW.cjs');
 
 
 

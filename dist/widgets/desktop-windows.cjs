@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_desktopWindows = require('../chunks/desktop-windows-Co80YxRq.cjs');
+var widgets_desktopWindows = require('../chunks/desktop-windows-DF6eUzSU.cjs');
 
 
 

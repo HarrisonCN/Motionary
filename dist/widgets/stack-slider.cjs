@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_stackSlider = require('../chunks/stack-slider-wwYZ0dbq.cjs');
+var widgets_stackSlider = require('../chunks/stack-slider-Cj4bWAdl.cjs');
 
 
 

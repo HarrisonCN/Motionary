@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_shapeDivider = require('../chunks/shape-divider-1ERAEE1L.cjs');
+var widgets_shapeDivider = require('../chunks/shape-divider-uvGuEyLe.cjs');
 
 
 

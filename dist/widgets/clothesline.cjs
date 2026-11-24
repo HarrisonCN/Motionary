@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_clothesline = require('../chunks/clothesline-BP_0vzbW.cjs');
+var widgets_clothesline = require('../chunks/clothesline-D8r1ZFGO.cjs');
 
 
 

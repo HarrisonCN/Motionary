@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { o as ownChildren, c as cleanColor } from '../chunks/kit-DugHPVcq.js';
-import { c as css } from '../chunks/motion-kit-BZDRzzob.js';
+import { c as css } from '../chunks/motion-kit-CFZmE2br.js';
 
 function defineBorderBeam(tag = 'usa-border-beam') {
     const ctor = defineElement(tag, Base => class BorderBeam extends Base {

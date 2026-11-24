@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { c as css } from '../chunks/parts-kit-Daly1iAs.js';
+import { c as css } from '../chunks/parts-kit-O_H_tVRs.js';
 
 function defineInfiniteScroll(tag = 'usa-infinite-scroll') {
     const ctor = defineElement(tag, Base => class InfiniteScroll extends Base {

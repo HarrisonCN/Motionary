@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_searchBar = require('../chunks/search-bar-DTPDTME9.cjs');
+var widgets_searchBar = require('../chunks/search-bar-prhV037u.cjs');
 
 
 

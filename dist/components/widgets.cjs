@@ -58,25 +58,25 @@ var widgets_hoverRevealList = require('../widgets/hover-reveal-list.cjs');
 var widgets_liquidGlass = require('../widgets/liquid-glass.cjs');
 var widgets_pathMotion = require('../chunks/path-motion-BJ5jD7yj.cjs');
 var widgets_cutReveal = require('../chunks/cut-reveal-CRGysVhi.cjs');
-var widgets_searchBar = require('../chunks/search-bar-DTPDTME9.cjs');
-var widgets_subscribe = require('../chunks/subscribe-B4LNqL9Q.cjs');
-var widgets_downloadButton = require('../chunks/download-button-0sEDScxK.cjs');
-var widgets_revealFooter = require('../chunks/reveal-footer-Dl6ALUvp.cjs');
-var widgets_shapeDivider = require('../chunks/shape-divider-1ERAEE1L.cjs');
-var widgets_scrollCue = require('../chunks/scroll-cue-CRzg-X58.cjs');
-var widgets_virtualList = require('../chunks/virtual-list-vkLe9NDB.cjs');
+var widgets_searchBar = require('../chunks/search-bar-prhV037u.cjs');
+var widgets_subscribe = require('../chunks/subscribe-TcPIBfdP.cjs');
+var widgets_downloadButton = require('../chunks/download-button-RqYvHsrm.cjs');
+var widgets_revealFooter = require('../chunks/reveal-footer-BvjeDtHz.cjs');
+var widgets_shapeDivider = require('../chunks/shape-divider-uvGuEyLe.cjs');
+var widgets_scrollCue = require('../chunks/scroll-cue-DaNtu4QG.cjs');
+var widgets_virtualList = require('../chunks/virtual-list-CoLIIDf7.cjs');
 var widgets_infiniteScroll = require('../widgets/infinite-scroll.cjs');
-var widgets_contextMenu = require('../chunks/context-menu-BVy_WE-8.cjs');
-var widgets_splitPane = require('../chunks/split-pane-CoScl19P.cjs');
-var widgets_desktopWindows = require('../chunks/desktop-windows-Co80YxRq.cjs');
-var widgets_stackSlider = require('../chunks/stack-slider-wwYZ0dbq.cjs');
-var widgets_morphCard = require('../chunks/morph-card-CurBSiMR.cjs');
-var widgets_scrollZoom = require('../chunks/scroll-zoom-Cp1j5WME.cjs');
-var widgets_scrollBg = require('../chunks/scroll-bg-BVnTSelN.cjs');
-var widgets_imageTunnel = require('../chunks/image-tunnel-B84cwjHO.cjs');
-var widgets_orbitGallery = require('../chunks/orbit-gallery-DWXGgnJI.cjs');
-var widgets_clothesline = require('../chunks/clothesline-BP_0vzbW.cjs');
-var widgets_elasticFrame = require('../chunks/elastic-frame-DoCb3gOm.cjs');
+var widgets_contextMenu = require('../chunks/context-menu-Fvb0plyo.cjs');
+var widgets_splitPane = require('../chunks/split-pane-Dq5DmrWt.cjs');
+var widgets_desktopWindows = require('../chunks/desktop-windows-DF6eUzSU.cjs');
+var widgets_stackSlider = require('../chunks/stack-slider-Cj4bWAdl.cjs');
+var widgets_morphCard = require('../chunks/morph-card-DlOkzOOo.cjs');
+var widgets_scrollZoom = require('../chunks/scroll-zoom-TExkR9AQ.cjs');
+var widgets_scrollBg = require('../chunks/scroll-bg-CzwEiH56.cjs');
+var widgets_imageTunnel = require('../chunks/image-tunnel-B24fEP_Y.cjs');
+var widgets_orbitGallery = require('../chunks/orbit-gallery-DCde86kY.cjs');
+var widgets_clothesline = require('../chunks/clothesline-D8r1ZFGO.cjs');
+var widgets_elasticFrame = require('../chunks/elastic-frame-Bgj6xpbW.cjs');
 var widgets_borderBeam = require('../widgets/border-beam.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
@@ -244,8 +244,281 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
 var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
+
+/**
+ * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
+ *
+ * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
+ * frosted glass, type, picture filters, loop speed). Three families of nine treatments each, over twelve palettes,
+ * give 108 looks per family:
+ *
+ * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal
+ * - `parts` for interface parts: flat, elevated, outlined, frosted, cyber, blocky, pastel, window, console
+ * - `motion` for motion and depth: vivid, noir, sepia, duotone, glow, polaroid, film, blueprint, holo
+ *
+ * Put `look="neon-ocean"` (or `data-mo-look="neon-ocean"`) on a widget or any ancestor after `adoptLooks()`, or call
+ * `applyLook(el, 'neon-ocean')`, which adopts just that one rule. A look only sets `--mo-kit-*` tokens, the text color
+ * and sometimes the font family, so any token can still be overridden next to it. See docs/looks-17-11.md.
+ */
+/** Palette: ink, paper, accent, second accent. The last two palettes are dark. */
+const LOOK_PALETTES = {
+    indigo: ['#18181b', '#ffffff', '#4f46e5', '#a855f7'],
+    ocean: ['#0c2a3e', '#f0f9ff', '#0369a1', '#22d3ee'],
+    forest: ['#14281d', '#f3f8f2', '#15803d', '#a3e635'],
+    sunset: ['#3b1d0e', '#fff7ed', '#c2410c', '#fb7185'],
+    rose: ['#3f0d1f', '#fff1f5', '#be123c', '#f472b6'],
+    grape: ['#2a1240', '#faf5ff', '#7c3aed', '#e879f9'],
+    amber: ['#2f2104', '#fffbeb', '#b45309', '#facc15'],
+    slate: ['#0f172a', '#f8fafc', '#475569', '#94a3b8'],
+    mint: ['#062a24', '#f0fdfa', '#0f766e', '#34d399'],
+    coral: ['#3a1410', '#fff5f2', '#c43d1c', '#ffb703'],
+    midnight: ['#e2e8f0', '#0b1020', '#818cf8', '#22d3ee'],
+    ember: ['#fef3c7', '#1c1210', '#fb923c', '#f87171'],
+};
+/* ---------- color math (hex in, hex or rgb() out) ---------- */
+const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+/** `a` mixed into `b`: `t` = 1 is all `a`. */
+function mixHex(a, t, b) {
+    const x = rgbOf(a);
+    const y = rgbOf(b);
+    return hexOf(x.map((v, i) => v * t + y[i] * (1 - t)));
+}
+/** A hex color with alpha, as `rgb(r g b / a)`. */
+const alpha = (hex, a) => `rgb(${rgbOf(hex).join(' ')} / ${a})`;
+/** Hue of a hex color in degrees (0–359). */
+function hueOf(hex) {
+    const [r, g, b] = rgbOf(hex).map((v) => v / 255);
+    const max = Math.max(r, g, b);
+    const d = max - Math.min(r, g, b);
+    if (!d)
+        return 0;
+    const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return Math.round((h * 60 + 360) % 360);
+}
+const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+const NONE = '0 0 0 transparent';
+/** A dark surface tinted by `tint`, with light ink and the bright accent: shared by neon, terminal, cyber, console. */
+const darkSet = (p, base, tint, amount, ink) => {
+    const paper = mixHex(tint, amount, base);
+    return { dark: true, paper, bg: paper, ink, accent: p.a2, onAccent: paper, cta: p.a2, onCta: paper, ok: '#4ade80', bad: '#f87171' };
+};
+/** A light surface even for the dark palettes: deep ink and a deep accent. */
+const lightSet = (p, paper) => {
+    const accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    return { dark: false, paper, bg: paper, ink: p.dark ? mixHex(p.accent, 0.22, '#14121a') : p.ink, accent, onAccent: '#ffffff' };
+};
+const LOOK_TREATMENTS = {
+    ui: {
+        solid: () => ({ radius: '14px', shadow: '0 18px 40px -22px rgb(0 0 0 / .45)' }),
+        outline: (p) => ({ bw: '2px', line: p.accent, soft: p.paper, radius: '12px', shadow: NONE, cta: p.accent, onCta: p.on }),
+        soft: (p) => ({ soft: mixHex(p.accent, 0.12, p.paper), line: 'transparent', radius: '18px', shadow: `0 10px 24px -18px ${alpha(p.accent, 0.6)}`, cta: p.accent, onCta: p.on }),
+        glass: (p) => ({
+            bg: mixHex(p.a2, 0.3, p.paper),
+            paper: alpha(p.paper, 0.55),
+            soft: alpha(p.paper, 0.35),
+            line: p.dark ? 'rgb(255 255 255 / .16)' : 'rgb(255 255 255 / .6)',
+            backdrop: 'blur(14px) saturate(1.5)',
+            radius: '20px',
+            shadow: `0 24px 48px -24px rgb(0 0 0 / .35), inset 0 1px 0 rgb(255 255 255 / ${p.dark ? 0.12 : 0.55})`,
+        }),
+        neon: (p) => {
+            const d = darkSet(p, '#05050a', p.accent, 0.1, '#f5f5f7');
+            return { ...d, soft: mixHex(p.a2, 0.12, d.paper), line: alpha(p.a2, 0.55), glow: `0 0 18px ${alpha(p.a2, 0.45)}`, radius: '12px', shadow: NONE };
+        },
+        brutal: (p) => ({ radius: '0px', bw: '3px', line: p.ink, shadow: `5px 5px 0 ${p.ink}`, soft: mixHex(p.a2, 0.25, p.paper), cta: p.accent, onCta: p.on, font: MONO }),
+        paper: (p) => ({
+            ...lightSet(p, mixHex(p.accent, 0.04, '#fffdf5')),
+            bs: 'dashed',
+            bw: '1.5px',
+            dash: '4 4',
+            radius: '6px',
+            font: 'Georgia, "Times New Roman", serif',
+        }),
+        gradient: (p) => ({
+            soft: mixHex(p.accent, 0.08, p.paper),
+            cta: `linear-gradient(135deg, ${p.accent}, ${mixHex(p.a2, 0.55, p.ink)})`,
+            onCta: p.on,
+            radius: '16px',
+            glow: `0 12px 30px -14px ${alpha(p.accent, 0.55)}`,
+        }),
+        terminal: (p) => {
+            const d = darkSet(p, '#070908', p.accent, 0.06, mixHex(p.a2, 0.25, '#e8f5e9'));
+            return { ...d, soft: mixHex(p.a2, 0.08, d.paper), line: alpha(p.a2, 0.4), radius: '4px', shadow: NONE, glow: `0 0 0 1px ${alpha(p.a2, 0.25)}`, font: MONO };
+        },
+    },
+    parts: {
+        flat: (p) => ({ shadow: NONE, line: alpha(p.ink, 0.1), soft: mixHex(p.ink, 0.05, p.paper), radius: '10px', cta: p.accent, onCta: p.on }),
+        elevated: () => ({ line: 'transparent', radius: '16px', shadow: '0 28px 60px -28px rgb(0 0 0 / .45), 0 2px 8px -2px rgb(0 0 0 / .12)' }),
+        outlined: (p) => ({ bw: '1.5px', line: mixHex(p.accent, 0.55, p.paper), soft: mixHex(p.accent, 0.06, p.paper), radius: '12px', shadow: NONE, cta: p.accent, onCta: p.on }),
+        frosted: (p) => ({
+            bg: mixHex(p.accent, 0.3, p.paper),
+            paper: alpha(mixHex(p.accent, 0.06, p.paper), 0.6),
+            soft: alpha(p.paper, 0.4),
+            line: p.dark ? 'rgb(255 255 255 / .15)' : 'rgb(255 255 255 / .6)',
+            backdrop: 'blur(20px) saturate(1.6)',
+            radius: '18px',
+            shadow: '0 30px 60px -30px rgb(0 0 0 / .4)',
+        }),
+        cyber: (p) => {
+            const d = darkSet(p, '#06070d', p.a2, 0.08, '#e6f1ff');
+            return { ...d, soft: mixHex(p.a2, 0.12, d.paper), line: alpha(p.a2, 0.6), radius: '2px', shadow: NONE, glow: `0 0 0 1px ${alpha(p.a2, 0.35)}, 0 0 22px -4px ${alpha(p.a2, 0.55)}`, font: MONO };
+        },
+        blocky: (p) => ({ radius: '6px', bw: '2px', line: p.ink, shadow: `3px 3px 0 ${p.accent}`, soft: mixHex(p.a2, 0.2, p.paper), cta: p.accent, onCta: p.on }),
+        pastel: (p) => {
+            const l = lightSet(p, mixHex(p.accent, 0.07, '#ffffff'));
+            return { ...l, soft: mixHex(p.a2, 0.18, '#ffffff'), line: mixHex(p.a2, 0.35, '#ffffff'), radius: '22px', shadow: `0 14px 30px -20px ${alpha(p.accent, 0.45)}`, cta: l.accent, onCta: '#ffffff' };
+        },
+        window: (p) => ({
+            radius: '10px',
+            soft: mixHex(p.ink, 0.07, p.paper),
+            line: alpha(p.ink, 0.16),
+            shadow: '0 22px 70px -20px rgb(0 0 0 / .5), 0 0 0 .5px rgb(0 0 0 / .2)',
+            cta: p.accent,
+            onCta: p.on,
+            font: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+        }),
+        console: (p) => {
+            const d = darkSet(p, '#101216', p.accent, 0.05, '#e5e7eb');
+            return { ...d, soft: mixHex('#ffffff', 0.06, d.paper), line: 'rgb(255 255 255 / .12)', radius: '8px', shadow: '0 20px 40px -24px rgb(0 0 0 / .8)', font: MONO };
+        },
+    },
+    motion: {
+        vivid: (p) => ({ mediaFilter: 'saturate(1.35) contrast(1.06)', speed: '1.25', glow: `0 0 24px ${alpha(p.accent, 0.35)}` }),
+        noir: (p) => ({
+            dark: true,
+            paper: '#0b0b0c',
+            bg: '#0b0b0c',
+            ink: '#f4f4f5',
+            accent: mixHex(p.a2, 0.5, '#ffffff'),
+            onAccent: '#0b0b0c',
+            mediaFilter: 'grayscale(1) contrast(1.2) brightness(.95)',
+            frame: '#18181b',
+            beamA: '#ffffff',
+            beamB: p.a2,
+            speed: '.8',
+        }),
+        sepia: (p) => {
+            const paper = mixHex(p.accent, 0.04, '#f6eedc');
+            return { dark: false, paper, bg: paper, ink: '#3b2f20', accent: mixHex(p.accent, 0.35, '#6b3f17'), onAccent: '#ffffff', mediaFilter: 'sepia(.75) saturate(1.15) contrast(1.05)', frame: '#fbf6ea', beamA: mixHex(p.accent, 0.35, '#b0895a'), beamB: '#e9d5a8', speed: '.9' };
+        },
+        duotone: (p) => ({ mediaFilter: `grayscale(1) sepia(1) saturate(2.4) hue-rotate(${(hueOf(p.accent) - 38 + 360) % 360}deg) contrast(1.05)`, frame: mixHex(p.accent, 0.12, p.paper) }),
+        glow: (p) => ({ mediaFilter: `brightness(1.06) drop-shadow(0 0 16px ${alpha(p.a2, 0.55)})`, glow: `0 0 32px ${alpha(p.a2, 0.5)}`, beamA: p.a2, beamB: p.accent }),
+        polaroid: (p) => {
+            const paper = mixHex(p.accent, 0.05, '#fafaf7');
+            return { ...lightSet(p, paper), frame: '#ffffff', mediaRadius: '2px', mediaFilter: 'contrast(1.04) saturate(1.08)', shadow: '0 16px 28px -18px rgb(0 0 0 / .55)' };
+        },
+        film: () => ({ dark: true, paper: '#111111', bg: '#111111', ink: '#ececec', accent: '#f5c542', onAccent: '#111111', mediaFilter: 'contrast(1.12) saturate(.8) sepia(.18)', mediaRadius: '0px', frame: '#1c1c1c', speed: '.7' }),
+        blueprint: (p) => {
+            const paper = mixHex(p.accent, 0.35, '#0b1b3a');
+            return { dark: true, paper, bg: paper, ink: '#e8f1ff', accent: '#e8f1ff', onAccent: paper, line: 'rgb(255 255 255 / .4)', bs: 'dashed', dash: '6 5', mediaFilter: 'grayscale(1) brightness(1.15) contrast(.95)', mediaRadius: '4px', frame: mixHex(p.accent, 0.3, '#0f2550'), beamA: '#e8f1ff', beamB: p.a2 };
+        },
+        holo: (p) => ({ mediaFilter: 'saturate(1.6) hue-rotate(18deg) contrast(1.05)', glow: `0 0 26px ${alpha(p.a2, 0.45)}`, beamA: p.a2, beamB: p.accent, speed: '1.5', mediaRadius: '22px' }),
+    },
+};
+const LOOK_FAMILIES = Object.keys(LOOK_TREATMENTS);
+/* ---------- lookup ---------- */
+let index = null;
+function build() {
+    const m = new Map();
+    for (const family of LOOK_FAMILIES) {
+        for (const [treatment, make] of Object.entries(LOOK_TREATMENTS[family])) {
+            for (const palette of Object.keys(LOOK_PALETTES)) {
+                const [ink, paper, accent, a2] = LOOK_PALETTES[palette];
+                const dark = palette === 'midnight' || palette === 'ember';
+                const p = { ink, paper, accent, a2, on: dark ? paper : '#ffffff', dark };
+                const name = `${treatment}-${palette}`;
+                const t = { ink, paper, accent, onAccent: p.on, bg: paper, dark, beamA: accent, beamB: a2, ...make(p) };
+                // Every look sets every token, so a look inside another never inherits the outer one's surfaces.
+                const solid = t.paper.startsWith('#') ? t.paper : t.bg;
+                const spec = {
+                    soft: mixHex(t.ink, 0.06, solid),
+                    line: alpha(t.ink, 0.14),
+                    radius: '14px',
+                    shadow: t.dark ? '0 18px 40px -22px rgb(0 0 0 / .8)' : '0 18px 40px -22px rgb(0 0 0 / .45)',
+                    glow: NONE,
+                    bw: '1px',
+                    bs: 'solid',
+                    dash: 'none',
+                    backdrop: 'none',
+                    cta: t.ink,
+                    onCta: solid,
+                    ok: t.dark ? '#4ade80' : '#15803d',
+                    bad: t.dark ? '#f87171' : '#b91c1c',
+                    mediaFilter: 'none',
+                    mediaRadius: '14px',
+                    frame: '#ffffff',
+                    speed: '1',
+                    ...t,
+                };
+                m.set(name, { name, family, treatment, palette, ...spec });
+            }
+        }
+    }
+    return m;
+}
+const all = () => (index ?? (index = build()));
+/** Every look name, or a family's, in treatment then palette order. */
+function lookNames(family) {
+    return [...all().values()].filter((l) => !family || l.family === family).map((l) => l.name);
+}
+/** What a look sets, or null for an unknown name. */
+function lookInfo(name) {
+    return all().get(name) ?? null;
+}
+const TOKENS = [
+    ['ink', 'ink'], ['paper', 'paper'], ['accent', 'accent'], ['onAccent', 'on-accent'], ['soft', 'soft'], ['line', 'line'],
+    ['radius', 'radius'], ['shadow', 'shadow'], ['glow', 'glow'], ['bw', 'border-width'], ['bs', 'border-style'], ['dash', 'dash'],
+    ['backdrop', 'backdrop'], ['cta', 'cta'], ['onCta', 'on-cta'], ['ok', 'ok'], ['bad', 'bad'], ['mediaFilter', 'media-filter'],
+    ['mediaRadius', 'media-radius'], ['frame', 'frame'], ['speed', 'speed'], ['beamA', 'beam-a'], ['beamB', 'beam-b'],
+];
+/** A look's custom properties, as `{ '--mo-kit-ink': '#…', … }` (empty for an unknown name). */
+function lookTokens(name) {
+    const l = lookInfo(name);
+    const out = {};
+    if (!l)
+        return out;
+    for (const [key, token] of TOKENS)
+        if (l[key] != null)
+            out[`--mo-kit-${token}`] = String(l[key]);
+    return out;
+}
+/** The CSS rule for one look (empty for an unknown name). */
+function lookRule(name) {
+    const l = lookInfo(name);
+    if (!l)
+        return '';
+    const decl = Object.entries(lookTokens(name)).map(([k, v]) => `${k}:${v}`);
+    decl.push('color:var(--mo-kit-ink)');
+    if (l.font)
+        decl.push(`font-family:${l.font}`);
+    return `:where([look="${name}"],[data-mo-look="${name}"]){${decl.join(';')}}`;
+}
+/** The stylesheet for every look, or one family's. */
+function looksCss(family) {
+    return lookNames(family).map(lookRule).join('\n');
+}
+/** Add the rules for every look (or one family's) to the document, once. */
+function adoptLooks(family) {
+    base.adoptStyles(`mo-looks${family ? '-' + family : ''}`, looksCss(family));
+}
+/** Give `el` a look (adopting just that rule); null removes it. False for an unknown name. */
+function applyLook(el, name) {
+    if (!el)
+        return false;
+    if (name == null) {
+        el.removeAttribute('data-mo-look');
+        return true;
+    }
+    if (!lookInfo(name))
+        return false;
+    base.adoptStyles(`mo-look-${name}`, lookRule(name));
+    el.setAttribute('data-mo-look', name);
+    return true;
+}
 
 const WIDGETS = {
     '6.2': { 'usa-carousel': widgets_carousel.defineCarousel, 'usa-tab-bar': widgets_tabBar.defineTabBar, 'usa-disclosure': widgets_disclosure.defineDisclosure, 'usa-stories': widgets_stories.defineStories },
@@ -676,7 +949,17 @@ exports.safeImageUrl = kit.safeImageUrl;
 exports.tween = kit.tween;
 exports.viewportHeight = viewport.viewportHeight;
 exports.watchViewport = viewport.watchViewport;
+exports.LOOK_FAMILIES = LOOK_FAMILIES;
+exports.LOOK_PALETTES = LOOK_PALETTES;
+exports.LOOK_TREATMENTS = LOOK_TREATMENTS;
 exports.WIDGETS = WIDGETS;
 exports.WIDGET_TAGS = WIDGET_TAGS;
+exports.adoptLooks = adoptLooks;
+exports.applyLook = applyLook;
 exports.defineWidgets = defineWidgets;
+exports.lookInfo = lookInfo;
+exports.lookNames = lookNames;
+exports.lookRule = lookRule;
+exports.lookTokens = lookTokens;
+exports.looksCss = looksCss;
 //# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/widgets.cjs.map

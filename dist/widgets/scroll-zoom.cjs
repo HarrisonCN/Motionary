@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_scrollZoom = require('../chunks/scroll-zoom-Cp1j5WME.cjs');
+var widgets_scrollZoom = require('../chunks/scroll-zoom-TExkR9AQ.cjs');
 
 
 

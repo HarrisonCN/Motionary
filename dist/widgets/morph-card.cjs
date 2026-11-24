@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_morphCard = require('../chunks/morph-card-CurBSiMR.cjs');
+var widgets_morphCard = require('../chunks/morph-card-DlOkzOOo.cjs');
 
 
 

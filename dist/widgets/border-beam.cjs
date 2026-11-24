@@ -4,7 +4,7 @@ var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
-var motionKit = require('../chunks/motion-kit-Drqx5vzb.cjs');
+var motionKit = require('../chunks/motion-kit-Bl78eN_4.cjs');
 
 function defineBorderBeam(tag = 'usa-border-beam') {
     const ctor = base.defineElement(tag, Base => class BorderBeam extends Base {

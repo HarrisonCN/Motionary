@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_orbitGallery = require('../chunks/orbit-gallery-DWXGgnJI.cjs');
+var widgets_orbitGallery = require('../chunks/orbit-gallery-DCde86kY.cjs');
 
 
 

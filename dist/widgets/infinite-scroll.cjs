@@ -3,7 +3,7 @@
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
-var partsKit = require('../chunks/parts-kit-CZw4-JX_.cjs');
+var partsKit = require('../chunks/parts-kit-ChjBuIN0.cjs');
 
 function defineInfiniteScroll(tag = 'usa-infinite-scroll') {
     const ctor = base.defineElement(tag, Base => class InfiniteScroll extends Base {

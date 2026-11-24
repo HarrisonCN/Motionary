@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_imageTunnel = require('../chunks/image-tunnel-B84cwjHO.cjs');
+var widgets_imageTunnel = require('../chunks/image-tunnel-B24fEP_Y.cjs');
 
 
 
