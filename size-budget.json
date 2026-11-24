@@ -3182,6 +3182,16 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/icon' (per-entry, fixed)",
+    "import": "import { defineIcon } from 'pkg/widgets/icon'; console.log(defineIcon);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/icon-picker' (per-entry, fixed)",
+    "import": "import { defineIconPicker } from 'pkg/widgets/icon-picker'; console.log(defineIconPicker);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

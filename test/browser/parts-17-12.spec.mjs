@@ -103,29 +103,33 @@ test('the home page shows the release pages as live collections', async ({ page 
   await section.scrollIntoViewIfNeeded();
   // only the section's own tabs: the demos inside the panels have tablists too
   const tabs = section.locator('.col-tabs').getByRole('tab');
-  await expect(tabs).toHaveCount(10);
+  await expect(tabs).toHaveCount(11);
   await expect(tabs.first()).toHaveAttribute('aria-selected', 'true');
-  // 17.13: the newest tab (studio) comes first
+  // 17.14: the newest tab (icons) comes first
+  await expect(section.locator('.col-panel:not([hidden]) .col-open')).toHaveAttribute('href', './icons.html');
+  await expect(section.locator('.col-panel:not([hidden]) mo-icon-picker .usa-ipick-btn').first()).toBeAttached({ timeout: 15000 });
+
+  await tabs.nth(1).click();
   await expect(section.locator('.col-panel:not([hidden]) .col-open')).toHaveAttribute('href', './studio.html');
   await expect(section.locator('.col-panel:not([hidden]) mo-line-chart .usa-lchart-svg')).toBeAttached({ timeout: 15000 });
 
-  await tabs.nth(1).click();
+  await tabs.nth(2).click();
   const open = section.locator('.col-panel:not([hidden])');
   await expect(open.locator('mo-progress-tabs [role="tablist"]')).toBeAttached({ timeout: 15000 });
   await expect(open.locator('.col-open')).toHaveAttribute('href', './parts.html');
 
-  await tabs.nth(1).focus();
+  await tabs.nth(2).focus();
   await page.keyboard.press('ArrowRight');
-  await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
+  await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
   await expect(section.locator('.col-panel:not([hidden]) mo-download-button button')).toBeVisible({ timeout: 15000 });
   // the store's own "/" search keeps its key: demo search bars on this page have no shortcut
   await expect(section.locator('.col-panel:not([hidden]) mo-search-bar')).toHaveAttribute('shortcut', 'none');
 
-  await tabs.nth(3).click();
+  await tabs.nth(4).click();
   await expect(section.locator('.col-panel:not([hidden]) .col-look')).toHaveCount(16, { timeout: 15000 });
 
   await page.locator('#lang-toggle').click();
-  await expect(tabs.first()).toContainText('17.13 新品');
+  await expect(tabs.first()).toContainText('253 个图标');
 
   await page.goto('/showcase/index.html#collections-luminous');
   await expect(page.locator('#collections .col-tabs').getByRole('tab', { name: /Luminous|发光控件/ })).toHaveAttribute('aria-selected', 'true');

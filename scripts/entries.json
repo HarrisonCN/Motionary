@@ -1587,6 +1587,32 @@
  },
  {
   "kind": "widget",
+  "name": "icon",
+  "entry": "motionary/widgets/icon",
+  "src": "src/entries/widgets/icon.ts",
+  "tag": "usa-icon",
+  "define": "defineIcon",
+  "types": [
+   "UsaIconElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/icon"
+ },
+ {
+  "kind": "widget",
+  "name": "icon-picker",
+  "entry": "motionary/widgets/icon-picker",
+  "src": "src/entries/widgets/icon-picker.ts",
+  "tag": "usa-icon-picker",
+  "define": "defineIconPicker",
+  "types": [
+   "UsaIconPickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/icon-picker"
+ },
+ {
+  "kind": "widget",
   "name": "tour",
   "entry": "motionary/widgets/tour",
   "src": "src/entries/widgets/tour.ts",

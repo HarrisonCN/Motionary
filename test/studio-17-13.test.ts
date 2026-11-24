@@ -53,7 +53,7 @@ describe('17.13 registration', () => {
     for (const name of TAGS) expect(lab).toContain(`<mo-${name}`);
     expect(readFileSync('showcase/index.html', 'utf8')).toContain('./studio.html');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
-    const tab = (COLLECTIONS as any[])[0];
+    const tab = (COLLECTIONS as any[]).find((c) => c.id === 'studio');
     expect(tab.id).toBe('studio');
     expect(tab.since).toBe('17.13');
     expect(tab.items.length).toBeGreaterThanOrEqual(12);

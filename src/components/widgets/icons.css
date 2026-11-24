@@ -1,0 +1,60 @@
+/* 17.14 icons: <usa-icon> and <usa-icon-picker> */
+usa-icon, mo-icon {display:inline-flex; vertical-align:-.125em; line-height:0}
+.usa-icon {flex:none; overflow:visible; transform-box:fill-box; transform-origin:50% 50%; --usa-icon-dur:1s}
+.usa-icon[data-run] {animation:var(--usa-icon-kf) var(--usa-icon-dur) var(--usa-icon-ease, ease-in-out) 1 both}
+.usa-icon[data-run="loop"] {animation-iteration-count:infinite}
+.usa-icon[data-motion="spin"] {--usa-icon-kf:usa-icon-spin; --usa-icon-ease:linear}
+.usa-icon[data-motion="pulse"] {--usa-icon-kf:usa-icon-pulse}
+.usa-icon[data-motion="beat"] {--usa-icon-kf:usa-icon-beat}
+.usa-icon[data-motion="bounce"] {--usa-icon-kf:usa-icon-bounce; --usa-icon-ease:cubic-bezier(.3,0,.4,1)}
+.usa-icon[data-motion="wiggle"] {--usa-icon-kf:usa-icon-wiggle}
+.usa-icon[data-motion="shake"] {--usa-icon-kf:usa-icon-shake}
+.usa-icon[data-motion="ring"] {--usa-icon-kf:usa-icon-ring; transform-origin:50% 8%}
+.usa-icon[data-motion="float"] {--usa-icon-kf:usa-icon-float}
+.usa-icon[data-motion="flip"] {--usa-icon-kf:usa-icon-flip}
+.usa-icon[data-motion="pop"] {--usa-icon-kf:usa-icon-pop; --usa-icon-ease:cubic-bezier(.34,1.56,.64,1)}
+.usa-icon[data-motion="blink"] {--usa-icon-kf:usa-icon-blink}
+/* draw: the svg itself holds still and every shape traces its line */
+.usa-icon[data-motion="draw"][data-run] {animation:none}
+.usa-icon[data-motion="draw"][data-run] > * {stroke-dasharray:1 1; animation:usa-icon-draw var(--usa-icon-dur) ease-out 1 both}
+.usa-icon[data-motion="draw"][data-run="loop"] > * {animation-iteration-count:infinite; animation-direction:alternate}
+@keyframes usa-icon-spin {to {transform:rotate(360deg)}}
+@keyframes usa-icon-pulse {0%,100% {transform:scale(1); opacity:1} 50% {transform:scale(1.14); opacity:.7}}
+@keyframes usa-icon-beat {0%,40%,100% {transform:scale(1)} 15% {transform:scale(1.25)} 28% {transform:scale(1.08)}}
+@keyframes usa-icon-bounce {0%,100% {transform:translateY(0)} 30% {transform:translateY(-28%)} 55% {transform:translateY(0)} 72% {transform:translateY(-10%)}}
+@keyframes usa-icon-wiggle {0%,100% {transform:rotate(0)} 20% {transform:rotate(-12deg)} 40% {transform:rotate(10deg)} 60% {transform:rotate(-6deg)} 80% {transform:rotate(4deg)}}
+@keyframes usa-icon-shake {0%,100% {transform:translateX(0)} 20% {transform:translateX(-12%)} 40% {transform:translateX(10%)} 60% {transform:translateX(-6%)} 80% {transform:translateX(4%)}}
+@keyframes usa-icon-ring {0%,100% {transform:rotate(0)} 12% {transform:rotate(18deg)} 26% {transform:rotate(-16deg)} 40% {transform:rotate(12deg)} 54% {transform:rotate(-8deg)} 68% {transform:rotate(4deg)} 80% {transform:rotate(0)}}
+@keyframes usa-icon-float {0%,100% {transform:translateY(0)} 50% {transform:translateY(-14%)}}
+@keyframes usa-icon-flip {0% {transform:perspective(80px) rotateY(0)} 100% {transform:perspective(80px) rotateY(360deg)}}
+@keyframes usa-icon-pop {0% {transform:scale(.55); opacity:.4} 100% {transform:scale(1); opacity:1}}
+@keyframes usa-icon-blink {0%,100% {opacity:1} 45%,55% {opacity:.15}}
+@keyframes usa-icon-draw {from {stroke-dashoffset:1} to {stroke-dashoffset:0}}
+
+/* picker */
+.usa-ipick {display:grid; gap:12px; color:var(--mo-kit-ink, inherit); font:inherit; --usa-ipick-size:24px; --usa-ipick-cell:56px}
+.usa-ipick-top {display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.usa-ipick-search {flex:1 1 220px; display:flex; align-items:center; gap:8px; padding:0 12px; min-height:40px; border:var(--mo-kit-bw, 1px) var(--mo-kit-bs, solid) var(--mo-kit-line, rgb(0 0 0 / .16)); border-radius:var(--mo-kit-radius, 10px); background:var(--mo-kit-paper, #fff)}
+.usa-ipick-search input {flex:1; min-width:0; border:0; background:none; font:inherit; color:inherit; padding:8px 0; outline:none}
+.usa-ipick-search:focus-within {outline:2px solid var(--mo-kit-accent, #4f46e5); outline-offset:2px}
+.usa-ipick-count {font-size:.85em; opacity:.7; font-variant-numeric:tabular-nums}
+.usa-ipick-cats {display:flex; flex-wrap:wrap; gap:6px}
+.usa-ipick-cat {padding:5px 12px; border:1px solid var(--mo-kit-line, rgb(0 0 0 / .16)); border-radius:999px; background:var(--mo-kit-paper, #fff); color:inherit; font:inherit; font-size:.85em; cursor:pointer}
+.usa-ipick-cat[aria-pressed="true"] {background:var(--mo-kit-accent, #4f46e5); color:var(--mo-kit-on-accent, #fff); border-color:transparent}
+.usa-ipick-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(var(--usa-ipick-cell), 1fr)); gap:6px; max-height:var(--usa-ipick-height, 360px); overflow:auto; padding:4px; margin:0; list-style:none}
+.usa-ipick-btn {display:grid; place-items:center; gap:4px; width:100%; aspect-ratio:1; padding:6px; border:1px solid transparent; border-radius:var(--mo-kit-radius, 10px); background:var(--mo-kit-soft, rgb(0 0 0 / .035)); color:inherit; cursor:pointer; transition:transform .18s ease, background .18s ease, border-color .18s ease}
+.usa-ipick-btn .usa-icon {width:var(--usa-ipick-size); height:var(--usa-ipick-size)}
+.usa-ipick-btn:hover {transform:translateY(-2px); border-color:var(--mo-kit-line, rgb(0 0 0 / .16))}
+.usa-ipick-btn:focus-visible {outline:2px solid var(--mo-kit-accent, #4f46e5); outline-offset:2px}
+.usa-ipick-btn[aria-pressed="true"] {background:var(--mo-kit-accent, #4f46e5); color:var(--mo-kit-on-accent, #fff)}
+.usa-ipick-btn[aria-pressed="true"] .usa-icon {animation:usa-icon-pop .35s cubic-bezier(.34,1.56,.64,1)}
+.usa-ipick-btn[hidden] {display:none}
+.usa-ipick-name {font-size:10px; line-height:1.15; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; opacity:.7}
+.usa-ipick[data-compact] .usa-ipick-name {display:none}
+.usa-ipick-empty {padding:24px; text-align:center; opacity:.7}
+.usa-ipick-sr {position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.usa-ipick[data-static] .usa-ipick-btn {transition:none}
+.usa-ipick[data-static] .usa-ipick-btn:hover {transform:none}
+@media (prefers-reduced-motion: reduce) {
+  .usa-icon[data-run], .usa-icon[data-run] > *, .usa-ipick-btn[aria-pressed="true"] .usa-icon {animation:none !important}
+}

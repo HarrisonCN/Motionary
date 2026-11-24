@@ -117,6 +117,8 @@ import { definePixelTransition, type UsaPixelTransitionElement } from './pixel-t
 import { defineMagnetLines, type UsaMagnetLinesElement } from './magnet-lines';
 import { defineTextPressure, type UsaTextPressureElement } from './text-pressure';
 import { defineShuffleGrid, type UsaShuffleGridElement } from './shuffle-grid';
+import { defineIcon, type UsaIconElement } from './icon';
+import { defineIconPicker, type UsaIconPickerElement } from './icon-picker';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -412,6 +414,8 @@ export { definePixelTransition, type UsaPixelTransitionElement };
 export { defineMagnetLines, type UsaMagnetLinesElement };
 export { defineTextPressure, type UsaTextPressureElement };
 export { defineShuffleGrid, type UsaShuffleGridElement };
+export { defineIcon, type UsaIconElement };
+export { defineIconPicker, type UsaIconPickerElement };
 export { rovingIndex, copyText, seeded, moveItem, numbers } from './kit-12';
 export { shareUrl, SHARE_TARGETS, type ShareTarget } from './share-button';
 export { tagSize } from './tag-cloud';
@@ -421,6 +425,9 @@ export { dropIndex } from './sortable-list';
 export { lensOffset } from './zoom-lens';
 export { ratingSummary } from './rating-bars';
 export { ringDash } from './checklist';
+export { ICONS, ICON_GROUPS, ICON_CATEGORIES, ICON_SVG_ATTRS, iconNames, iconCategory, iconParts, iconSvg, searchIcons, type IconCategory, type IconPart } from './icon-set';
+export { ICON_MOTIONS, ICON_TRIGGERS, iconElement, type IconMotion, type IconTrigger } from './icon';
+export { iconCopyText, gridStep } from './icon-picker';
 export { clampTo, tourPlace, wheelIndex, wheelTilt, mentionQuery, matchNames, diffLines, changedSpan, niceTicks, linePath, funnelRows, squarify, dayNumber, ganttSpan, waffleCells, flapSteps, shuffleOrder, pressureAt, angleTo, strokeWidth, type DiffLine } from './kit-13';
 export { EMOJI, filterEmoji, type EmojiEntry } from './emoji-picker';
 export { replyCount } from './comment-thread';
@@ -690,6 +697,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.14': { 'usa-icon': defineIcon, 'usa-icon-picker': defineIconPicker },
   '17.13': { 'usa-tour': defineTour, 'usa-signature-pad': defineSignaturePad, 'usa-wheel-picker': defineWheelPicker, 'usa-mention-input': defineMentionInput, 'usa-emoji-picker': defineEmojiPicker, 'usa-comment-thread': defineCommentThread, 'usa-diff-viewer': defineDiffViewer, 'usa-line-chart': defineLineChart, 'usa-funnel-chart': defineFunnelChart, 'usa-treemap': defineTreemap, 'usa-gantt': defineGantt, 'usa-waffle-chart': defineWaffleChart, 'usa-split-flap': defineSplitFlap, 'usa-scratch-card': defineScratchCard, 'usa-page-flip': definePageFlip, 'usa-circular-text': defineCircularText, 'usa-pixel-transition': definePixelTransition, 'usa-magnet-lines': defineMagnetLines, 'usa-text-pressure': defineTextPressure, 'usa-shuffle-grid': defineShuffleGrid },
   '17.12': { 'usa-progress-tabs': defineProgressTabs, 'usa-code-tabs': defineCodeTabs, 'usa-helpful-vote': defineHelpfulVote, 'usa-share-button': defineShareButton, 'usa-inline-edit': defineInlineEdit, 'usa-tag-cloud': defineTagCloud, 'usa-heatmap': defineHeatmap, 'usa-donut-chart': defineDonutChart, 'usa-sortable-list': defineSortableList, 'usa-zoom-lens': defineZoomLens, 'usa-rating-bars': defineRatingBars, 'usa-checklist': defineChecklist, 'usa-meteors': defineMeteors, 'usa-connect-beam': defineConnectBeam, 'usa-retro-grid': defineRetroGrid, 'usa-orbit-rings': defineOrbitRings, 'usa-letter-swap': defineLetterSwap, 'usa-ripple-grid': defineRippleGrid },
   '17.11': { 'usa-search-bar': defineSearchBar, 'usa-subscribe': defineSubscribe, 'usa-download-button': defineDownloadButton, 'usa-reveal-footer': defineRevealFooter, 'usa-shape-divider': defineShapeDivider, 'usa-scroll-cue': defineScrollCue, 'usa-virtual-list': defineVirtualList, 'usa-infinite-scroll': defineInfiniteScroll, 'usa-context-menu': defineContextMenu, 'usa-split-pane': defineSplitPane, 'usa-desktop-windows': defineDesktopWindows, 'usa-stack-slider': defineStackSlider, 'usa-morph-card': defineMorphCard, 'usa-scroll-zoom': defineScrollZoom, 'usa-scroll-bg': defineScrollBg, 'usa-image-tunnel': defineImageTunnel, 'usa-orbit-gallery': defineOrbitGallery, 'usa-clothesline': defineClothesline, 'usa-elastic-frame': defineElasticFrame, 'usa-border-beam': defineBorderBeam },
@@ -942,6 +950,10 @@ declare global {
     'mo-text-pressure': UsaTextPressureElement;
     'usa-shuffle-grid': UsaShuffleGridElement;
     'mo-shuffle-grid': UsaShuffleGridElement;
+    'usa-icon': UsaIconElement;
+    'mo-icon': UsaIconElement;
+    'usa-icon-picker': UsaIconPickerElement;
+    'mo-icon-picker': UsaIconPickerElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;
