@@ -5,4 +5,4 @@ var widgets_bgGenerator = require('../chunks/bg-generator-D4ssmvZk.cjs');
 
 
 exports.defineBgGenerator = widgets_bgGenerator.defineBgGenerator;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/bg-generator.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/bg-generator.cjs.map

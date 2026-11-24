@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var instrumentPanel = require('../chunks/instrument-panel-BFEIBs0Q.cjs');
+var instrumentPanel = require('../chunks/instrument-panel-DDBfyoY7.cjs');
 
 function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
     const ctor = base.defineElement(tag, Base => class IrisDiaphragm extends Base {
@@ -20,4 +20,4 @@ function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
 }
 
 exports.defineIrisDiaphragm = defineIrisDiaphragm;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/iris-diaphragm.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/iris-diaphragm.cjs.map

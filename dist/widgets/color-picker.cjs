@@ -5,4 +5,4 @@ var widgets_colorPicker = require('../chunks/color-picker-8N-NOvcQ.cjs');
 
 
 exports.defineColorPicker = widgets_colorPicker.defineColorPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/color-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/color-picker.cjs.map

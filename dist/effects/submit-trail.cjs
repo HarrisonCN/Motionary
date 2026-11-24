@@ -15,4 +15,4 @@ function registerSubmitTrail() {
 exports.effect = effect;
 exports.register = registerSubmitTrail;
 exports.registerSubmitTrail = registerSubmitTrail;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/submit-trail.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/submit-trail.cjs.map

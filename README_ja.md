@@ -313,7 +313,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 コンポーネント数とサイズに上限はありません。[`size-budget.json`](./size-budget.json) は過去の参考値を保持します。CI はサイズを報告し、出力とドキュメントの整合性を確認します。参考値を超えても失敗しません。[サイズ方針](./docs/size-policy.md)を参照してください。
 
 <!-- size-table:start -->
-17.8.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.9.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 参考値 |
 |---|---:|---:|

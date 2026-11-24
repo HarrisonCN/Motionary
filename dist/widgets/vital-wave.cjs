@@ -26,4 +26,4 @@ function defineVitalWave(tag = 'usa-vital-wave') {
 }
 
 exports.defineVitalWave = defineVitalWave;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/vital-wave.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/vital-wave.cjs.map

@@ -46,4 +46,4 @@ let uid = 0;
 const uniqueId = (prefix) => `${prefix}-${++uid}`;
 
 export { nearestNotch as a, bound as b, make as m, notchValues as n, roundTo as r, shortestTurn as s, uniqueId as u };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/moments-Cg_NlOYG.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/moments-Cg_NlOYG.js.map

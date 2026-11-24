@@ -134,4 +134,4 @@ function defineMoAliases() {
 exports.aliasCss = aliasCss;
 exports.aliasTag = aliasTag;
 exports.defineMoAliases = defineMoAliases;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/mo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/mo.cjs.map

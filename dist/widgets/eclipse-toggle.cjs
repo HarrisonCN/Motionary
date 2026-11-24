@@ -57,4 +57,4 @@ function defineEclipseToggle(tag = 'usa-eclipse-toggle') {
 }
 
 exports.defineEclipseToggle = defineEclipseToggle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/eclipse-toggle.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/eclipse-toggle.cjs.map

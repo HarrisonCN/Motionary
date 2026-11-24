@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-Dl9RztS5.js';
+import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-BfMtueXl.js';
 
 function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
     const ctor = defineElement(tag, Base => class IrisDiaphragm extends Base {
@@ -18,4 +18,4 @@ function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
 }
 
 export { defineIrisDiaphragm };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/iris-diaphragm.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/iris-diaphragm.js.map

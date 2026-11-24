@@ -88,4 +88,4 @@ function defineHueOrbit(tag = 'usa-hue-orbit') {
 
 exports.defineHueOrbit = defineHueOrbit;
 exports.hueColor = hueColor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/hue-orbit-BGfcmKZH.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/hue-orbit-BGfcmKZH.cjs.map

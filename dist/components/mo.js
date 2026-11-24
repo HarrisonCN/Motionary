@@ -130,4 +130,4 @@ function defineMoAliases() {
 }
 
 export { aliasCss, aliasTag, defineMoAliases };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/mo.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/mo.js.map

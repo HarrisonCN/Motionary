@@ -24,4 +24,4 @@ function defineStatusPill(tag = 'usa-status-pill') {
 }
 
 export { defineStatusPill };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/status-pill.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/status-pill.js.map

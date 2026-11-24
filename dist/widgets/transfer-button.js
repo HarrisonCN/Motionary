@@ -116,4 +116,4 @@ function defineTransferButton(tag = 'usa-transfer-button') {
 }
 
 export { defineTransferButton };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/transfer-button.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/transfer-button.js.map

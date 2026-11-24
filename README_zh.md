@@ -313,7 +313,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 组件数量、单组件及整体包体积均不设上限。[`size-budget.json`](./size-budget.json) 保留历史参考值；CI 只报告体积并验证构建产物和文档一致性，超出参考值不会失败。详见[体积策略](./docs/size-policy.md)。
 
 <!-- size-table:start -->
-17.8.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.9.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 历史参考 |
 |---|---:|---:|

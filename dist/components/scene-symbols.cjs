@@ -374,4 +374,4 @@ exports.symbolUsage = symbolUsage;
 exports.symbolsToCss = symbolsToCss;
 exports.updateSymbol = updateSymbol;
 exports.validateSymbols = validateSymbols;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/scene-symbols.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/scene-symbols.cjs.map

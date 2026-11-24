@@ -1362,4 +1362,4 @@ function registerAllEffects() {
 }
 
 export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, applyMotionTheme, bounceKeyframes, bumpCount, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, formatCount, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/effects.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/effects.js.map
