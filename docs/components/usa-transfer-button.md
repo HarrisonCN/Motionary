@@ -1,12 +1,12 @@
-# `<mo-transfer-button>` — <usa-transfer-button>
+# `<mo-transfer-button>` — Transfer button
 
 > Element name `<mo-transfer-button>` (default since 17.3); the legacy name `<usa-transfer-button>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-A squishy download / upload key. Pressing it hops the arrow toward the tray and asks the page to start the transfer; the page then reports progress through the `progress` attribute, which fills a ring around the key. At 100 the arrow turns into a tick and `usa:complete` fires once. A native button handles pointer and keyboard; progress is announced through a polite live region.
+A squishy download / upload key with a progress ring that turns into a tick at 100.
 
-- **Category:** widgets
+- **Category:** click · **since** 17.9
 - **Import:** `import { defineTransferButton } from 'motionary/components/widgets'` then `defineTransferButton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `direction`, `label`, `progress`, `disabled`
@@ -18,5 +18,19 @@ A squishy download / upload key. Pressing it hops the arrow toward the tray and 
 ## Minimal example
 
 ```html
-<usa-transfer-button></usa-transfer-button>
+<mo-transfer-button direction="download"></mo-transfer-button> <mo-transfer-button direction="upload"></mo-transfer-button>
+```
+
+## ES module
+
+```js
+import { defineMoAliases } from 'motionary/components/mo';
+import { defineTransferButton } from 'motionary/components/widgets';
+
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTransferButton(); // registers <mo-transfer-button>
+
+/* then use it in your HTML:
+<mo-transfer-button direction="download"></mo-transfer-button> <mo-transfer-button direction="upload"></mo-transfer-button>
+*/
 ```

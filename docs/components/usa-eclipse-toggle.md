@@ -1,12 +1,12 @@
-# `<mo-eclipse-toggle>` — <usa-eclipse-toggle>
+# `<mo-eclipse-toggle>` — Eclipse toggle
 
 > Element name `<mo-eclipse-toggle>` (default since 17.3); the legacy name `<usa-eclipse-toggle>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-A light / dark switch drawn as an eclipse: a disc slides over the sun, the rays retract and a thin corona stays. A native `<button role="switch">` handles pointer, Enter and Space. Attributes: `checked`, `label`, `disabled`. Event `usa:change` ({ checked }). It reports the state only; the page decides what dark means.
+A sun slides behind a moon as the switch turns on; a native switch button underneath.
 
-- **Category:** widgets
+- **Category:** ui · **since** 17.9
 - **Import:** `import { defineEclipseToggle } from 'motionary/components/widgets'` then `defineEclipseToggle();`
 - **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `checked`, `label`, `disabled`
@@ -18,5 +18,19 @@ A light / dark switch drawn as an eclipse: a disc slides over the sun, the rays 
 ## Minimal example
 
 ```html
-<usa-eclipse-toggle></usa-eclipse-toggle>
+<mo-eclipse-toggle label="Night mode"></mo-eclipse-toggle>
+```
+
+## ES module
+
+```js
+import { defineMoAliases } from 'motionary/components/mo';
+import { defineEclipseToggle } from 'motionary/components/widgets';
+
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineEclipseToggle(); // registers <mo-eclipse-toggle>
+
+/* then use it in your HTML:
+<mo-eclipse-toggle label="Night mode"></mo-eclipse-toggle>
+*/
 ```

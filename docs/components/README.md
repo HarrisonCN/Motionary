@@ -35,6 +35,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-bg-generator>`](usa-bg-generator.md) — Background generator
 - [`<mo-bottom-sheet>`](usa-bottom-sheet.md) — Bottom sheet
 - [`<mo-breadcrumbs>`](usa-breadcrumbs.md) — Breadcrumbs (animated, collapsing)
+- [`<mo-bulge-volume>`](usa-bulge-volume.md) — Bulge volume
 - [`<mo-carousel>`](usa-carousel.md) — Carousel / slider
 - [`<mo-cart-drawer>`](usa-cart-drawer.md) — Cart drawer
 - [`<mo-chapter-nav>`](usa-chapter-nav.md) — Chapter nav
@@ -46,6 +47,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-combobox>`](usa-combobox.md) — Search combobox
 - [`<mo-command-palette>`](usa-command-palette.md) — Command palette (⌘K)
 - [`<mo-consent>`](usa-consent.md) — Preference consent
+- [`<mo-copy-button>`](usa-copy-button.md) — Copy button
 - [`<mo-countdown>`](usa-countdown.md) — Flip countdown
 - [`<mo-cta-popup>`](usa-cta-popup.md) — Deliberate popup
 - [`<mo-date-picker>`](usa-date-picker.md) — Date picker
@@ -54,6 +56,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-dotlottie>`](usa-dotlottie.md) — Interactive dotLottie (themes + state machine) · Requires: motionary/runtime/vector + motionary/runtime/lottie-state
 - [`<mo-download-menu>`](usa-download-menu.md) — Download menu
 - [`<mo-drawer>`](usa-drawer.md) — Drawer
+- [`<mo-eclipse-toggle>`](usa-eclipse-toggle.md) — Eclipse toggle
 - [`<mo-fab>`](usa-fab.md) — FAB speed dial
 - [`<mo-festival-banner>`](usa-festival-banner.md) — Festival banner
 - [`<mo-field>`](usa-field.md) — Animated field
@@ -75,6 +78,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
 - [`<mo-hold-action>`](usa-hold-action.md) — Hold action
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
+- [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
 - [`<mo-install-button>`](usa-install-button.md) — Install button
 - [`<mo-kpi>`](usa-kpi.md) — KPI card
@@ -100,6 +104,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-nav-flyout>`](usa-nav-flyout.md) — Nav flyouts (shared background)
 - [`<mo-nav-morph>`](usa-nav-morph.md) — Navbar with morphing indicator
 - [`<mo-navbar>`](usa-navbar.md) — Auto-hide navbar
+- [`<mo-notch-slider>`](usa-notch-slider.md) — Notch slider
 - [`<mo-notification-bell>`](usa-notification-bell.md) — Notification bell
 - [`<mo-number-stepper>`](usa-number-stepper.md) — Number stepper
 - [`<mo-orbit-pass>`](usa-orbit-pass.md) — Orbit flyover
@@ -155,6 +160,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-textarea>`](usa-textarea.md) — Adaptive textarea
 - [`<mo-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
+- [`<mo-tile-relay>`](usa-tile-relay.md) — Tile relay
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
 - [`<mo-title-sequence>`](usa-title-sequence.md) — Title sequence
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
@@ -179,18 +185,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-motion-switch>`](usa-motion-switch.md) — Motion intensity
 - [`<mo-splash>`](usa-splash.md) — Splash screen
 
-## widgets
+## gesture
 
-- [`<mo-analog-stick>`](usa-analog-stick.md) — <usa-analog-stick>
-- [`<mo-bulge-volume>`](usa-bulge-volume.md) — <usa-bulge-volume>
-- [`<mo-copy-button>`](usa-copy-button.md) — <usa-copy-button>
-- [`<mo-eclipse-toggle>`](usa-eclipse-toggle.md) — <usa-eclipse-toggle>
-- [`<mo-hue-orbit>`](usa-hue-orbit.md) — <usa-hue-orbit>
-- [`<mo-notch-slider>`](usa-notch-slider.md) — <usa-notch-slider>
-- [`<mo-squish-key>`](usa-squish-key.md) — <usa-squish-key>
-- [`<mo-squish-stepper>`](usa-squish-stepper.md) — <usa-squish-stepper>
-- [`<mo-tile-relay>`](usa-tile-relay.md) — <usa-tile-relay>
-- [`<mo-transfer-button>`](usa-transfer-button.md) — <usa-transfer-button>
+- [`<mo-analog-stick>`](usa-analog-stick.md) — Analog stick
+- [`<mo-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
+- [`<mo-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
+- [`<mo-swipeable>`](usa-swipeable.md) — Swipeable
 
 ## svg
 
@@ -234,8 +234,11 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-like>`](usa-like.md) — Like button
 - [`<mo-menu-toggle>`](usa-menu-toggle.md) — Hamburger → close
 - [`<mo-pull-cord>`](usa-pull-cord.md) — Lamp pull-cord switch
+- [`<mo-squish-key>`](usa-squish-key.md) — Squish key
+- [`<mo-squish-stepper>`](usa-squish-stepper.md) — Squish stepper
 - [`<mo-star-rating>`](usa-star-rating.md) — Star rating 2.0
 - [`<mo-switch>`](usa-switch.md) — Toggle switch variants
+- [`<mo-transfer-button>`](usa-transfer-button.md) — Transfer button
 
 ## cards
 
@@ -330,9 +333,3 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-scroll-scene>`](usa-scroll-scene.md) — Scroll scene · Requires: motionary/runtime/scroll
 - [`<mo-scrolly>`](usa-scrolly.md) — Sticky scrollytelling
 - [`<mo-stagger>`](usa-stagger.md) — Stagger list
-
-## gesture
-
-- [`<mo-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
-- [`<mo-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
-- [`<mo-swipeable>`](usa-swipeable.md) — Swipeable
