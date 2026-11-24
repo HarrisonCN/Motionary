@@ -9,7 +9,7 @@ Search 253 line icons by name or category, filter with chips, walk the grid with
 - **Category:** ui · **since** 17.14
 - **Import:** `import { defineIconPicker } from 'motionary/components/widgets'` then `defineIconPicker();`
 - **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
-- **Attributes:** `name`, `copy`, `categories`, `category-labels`, `size`, `height`, `compact`, `label`, `search-label`, `placeholder`, `all-label`, `empty`, `count-label`
+- **Attributes:** `value`, `name`, `copy`, `categories`, `category-labels`, `size`, `height`, `compact`, `label`, `search-label`, `placeholder`, `all-label`, `empty`, `count-label`
 - **Events:** `usa:pick`
 - **Slots:** —
 - **Methods:** `search()`
