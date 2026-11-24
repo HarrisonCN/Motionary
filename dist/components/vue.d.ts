@@ -1693,6 +1693,13 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    'usa-announcement-bar': {
+        'close-label'?: string | boolean | number;
+        dismissible?: string | boolean | number;
+        interval?: string | boolean | number;
+        label?: string | boolean | number;
+        tone?: string | boolean | number;
+    };
     'usa-audio': {
         cooldown?: string | boolean | number;
         label?: string | boolean | number;
@@ -1739,6 +1746,12 @@ interface LegacyAttributes {
         max?: string | boolean | number;
         unit?: string | boolean | number;
         values?: string | boolean | number;
+    };
+    'usa-bento': {
+        collapse?: string | boolean | number;
+        columns?: string | boolean | number;
+        gap?: string | boolean | number;
+        stagger?: string | boolean | number;
     };
     'usa-bezier-lab': {
         disabled?: string | boolean | number;
@@ -1995,6 +2008,19 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         targets?: string | boolean | number;
     };
+    'usa-cut-reveal': {
+        cut?: string | boolean | number;
+        duration?: string | boolean | number;
+        pieces?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    'usa-data-table': {
+        'filter-label'?: string | boolean | number;
+        filterable?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        'sort-column'?: string | boolean | number;
+        'sort-direction'?: string | boolean | number;
+    };
     'usa-date-picker': {
         'first-day'?: string | boolean | number;
         locale?: string | boolean | number;
@@ -2103,14 +2129,33 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-empty-state': {
+        compact?: string | boolean | number;
+        description?: string | boolean | number;
+        heading?: string | boolean | number;
+        'heading-level'?: string | boolean | number;
+        icon?: string | boolean | number;
+    };
     'usa-equalizer': {
         bands?: string | boolean | number;
         label?: string | boolean | number;
         preset?: string | boolean | number;
     };
+    'usa-expand-cards': {
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        stack?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
     'usa-fab': {
         direction?: string | boolean | number;
         gap?: string | boolean | number;
+    };
+    'usa-fan-carousel': {
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+        spread?: string | boolean | number;
     };
     'usa-festival-banner': {
         dismissible?: string | boolean | number;
@@ -2130,6 +2175,15 @@ interface LegacyAttributes {
         simulate?: string | boolean | number;
     };
     'usa-file-tree': {};
+    'usa-filter-chips': {
+        'all-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        match?: string | boolean | number;
+        multiple?: string | boolean | number;
+        options?: string | boolean | number;
+        target?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-flight-status': {
         animated?: string | boolean | number;
         arrival?: string | boolean | number;
@@ -2332,6 +2386,22 @@ interface LegacyAttributes {
         duration?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-horizontal-scroll': {
+        gap?: string | boolean | number;
+        label?: string | boolean | number;
+        'min-width'?: string | boolean | number;
+        'panel-width'?: string | boolean | number;
+        progress?: string | boolean | number;
+    };
+    'usa-hotspots': {
+        label?: string | boolean | number;
+        pulse?: string | boolean | number;
+    };
+    'usa-hover-reveal-list': {
+        label?: string | boolean | number;
+        size?: string | boolean | number;
+        tilt?: string | boolean | number;
+    };
     'usa-hud-panel': {
         color?: string | boolean | number;
         status?: string | boolean | number;
@@ -2357,6 +2427,12 @@ interface LegacyAttributes {
         preset?: string | boolean | number;
         size?: string | boolean | number;
         toggle?: string | boolean | number;
+    };
+    'usa-image-trail': {
+        distance?: string | boolean | number;
+        life?: string | boolean | number;
+        max?: string | boolean | number;
+        size?: string | boolean | number;
     };
     'usa-infinity-loop': {
         duration?: string | boolean | number;
@@ -2390,6 +2466,12 @@ interface LegacyAttributes {
         glyph?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-json-viewer': {
+        'expand-depth'?: string | boolean | number;
+        json?: string | boolean | number;
+        label?: string | boolean | number;
+        'max-nodes'?: string | boolean | number;
+    };
     'usa-kanban': {
         label?: string | boolean | number;
     };
@@ -2413,6 +2495,10 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-lightbox': {
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+    };
     'usa-like': {
         color?: string | boolean | number;
         count?: string | boolean | number;
@@ -2423,6 +2509,13 @@ interface LegacyAttributes {
         size?: string | boolean | number;
     };
     'usa-liquid': {};
+    'usa-liquid-glass': {
+        blur?: string | boolean | number;
+        pressable?: string | boolean | number;
+        radius?: string | boolean | number;
+        strength?: string | boolean | number;
+        tint?: string | boolean | number;
+    };
     'usa-liquid-metal': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2758,6 +2851,15 @@ interface LegacyAttributes {
         revealed?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-path-motion': {
+        duration?: string | boolean | number;
+        path?: string | boolean | number;
+        rotate?: string | boolean | number;
+        'show-path'?: string | boolean | number;
+        spacing?: string | boolean | number;
+        trace?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
     'usa-pause-all': {
         label?: string | boolean | number;
         'resume-label'?: string | boolean | number;
@@ -2822,6 +2924,17 @@ interface LegacyAttributes {
         bounce?: string | boolean | number;
         disabled?: string | boolean | number;
         scale?: string | boolean | number;
+    };
+    'usa-pricing': {
+        currency?: string | boolean | number;
+        label?: string | boolean | number;
+        locale?: string | boolean | number;
+        'month-unit'?: string | boolean | number;
+        'monthly-label'?: string | boolean | number;
+        period?: string | boolean | number;
+        'year-unit'?: string | boolean | number;
+        'yearly-label'?: string | boolean | number;
+        'yearly-note'?: string | boolean | number;
     };
     'usa-prize-wheel': {
         duration?: string | boolean | number;
@@ -3031,6 +3144,17 @@ interface LegacyAttributes {
         start?: string | boolean | number;
         'toggle-class'?: string | boolean | number;
     };
+    'usa-scroll-velocity': {
+        max?: string | boolean | number;
+        mode?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    'usa-scrollspy': {
+        label?: string | boolean | number;
+        offset?: string | boolean | number;
+        selector?: string | boolean | number;
+        target?: string | boolean | number;
+    };
     'usa-scrolly': {
         offset?: string | boolean | number;
     };
@@ -3096,6 +3220,12 @@ interface LegacyAttributes {
         keys?: string | boolean | number;
         label?: string | boolean | number;
         listen?: string | boolean | number;
+    };
+    'usa-sidebar': {
+        'collapse-label'?: string | boolean | number;
+        collapsed?: string | boolean | number;
+        'expand-label'?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-six-dot-orbit': {
         duration?: string | boolean | number;
@@ -3262,6 +3392,14 @@ interface LegacyAttributes {
         clickable?: string | boolean | number;
         label?: string | boolean | number;
         orientation?: string | boolean | number;
+    };
+    'usa-sticky-cta': {
+        'close-label'?: string | boolean | number;
+        dismissible?: string | boolean | number;
+        label?: string | boolean | number;
+        offset?: string | boolean | number;
+        position?: string | boolean | number;
+        watch?: string | boolean | number;
     };
     'usa-sticky-stack': {
         gap?: string | boolean | number;
@@ -3581,6 +3719,10 @@ interface LegacyEvents {
         'usa:release': CustomEvent<any>;
     };
     'usa-anim-icon': {};
+    'usa-announcement-bar': {
+        'usa:change': CustomEvent<any>;
+        'usa:dismiss': CustomEvent<any>;
+    };
     'usa-audio': {
         'usa:audio-error': CustomEvent<any>;
         'usa:beat': CustomEvent<any>;
@@ -3595,6 +3737,7 @@ interface LegacyEvents {
         'usa:unlock': CustomEvent<any>;
     };
     'usa-bar-chart': {};
+    'usa-bento': {};
     'usa-bezier-lab': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -3724,6 +3867,13 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-cursor': {};
+    'usa-cut-reveal': {
+        'usa:done': CustomEvent<any>;
+    };
+    'usa-data-table': {
+        'usa:filter': CustomEvent<any>;
+        'usa:sort': CustomEvent<any>;
+    };
     'usa-date-picker': {
         'usa:change': CustomEvent<any>;
     };
@@ -3779,11 +3929,18 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-empty-state': {};
     'usa-equalizer': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-expand-cards': {
         'usa:change': CustomEvent<any>;
     };
     'usa-fab': {
         'usa:toggle': CustomEvent<any>;
+    };
+    'usa-fan-carousel': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-festival-banner': {
         'usa:dismiss': CustomEvent<any>;
@@ -3796,6 +3953,9 @@ interface LegacyEvents {
         'usa:files': CustomEvent<any>;
     };
     'usa-file-tree': {};
+    'usa-filter-chips': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-flight-status': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -3882,6 +4042,16 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:confirm': CustomEvent<any>;
     };
+    'usa-horizontal-scroll': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-hotspots': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-hover-reveal-list': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-hud-panel': {
         'usa:boot': CustomEvent<any>;
     };
@@ -3894,6 +4064,7 @@ interface LegacyEvents {
     'usa-icon-morph': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-image-trail': {};
     'usa-infinity-loop': {};
     'usa-ink-flow': {
         'usa:action': CustomEvent<any>;
@@ -3909,6 +4080,9 @@ interface LegacyEvents {
     'usa-jelly-button': {
         'usa:press': CustomEvent<any>;
     };
+    'usa-json-viewer': {
+        'usa:toggle': CustomEvent<any>;
+    };
     'usa-kanban': {
         'usa:move': CustomEvent<any>;
     };
@@ -3923,10 +4097,16 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-lightbox': {
+        'usa:change': CustomEvent<any>;
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
     'usa-like': {
         'usa:change': CustomEvent<any>;
     };
     'usa-liquid': {};
+    'usa-liquid-glass': {};
     'usa-liquid-metal': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -4090,6 +4270,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-path-motion': {
+        'usa:done': CustomEvent<any>;
+    };
     'usa-pause-all': {
         'usa:pause-all': CustomEvent<any>;
     };
@@ -4125,6 +4308,10 @@ interface LegacyEvents {
     'usa-post-fx': {};
     'usa-presence': {};
     'usa-press': {};
+    'usa-pricing': {
+        'usa:change': CustomEvent<any>;
+        'usa:select': CustomEvent<any>;
+    };
     'usa-prize-wheel': {
         'usa:result': CustomEvent<any>;
     };
@@ -4220,6 +4407,10 @@ interface LegacyEvents {
         'usa:progress': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
     };
+    'usa-scroll-velocity': {};
+    'usa-scrollspy': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-scrolly': {
         'usa:step': CustomEvent<any>;
     };
@@ -4251,6 +4442,10 @@ interface LegacyEvents {
     'usa-shimmer-text': {};
     'usa-shortcut': {
         'usa:trigger': CustomEvent<any>;
+    };
+    'usa-sidebar': {
+        'usa:select': CustomEvent<any>;
+        'usa:toggle': CustomEvent<any>;
     };
     'usa-six-dot-orbit': {};
     'usa-skeleton': {
@@ -4322,6 +4517,9 @@ interface LegacyEvents {
     };
     'usa-stepper': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-sticky-cta': {
+        'usa:dismiss': CustomEvent<any>;
     };
     'usa-sticky-stack': {};
     'usa-sticky-wall': {

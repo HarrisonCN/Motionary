@@ -682,6 +682,20 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 <usa-anim-icon name="heart" trigger="click"></usa-anim-icon>
 ```
 
+### <mo-announcement-bar> (legacy <usa-announcement-bar>) — Announcement bar
+
+A slim bar that rolls between messages, pauses on hover or focus and can be dismissed.
+
+- Import: `import { defineAnnouncementBar } from 'motionary/components/widgets'; defineAnnouncementBar();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `interval`, `dismissible`, `label`, `close-label`, `tone`
+- Events: `usa:change`, `usa:dismiss`
+- Methods: `dismiss()`, `next()`, `previous()`
+
+```html
+<mo-announcement-bar dismissible><span>New: 21 components</span><a href="#">Read the changelog</a></mo-announcement-bar>
+```
+
 ### <mo-audio> (legacy <usa-audio>) — Beat-triggered effects
 
 5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.
@@ -821,6 +835,18 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 ```html
 <usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
 <script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
+```
+
+### <mo-bento> (legacy <usa-bento>) — Bento grid
+
+A tiled grid whose cells take spans from data-span / data-rows; tiles rise in turn and a soft spotlight follows the pointer.
+
+- Import: `import { defineBento } from 'motionary/components/widgets'; defineBento();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `columns`, `gap`, `collapse`, `stagger`
+
+```html
+<mo-bento columns="3"><div data-span="2">Fast</div><div data-rows="2">Small</div><div>Typed</div><div>Accessible</div></mo-bento>
 ```
 
 ### <mo-bezier-lab> (legacy <usa-bezier-lab>) — Bezier laboratory
@@ -1437,6 +1463,34 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 <usa-cursor mode="magnetic" hide-native></usa-cursor>
 ```
 
+### <mo-cut-reveal> (legacy <usa-cut-reveal>) — Cut reveal
+
+Copies of the content are sliced, shredded, split or torn and fly together to reveal it.
+
+- Import: `import { defineCutReveal } from 'motionary/components/widgets'; defineCutReveal();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `cut`, `pieces`, `duration`, `trigger`
+- Events: `usa:done`
+- Methods: `play()`
+
+```html
+<mo-cut-reveal cut="slice" pieces="6"><h2>Sliced in</h2></mo-cut-reveal>
+```
+
+### <mo-data-table> (legacy <usa-data-table>) — Sortable data table
+
+Enhances a real table: header buttons sort, a box filters, and rows glide to their new places.
+
+- Import: `import { defineDataTable } from 'motionary/components/widgets'; defineDataTable();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `filterable`, `filter-label`, `placeholder`, `sort-column`, `sort-direction`
+- Events: `usa:sort`, `usa:filter`
+- Methods: `sort()`, `filter()`
+
+```html
+<mo-data-table filterable><table><thead><tr><th>Name</th><th>Size</th></tr></thead><tbody><tr><td>core</td><td>12.4</td></tr><tr><td>widgets</td><td>3.1</td></tr><tr><td>fx</td><td>8.8</td></tr></tbody></table></mo-data-table>
+```
+
 ### <mo-date-picker> (legacy <usa-date-picker>) — Date picker
 
 6.9: months slide in from the direction of travel, the chosen day pops inside a spring circle, today has a ring. A real date grid: arrows, PageUp / PageDown, Home / End, min / max.
@@ -1726,6 +1780,19 @@ The value bubble trails the thumb on a spring and leans with its speed.
 <mo-elastic-slider label="Font size" value="16" min="8" max="32" unit="px"></mo-elastic-slider>
 ```
 
+### <mo-empty-state> (legacy <usa-empty-state>) — Empty state
+
+An illustration that draws itself, then the heading, text and actions rise in turn.
+
+- Import: `import { defineEmptyState } from 'motionary/components/widgets'; defineEmptyState();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `icon`, `heading`, `description`, `heading-level`, `compact`
+- Methods: `replay()`
+
+```html
+<mo-empty-state icon="inbox" heading="No messages" description="New mail will show up here."><button type="button">Refresh</button></mo-empty-state>
+```
+
 ### <mo-equalizer> (legacy <usa-equalizer>) — Graphic equalizer
 
 7.1: one vertical slider per band with springy caps and a smooth response curve drawn through them; presets glide every band to its gain.
@@ -1739,6 +1806,19 @@ The value bubble trails the thumb on a spring and leans with its speed.
 ```html
 <usa-equalizer preset="rock" bands="60,150,400,1k,2.4k,6k,16k"></usa-equalizer>
 <script>addEventListener('DOMContentLoaded', () => { const eq = document.querySelector('usa-equalizer'); eq.applyPreset('vocal'); });</script>
+```
+
+### <mo-expand-cards> (legacy <usa-expand-cards>) — Expanding cards
+
+A row of panels where the chosen one widens and shows its text; stacks on narrow screens.
+
+- Import: `import { defineExpandCards } from 'motionary/components/widgets'; defineExpandCards();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `index`, `trigger`, `stack`, `label`
+- Events: `usa:change`
+
+```html
+<mo-expand-cards><div data-title="Coast" data-image="assets/demo-photo.jpg">Morning tide.</div><div data-title="Forest" data-image="assets/demo-photo.jpg">Pines.</div><div data-title="City" data-image="assets/demo-photo.jpg">Night lights.</div></mo-expand-cards>
 ```
 
 ### <mo-fab> (legacy <usa-fab>) — FAB speed dial
@@ -1757,6 +1837,20 @@ A floating action button whose actions fan out with a staggered spring: up, down
   <button aria-label="Photo">📷</button>
   <button aria-label="Note">📝</button>
 </usa-fab>
+```
+
+### <mo-fan-carousel> (legacy <usa-fan-carousel>) — Fan carousel
+
+Cards spread like a hand of cards; the front one is centred and the rest fan out behind it.
+
+- Import: `import { defineFanCarousel } from 'motionary/components/widgets'; defineFanCarousel();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `index`, `spread`, `loop`, `label`
+- Events: `usa:change`
+- Methods: `next()`, `previous()`, `go()`
+
+```html
+<mo-fan-carousel label="Cards"><div>One</div><div>Two</div><div>Three</div><div>Four</div></mo-fan-carousel>
 ```
 
 ### <mo-festival-banner> (legacy <usa-festival-banner>) — Festival banner
@@ -1815,6 +1909,19 @@ Expandable folders with native file links and left/right keyboard navigation.
 
 ```html
 <usa-file-tree><details open><summary>Portfolio</summary><details><summary>Portraits</summary><a href="#contact">Contact sheet</a></details></details></usa-file-tree>
+```
+
+### <mo-filter-chips> (legacy <usa-filter-chips>) — Filter chips
+
+Toggle chips that filter a list by data-tags; leaving items fade and the rest close the gaps.
+
+- Import: `import { defineFilterChips } from 'motionary/components/widgets'; defineFilterChips();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `options`, `value`, `target`, `multiple`, `match`, `label`, `all-label`
+- Events: `usa:change`
+
+```html
+<mo-filter-chips options="UI, Motion" multiple></mo-filter-chips><ul><li data-tags="UI">Sidebar</li><li data-tags="Motion">Path motion</li></ul>
 ```
 
 ### <mo-flight-status> (legacy <usa-flight-status>) — Flight status
@@ -2274,6 +2381,46 @@ Hold with a pointer, Space or Enter; release or Escape cancels. Emits an event o
 <mo-hold-action duration="800"></mo-hold-action>
 ```
 
+### <mo-horizontal-scroll> (legacy <usa-horizontal-scroll>) — Horizontal scroll section
+
+Panels that travel sideways while the page scrolls down; a snap scroller on narrow screens and under reduced motion.
+
+- Import: `import { defineHorizontalScroll } from 'motionary/components/widgets'; defineHorizontalScroll();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `panel-width`, `gap`, `progress`, `min-width`, `label`
+- Events: `usa:change`
+
+```html
+<mo-horizontal-scroll panel-width="60vw" progress><section>One</section><section>Two</section><section>Three</section></mo-horizontal-scroll>
+```
+
+### <mo-hotspots> (legacy <usa-hotspots>) — Image hotspots
+
+Pulsing points on a picture; each opens a note, closes with Escape or a click outside.
+
+- Import: `import { defineHotspots } from 'motionary/components/widgets'; defineHotspots();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `pulse`, `label`
+- Events: `usa:open`, `usa:close`
+- Methods: `open()`, `close()`
+
+```html
+<mo-hotspots><img src="assets/demo-photo.jpg" alt="Desk"><div data-x="30" data-y="40" data-title="Lamp">Warm light.</div><div data-x="70" data-y="65" data-title="Notebook">Dotted paper.</div></mo-hotspots>
+```
+
+### <mo-hover-reveal-list> (legacy <usa-hover-reveal-list>) — Hover reveal list
+
+A big link list where a picture follows the pointer on a spring and leans with its speed.
+
+- Import: `import { defineHoverRevealList } from 'motionary/components/widgets'; defineHoverRevealList();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `size`, `tilt`, `label`
+- Events: `usa:change`
+
+```html
+<mo-hover-reveal-list><a href="#" data-image="assets/demo-photo.jpg">Studio</a><a href="#" data-image="assets/demo-photo.jpg">Journal</a></mo-hover-reveal-list>
+```
+
 ### <mo-hud-panel> (legacy <usa-hud-panel>) — HUD panel
 
 8.4: a sci-fi HUD panel — angled corners, a glowing frame that draws itself in when the panel scrolls into view, a header with a blinking status light, and data rows that fill in as animated bar readouts.
@@ -2336,6 +2483,18 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 ```html
 <usa-icon-morph icons="play,pause" labels="Play,Pause" toggle></usa-icon-morph>
 <usa-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></usa-icon-morph>
+```
+
+### <mo-image-trail> (legacy <usa-image-trail>) — Image trail
+
+Pictures drop behind the pointer as it moves across the area and fade away.
+
+- Import: `import { defineImageTrail } from 'motionary/components/widgets'; defineImageTrail();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `distance`, `life`, `max`, `size`
+
+```html
+<mo-image-trail><img src="assets/demo-photo.jpg" alt="Photo 1" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 2" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 3" data-full="assets/demo-photo.jpg"><h2>Move here</h2></mo-image-trail>
 ```
 
 ### <mo-infinity-loop> (legacy <usa-infinity-loop>) — Infinity loop
@@ -2423,6 +2582,20 @@ A button that wobbles like jelly when pressed.
 
 ```html
 <mo-jelly-button label="Add"></mo-jelly-button>
+```
+
+### <mo-json-viewer> (legacy <usa-json-viewer>) — JSON viewer
+
+A keyboard-navigable tree for JSON; branches open with a soft slide and long data stays capped.
+
+- Import: `import { defineJsonViewer } from 'motionary/components/widgets'; defineJsonViewer();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `json`, `expand-depth`, `max-nodes`, `label`
+- Events: `usa:toggle`
+- Methods: `expandAll()`, `collapseAll()`
+
+```html
+<mo-json-viewer json='{"name":"motionary","tags":["ui","motion"],"stars":42}'></mo-json-viewer>
 ```
 
 ### <mo-kanban> (legacy <usa-kanban>) — Kanban board (drag-sort)
@@ -2529,6 +2702,20 @@ defineLensStack(); // registers <usa-lens-stack> — after the prerequisites
 <mo-lens-stack value="42"></mo-lens-stack>
 ```
 
+### <mo-lightbox> (legacy <usa-lightbox>) — Lightbox gallery
+
+Thumbnails that grow into a full-screen dialog; arrows, swipe, zoom and pan, and the picture shrinks back on close.
+
+- Import: `import { defineLightbox } from 'motionary/components/widgets'; defineLightbox();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `loop`
+- Events: `usa:open`, `usa:close`, `usa:change`
+- Methods: `open()`, `close()`
+
+```html
+<mo-lightbox label="Gallery"><img src="assets/demo-photo.jpg" alt="Photo 1" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 2" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="Photo 3" data-full="assets/demo-photo.jpg"></mo-lightbox>
+```
+
 ### <mo-like> (legacy <usa-like>) — Like button
 
 A heart that pops with a spring and bursts into particles; aria-pressed, optional count.
@@ -2554,6 +2741,18 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 <usa-liquid strength="1">
   <img src="photo.jpg" alt="…">
 </usa-liquid>
+```
+
+### <mo-liquid-glass> (legacy <usa-liquid-glass>) — Liquid glass
+
+A glass pane that blurs and bends what is behind it, catches a highlight under the pointer and squashes on press.
+
+- Import: `import { defineLiquidGlass } from 'motionary/components/widgets'; defineLiquidGlass();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `strength`, `blur`, `tint`, `radius`, `pressable`
+
+```html
+<mo-liquid-glass pressable><strong>Liquid glass</strong></mo-liquid-glass>
 ```
 
 ### <mo-liquid-metal> (legacy <usa-liquid-metal>) — Liquid metal
@@ -3390,6 +3589,19 @@ Reveal and hide without losing the selection; no secret values in custom events.
 <mo-password label="Password" name="password" minlength="8" hint="Use a unique password."></mo-password>
 ```
 
+### <mo-path-motion> (legacy <usa-path-motion>) — Path motion
+
+Things that ride an SVG path on scroll, in view, on hover or in a loop, turning with it and drawing the trail.
+
+- Import: `import { definePathMotion } from 'motionary/components/widgets'; definePathMotion();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `path`, `trigger`, `duration`, `rotate`, `trace`, `spacing`, `show-path`
+- Events: `usa:done`
+
+```html
+<mo-path-motion trigger="loop" rotate trace><span>✈</span></mo-path-motion>
+```
+
 ### <mo-pause-all> (legacy <usa-pause-all>) — Pause all motion
 
 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it again; `scope` limits it to one area.
@@ -3604,6 +3816,19 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 
 ```html
 <usa-press bounce><button>Press</button></usa-press>
+```
+
+### <mo-pricing> (legacy <usa-pricing>) — Pricing table
+
+Monthly / yearly switch with a sliding thumb; prices roll to the new figure and the featured plan lifts.
+
+- Import: `import { definePricing } from 'motionary/components/widgets'; definePricing();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `period`, `currency`, `label`, `monthly-label`, `yearly-label`, `yearly-note`, `locale`, `month-unit`, `year-unit`
+- Events: `usa:change`, `usa:select`
+
+```html
+<mo-pricing currency="$"><div data-name="Starter" data-monthly="0" data-yearly="0">For trying it out</div><div data-name="Pro" data-monthly="12" data-yearly="120" data-featured data-badge="Popular">For teams</div></mo-pricing>
 ```
 
 ### <mo-prize-wheel> (legacy <usa-prize-wheel>) — Prize wheel
@@ -4053,6 +4278,32 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 </usa-scroll-scene>
 ```
 
+### <mo-scroll-velocity> (legacy <usa-scroll-velocity>) — Scroll velocity
+
+Content that skews, stretches, blurs or tilts with how fast the page scrolls, then settles.
+
+- Import: `import { defineScrollVelocity } from 'motionary/components/widgets'; defineScrollVelocity();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `mode`, `strength`, `max`
+
+```html
+<mo-scroll-velocity mode="skew"><h2>Scroll me</h2></mo-scroll-velocity>
+```
+
+### <mo-scrollspy> (legacy <usa-scrollspy>) — Scrollspy table of contents
+
+A table of contents that follows the reader: a marker slides to the section on screen; links scroll smoothly and move focus.
+
+- Import: `import { defineScrollspy } from 'motionary/components/widgets'; defineScrollspy();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `target`, `selector`, `label`, `offset`
+- Events: `usa:change`
+- Methods: `refresh()`
+
+```html
+<mo-scrollspy target="main" label="On this page"></mo-scrollspy>
+```
+
 ### <mo-scrolly> (legacy <usa-scrolly>) — Sticky scrollytelling
 
 A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
@@ -4207,6 +4458,20 @@ A light sweep across gradient-filled text. CSS only; colours and speed via attri
 ```html
 <usa-shortcut keys="mod+k" label="Search"></usa-shortcut>
 <usa-shortcut keys="mod+shift+p" for="palette-button"></usa-shortcut>
+```
+
+### <mo-sidebar> (legacy <usa-sidebar>) — Collapsible sidebar
+
+Navigation that folds to an icon rail; a pill glides to the current item and labels fade out as it narrows.
+
+- Import: `import { defineSidebar } from 'motionary/components/widgets'; defineSidebar();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `collapsed`, `expand-label`, `collapse-label`
+- Events: `usa:toggle`, `usa:select`
+- Methods: `toggle()`
+
+```html
+<mo-sidebar label="Main"><a href="#" data-icon="⌂" aria-current="page">Home</a><a href="#" data-icon="✉">Inbox</a><a href="#" data-icon="⚙">Settings</a></mo-sidebar>
 ```
 
 ### <mo-six-dot-orbit> (legacy <usa-six-dot-orbit>) — Six dot orbit
@@ -4592,6 +4857,19 @@ A bead rolls along a line of steps with back and next buttons.
   <span>Payment</span>
   <span>Done</span>
 </usa-stepper>
+```
+
+### <mo-sticky-cta> (legacy <usa-sticky-cta>) — Sticky call to action
+
+A call-to-action bar that slides in once the reader scrolls past a point or element, and away again near the top.
+
+- Import: `import { defineStickyCta } from 'motionary/components/widgets'; defineStickyCta();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `watch`, `offset`, `position`, `label`, `dismissible`, `close-label`
+- Events: `usa:dismiss`
+
+```html
+<mo-sticky-cta offset="320" dismissible><span>Ready to start?</span><a href="#">Sign up</a></mo-sticky-cta>
 ```
 
 ### <mo-sticky-stack> (legacy <usa-sticky-stack>) — Sticky stack
