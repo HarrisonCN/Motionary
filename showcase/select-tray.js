@@ -58,6 +58,9 @@ const STR = {
   },
 };
 
+/** The shared closing rules of every copied prompt (17.9: also used by param-prompt.js). */
+export const promptRules = (lang = 'en') => (STR[lang] || STR.en).rules.slice();
+
 /**
  * The prompt for `items` (gallery cards: { id, tag, title, desc, usage } plus `imports`, the import / register lines), with an optional note per
  * card id (`notes[id]`). Plain text, our own wording; the snippets come from the cards and use the mo-* names.

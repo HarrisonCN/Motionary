@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Moments & Tactile
+
+- Added six micro-interaction widgets: `mo-eclipse-toggle`, `mo-hue-orbit`, `mo-notch-slider`, `mo-bulge-volume`, `mo-copy-button` and `mo-tile-relay`. Each sits on a native switch button, radio group, range input or button, and stands still under reduced motion.
+- Added four tactile controls on a shared press spring: `mo-squish-key`, `mo-squish-stepper` (hold to repeat), `mo-analog-stick` (rubber-band pull, arrow keys, dead zone) and `mo-transfer-button` (progress ring driven by the page). `defineWidgets('17.9')` registers all ten.
+- `mo-magnetic` takes `release="spring"`: a fast exit keeps the pointer's velocity and springs back. The default release is unchanged.
+- The gallery's effect detail, the playground and the run page get **Copy as AI prompt**, which copies the code with every value you tuned (`showcase/param-prompt.js`).
+- Added an Agent Skill at `skills/motionary/SKILL.md` (`npx skills add HarrisonCN/Motionary`) and a style compare page that shows one component in all six variants.
+- Original implementations inspired by public X posts on UI Moments, squishy UI, Solar Icons and copyable motion prompts; sources and scope are in docs/moments-tactile.md. No third-party code or assets are included.
+
 ## [17.8.0] - 2026-11-18 — Spatial Instruments
 
 - Added three independent cards, `mo-lens-stack`, `mo-iris-diaphragm` and `mo-contour-relief`. Drag to separate lens sections, open mechanical blades or lift topographic layers. The native sliders offer the same controls by keyboard.

@@ -6,6 +6,7 @@
 import { ITEMS, CATEGORIES, findItem, matches } from './catalog.js';
 import { TABS, INSTALL, EASINGS, defaultState, generate, defaultTab, highlight, presetDistance, revealOptions, animationValue, easingValue } from './codegen.js';
 import { t as tr } from './i18n.js';
+import { paramPrompt } from './param-prompt.js';
 
 /* ------------------------------------------------------------------ */
 /* Environment                                                         */
@@ -893,6 +894,14 @@ function snippets() {
   return generate(detail.item, detail.state, lib.PRESETS);
 }
 
+/** 17.9: this effect with the values tuned in the Options panel and the code of the open tab, as an AI prompt. */
+function currentPrompt() {
+  const item = detail.item;
+  const params = item.kind === 'component' ? [] : controlsFor(item).map((k) => [k, controlValue(k)]);
+  const tab = TABS.find((x) => x.id === detail.tab);
+  return paramPrompt({ name: L(item.title), tag: item.tag || '', params, code: snippets()[detail.tab], fence: tab ? tab.lang : 'js', lang: ui.lang });
+}
+
 function refreshCode() {
   const code = snippets()[detail.tab];
   const pre = $('#code-pre');
@@ -1081,6 +1090,7 @@ function renderDetail(item, keepState) {
         h('pre', { id: 'code-pre', role: 'tabpanel', tabindex: '0' }),
         h('button', { class: 'pill-btn copy', type: 'button', 'data-copy-code': true, html: `${ICON.copy}<span class="idle">${T('detail.copy')}</span><span class="ok">${T('detail.copied')}</span>` }),
       ]),
+      h('button', { class: 'pill-btn copy', type: 'button', 'data-copy-prompt': true, title: T('detail.copyPromptHint'), html: `${ICON.copy}<span class="idle">${T('detail.copyPrompt')}</span><span class="ok">${T('detail.copied')}</span>` }),
     ])
   );
   const related = ITEMS.filter((i) => i.category === item.category && i.id !== item.id).slice(0, 6);
@@ -1493,6 +1503,8 @@ function wireEvents() {
     if (cbtn) return copyWithFeedback(cbtn, INSTALL[ui.pm]);
     const code = t.closest('[data-copy-code]');
     if (code) return copyWithFeedback(code, $('#code-pre').dataset.raw);
+    const prompt = t.closest('[data-copy-prompt]');
+    if (prompt) return copyWithFeedback(prompt, currentPrompt(), T('toast.prompt'));
     const link = t.closest('[data-copylink]');
     if (link) return copyWithFeedback(link, location.href, T('toast.link'));
     const tab = t.closest('.tab');

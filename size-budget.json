@@ -2617,6 +2617,56 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/eclipse-toggle' (per-entry, fixed)",
+    "import": "import { defineEclipseToggle } from 'pkg/widgets/eclipse-toggle'; console.log(defineEclipseToggle);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/hue-orbit' (per-entry, fixed)",
+    "import": "import { defineHueOrbit } from 'pkg/widgets/hue-orbit'; console.log(defineHueOrbit);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/notch-slider' (per-entry, fixed)",
+    "import": "import { defineNotchSlider } from 'pkg/widgets/notch-slider'; console.log(defineNotchSlider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bulge-volume' (per-entry, fixed)",
+    "import": "import { defineBulgeVolume } from 'pkg/widgets/bulge-volume'; console.log(defineBulgeVolume);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/copy-button' (per-entry, fixed)",
+    "import": "import { defineCopyButton } from 'pkg/widgets/copy-button'; console.log(defineCopyButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/tile-relay' (per-entry, fixed)",
+    "import": "import { defineTileRelay } from 'pkg/widgets/tile-relay'; console.log(defineTileRelay);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/squish-key' (per-entry, fixed)",
+    "import": "import { defineSquishKey } from 'pkg/widgets/squish-key'; console.log(defineSquishKey);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/squish-stepper' (per-entry, fixed)",
+    "import": "import { defineSquishStepper } from 'pkg/widgets/squish-stepper'; console.log(defineSquishStepper);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/analog-stick' (per-entry, fixed)",
+    "import": "import { defineAnalogStick } from 'pkg/widgets/analog-stick'; console.log(defineAnalogStick);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/transfer-button' (per-entry, fixed)",
+    "import": "import { defineTransferButton } from 'pkg/widgets/transfer-button'; console.log(defineTransferButton);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

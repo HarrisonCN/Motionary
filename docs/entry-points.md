@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (174)
+## Widgets (184)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,16 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-eclipse-toggle>` | `motionary/widgets/eclipse-toggle` | `defineEclipseToggle()` |
+| `<usa-hue-orbit>` | `motionary/widgets/hue-orbit` | `defineHueOrbit()` |
+| `<usa-notch-slider>` | `motionary/widgets/notch-slider` | `defineNotchSlider()` |
+| `<usa-bulge-volume>` | `motionary/widgets/bulge-volume` | `defineBulgeVolume()` |
+| `<usa-copy-button>` | `motionary/widgets/copy-button` | `defineCopyButton()` |
+| `<usa-tile-relay>` | `motionary/widgets/tile-relay` | `defineTileRelay()` |
+| `<usa-squish-key>` | `motionary/widgets/squish-key` | `defineSquishKey()` |
+| `<usa-squish-stepper>` | `motionary/widgets/squish-stepper` | `defineSquishStepper()` |
+| `<usa-analog-stick>` | `motionary/widgets/analog-stick` | `defineAnalogStick()` |
+| `<usa-transfer-button>` | `motionary/widgets/transfer-button` | `defineTransferButton()` |
 | `<usa-lens-stack>` | `motionary/widgets/lens-stack` | `defineLensStack()` |
 | `<usa-iris-diaphragm>` | `motionary/widgets/iris-diaphragm` | `defineIrisDiaphragm()` |
 | `<usa-contour-relief>` | `motionary/widgets/contour-relief` | `defineContourRelief()` |

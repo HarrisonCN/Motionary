@@ -1587,6 +1587,136 @@
  },
  {
   "kind": "widget",
+  "name": "eclipse-toggle",
+  "entry": "motionary/widgets/eclipse-toggle",
+  "src": "src/entries/widgets/eclipse-toggle.ts",
+  "tag": "usa-eclipse-toggle",
+  "define": "defineEclipseToggle",
+  "types": [
+   "UsaEclipseToggleElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/eclipse-toggle"
+ },
+ {
+  "kind": "widget",
+  "name": "hue-orbit",
+  "entry": "motionary/widgets/hue-orbit",
+  "src": "src/entries/widgets/hue-orbit.ts",
+  "tag": "usa-hue-orbit",
+  "define": "defineHueOrbit",
+  "types": [
+   "UsaHueOrbitElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hue-orbit"
+ },
+ {
+  "kind": "widget",
+  "name": "notch-slider",
+  "entry": "motionary/widgets/notch-slider",
+  "src": "src/entries/widgets/notch-slider.ts",
+  "tag": "usa-notch-slider",
+  "define": "defineNotchSlider",
+  "types": [
+   "UsaNotchSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/notch-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "bulge-volume",
+  "entry": "motionary/widgets/bulge-volume",
+  "src": "src/entries/widgets/bulge-volume.ts",
+  "tag": "usa-bulge-volume",
+  "define": "defineBulgeVolume",
+  "types": [
+   "UsaBulgeVolumeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bulge-volume"
+ },
+ {
+  "kind": "widget",
+  "name": "copy-button",
+  "entry": "motionary/widgets/copy-button",
+  "src": "src/entries/widgets/copy-button.ts",
+  "tag": "usa-copy-button",
+  "define": "defineCopyButton",
+  "types": [
+   "UsaCopyButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/copy-button"
+ },
+ {
+  "kind": "widget",
+  "name": "tile-relay",
+  "entry": "motionary/widgets/tile-relay",
+  "src": "src/entries/widgets/tile-relay.ts",
+  "tag": "usa-tile-relay",
+  "define": "defineTileRelay",
+  "types": [
+   "UsaTileRelayElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tile-relay"
+ },
+ {
+  "kind": "widget",
+  "name": "squish-key",
+  "entry": "motionary/widgets/squish-key",
+  "src": "src/entries/widgets/squish-key.ts",
+  "tag": "usa-squish-key",
+  "define": "defineSquishKey",
+  "types": [
+   "UsaSquishKeyElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/squish-key"
+ },
+ {
+  "kind": "widget",
+  "name": "squish-stepper",
+  "entry": "motionary/widgets/squish-stepper",
+  "src": "src/entries/widgets/squish-stepper.ts",
+  "tag": "usa-squish-stepper",
+  "define": "defineSquishStepper",
+  "types": [
+   "UsaSquishStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/squish-stepper"
+ },
+ {
+  "kind": "widget",
+  "name": "analog-stick",
+  "entry": "motionary/widgets/analog-stick",
+  "src": "src/entries/widgets/analog-stick.ts",
+  "tag": "usa-analog-stick",
+  "define": "defineAnalogStick",
+  "types": [
+   "UsaAnalogStickElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/analog-stick"
+ },
+ {
+  "kind": "widget",
+  "name": "transfer-button",
+  "entry": "motionary/widgets/transfer-button",
+  "src": "src/entries/widgets/transfer-button.ts",
+  "tag": "usa-transfer-button",
+  "define": "defineTransferButton",
+  "types": [
+   "UsaTransferButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/transfer-button"
+ },
+ {
+  "kind": "widget",
   "name": "lens-stack",
   "entry": "motionary/widgets/lens-stack",
   "src": "src/entries/widgets/lens-stack.ts",

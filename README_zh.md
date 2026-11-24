@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->265<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->275<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,7 +37,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->265<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->174<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->159<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->275<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->184<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->159<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（历史参考 10 KB）。
 - **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->21<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
@@ -274,6 +274,8 @@ Claude Code：`claude mcp add motionary -- npx -y -p motionary motionary-mcp`。
 - `validate_snippet { mount: true }` 会在 jsdom（可选 peer 依赖：`npm i -D jsdom`）中用真实的打包产物挂载代码，并按组件契约检查；代码片段自身的脚本不会被执行。
 - 回答会按你项目中安装的版本给出；`check_compat` 会列出该版本缺少或行为不同的部分。
 - 完整指南：[docs/mcp.md](./docs/mcp.md)。
+
+**Agent Skill。** `skills/motionary/SKILL.md` 告诉 Claude Code、Codex 等支持 Agent Skills 的智能体：怎样安装、注册和挑选 Motionary 组件，以及要遵守哪些规则。用 `npx skills add HarrisonCN/Motionary` 安装，或把这个文件夹复制到 `.claude/skills/`。动效库里每个效果、演练场和代码运行页都有 **复制为 AI 提示词** 按钮，会把代码和你调过的全部参数一起交给 AI 助手。
 
 **用文字描述动效。** `motionary/tooling/ai` 能把“卡片从下往上依次淡入”这样的描述转换成效果、关键帧、CSS 以及对应的组件。默认解析器在本地运行、结果确定（支持中文和英文）。如果想用自己的 LLM，给 `suggestMotion()` 传入一个 provider 即可。Motionary 不内置任何厂商 SDK，也不会主动发起网络请求，除非你传入了 provider。模型的回答会经过 JSON Schema 校验，不通过时自动回退到本地结果。
 

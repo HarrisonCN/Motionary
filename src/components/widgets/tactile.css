@@ -1,0 +1,76 @@
+/* 17.9 Tactile: squish-key, squish-stepper, analog-stick, transfer-button */
+usa-squish-key, usa-squish-stepper, usa-analog-stick, usa-transfer-button,
+mo-squish-key, mo-squish-stepper, mo-analog-stick, mo-transfer-button {display:inline-block; vertical-align:middle; min-width:0}
+.usa-tactile {
+  --mo-key: var(--mo-tactile-key, #1d1d1f);
+  --mo-glyph: var(--mo-tactile-glyph, #f5f5f2);
+  --mo-tile: var(--mo-tactile-tile, #e6e5e1);
+  --mo-key-size: 56px;
+  --press: 0;
+  box-sizing:border-box; display:inline-flex; align-items:center; gap:10px; color:var(--mo-key);
+  font:600 15px/1 var(--mo-tactile-font, system-ui, sans-serif); -webkit-tap-highlight-color:transparent; user-select:none;
+}
+.usa-tactile *, .usa-tactile *::before, .usa-tactile *::after {box-sizing:border-box}
+.usa-tactile .usa-sr {position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0}
+.usa-tactile button {font:inherit; color:inherit; -webkit-appearance:none; appearance:none}
+.usa-tactile button:focus-visible {outline:2px solid var(--mo-key); outline-offset:4px}
+
+/* a key: --press 1 = fully down, negative = stretched above rest (the spring overshoot) */
+.usa-squish {padding:10px; border-radius:22px; background:var(--mo-tile); box-shadow:inset 0 1px 0 rgb(255 255 255 / .6), inset 0 -2px 6px rgb(0 0 0 / .06)}
+.usa-squish-key {
+  position:relative; display:grid; place-items:center; width:var(--mo-key-size); height:var(--mo-key-size); padding:0; margin:0;
+  border:0; border-radius:16px; background:var(--mo-key); color:var(--mo-glyph); cursor:pointer; touch-action:none;
+  transform:translateY(calc(var(--press) * 3px)) scale(calc(1 + var(--press) * .06), calc(1 - var(--press) * .1));
+  transform-origin:50% 100%;
+  box-shadow:0 calc(6px - var(--press) * 5px) calc(14px - var(--press) * 10px) -4px rgb(0 0 0 / .45), inset 0 1px 0 rgb(255 255 255 / .18), inset 0 calc(-3px + var(--press) * 2px) 0 rgb(0 0 0 / .35);
+}
+.usa-squish-glyph {font-size:20px; transform:scale(calc(1 - var(--press) * .08)); pointer-events:none}
+.usa-squish[data-shape="round"] .usa-squish-key {border-radius:50%}
+.usa-squish[data-shape="round"] {border-radius:50%}
+.usa-squish[data-shape="pill"] .usa-squish-key {width:calc(var(--mo-key-size) * 1.9); border-radius:999px}
+.usa-squish[data-shape="pill"] {border-radius:999px}
+.usa-squish[data-tone="light"] .usa-squish-key {background:var(--mo-glyph); color:var(--mo-key); box-shadow:0 calc(6px - var(--press) * 5px) calc(14px - var(--press) * 10px) -4px rgb(0 0 0 / .25), inset 0 calc(-3px + var(--press) * 2px) 0 rgb(0 0 0 / .1)}
+.usa-squish-key:disabled {opacity:.45; cursor:not-allowed}
+
+/* stepper */
+.usa-stepper {padding:8px; border-radius:22px; background:var(--mo-tile); gap:6px; --mo-key-size:44px}
+.usa-stepper-key {border-radius:14px}
+.usa-stepper-window {position:relative; display:grid; place-items:center; min-width:52px; height:44px; overflow:hidden; font-variant-numeric:tabular-nums; font-size:20px}
+.usa-stepper-value {display:block}
+.usa-stepper[data-disabled] {opacity:.55}
+
+/* analog stick */
+.usa-stick {--sx:0; --sy:0; position:relative; display:grid; place-items:center; width:128px; height:128px; border-radius:50%; background:var(--mo-tile); box-shadow:inset 0 6px 14px -6px rgb(0 0 0 / .3), inset 0 -2px 0 rgb(255 255 255 / .5)}
+.usa-stick-rim {position:absolute; inset:16px; border-radius:50%; border:2px dashed color-mix(in srgb, var(--mo-key) 18%, transparent); pointer-events:none}
+.usa-stick-cap {
+  position:relative; width:58px; height:58px; padding:0; border:0; border-radius:50%; background:var(--mo-key); cursor:grab; touch-action:none;
+  transform:translate(calc(var(--sx) * 1px), calc(var(--sy) * 1px));
+  box-shadow:0 8px 16px -6px rgb(0 0 0 / .5), inset 0 2px 0 rgb(255 255 255 / .15), inset 0 -6px 10px rgb(0 0 0 / .35);
+}
+.usa-stick-cap::after {content:""; position:absolute; inset:16px; border-radius:50%; background:radial-gradient(circle at 40% 35%, rgb(255 255 255 / .25), transparent 70%)}
+.usa-stick[data-held] .usa-stick-cap {cursor:grabbing}
+.usa-stick[data-disabled] {opacity:.5}
+.usa-stick[data-disabled] .usa-stick-cap {cursor:not-allowed}
+
+/* transfer */
+.usa-transfer {--progress:0; flex-direction:column; gap:8px; font-size:12px}
+.usa-transfer-key {width:64px; height:64px; border-radius:20px}
+.usa-transfer-ring {position:absolute; inset:-7px; width:calc(100% + 14px); height:calc(100% + 14px); transform:rotate(-90deg); fill:none; stroke-width:2.4; pointer-events:none; overflow:visible}
+.usa-transfer-track {stroke:transparent}
+.usa-transfer-bar {stroke:var(--mo-key); stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:calc(1 - var(--progress)); opacity:0; transition:stroke-dashoffset .35s ease, opacity .25s}
+.usa-transfer:not([data-state="idle"]) .usa-transfer-bar {opacity:1}
+.usa-transfer:not([data-state="idle"]) .usa-transfer-track {stroke:color-mix(in srgb, var(--mo-key) 16%, transparent)}
+.usa-transfer-icon {width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; pointer-events:none}
+.usa-transfer-icon path {stroke-dasharray:1; stroke-dashoffset:0; transition:stroke-dashoffset .35s ease .1s, opacity .2s}
+.usa-transfer[data-direction="upload"] .usa-transfer-arrow {transform:rotate(180deg); transform-origin:12px 10px}
+.usa-transfer-tick {stroke-dashoffset:1 !important; opacity:0}
+.usa-transfer[data-state="busy"] .usa-transfer-arrow {animation:usa-transfer-hop .9s cubic-bezier(.34,1.56,.64,1) infinite}
+.usa-transfer[data-direction="upload"][data-state="busy"] .usa-transfer-arrow {animation-name:usa-transfer-hop-up}
+.usa-transfer[data-state="done"] .usa-transfer-arrow, .usa-transfer[data-state="done"] .usa-transfer-tray {stroke-dashoffset:1; opacity:0; transition-delay:0s}
+.usa-transfer[data-state="done"] .usa-transfer-tick {stroke-dashoffset:0 !important; opacity:1}
+.usa-transfer-label {color:color-mix(in srgb, var(--mo-key) 70%, transparent); font-weight:500}
+@keyframes usa-transfer-hop {0%,100% {transform:translateY(-2px)} 50% {transform:translateY(2px)}}
+@keyframes usa-transfer-hop-up {0%,100% {transform:rotate(180deg) translateY(-2px)} 50% {transform:rotate(180deg) translateY(2px)}}
+
+.usa-tactile[data-static], .usa-tactile[data-static] * {transition:none !important; animation:none !important}
+@media (prefers-reduced-motion: reduce) { .usa-tactile, .usa-tactile * {transition:none !important; animation:none !important} }

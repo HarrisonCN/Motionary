@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>微交互与触感 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .magnet {display:flex; flex-wrap:wrap; gap:28px; align-items:center}
+    .magnet button {padding:14px 24px; border:0; border-radius:999px; background:#1b1b1a; color:#f4f3ef; font:inherit; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="styles.html">风格对照</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main>
+    <header class="intro"><h1>微交互与触感</h1><p>十个小部件，都建立在原生按钮、单选框和滑块之上，键盘和读屏都能用。开启“减少动态效果”后，它们会直接停在结果上。</p></header>
+
+    <h2>微交互</h2>
+    <section class="grid" aria-label="微交互">
+      <article><div class="stage"><mo-eclipse-toggle label="夜间模式"></mo-eclipse-toggle></div><p>打开时，月亮滑过太阳。</p></article>
+      <article><div class="stage"><mo-hue-orbit label="强调色" hue="210"></mo-hue-orbit></div><p>选中的颜色会沿较短方向转到顶部。</p></article>
+      <article><div class="stage" style="display:block"><mo-notch-slider label="曝光" min="-2" max="2" step="0.1" notches="5" value="0" unit=" EV"></mo-notch-slider></div><p>划过刻度会轻跳一下，在刻度附近松手会吸附。</p><output class="log" data-log="notch"></output></article>
+      <article><div class="stage"><mo-bulge-volume label="音量" value="60"></mo-bulge-volume></div><p>按住上下拖动，竖条会在手指处鼓起。</p></article>
+      <article><div class="stage"><mo-copy-button text="npm i motionary" label="复制" done-label="已复制" fail-label="请按 Ctrl+C"></mo-copy-button></div><p>事件里只有是否成功和长度，不带被复制的内容。</p><output class="log" data-log="copy"></output></article>
+      <article><div class="stage"><mo-tile-relay label="正在加载"></mo-tile-relay><mo-tile-relay size="3" label="正在加载"></mo-tile-relay></div><p>纯 CSS 的接力加载，离开屏幕时暂停。</p></article>
+    </section>
+
+    <h2>弹性触感</h2>
+    <section class="grid" aria-label="弹性触感控件">
+      <article><div class="stage"><mo-squish-key label="E" shape="round"></mo-squish-key><mo-squish-key label="A" shape="round" tone="light"></mo-squish-key><mo-squish-key label="开始" shape="pill"></mo-squish-key></div><p>按住下沉，松开后越过原位再回弹。</p><output class="log" data-log="key"></output></article>
+      <article><div class="stage"><mo-squish-stepper label="人数" value="2" min="1" max="8"></mo-squish-stepper></div><p>长按加减键会连续变化。</p></article>
+      <article><div class="stage"><mo-analog-stick label="移动"></mo-analog-stick></div><p>拖出边缘时阻力变大，松手弹回中心。也能用方向键推。</p><output class="log" data-log="stick"></output></article>
+      <article><div class="stage"><mo-transfer-button direction="download" label="下载"></mo-transfer-button><mo-transfer-button direction="upload" label="上传"></mo-transfer-button></div><p>演示里点按会模拟一次传输，进度由页面通过 progress 属性告诉它。</p></article>
+    </section>
+
+    <h2>磁吸回弹</h2>
+    <section class="magnet" aria-label="磁吸按钮对比">
+      <mo-magnetic strength="0.45" radius="120"><button type="button">默认：平滑归位</button></mo-magnetic>
+      <mo-magnetic strength="0.45" radius="120" release="spring"><button type="button">release="spring"：快速移开时回弹</button></mo-magnetic>
+    </section>
+    <p style="margin-top:14px">鼠标快速甩出时，第二个按钮会带着离开时的速度，弹簧摆一下再回到原位。</p>
+  </main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineMagnetic } from '../dist/components/interaction.js';
+    import { defineEclipseToggle } from '../dist/widgets/eclipse-toggle.js';
+    import { defineHueOrbit } from '../dist/widgets/hue-orbit.js';
+    import { defineNotchSlider } from '../dist/widgets/notch-slider.js';
+    import { defineBulgeVolume } from '../dist/widgets/bulge-volume.js';
+    import { defineCopyButton } from '../dist/widgets/copy-button.js';
+    import { defineTileRelay } from '../dist/widgets/tile-relay.js';
+    import { defineSquishKey } from '../dist/widgets/squish-key.js';
+    import { defineSquishStepper } from '../dist/widgets/squish-stepper.js';
+    import { defineAnalogStick } from '../dist/widgets/analog-stick.js';
+    import { defineTransferButton } from '../dist/widgets/transfer-button.js';
+    import { wire } from './catalog/tactile.js';
+    defineMoAliases();
+    for (const define of [defineMagnetic, defineEclipseToggle, defineHueOrbit, defineNotchSlider, defineBulgeVolume, defineCopyButton, defineTileRelay, defineSquishKey, defineSquishStepper, defineAnalogStick, defineTransferButton]) define();
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    document.querySelector('mo-notch-slider')?.addEventListener('usa:detent', (e) => log('notch', `detent ${e.detail.value}`));
+    document.querySelector('mo-copy-button')?.addEventListener('usa:copy', (e) => log('copy', `ok ${e.detail.ok}, ${e.detail.length} chars`));
+    document.querySelectorAll('mo-squish-key').forEach((k) => k.addEventListener('usa:press', () => log('key', `press ${k.getAttribute('label')}`)));
+    document.querySelector('mo-analog-stick')?.addEventListener('usa:move', (e) => log('stick', `x ${e.detail.x.toFixed(2)}  y ${e.detail.y.toFixed(2)}`));
+    wire['transfer-button'](document);
+  </script>
+</body>
+</html>

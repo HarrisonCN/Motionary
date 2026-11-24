@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.8.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 265 animated Web Components (91 core, 174 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 275 animated Web Components (91 core, 184 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,106 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/eclipse-toggle": {
+      "import": {
+        "types": "./dist/widgets/eclipse-toggle.d.ts",
+        "default": "./dist/widgets/eclipse-toggle.js"
+      },
+      "require": {
+        "types": "./dist/widgets/eclipse-toggle.d.cts",
+        "default": "./dist/widgets/eclipse-toggle.cjs"
+      }
+    },
+    "./widgets/hue-orbit": {
+      "import": {
+        "types": "./dist/widgets/hue-orbit.d.ts",
+        "default": "./dist/widgets/hue-orbit.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hue-orbit.d.cts",
+        "default": "./dist/widgets/hue-orbit.cjs"
+      }
+    },
+    "./widgets/notch-slider": {
+      "import": {
+        "types": "./dist/widgets/notch-slider.d.ts",
+        "default": "./dist/widgets/notch-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/notch-slider.d.cts",
+        "default": "./dist/widgets/notch-slider.cjs"
+      }
+    },
+    "./widgets/bulge-volume": {
+      "import": {
+        "types": "./dist/widgets/bulge-volume.d.ts",
+        "default": "./dist/widgets/bulge-volume.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bulge-volume.d.cts",
+        "default": "./dist/widgets/bulge-volume.cjs"
+      }
+    },
+    "./widgets/copy-button": {
+      "import": {
+        "types": "./dist/widgets/copy-button.d.ts",
+        "default": "./dist/widgets/copy-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/copy-button.d.cts",
+        "default": "./dist/widgets/copy-button.cjs"
+      }
+    },
+    "./widgets/tile-relay": {
+      "import": {
+        "types": "./dist/widgets/tile-relay.d.ts",
+        "default": "./dist/widgets/tile-relay.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tile-relay.d.cts",
+        "default": "./dist/widgets/tile-relay.cjs"
+      }
+    },
+    "./widgets/squish-key": {
+      "import": {
+        "types": "./dist/widgets/squish-key.d.ts",
+        "default": "./dist/widgets/squish-key.js"
+      },
+      "require": {
+        "types": "./dist/widgets/squish-key.d.cts",
+        "default": "./dist/widgets/squish-key.cjs"
+      }
+    },
+    "./widgets/squish-stepper": {
+      "import": {
+        "types": "./dist/widgets/squish-stepper.d.ts",
+        "default": "./dist/widgets/squish-stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/squish-stepper.d.cts",
+        "default": "./dist/widgets/squish-stepper.cjs"
+      }
+    },
+    "./widgets/analog-stick": {
+      "import": {
+        "types": "./dist/widgets/analog-stick.d.ts",
+        "default": "./dist/widgets/analog-stick.js"
+      },
+      "require": {
+        "types": "./dist/widgets/analog-stick.d.cts",
+        "default": "./dist/widgets/analog-stick.cjs"
+      }
+    },
+    "./widgets/transfer-button": {
+      "import": {
+        "types": "./dist/widgets/transfer-button.d.ts",
+        "default": "./dist/widgets/transfer-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/transfer-button.d.cts",
+        "default": "./dist/widgets/transfer-button.cjs"
       }
     },
     "./widgets/lens-stack": {

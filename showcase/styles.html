@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>风格对照 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#e9e9ef; background:#101116}
+    body {margin:0}
+    main,nav {width:min(1180px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #2b2d38}
+    a {color:#b9c4ff; text-underline-offset:.25em}
+    h1,p {margin:0}
+    .intro {padding:clamp(36px,7vw,72px) 0 24px}
+    h1 {font:500 clamp(40px,6vw,76px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    .intro p {margin-top:16px; max-width:44em; line-height:1.65; color:#a9abb8}
+    .bar {display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 22px}
+    .bar button {padding:9px 15px; border:1px solid #3a3d4c; border-radius:999px; background:transparent; color:inherit; font:inherit; font-size:14px; cursor:pointer}
+    .bar button[aria-pressed="true"] {background:#e9e9ef; color:#101116; border-color:#e9e9ef}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px; padding-bottom:64px}
+    .panel {display:grid; gap:14px; padding:18px; border-radius:20px; background:#181a22; border:1px solid #2b2d38}
+    .panel header {display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:13px; color:#a9abb8}
+    .panel header b {color:#e9e9ef; font-weight:600}
+    .panel .stage {display:grid; place-items:center; min-height:150px; padding:18px; border-radius:14px; background:var(--usa-surface); color:var(--usa-text); font-family:var(--usa-font)}
+    .panel[data-usa-variant="minimal"] .stage {background:#f4f3ef; color:#1b1b1a}
+    .panel .stage > * {max-width:100%}
+    .panel pre {margin:0; padding:10px 12px; border-radius:10px; background:#0c0d11; font:12px/1.5 ui-monospace,monospace; color:#c9cbe0; white-space:pre-wrap; word-break:break-all}
+    button:focus-visible,a:focus-visible {outline:2px solid #b9c4ff; outline-offset:3px}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="moments.html">微交互与触感</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main>
+    <header class="intro"><h1>风格对照</h1><p>同一个组件，在六种内置风格下并排摆放。每块面板只是加了一个 <code>data-usa-variant</code>，组件读的是同一套设计变量。选一个组件，然后复制你喜欢的那一版代码。</p></header>
+    <div class="bar" role="group" aria-label="选择组件" id="picker"></div>
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+  <script type="module">
+    import { VARIANTS, setVariant, defineSlider } from '../dist/components/ui.js';
+    import { defineSwitch } from '../dist/widgets/switch.js';
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineEclipseToggle } from '../dist/widgets/eclipse-toggle.js';
+    import { defineNotchSlider } from '../dist/widgets/notch-slider.js';
+    import { defineCopyButton } from '../dist/widgets/copy-button.js';
+    import { defineSquishStepper } from '../dist/widgets/squish-stepper.js';
+    import { defineSquishKey } from '../dist/widgets/squish-key.js';
+    import { defineTransferButton } from '../dist/widgets/transfer-button.js';
+    defineMoAliases();
+    for (const define of [defineSwitch, defineSlider, defineEclipseToggle, defineNotchSlider, defineCopyButton, defineSquishStepper, defineSquishKey, defineTransferButton]) define();
+
+    const SAMPLES = [
+      ['日食开关', '<mo-eclipse-toggle label="Night mode"></mo-eclipse-toggle>'],
+      ['刻度滑块', '<mo-notch-slider label="Exposure" min="-2" max="2" step="0.1" notches="5" value="0.5"></mo-notch-slider>'],
+      ['弹性步进器', '<mo-squish-stepper label="Players" value="2" min="1" max="8"></mo-squish-stepper>'],
+      ['弹性按键', '<mo-squish-key label="A" shape="round"></mo-squish-key>'],
+      ['下载键', '<mo-transfer-button direction="download"></mo-transfer-button>'],
+      ['复制按钮', '<mo-copy-button text="npm i motionary"></mo-copy-button>'],
+      ['开关', '<mo-switch label="Wi-Fi"></mo-switch>'],
+      ['滑块', '<mo-slider label="Brightness" value="40"></mo-slider>'],
+    ];
+    const picker = document.getElementById('picker');
+    const grid = document.getElementById('grid');
+    const render = (i) => {
+      picker.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
+      const [, html] = SAMPLES[i];
+      grid.replaceChildren(...VARIANTS.map((variant) => {
+        const panel = document.createElement('article');
+        panel.className = 'panel';
+        setVariant(variant, panel);
+        const snippet = html.replace(/^<([\w-]+)/, `<$1 variant="${variant}"`);
+        const head = document.createElement('header');
+        const name = document.createElement('b');
+        name.textContent = variant;
+        const copy = document.createElement('mo-copy-button');
+        copy.setAttribute('text', snippet);
+        copy.setAttribute('label', '复制代码');
+        copy.setAttribute('done-label', '已复制');
+        copy.setAttribute('fail-label', '请手动复制');
+        head.append(name, copy);
+        const stage = document.createElement('div');
+        stage.className = 'stage';
+        stage.innerHTML = html;
+        const pre = document.createElement('pre');
+        pre.textContent = snippet;
+        panel.append(head, stage, pre);
+        return panel;
+      }));
+    };
+    SAMPLES.forEach(([label], i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.addEventListener('click', () => render(i));
+      picker.append(b);
+    });
+    render(0);
+  </script>
+</body>
+</html>

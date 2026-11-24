@@ -1,4 +1,4 @@
-# Motionary components (265)
+# Motionary components (275)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -178,6 +178,19 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-loading-bar>`](usa-loading-bar.md) — Top loading bar
 - [`<mo-motion-switch>`](usa-motion-switch.md) — Motion intensity
 - [`<mo-splash>`](usa-splash.md) — Splash screen
+
+## widgets
+
+- [`<mo-analog-stick>`](usa-analog-stick.md) — <usa-analog-stick>
+- [`<mo-bulge-volume>`](usa-bulge-volume.md) — <usa-bulge-volume>
+- [`<mo-copy-button>`](usa-copy-button.md) — <usa-copy-button>
+- [`<mo-eclipse-toggle>`](usa-eclipse-toggle.md) — <usa-eclipse-toggle>
+- [`<mo-hue-orbit>`](usa-hue-orbit.md) — <usa-hue-orbit>
+- [`<mo-notch-slider>`](usa-notch-slider.md) — <usa-notch-slider>
+- [`<mo-squish-key>`](usa-squish-key.md) — <usa-squish-key>
+- [`<mo-squish-stepper>`](usa-squish-stepper.md) — <usa-squish-stepper>
+- [`<mo-tile-relay>`](usa-tile-relay.md) — <usa-tile-relay>
+- [`<mo-transfer-button>`](usa-transfer-button.md) — <usa-transfer-button>
 
 ## svg
 

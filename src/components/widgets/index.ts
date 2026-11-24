@@ -7,6 +7,16 @@ export type { FormIssue } from './validation-summary';
 import { defineSelect, type UsaSelectElement } from './select';
 import { defineCombobox, type UsaComboboxElement } from './combobox';
 import { defineMultiSelect, type UsaMultiSelectElement } from './multi-select';
+import { defineEclipseToggle, type UsaEclipseToggleElement } from './eclipse-toggle';
+import { defineHueOrbit, type UsaHueOrbitElement } from './hue-orbit';
+import { defineNotchSlider, type UsaNotchSliderElement } from './notch-slider';
+import { defineBulgeVolume, type UsaBulgeVolumeElement } from './bulge-volume';
+import { defineCopyButton, type UsaCopyButtonElement } from './copy-button';
+import { defineTileRelay, type UsaTileRelayElement } from './tile-relay';
+import { defineSquishKey, type UsaSquishKeyElement } from './squish-key';
+import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
+import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
+import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
 import { defineLensStack, type UsaLensStackElement } from './lens-stack';
 import { defineIrisDiaphragm, type UsaIrisDiaphragmElement } from './iris-diaphragm';
 import { defineContourRelief, type UsaContourReliefElement } from './contour-relief';
@@ -183,6 +193,19 @@ import { defineHaloSegmented, type UsaHaloSegmentedElement } from './halo-segmen
 import { defineHaloSlider, type UsaHaloSliderElement } from './halo-slider';
 import { defineOrbitProgress, type UsaOrbitProgressElement } from './orbit-progress';
 
+export { defineEclipseToggle, type UsaEclipseToggleElement };
+export { defineHueOrbit, type UsaHueOrbitElement };
+export { defineNotchSlider, type UsaNotchSliderElement };
+export { defineBulgeVolume, type UsaBulgeVolumeElement };
+export { defineCopyButton, type UsaCopyButtonElement };
+export { defineTileRelay, type UsaTileRelayElement };
+export { defineSquishKey, type UsaSquishKeyElement };
+export { defineSquishStepper, type UsaSquishStepperElement };
+export { defineAnalogStick, type UsaAnalogStickElement };
+export { defineTransferButton, type UsaTransferButtonElement };
+export { hueColor } from './hue-orbit';
+export { relayOrder } from './tile-relay';
+export { deadZone } from './analog-stick';
 export { defineLensStack, type UsaLensStackElement };
 export { defineIrisDiaphragm, type UsaIrisDiaphragmElement };
 export { defineContourRelief, type UsaContourReliefElement };
@@ -390,6 +413,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.9': { 'usa-eclipse-toggle': defineEclipseToggle, 'usa-hue-orbit': defineHueOrbit, 'usa-notch-slider': defineNotchSlider, 'usa-bulge-volume': defineBulgeVolume, 'usa-copy-button': defineCopyButton, 'usa-tile-relay': defineTileRelay, 'usa-squish-key': defineSquishKey, 'usa-squish-stepper': defineSquishStepper, 'usa-analog-stick': defineAnalogStick, 'usa-transfer-button': defineTransferButton },
   '17.8': { 'usa-lens-stack': defineLensStack, 'usa-iris-diaphragm': defineIrisDiaphragm, 'usa-contour-relief': defineContourRelief },
   '17.7': { 'usa-textarea': defineTextarea, 'usa-search-field': defineSearchField, 'usa-form-stepper': defineFormStepper, 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
   '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
@@ -411,6 +435,26 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-eclipse-toggle': UsaEclipseToggleElement;
+    'mo-eclipse-toggle': UsaEclipseToggleElement;
+    'usa-hue-orbit': UsaHueOrbitElement;
+    'mo-hue-orbit': UsaHueOrbitElement;
+    'usa-notch-slider': UsaNotchSliderElement;
+    'mo-notch-slider': UsaNotchSliderElement;
+    'usa-bulge-volume': UsaBulgeVolumeElement;
+    'mo-bulge-volume': UsaBulgeVolumeElement;
+    'usa-copy-button': UsaCopyButtonElement;
+    'mo-copy-button': UsaCopyButtonElement;
+    'usa-tile-relay': UsaTileRelayElement;
+    'mo-tile-relay': UsaTileRelayElement;
+    'usa-squish-key': UsaSquishKeyElement;
+    'mo-squish-key': UsaSquishKeyElement;
+    'usa-squish-stepper': UsaSquishStepperElement;
+    'mo-squish-stepper': UsaSquishStepperElement;
+    'usa-analog-stick': UsaAnalogStickElement;
+    'mo-analog-stick': UsaAnalogStickElement;
+    'usa-transfer-button': UsaTransferButtonElement;
+    'mo-transfer-button': UsaTransferButtonElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

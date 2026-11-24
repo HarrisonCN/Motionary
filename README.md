@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->265<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->275<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has its gzip size reported in CI, and every animation respects `prefers-reduced-motion`.
@@ -46,7 +46,7 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 - **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
   3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
   `staggerChildren()` and `parallax()`.
-- **<!--fact:public-->265<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->174<!--/fact--> widgets, one entry point
+- **<!--fact:public-->275<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->184<!--/fact--> widgets, one entry point
   each (`motionary/widgets/<name>`). Plus <!--fact:effects-->159<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
   [How components are counted](./docs/components.md#how-components-are-counted).
 - **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (historical reference 10 KB).
@@ -309,6 +309,12 @@ Claude Code: `claude mcp add motionary -- npx -y -p motionary motionary-mcp`.
   and checks it against the component contract. The snippet's own scripts never run.
 - Answers match the version installed in your project. `check_compat` lists what that version is missing or does differently.
 - Full guide: [docs/mcp.md](./docs/mcp.md).
+
+**Agent Skill.** `skills/motionary/SKILL.md` teaches Claude Code, Codex and other agents that read
+Agent Skills how to install, register and pick Motionary components and which rules to keep.
+Add it with `npx skills add HarrisonCN/Motionary`, or copy the folder into `.claude/skills/`. The gallery's
+**Copy as AI prompt** button (on every effect, in the playground and on the run page) hands an assistant the code and
+every value you tuned.
 
 **Motion from text.** `motionary/tooling/ai` turns a description like "fade the cards up slowly, one after another" into
 an effect, keyframes, CSS and matching components. The default parser is local and deterministic (English and

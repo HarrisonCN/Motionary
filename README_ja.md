@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->265<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->275<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
 
@@ -37,7 +37,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 ## 特長
 
 - **スクロール表示プリセット 214 種**を 14 のファミリーで提供（コアに 33 種、`motionary/presets/extended` にさらに 181 種）。フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、奥行き、グリッチ、スクロール量に連動する `scrub-*` など。`timeline()`、`staggerChildren()`、`parallax()` もあります。
-- **`<mo-*>` Web Components <!--fact:public-->265<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->174<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->159<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
+- **`<mo-*>` Web Components <!--fact:public-->275<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->184<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->159<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
 - **Motion Core**：`motionary/core` の `createMotion()`。プラグイン方式のエンジンで、gzip 後およそ 2.5 KB（過去の参考値 10 KB）です。
 - **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と <!--fact:runtimeModules-->21<!--/fact--> のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
 - **どのフレームワークでも**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`。要素用のラッパー `motionary/components/react` · `vue` · `svelte` · `solid` もあります。サーバー側でインポートしても何も起きません。
@@ -274,6 +274,8 @@ Claude Code の場合：`claude mcp add motionary -- npx -y -p motionary motiona
 - `validate_snippet { mount: true }` は、jsdom（オプションの peer 依存：`npm i -D jsdom`）上で実際のバンドルを使ってマークアップをマウントし、コンポーネント規約に沿っているかを検査します。スニペット自体のスクリプトは実行されません。
 - 回答はプロジェクトにインストールされているバージョンに合わせて返ります。`check_compat` は、そのバージョンに足りないものや挙動が違うものを一覧にします。
 - ガイド全文：[docs/mcp.md](./docs/mcp.md)。
+
+**Agent Skill。** `skills/motionary/SKILL.md` は、Claude Code や Codex など Agent Skills に対応したエージェントに、Motionary コンポーネントのインストール・登録・選び方と守るべきルールを伝えます。`npx skills add HarrisonCN/Motionary` で追加するか、フォルダーを `.claude/skills/` にコピーしてください。ギャラリーの各エフェクト、プレイグラウンド、実行ページにある **AI プロンプトとしてコピー** ボタンは、コードと調整したすべての値をまとめてアシスタントに渡します。
 
 **文章からモーションを作る。** `motionary/tooling/ai` は「カードを下からゆっくり順番にフェードイン」のような説明文を、エフェクト・キーフレーム・CSS・対応するコンポーネントに変換します。標準の解析器はローカルで動き、結果は決定的です（英語と中国語に対応）。自分の LLM を使いたい場合は、`suggestMotion()` に provider を渡します。Motionary はベンダーの SDK を同梱しておらず、provider を渡さない限りネットワークにアクセスしません。モデルの回答は JSON Schema で検証され、通らなければローカルの結果に切り替わります。
 

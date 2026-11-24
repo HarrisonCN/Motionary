@@ -9,6 +9,69 @@
     "usa:beat": "<usa-audio>: the { energy, time } object onBeat() passes (src/components/effects/audio.ts)"
   },
   "components": {
+    "usa-analog-stick": {
+      "usa:move": [
+        "{x, y}"
+      ],
+      "usa:release": [
+        "object: last"
+      ]
+    },
+    "usa-bulge-volume": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-copy-button": {
+      "usa:copy": [
+        "{length, ok}"
+      ]
+    },
+    "usa-eclipse-toggle": {
+      "usa:change": [
+        "{checked}"
+      ]
+    },
+    "usa-hue-orbit": {
+      "usa:change": [
+        "{color, hue}"
+      ]
+    },
+    "usa-notch-slider": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:detent": [
+        "{index, value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-squish-key": {
+      "usa:press": [
+        "(none)"
+      ]
+    },
+    "usa-squish-stepper": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-transfer-button": {
+      "usa:complete": [
+        "{direction}"
+      ],
+      "usa:transfer": [
+        "{direction}"
+      ]
+    },
     "usa-contour-relief": {
       "usa:change": [
         "{value}"

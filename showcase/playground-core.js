@@ -54,6 +54,14 @@ const attrString = (layer) => {
     .join('');
 };
 
+/** 17.9: the tuned layers as [key, value] rows for paramPrompt(): one row per layer, only values changed from the default. */
+export function playgroundParams(state) {
+  return (state.layers || []).map((layer, i) => {
+    const attrs = attrString(layer).trim();
+    return [`${i + 1}. <${layer.tag.replace(/^usa-/, 'mo-')}>`, attrs || '(defaults)'];
+  });
+}
+
 /** HTML for a composition: layers wrap each other, outermost first. */
 export function composeMarkup(state, indent = '  ') {
   const content = (PLAYGROUND_CONTENT[state.content] || PLAYGROUND_CONTENT.card).html;
@@ -239,6 +247,6 @@ export function decodeState(s) {
 export const DEFAULT_STATE = { content: 'card', layers: [newLayer('usa-reveal'), newLayer('usa-tilt')] };
 
 export const PG_STRINGS = {
-  en: { tracks: 'Timeline tracks', addTrack: 'Add track', playTl: 'Play timeline', presets: 'Presets', savePreset: 'Save', deletePreset: 'Delete', exportJson: 'Copy preset JSON', importJson: 'Import JSON…', presetName: 'Preset name', start: 'start', duration: 'duration', label: 'label', title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', copyFail: 'Copy failed', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
-  zh: { tracks: '时间线轨道', addTrack: '添加轨道', playTl: '播放时间线', presets: '预设', savePreset: '保存', deletePreset: '删除', exportJson: '复制预设 JSON', importJson: '导入 JSON…', presetName: '预设名称', start: '开始', duration: '时长', label: '文字', title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', copyFail: '复制失败', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
+  en: { tracks: 'Timeline tracks', addTrack: 'Add track', playTl: 'Play timeline', presets: 'Presets', savePreset: 'Save', deletePreset: 'Delete', exportJson: 'Copy preset JSON', copyPrompt: 'Copy as AI prompt', importJson: 'Import JSON…', presetName: 'Preset name', start: 'start', duration: 'duration', label: 'label', title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', copyFail: 'Copy failed', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
+  zh: { tracks: '时间线轨道', addTrack: '添加轨道', playTl: '播放时间线', presets: '预设', savePreset: '保存', deletePreset: '删除', exportJson: '复制预设 JSON', copyPrompt: '复制为 AI 提示词', importJson: '导入 JSON…', presetName: '预设名称', start: '开始', duration: '时长', label: '文字', title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', copyFail: '复制失败', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
 };
