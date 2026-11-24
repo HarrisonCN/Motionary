@@ -9,7 +9,10 @@ import { components as tactile } from '../showcase/catalog/tactile.js';
 import { installComponentMocks } from './components-setup';
 import { readFileSync } from 'node:fs';
 
-const TAGS = ['eclipse-toggle', 'hue-orbit', 'notch-slider', 'bulge-volume', 'copy-button', 'tile-relay', 'squish-key', 'squish-stepper', 'analog-stick', 'transfer-button'];
+const TAGS = ['eclipse-toggle', 'hue-orbit', 'notch-slider', 'bulge-volume', 'copy-button', 'tile-relay', 'squish-key', 'squish-stepper', 'analog-stick', 'transfer-button',
+  'six-dot-orbit', 'center-bars', 'quarter-ring', 'triple-pulse', 'breath-orb', 'three-dot-bounce', 'infinity-loop', 'sweep-lines', 'wifi-signal', 'text-reveal',
+  'jelly-button', 'bounce-button', 'tada-button', 'groove-toggle', 'cart-badge', 'chip-input', 'plan-picker', 'align-switch', 'elastic-slider', 'code-shake',
+  'strength-meter', 'step-track', 'elastic-accordion', 'squish-indicator'];
 
 beforeEach(() => {
   installComponentMocks({ reducedMotion: true });
@@ -33,7 +36,7 @@ const events = (el: Element, type: string) => {
 };
 
 describe('17.9 registration', () => {
-  it('registers ten widgets under 17.9 with mo-* and usa-* names', () => {
+  it('registers thirty-four widgets under 17.9 with mo-* and usa-* names', () => {
     expect(Object.keys(WIDGETS['17.9']).map((t) => t.slice(4))).toEqual(TAGS);
     for (const name of TAGS) {
       expect(customElements.get('mo-' + name)).toBeTruthy();
@@ -43,7 +46,7 @@ describe('17.9 registration', () => {
 
   it('lists every new widget in the showcase catalog and the lab page', () => {
     const ids = [...moments, ...tactile].map((c) => c.id);
-    expect(ids).toEqual(TAGS);
+    expect([...ids].sort()).toEqual([...TAGS].sort());
     const lab = readFileSync('showcase/moments.html', 'utf8');
     for (const name of TAGS) expect(lab).toContain(`<mo-${name}`);
   });

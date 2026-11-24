@@ -31,7 +31,7 @@
 <body>
   <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="styles.html">风格对照</a> · <a href="components.html">组件目录 ↗</a></span></nav>
   <main>
-    <header class="intro"><h1>微交互与触感</h1><p>十个小部件，都建立在原生按钮、单选框和滑块之上，键盘和读屏都能用。开启“减少动态效果”后，它们会直接停在结果上。</p></header>
+    <header class="intro"><h1>微交互与触感</h1><p>三十多个小部件，都建立在原生按钮、单选框和滑块之上，键盘和读屏都能用。开启“减少动态效果”后，它们会直接停在结果上。</p></header>
 
     <h2>微交互</h2>
     <section class="grid" aria-label="微交互">
@@ -49,6 +49,35 @@
       <article><div class="stage"><mo-squish-stepper label="人数" value="2" min="1" max="8"></mo-squish-stepper></div><p>长按加减键会连续变化。</p></article>
       <article><div class="stage"><mo-analog-stick label="移动"></mo-analog-stick></div><p>拖出边缘时阻力变大，松手弹回中心。也能用方向键推。</p><output class="log" data-log="stick"></output></article>
       <article><div class="stage"><mo-transfer-button direction="download" label="下载"></mo-transfer-button><mo-transfer-button direction="upload" label="上传"></mo-transfer-button></div><p>演示里点按会模拟一次传输，进度由页面通过 progress 属性告诉它。</p></article>
+    </section>
+
+    <h2>加载动画</h2>
+    <section class="grid" aria-label="加载动画">
+      <article><div class="stage"><mo-six-dot-orbit label="正在加载"></mo-six-dot-orbit><mo-center-bars label="正在加载"></mo-center-bars><mo-quarter-ring label="正在加载"></mo-quarter-ring><mo-triple-pulse label="正在加载"></mo-triple-pulse></div><p>六点环绕、中心律动条、四分之一圆环、三重脉冲。</p></article>
+      <article><div class="stage"><mo-breath-orb label="正在加载"></mo-breath-orb><mo-three-dot-bounce label="正在输入"></mo-three-dot-bounce><mo-infinity-loop label="正在加载"></mo-infinity-loop></div><p>呼吸光球、三点跳动、无限循环。纯 CSS，离屏时暂停。</p></article>
+      <article><div class="stage" style="display:block"><mo-sweep-lines label="正在加载"></mo-sweep-lines></div><p>扫描线条，用作不确定进度条。</p></article>
+      <article><div class="stage"><mo-wifi-signal level="1" label="信号"></mo-wifi-signal><mo-wifi-signal level="3" label="信号"></mo-wifi-signal><mo-wifi-signal searching label="信号"></mo-wifi-signal></div><p>按信号强度点亮，搜索时向外闪烁。</p></article>
+    </section>
+
+    <h2>按钮与开关</h2>
+    <section class="grid" aria-label="按钮与开关">
+      <article><div class="stage"><mo-jelly-button label="添加"></mo-jelly-button><mo-bounce-button label="向上"></mo-bounce-button><mo-bounce-button label="下一页" direction="right"></mo-bounce-button></div><p>果冻按钮和弹跳箭头。</p><output class="log" data-log="press"></output></article>
+      <article><div class="stage"><mo-tada-button label="收藏"></mo-tada-button><mo-groove-toggle label="置顶"></mo-groove-toggle></div><p>打开时庆祝一下，或沉入凹槽。</p></article>
+      <article><div class="stage"><mo-cart-badge count="2" label="购物车" add-label="加入购物车"></mo-cart-badge></div><p>加入时角标弹出，袋子摇一下。</p><output class="log" data-log="cart"></output></article>
+      <article><div class="stage"><mo-text-reveal text="Moments matter"></mo-text-reveal></div><p>滚动到可见时，字母依次浮现。</p></article>
+      <article><div class="stage"><mo-squish-indicator options="A,B,C" value="B" label="选项"></mo-squish-indicator></div><p>选中的软键带弹性鼓起。</p></article>
+    </section>
+
+    <h2>表单</h2>
+    <section class="grid" aria-label="表单控件">
+      <article><div class="stage" style="display:block"><mo-chip-input label="标签" placeholder="输入后回车" value="动效, 界面"></mo-chip-input></div><p>回车或逗号生成标签，退格删除最后一个。</p></article>
+      <article><div class="stage" style="display:block"><mo-plan-picker label="套餐" plans="基础|免费, 专业|¥68, 团队|¥198" value="专业"></mo-plan-picker></div><p>选框弹性移到选中的卡片。</p></article>
+      <article><div class="stage"><mo-align-switch label="文字对齐" value="center"></mo-align-switch></div><p>预览线条滑到新的对齐方向。</p></article>
+      <article><div class="stage" style="display:block"><mo-elastic-slider label="字号" value="16" min="8" max="32" unit="px"></mo-elastic-slider></div><p>气泡跟随滑块，快速拖动时会倾斜。</p></article>
+      <article><div class="stage"><mo-code-shake label="验证码"></mo-code-shake></div><p>演示里 1234 正确，其余会抖动清空。</p></article>
+      <article><div class="stage" style="display:block"><mo-strength-meter label="密码"></mo-strength-meter></div><p>四段强度条随密码变化。</p></article>
+      <article><div class="stage" style="display:block"><mo-step-track steps="4" value="2" label="进度"></mo-step-track></div><p>圆珠沿步骤线滚动。</p></article>
+      <article><div class="stage" style="display:block"><mo-elastic-accordion heading="配送说明"><p>满 99 元包邮，一般两天内送达。</p></mo-elastic-accordion></div><p>展开时略微超出后回稳。</p></article>
     </section>
 
     <h2>磁吸回弹</h2>
@@ -71,14 +100,42 @@
     import { defineSquishStepper } from '../dist/widgets/squish-stepper.js';
     import { defineAnalogStick } from '../dist/widgets/analog-stick.js';
     import { defineTransferButton } from '../dist/widgets/transfer-button.js';
+    import { defineSixDotOrbit } from '../dist/widgets/six-dot-orbit.js';
+    import { defineCenterBars } from '../dist/widgets/center-bars.js';
+    import { defineQuarterRing } from '../dist/widgets/quarter-ring.js';
+    import { defineTriplePulse } from '../dist/widgets/triple-pulse.js';
+    import { defineBreathOrb } from '../dist/widgets/breath-orb.js';
+    import { defineThreeDotBounce } from '../dist/widgets/three-dot-bounce.js';
+    import { defineInfinityLoop } from '../dist/widgets/infinity-loop.js';
+    import { defineSweepLines } from '../dist/widgets/sweep-lines.js';
+    import { defineWifiSignal } from '../dist/widgets/wifi-signal.js';
+    import { defineTextReveal } from '../dist/widgets/text-reveal.js';
+    import { defineJellyButton } from '../dist/widgets/jelly-button.js';
+    import { defineBounceButton } from '../dist/widgets/bounce-button.js';
+    import { defineTadaButton } from '../dist/widgets/tada-button.js';
+    import { defineGrooveToggle } from '../dist/widgets/groove-toggle.js';
+    import { defineCartBadge } from '../dist/widgets/cart-badge.js';
+    import { defineChipInput } from '../dist/widgets/chip-input.js';
+    import { definePlanPicker } from '../dist/widgets/plan-picker.js';
+    import { defineAlignSwitch } from '../dist/widgets/align-switch.js';
+    import { defineElasticSlider } from '../dist/widgets/elastic-slider.js';
+    import { defineCodeShake } from '../dist/widgets/code-shake.js';
+    import { defineStrengthMeter } from '../dist/widgets/strength-meter.js';
+    import { defineStepTrack } from '../dist/widgets/step-track.js';
+    import { defineElasticAccordion } from '../dist/widgets/elastic-accordion.js';
+    import { defineSquishIndicator } from '../dist/widgets/squish-indicator.js';
     import { wire } from './catalog/tactile.js';
     defineMoAliases();
-    for (const define of [defineMagnetic, defineEclipseToggle, defineHueOrbit, defineNotchSlider, defineBulgeVolume, defineCopyButton, defineTileRelay, defineSquishKey, defineSquishStepper, defineAnalogStick, defineTransferButton]) define();
+    for (const define of [defineMagnetic, defineEclipseToggle, defineHueOrbit, defineNotchSlider, defineBulgeVolume, defineCopyButton, defineTileRelay, defineSquishKey, defineSquishStepper, defineAnalogStick, defineTransferButton, defineSixDotOrbit, defineCenterBars, defineQuarterRing, defineTriplePulse, defineBreathOrb, defineThreeDotBounce, defineInfinityLoop, defineSweepLines, defineWifiSignal, defineTextReveal, defineJellyButton, defineBounceButton, defineTadaButton, defineGrooveToggle, defineCartBadge, defineChipInput, definePlanPicker, defineAlignSwitch, defineElasticSlider, defineCodeShake, defineStrengthMeter, defineStepTrack, defineElasticAccordion, defineSquishIndicator]) define();
     const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
     document.querySelector('mo-notch-slider')?.addEventListener('usa:detent', (e) => log('notch', `detent ${e.detail.value}`));
     document.querySelector('mo-copy-button')?.addEventListener('usa:copy', (e) => log('copy', `ok ${e.detail.ok}, ${e.detail.length} chars`));
     document.querySelectorAll('mo-squish-key').forEach((k) => k.addEventListener('usa:press', () => log('key', `press ${k.getAttribute('label')}`)));
     document.querySelector('mo-analog-stick')?.addEventListener('usa:move', (e) => log('stick', `x ${e.detail.x.toFixed(2)}  y ${e.detail.y.toFixed(2)}`));
+    document.querySelectorAll('mo-jelly-button, mo-bounce-button').forEach((b) => b.addEventListener('usa:press', () => log('press', `press ${b.getAttribute('label')}`)));
+    document.querySelector('mo-cart-badge')?.addEventListener('usa:add', (e) => log('cart', `count ${e.detail.count}`));
+    const code = document.querySelector('mo-code-shake');
+    code?.addEventListener('usa:complete', () => (code.value === '1234' ? code.accept() : code.reject()));
     wire['transfer-button'](document);
   </script>
 </body>

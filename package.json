@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 275 animated Web Components (91 core, 184 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 299 animated Web Components (91 core, 208 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3278,6 +3278,246 @@
       "require": {
         "types": "./dist/widgets/transfer-button.d.cts",
         "default": "./dist/widgets/transfer-button.cjs"
+      }
+    },
+    "./widgets/six-dot-orbit": {
+      "import": {
+        "types": "./dist/widgets/six-dot-orbit.d.ts",
+        "default": "./dist/widgets/six-dot-orbit.js"
+      },
+      "require": {
+        "types": "./dist/widgets/six-dot-orbit.d.cts",
+        "default": "./dist/widgets/six-dot-orbit.cjs"
+      }
+    },
+    "./widgets/center-bars": {
+      "import": {
+        "types": "./dist/widgets/center-bars.d.ts",
+        "default": "./dist/widgets/center-bars.js"
+      },
+      "require": {
+        "types": "./dist/widgets/center-bars.d.cts",
+        "default": "./dist/widgets/center-bars.cjs"
+      }
+    },
+    "./widgets/quarter-ring": {
+      "import": {
+        "types": "./dist/widgets/quarter-ring.d.ts",
+        "default": "./dist/widgets/quarter-ring.js"
+      },
+      "require": {
+        "types": "./dist/widgets/quarter-ring.d.cts",
+        "default": "./dist/widgets/quarter-ring.cjs"
+      }
+    },
+    "./widgets/triple-pulse": {
+      "import": {
+        "types": "./dist/widgets/triple-pulse.d.ts",
+        "default": "./dist/widgets/triple-pulse.js"
+      },
+      "require": {
+        "types": "./dist/widgets/triple-pulse.d.cts",
+        "default": "./dist/widgets/triple-pulse.cjs"
+      }
+    },
+    "./widgets/breath-orb": {
+      "import": {
+        "types": "./dist/widgets/breath-orb.d.ts",
+        "default": "./dist/widgets/breath-orb.js"
+      },
+      "require": {
+        "types": "./dist/widgets/breath-orb.d.cts",
+        "default": "./dist/widgets/breath-orb.cjs"
+      }
+    },
+    "./widgets/three-dot-bounce": {
+      "import": {
+        "types": "./dist/widgets/three-dot-bounce.d.ts",
+        "default": "./dist/widgets/three-dot-bounce.js"
+      },
+      "require": {
+        "types": "./dist/widgets/three-dot-bounce.d.cts",
+        "default": "./dist/widgets/three-dot-bounce.cjs"
+      }
+    },
+    "./widgets/infinity-loop": {
+      "import": {
+        "types": "./dist/widgets/infinity-loop.d.ts",
+        "default": "./dist/widgets/infinity-loop.js"
+      },
+      "require": {
+        "types": "./dist/widgets/infinity-loop.d.cts",
+        "default": "./dist/widgets/infinity-loop.cjs"
+      }
+    },
+    "./widgets/sweep-lines": {
+      "import": {
+        "types": "./dist/widgets/sweep-lines.d.ts",
+        "default": "./dist/widgets/sweep-lines.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sweep-lines.d.cts",
+        "default": "./dist/widgets/sweep-lines.cjs"
+      }
+    },
+    "./widgets/wifi-signal": {
+      "import": {
+        "types": "./dist/widgets/wifi-signal.d.ts",
+        "default": "./dist/widgets/wifi-signal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/wifi-signal.d.cts",
+        "default": "./dist/widgets/wifi-signal.cjs"
+      }
+    },
+    "./widgets/text-reveal": {
+      "import": {
+        "types": "./dist/widgets/text-reveal.d.ts",
+        "default": "./dist/widgets/text-reveal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/text-reveal.d.cts",
+        "default": "./dist/widgets/text-reveal.cjs"
+      }
+    },
+    "./widgets/jelly-button": {
+      "import": {
+        "types": "./dist/widgets/jelly-button.d.ts",
+        "default": "./dist/widgets/jelly-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/jelly-button.d.cts",
+        "default": "./dist/widgets/jelly-button.cjs"
+      }
+    },
+    "./widgets/bounce-button": {
+      "import": {
+        "types": "./dist/widgets/bounce-button.d.ts",
+        "default": "./dist/widgets/bounce-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bounce-button.d.cts",
+        "default": "./dist/widgets/bounce-button.cjs"
+      }
+    },
+    "./widgets/tada-button": {
+      "import": {
+        "types": "./dist/widgets/tada-button.d.ts",
+        "default": "./dist/widgets/tada-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tada-button.d.cts",
+        "default": "./dist/widgets/tada-button.cjs"
+      }
+    },
+    "./widgets/groove-toggle": {
+      "import": {
+        "types": "./dist/widgets/groove-toggle.d.ts",
+        "default": "./dist/widgets/groove-toggle.js"
+      },
+      "require": {
+        "types": "./dist/widgets/groove-toggle.d.cts",
+        "default": "./dist/widgets/groove-toggle.cjs"
+      }
+    },
+    "./widgets/cart-badge": {
+      "import": {
+        "types": "./dist/widgets/cart-badge.d.ts",
+        "default": "./dist/widgets/cart-badge.js"
+      },
+      "require": {
+        "types": "./dist/widgets/cart-badge.d.cts",
+        "default": "./dist/widgets/cart-badge.cjs"
+      }
+    },
+    "./widgets/chip-input": {
+      "import": {
+        "types": "./dist/widgets/chip-input.d.ts",
+        "default": "./dist/widgets/chip-input.js"
+      },
+      "require": {
+        "types": "./dist/widgets/chip-input.d.cts",
+        "default": "./dist/widgets/chip-input.cjs"
+      }
+    },
+    "./widgets/plan-picker": {
+      "import": {
+        "types": "./dist/widgets/plan-picker.d.ts",
+        "default": "./dist/widgets/plan-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/plan-picker.d.cts",
+        "default": "./dist/widgets/plan-picker.cjs"
+      }
+    },
+    "./widgets/align-switch": {
+      "import": {
+        "types": "./dist/widgets/align-switch.d.ts",
+        "default": "./dist/widgets/align-switch.js"
+      },
+      "require": {
+        "types": "./dist/widgets/align-switch.d.cts",
+        "default": "./dist/widgets/align-switch.cjs"
+      }
+    },
+    "./widgets/elastic-slider": {
+      "import": {
+        "types": "./dist/widgets/elastic-slider.d.ts",
+        "default": "./dist/widgets/elastic-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/elastic-slider.d.cts",
+        "default": "./dist/widgets/elastic-slider.cjs"
+      }
+    },
+    "./widgets/code-shake": {
+      "import": {
+        "types": "./dist/widgets/code-shake.d.ts",
+        "default": "./dist/widgets/code-shake.js"
+      },
+      "require": {
+        "types": "./dist/widgets/code-shake.d.cts",
+        "default": "./dist/widgets/code-shake.cjs"
+      }
+    },
+    "./widgets/strength-meter": {
+      "import": {
+        "types": "./dist/widgets/strength-meter.d.ts",
+        "default": "./dist/widgets/strength-meter.js"
+      },
+      "require": {
+        "types": "./dist/widgets/strength-meter.d.cts",
+        "default": "./dist/widgets/strength-meter.cjs"
+      }
+    },
+    "./widgets/step-track": {
+      "import": {
+        "types": "./dist/widgets/step-track.d.ts",
+        "default": "./dist/widgets/step-track.js"
+      },
+      "require": {
+        "types": "./dist/widgets/step-track.d.cts",
+        "default": "./dist/widgets/step-track.cjs"
+      }
+    },
+    "./widgets/elastic-accordion": {
+      "import": {
+        "types": "./dist/widgets/elastic-accordion.d.ts",
+        "default": "./dist/widgets/elastic-accordion.js"
+      },
+      "require": {
+        "types": "./dist/widgets/elastic-accordion.d.cts",
+        "default": "./dist/widgets/elastic-accordion.cjs"
+      }
+    },
+    "./widgets/squish-indicator": {
+      "import": {
+        "types": "./dist/widgets/squish-indicator.d.ts",
+        "default": "./dist/widgets/squish-indicator.js"
+      },
+      "require": {
+        "types": "./dist/widgets/squish-indicator.d.cts",
+        "default": "./dist/widgets/squish-indicator.cjs"
       }
     },
     "./widgets/lens-stack": {

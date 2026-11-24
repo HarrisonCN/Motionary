@@ -1538,6 +1538,82 @@
       "usa:input": [
         "{value}"
       ]
+    },
+    "usa-align-switch": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-bounce-button": {
+      "usa:press": [
+        "(none)"
+      ]
+    },
+    "usa-cart-badge": {
+      "usa:add": [
+        "{count}"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
+    "usa-chip-input": {
+      "usa:change": [
+        "{values}"
+      ]
+    },
+    "usa-code-shake": {
+      "usa:complete": [
+        "{length}"
+      ]
+    },
+    "usa-elastic-accordion": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-elastic-slider": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-groove-toggle": {
+      "usa:change": [
+        "{pressed}"
+      ]
+    },
+    "usa-jelly-button": {
+      "usa:press": [
+        "(none)"
+      ]
+    },
+    "usa-plan-picker": {
+      "usa:change": [
+        "{index, value}"
+      ]
+    },
+    "usa-squish-indicator": {
+      "usa:change": [
+        "{index, value}"
+      ]
+    },
+    "usa-step-track": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-strength-meter": {
+      "usa:change": [
+        "{score}"
+      ]
+    },
+    "usa-tada-button": {
+      "usa:change": [
+        "{pressed}"
+      ]
     }
   }
 }

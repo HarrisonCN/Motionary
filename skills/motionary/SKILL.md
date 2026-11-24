@@ -54,8 +54,8 @@ A few starting points:
 | Reveal on scroll | `<mo-reveal effect="fade-up">`, `<mo-stagger>` |
 | Press / hover feedback | `<mo-press>`, `<mo-ripple>`, `<mo-magnetic release="spring">`, `<mo-tilt>` |
 | Tactile controls | `<mo-squish-key>`, `<mo-squish-stepper>`, `<mo-analog-stick>`, `<mo-transfer-button>` |
-| Small moments | `<mo-eclipse-toggle>`, `<mo-hue-orbit>`, `<mo-notch-slider>`, `<mo-bulge-volume>`, `<mo-copy-button>` |
-| Loading | `<mo-tile-relay>`, `<mo-spinner>`, `<mo-skeleton>` |
+| Small moments | `<mo-eclipse-toggle>`, `<mo-hue-orbit>`, `<mo-notch-slider>`, `<mo-bulge-volume>`, `<mo-copy-button>`, `<mo-text-reveal>`, `<mo-cart-badge>`, `<mo-chip-input>`, `<mo-code-shake>`, `<mo-elastic-accordion>` |
+| Loading | `<mo-tile-relay>`, `<mo-six-dot-orbit>`, `<mo-three-dot-bounce>`, `<mo-sweep-lines>`, `<mo-spinner>`, `<mo-skeleton>` |
 | Forms | `<mo-select>`, `<mo-combobox>`, `<mo-number-stepper>`, `<mo-range-slider>`, `<mo-password>` |
 
 ## 3. Rules

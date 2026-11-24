@@ -74,3 +74,19 @@ mo-squish-key, mo-squish-stepper, mo-analog-stick, mo-transfer-button {display:i
 
 .usa-tactile[data-static], .usa-tactile[data-static] * {transition:none !important; animation:none !important}
 @media (prefers-reduced-motion: reduce) { .usa-tactile, .usa-tactile * {transition:none !important; animation:none !important} }
+
+/* squish indicator (A / B / C): --grow 1 = picked; the spring overshoots past 1 before it settles */
+usa-squish-indicator, mo-squish-indicator {display:inline-block; vertical-align:middle; min-width:0}
+.usa-pick {margin:0; padding:10px; border:0; min-width:0; gap:10px; border-radius:var(--mo-radius-pill, 999px); background:var(--mo-tile)}
+.usa-pick-key {
+  --grow:0; position:relative; display:grid; place-items:center; width:40px; height:40px; border-radius:50%; cursor:pointer;
+  background:color-mix(in srgb, var(--mo-key) calc(20% + var(--grow) * 80%), var(--mo-tile)); color:var(--mo-key);
+  transform:scale(calc(.82 + var(--grow) * .28)); box-shadow:0 calc(var(--grow) * 6px) calc(var(--grow) * 14px) -6px rgb(0 0 0 / .5);
+}
+.usa-pick-key[data-on] {color:var(--mo-glyph)}
+.usa-pick-input {position:absolute; inset:0; margin:0; opacity:0; cursor:inherit}
+.usa-pick-glyph {font-size:15px; pointer-events:none; transform:scale(calc(1 + var(--grow) * .08))}
+.usa-pick-key:has(.usa-pick-input:focus-visible) {outline:2px solid var(--mo-key); outline-offset:4px}
+.usa-pick-key:active {transform:scale(calc(.76 + var(--grow) * .24))}
+.usa-pick:disabled {opacity:.45}
+.usa-pick:disabled .usa-pick-key {cursor:not-allowed}

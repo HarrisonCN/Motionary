@@ -1,4 +1,4 @@
-# Motionary components (275)
+# Motionary components (299)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -28,20 +28,27 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 
 - [`<mo-activity-wall>`](usa-activity-wall.md) — Live activity wall
 - [`<mo-add-to-cart>`](usa-add-to-cart.md) — Add to cart (fly-to-cart)
+- [`<mo-align-switch>`](usa-align-switch.md) — Align switch
 - [`<mo-avatar-stack>`](usa-avatar-stack.md) — Avatar stack
 - [`<mo-badge>`](usa-badge.md) — Badge
 - [`<mo-badge-wall>`](usa-badge-wall.md) — Badge wall
 - [`<mo-bar-chart>`](usa-bar-chart.md) — Animated bar chart
 - [`<mo-bg-generator>`](usa-bg-generator.md) — Background generator
 - [`<mo-bottom-sheet>`](usa-bottom-sheet.md) — Bottom sheet
+- [`<mo-bounce-button>`](usa-bounce-button.md) — Bounce button
 - [`<mo-breadcrumbs>`](usa-breadcrumbs.md) — Breadcrumbs (animated, collapsing)
+- [`<mo-breath-orb>`](usa-breath-orb.md) — Breath orb
 - [`<mo-bulge-volume>`](usa-bulge-volume.md) — Bulge volume
 - [`<mo-carousel>`](usa-carousel.md) — Carousel / slider
+- [`<mo-cart-badge>`](usa-cart-badge.md) — Cart badge
 - [`<mo-cart-drawer>`](usa-cart-drawer.md) — Cart drawer
+- [`<mo-center-bars>`](usa-center-bars.md) — Center bars
 - [`<mo-chapter-nav>`](usa-chapter-nav.md) — Chapter nav
 - [`<mo-chat-composer>`](usa-chat-composer.md) — AI chat composer
+- [`<mo-chip-input>`](usa-chip-input.md) — Chip input
 - [`<mo-clock-control>`](usa-clock-control.md) — Motion clock control
 - [`<mo-code-export>`](usa-code-export.md) — Code export
+- [`<mo-code-shake>`](usa-code-shake.md) — Code shake
 - [`<mo-coffee-timer>`](usa-coffee-timer.md) — Coffee timer
 - [`<mo-color-picker>`](usa-color-picker.md) — Color picker
 - [`<mo-combobox>`](usa-combobox.md) — Search combobox
@@ -57,6 +64,8 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-download-menu>`](usa-download-menu.md) — Download menu
 - [`<mo-drawer>`](usa-drawer.md) — Drawer
 - [`<mo-eclipse-toggle>`](usa-eclipse-toggle.md) — Eclipse toggle
+- [`<mo-elastic-accordion>`](usa-elastic-accordion.md) — Elastic accordion
+- [`<mo-elastic-slider>`](usa-elastic-slider.md) — Elastic slider
 - [`<mo-fab>`](usa-fab.md) — FAB speed dial
 - [`<mo-festival-banner>`](usa-festival-banner.md) — Festival banner
 - [`<mo-field>`](usa-field.md) — Animated field
@@ -72,6 +81,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-globe>`](usa-globe.md) — Spinning globe
 - [`<mo-glucose-sparkline>`](usa-glucose-sparkline.md) — Glucose sparkline
 - [`<mo-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas
+- [`<mo-groove-toggle>`](usa-groove-toggle.md) — Groove toggle
 - [`<mo-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
 - [`<mo-halo-segmented>`](usa-halo-segmented.md) — Halo segmented control
 - [`<mo-halo-slider>`](usa-halo-slider.md) — Halo range slider
@@ -80,7 +90,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
+- [`<mo-infinity-loop>`](usa-infinity-loop.md) — Infinity loop
 - [`<mo-install-button>`](usa-install-button.md) — Install button
+- [`<mo-jelly-button>`](usa-jelly-button.md) — Jelly button
 - [`<mo-kpi>`](usa-kpi.md) — KPI card
 - [`<mo-leaderboard>`](usa-leaderboard.md) — Leaderboard
 - [`<mo-liquid-nav>`](usa-liquid-nav.md) — Liquid nav
@@ -119,6 +131,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-pause-all>`](usa-pause-all.md) — Pause all motion
 - [`<mo-perf-monitor>`](usa-perf-monitor.md) — Perf monitor
 - [`<mo-physics-playground>`](usa-physics-playground.md) — Physics playground · Requires: motionary/runtime/physics + motionary/runtime/format-scene
+- [`<mo-plan-picker>`](usa-plan-picker.md) — Plan picker
 - [`<mo-plugin-card>`](usa-plugin-card.md) — Plugin detail card · Requires: motionary/runtime
 - [`<mo-plugin-store>`](usa-plugin-store.md) — Plugin marketplace
 - [`<mo-popover>`](usa-popover.md) — Popover
@@ -127,6 +140,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-product-gallery>`](usa-product-gallery.md) — Product gallery
 - [`<mo-prop-panel>`](usa-prop-panel.md) — Property panel
 - [`<mo-pull-refresh>`](usa-pull-refresh.md) — Pull to refresh
+- [`<mo-quarter-ring>`](usa-quarter-ring.md) — Quarter ring
 - [`<mo-race-telemetry>`](usa-race-telemetry.md) — Race telemetry
 - [`<mo-radar>`](usa-radar.md) — Radar scope
 - [`<mo-range-slider>`](usa-range-slider.md) — Interval slider
@@ -143,33 +157,42 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-select>`](usa-select.md) — Native select
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
 - [`<mo-shortcut>`](usa-shortcut.md) — Shortcut hint
+- [`<mo-six-dot-orbit>`](usa-six-dot-orbit.md) — Six dot orbit
 - [`<mo-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
 - [`<mo-slider>`](usa-slider.md) — Slider
 - [`<mo-snap-carousel>`](usa-snap-carousel.md) — Snap carousel (drag · inertia · snap) · Requires: motionary/runtime/drag-snap
 - [`<mo-sparkline>`](usa-sparkline.md) — Sparkline
 - [`<mo-spatial-card>`](usa-spatial-card.md) — Spatial card
 - [`<mo-status-pill>`](usa-status-pill.md) — Status pill
+- [`<mo-step-track>`](usa-step-track.md) — Step track
 - [`<mo-stepper>`](usa-stepper.md) — Stepper / wizard
 - [`<mo-sticky-wall>`](usa-sticky-wall.md) — Sticky-note wall
 - [`<mo-stories>`](usa-stories.md) — Stories viewer
+- [`<mo-strength-meter>`](usa-strength-meter.md) — Strength meter
 - [`<mo-suggestion-chips>`](usa-suggestion-chips.md) — Suggestion chips
 - [`<mo-sun-timeline>`](usa-sun-timeline.md) — Sun timeline
+- [`<mo-sweep-lines>`](usa-sweep-lines.md) — Sweep lines
 - [`<mo-tab-bar>`](usa-tab-bar.md) — Tabs with animated indicator
 - [`<mo-tabs>`](usa-tabs.md) — Tabs
+- [`<mo-tada-button>`](usa-tada-button.md) — Tada button
 - [`<mo-terminal>`](usa-terminal.md) — Terminal window
+- [`<mo-text-reveal>`](usa-text-reveal.md) — Text reveal
 - [`<mo-textarea>`](usa-textarea.md) — Adaptive textarea
 - [`<mo-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
+- [`<mo-three-dot-bounce>`](usa-three-dot-bounce.md) — Three dot bounce
 - [`<mo-tile-relay>`](usa-tile-relay.md) — Tile relay
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
 - [`<mo-title-sequence>`](usa-title-sequence.md) — Title sequence
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<mo-transit-progress>`](usa-transit-progress.md) — Transit progress
+- [`<mo-triple-pulse>`](usa-triple-pulse.md) — Triple pulse
 - [`<mo-upload-progress>`](usa-upload-progress.md) — Upload progress
 - [`<mo-validation-summary>`](usa-validation-summary.md) — Validation summary
 - [`<mo-video-card>`](usa-video-card.md) — Video card
 - [`<mo-vital-wave>`](usa-vital-wave.md) — Vital dot wave
 - [`<mo-voice-button>`](usa-voice-button.md) — Voice button
+- [`<mo-wifi-signal>`](usa-wifi-signal.md) — Wi-Fi signal
 - [`<mo-worker-canvas>`](usa-worker-canvas.md) — Worker canvas
 - [`<mo-workout-player>`](usa-workout-player.md) — Workout player
 - [`<mo-xp-bar>`](usa-xp-bar.md) — XP bar
@@ -234,6 +257,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-like>`](usa-like.md) — Like button
 - [`<mo-menu-toggle>`](usa-menu-toggle.md) — Hamburger → close
 - [`<mo-pull-cord>`](usa-pull-cord.md) — Lamp pull-cord switch
+- [`<mo-squish-indicator>`](usa-squish-indicator.md) — Squish indicator
 - [`<mo-squish-key>`](usa-squish-key.md) — Squish key
 - [`<mo-squish-stepper>`](usa-squish-stepper.md) — Squish stepper
 - [`<mo-star-rating>`](usa-star-rating.md) — Star rating 2.0

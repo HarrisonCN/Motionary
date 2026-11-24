@@ -10,6 +10,8 @@ export const components = [
     '<mo-analog-stick label="Move"></mo-analog-stick>', undefined, x),
   C("usa-transfer-button", "click", "Transfer button", "下载上传键", "A squishy download / upload key with a progress ring that turns into a tick at 100.", "带进度环的软胶下载/上传键，到 100 时箭头变成对勾。", ['tactile', 'progress', '17.9'],
     '<mo-transfer-button direction="download"></mo-transfer-button> <mo-transfer-button direction="upload"></mo-transfer-button>', undefined, x),
+  C("usa-squish-indicator", "click", "Squish indicator", "弹性选择指示", "Round soft keys where the picked one swells on a spring; a native radio group.", "圆形软键，选中的一个带弹性鼓起；底层是原生单选组。", ['tactile', 'spring', '17.9'],
+    '<mo-squish-indicator options="A,B,C" value="B"></mo-squish-indicator>', undefined, x),
 ];
 
 /** Demo only: fake a transfer so the ring has something to show. */

@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [17.9.0] - 2026-11-24 — Moments & Tactile
 
 - Added six micro-interaction widgets: `mo-eclipse-toggle`, `mo-hue-orbit`, `mo-notch-slider`, `mo-bulge-volume`, `mo-copy-button` and `mo-tile-relay`. Each sits on a native switch button, radio group, range input or button, and stands still under reduced motion.
-- Added four tactile controls on a shared press spring: `mo-squish-key`, `mo-squish-stepper` (hold to repeat), `mo-analog-stick` (rubber-band pull, arrow keys, dead zone) and `mo-transfer-button` (progress ring driven by the page). `defineWidgets('17.9')` registers all ten.
+- Added four tactile controls on a shared press spring: `mo-squish-key`, `mo-squish-stepper` (hold to repeat), `mo-analog-stick` (rubber-band pull, arrow keys, dead zone) and `mo-transfer-button` (progress ring driven by the page).
+- Added eight pure-CSS loaders (`mo-six-dot-orbit`, `mo-center-bars`, `mo-quarter-ring`, `mo-triple-pulse`, `mo-breath-orb`, `mo-three-dot-bounce`, `mo-infinity-loop`, `mo-sweep-lines`) and `mo-wifi-signal`; they pause off screen and stand still under reduced motion.
+- Added `mo-text-reveal`, the `mo-jelly-button`, `mo-bounce-button` and `mo-tada-button` buttons, `mo-groove-toggle`, `mo-cart-badge` and `mo-squish-indicator` (A / B / C pick on a spring).
+- Added form moments: `mo-chip-input`, `mo-plan-picker`, `mo-align-switch`, `mo-elastic-slider` (spring-trailing value bubble), `mo-code-shake` (the code never leaves in events), `mo-strength-meter`, `mo-step-track` and `mo-elastic-accordion`. `defineWidgets('17.9')` registers all thirty-four.
 - `mo-magnetic` takes `release="spring"`: a fast exit keeps the pointer's velocity and springs back. The default release is unchanged.
 - The gallery's effect detail, the playground and the run page get **Copy as AI prompt**, which copies the code with every value you tuned (`showcase/param-prompt.js`).
 - Added an Agent Skill at `skills/motionary/SKILL.md` (`npx skills add HarrisonCN/Motionary`) and a style compare page that shows one component in all six variants.

@@ -2667,6 +2667,126 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/six-dot-orbit' (per-entry, fixed)",
+    "import": "import { defineSixDotOrbit } from 'pkg/widgets/six-dot-orbit'; console.log(defineSixDotOrbit);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/center-bars' (per-entry, fixed)",
+    "import": "import { defineCenterBars } from 'pkg/widgets/center-bars'; console.log(defineCenterBars);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/quarter-ring' (per-entry, fixed)",
+    "import": "import { defineQuarterRing } from 'pkg/widgets/quarter-ring'; console.log(defineQuarterRing);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/triple-pulse' (per-entry, fixed)",
+    "import": "import { defineTriplePulse } from 'pkg/widgets/triple-pulse'; console.log(defineTriplePulse);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/breath-orb' (per-entry, fixed)",
+    "import": "import { defineBreathOrb } from 'pkg/widgets/breath-orb'; console.log(defineBreathOrb);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/three-dot-bounce' (per-entry, fixed)",
+    "import": "import { defineThreeDotBounce } from 'pkg/widgets/three-dot-bounce'; console.log(defineThreeDotBounce);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/infinity-loop' (per-entry, fixed)",
+    "import": "import { defineInfinityLoop } from 'pkg/widgets/infinity-loop'; console.log(defineInfinityLoop);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/sweep-lines' (per-entry, fixed)",
+    "import": "import { defineSweepLines } from 'pkg/widgets/sweep-lines'; console.log(defineSweepLines);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/wifi-signal' (per-entry, fixed)",
+    "import": "import { defineWifiSignal } from 'pkg/widgets/wifi-signal'; console.log(defineWifiSignal);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/text-reveal' (per-entry, fixed)",
+    "import": "import { defineTextReveal } from 'pkg/widgets/text-reveal'; console.log(defineTextReveal);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/jelly-button' (per-entry, fixed)",
+    "import": "import { defineJellyButton } from 'pkg/widgets/jelly-button'; console.log(defineJellyButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bounce-button' (per-entry, fixed)",
+    "import": "import { defineBounceButton } from 'pkg/widgets/bounce-button'; console.log(defineBounceButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/tada-button' (per-entry, fixed)",
+    "import": "import { defineTadaButton } from 'pkg/widgets/tada-button'; console.log(defineTadaButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/groove-toggle' (per-entry, fixed)",
+    "import": "import { defineGrooveToggle } from 'pkg/widgets/groove-toggle'; console.log(defineGrooveToggle);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/cart-badge' (per-entry, fixed)",
+    "import": "import { defineCartBadge } from 'pkg/widgets/cart-badge'; console.log(defineCartBadge);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/chip-input' (per-entry, fixed)",
+    "import": "import { defineChipInput } from 'pkg/widgets/chip-input'; console.log(defineChipInput);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/plan-picker' (per-entry, fixed)",
+    "import": "import { definePlanPicker } from 'pkg/widgets/plan-picker'; console.log(definePlanPicker);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/align-switch' (per-entry, fixed)",
+    "import": "import { defineAlignSwitch } from 'pkg/widgets/align-switch'; console.log(defineAlignSwitch);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/elastic-slider' (per-entry, fixed)",
+    "import": "import { defineElasticSlider } from 'pkg/widgets/elastic-slider'; console.log(defineElasticSlider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/code-shake' (per-entry, fixed)",
+    "import": "import { defineCodeShake } from 'pkg/widgets/code-shake'; console.log(defineCodeShake);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/strength-meter' (per-entry, fixed)",
+    "import": "import { defineStrengthMeter } from 'pkg/widgets/strength-meter'; console.log(defineStrengthMeter);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/step-track' (per-entry, fixed)",
+    "import": "import { defineStepTrack } from 'pkg/widgets/step-track'; console.log(defineStepTrack);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/elastic-accordion' (per-entry, fixed)",
+    "import": "import { defineElasticAccordion } from 'pkg/widgets/elastic-accordion'; console.log(defineElasticAccordion);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/squish-indicator' (per-entry, fixed)",
+    "import": "import { defineSquishIndicator } from 'pkg/widgets/squish-indicator'; console.log(defineSquishIndicator);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0
