@@ -1,0 +1,54 @@
+import { f as defineElement } from './base-SPDwWyB1.js';
+import { d as defineMoName } from './mo-name-DT5wwaGR.js';
+import { m as make } from './moments-Cg_NlOYG.js';
+import { o as ownChildren, c as cleanColor } from './kit-DugHPVcq.js';
+import { s as seeded } from './kit-12-C5AMRg3h.js';
+import { c as css } from './motion-kit-12-C9izfNaB.js';
+
+/** Start position (% of the box), delay (s), duration (s) and tail length (px) of meteor `i`, the same on every load. */
+function meteorAt(i) {
+    return {
+        left: Math.round(seeded(i, 1) * 1200) / 10 - 10,
+        top: Math.round(seeded(i, 2) * 400) / 10 - 20,
+        delay: Math.round(seeded(i, 3) * 80) / 10,
+        duration: Math.round((2.2 + seeded(i, 4) * 3.6) * 10) / 10,
+        tail: Math.round(50 + seeded(i, 5) * 90),
+    };
+}
+function defineMeteors(tag = 'usa-meteors') {
+    const ctor = defineElement(tag, Base => class Meteors extends Base {
+        static get observedAttributes() { return ['count', 'angle', 'color', 'speed']; }
+        mount() {
+            const kids = ownChildren(this);
+            const root = make('div', 'usa-kit usa-meteors');
+            const sky = make('div', 'usa-meteors-sky');
+            sky.setAttribute('aria-hidden', 'true');
+            const n = Math.min(60, Math.max(1, Math.round(this.num('count', 18))));
+            if (!this.reduced) {
+                for (let i = 0; i < n; i++) {
+                    const m = meteorAt(i);
+                    const s = make('span', 'usa-meteor');
+                    s.style.cssText = `left:${m.left}%;top:${m.top}%;--delay:${m.delay}s;--dur:${m.duration}s;--tail:${m.tail}px`;
+                    sky.append(s);
+                }
+            }
+            const body = make('div', 'usa-meteors-body');
+            body.append(...kids);
+            root.append(sky, body);
+            root.style.setProperty('--angle', `${this.num('angle', 215)}deg`);
+            root.style.setProperty('--speed', String(Math.min(4, Math.max(0.25, this.num('speed', 1)))));
+            const c = cleanColor(this.str('color'));
+            if (c)
+                root.style.setProperty('--meteor', c);
+            root.toggleAttribute('data-static', this.reduced);
+            this.append(root);
+            this.inView((v) => root.toggleAttribute('data-paused', !v));
+            this.onCleanup(() => { this.append(...kids); root.remove(); });
+        }
+    }, { id: 'motion-kit-12', text: css });
+    defineMoName(tag, ctor);
+    return ctor;
+}
+
+export { defineMeteors as d, meteorAt as m };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/meteors-CpgtGQSu.js.map

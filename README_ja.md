@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->340<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->358<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンの変更点：[CHANGELOG.md](./CHANGELOG.md) · サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
 
@@ -38,7 +38,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 |---|---|---|
 | **スクロール表示** | 14 系統・214 個のプリセット：コアに 33 個、`motionary/presets/extended` にさらに 181 個（フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、グリッチ、スクロール連動の `scrub-*`）。ほかに `timeline()`、`staggerChildren()`、`parallax()` | [プリセット](./docs/presets.md) · [API](./docs/API.md) |
 | **コアコンポーネント** | `motionary/components` の <!--fact:core-->91<!--/fact--> 個の要素。テキスト、ボタン、カード、背景、トランジション、ジェスチャー、SVG、WebGL などのカテゴリ単位でインポート | [コンポーネント](#コンポーネント) |
-| **ウィジェット** | <!--fact:widgets-->249<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、インターフェース部品、フォーム、データとメディア、奥行きのモーション、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
+| **ウィジェット** | <!--fact:widgets-->267<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、インターフェース部品、フォーム、データとメディア、奥行きのモーション、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
 | **エフェクト** | <!--fact:effects-->159<!--/fact--> 個のエフェクト。それぞれ独立したエントリ `motionary/effects/<name>` を持ち、`<mo-fx>` で任意の要素にも付けられる | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) |
 | **スタイルバリアントとスタイルプリセット** | 6 つの組み込みスタイルバリアント（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`）。共通のデザイントークンで切り替え。さらに 17.11 ウィジェット向けの 324 種のスタイルプリセット：12 パレット × 9 トリートメント × 3 ファミリー | [スタイルバリアント](#スタイルバリアント) · [スタイルプリセット](#スタイルプリセット) |
 | **Motion Core とランタイム** | `motionary/core` の `createMotion()`（約 2.5 KB gzip）と、`motionary/runtime` および 3 階層の <!--fact:runtimeModules-->21<!--/fact--> モジュール：スクロールシーン、スムーズスクロール、テキスト分割、SVG、スプライト、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [ランタイム](#ランタイムと階層) |
@@ -246,10 +246,11 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 ### コレクション
 
-最近のリリースでは、ウィジェットをテーマごとにまとめて追加しています。各コレクションにラボページと API ドキュメントがあります：
+最近のリリースでは、ウィジェットをテーマごとにまとめて追加しています。各コレクションにラボページと API ドキュメントがあります。17.12 からは[ホームページ](https://harrisoncn.github.io/Motionary/showcase/#collections)のコレクション欄で、すべてのセットをタブで切り替えながらその場で試せます：
 
 | コレクション | 内容 | ラボ · ドキュメント |
 |---|---|---|
+| パーツとホームのコレクション（17.12） | 18 ウィジェット：UI パーツ（プログレスタブ、コードタブ、役に立った投票、共有ボタン、インライン編集、タグクラウド）、データと操作（ヒートマップ、ドーナツチャート、並べ替えリスト、ズームレンズ、評価バー、チェックリスト）、モーション（流れ星、コネクトビーム、レトログリッド、オービットリング、レタースワップ、リップルグリッド） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/parts.html) · [ドキュメント](./docs/parts-17-12.md) |
 | ブロック・部品・奥行き（17.11） | 20 ウィジェット：ページブロック（検索バー、購読フォーム、ダウンロードボタン、リビールフッター、シェイプディバイダー）、インターフェース部品（仮想リスト、無限スクロール、コンテキストメニュー、分割ペイン、デスクトップウィンドウ、モーフカード）、奥行きのモーション（スクロールズーム、画像トンネル、オービットギャラリー、ボーダービーム）。[324 種のスタイルプリセット](#スタイルプリセット)に対応 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [ドキュメント](./docs/blocks-17-11.md) |
 | UI・コンポーネント・モーション（17.10） | 21 ウィジェット：ページブロック（サイドバー、スクロールスパイ、料金表、ベントーグリッド、追従 CTA）、データとメディア（ライトボックス、データテーブル、JSON ビューア、ホットスポット）、モーションサーフェス（横スクロール、画像トレイル、リキッドグラス、パスモーション） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [ドキュメント](./docs/kit-17-10.md) |
 | Moments & Tactile（17.9） | 34 ウィジェット：マイクロインタラクション、むにっとした触感コントロール、CSS だけのローダー、フォームの小さな演出（チップ入力、プラン選択、弾むスライダー、強度メーター） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [ドキュメント](./docs/moments-tactile.md) |
@@ -379,9 +380,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 72.11 KB | 79.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 88.70 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 112.20 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 72.19 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 88.80 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 112.30 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 既定ではスクロールリスナーを使わず（IntersectionObserver を使用）、アニメーションはコンポジタ上で動くプロパティ（`transform`、`opacity`、`filter`、`clip-path`）だけを使います。

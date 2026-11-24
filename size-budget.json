@@ -2992,6 +2992,96 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/progress-tabs' (per-entry, fixed)",
+    "import": "import { defineProgressTabs } from 'pkg/widgets/progress-tabs'; console.log(defineProgressTabs);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/code-tabs' (per-entry, fixed)",
+    "import": "import { defineCodeTabs } from 'pkg/widgets/code-tabs'; console.log(defineCodeTabs);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/helpful-vote' (per-entry, fixed)",
+    "import": "import { defineHelpfulVote } from 'pkg/widgets/helpful-vote'; console.log(defineHelpfulVote);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/share-button' (per-entry, fixed)",
+    "import": "import { defineShareButton } from 'pkg/widgets/share-button'; console.log(defineShareButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/inline-edit' (per-entry, fixed)",
+    "import": "import { defineInlineEdit } from 'pkg/widgets/inline-edit'; console.log(defineInlineEdit);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/tag-cloud' (per-entry, fixed)",
+    "import": "import { defineTagCloud } from 'pkg/widgets/tag-cloud'; console.log(defineTagCloud);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/heatmap' (per-entry, fixed)",
+    "import": "import { defineHeatmap } from 'pkg/widgets/heatmap'; console.log(defineHeatmap);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/donut-chart' (per-entry, fixed)",
+    "import": "import { defineDonutChart } from 'pkg/widgets/donut-chart'; console.log(defineDonutChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/sortable-list' (per-entry, fixed)",
+    "import": "import { defineSortableList } from 'pkg/widgets/sortable-list'; console.log(defineSortableList);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/zoom-lens' (per-entry, fixed)",
+    "import": "import { defineZoomLens } from 'pkg/widgets/zoom-lens'; console.log(defineZoomLens);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/rating-bars' (per-entry, fixed)",
+    "import": "import { defineRatingBars } from 'pkg/widgets/rating-bars'; console.log(defineRatingBars);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/checklist' (per-entry, fixed)",
+    "import": "import { defineChecklist } from 'pkg/widgets/checklist'; console.log(defineChecklist);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/meteors' (per-entry, fixed)",
+    "import": "import { defineMeteors } from 'pkg/widgets/meteors'; console.log(defineMeteors);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/connect-beam' (per-entry, fixed)",
+    "import": "import { defineConnectBeam } from 'pkg/widgets/connect-beam'; console.log(defineConnectBeam);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/retro-grid' (per-entry, fixed)",
+    "import": "import { defineRetroGrid } from 'pkg/widgets/retro-grid'; console.log(defineRetroGrid);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/orbit-rings' (per-entry, fixed)",
+    "import": "import { defineOrbitRings } from 'pkg/widgets/orbit-rings'; console.log(defineOrbitRings);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/letter-swap' (per-entry, fixed)",
+    "import": "import { defineLetterSwap } from 'pkg/widgets/letter-swap'; console.log(defineLetterSwap);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/ripple-grid' (per-entry, fixed)",
+    "import": "import { defineRippleGrid } from 'pkg/widgets/ripple-grid'; console.log(defineRippleGrid);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

@@ -1,4 +1,4 @@
-# Motionary components (340)
+# Motionary components (358)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -21,7 +21,10 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-grain>`](usa-grain.md) — Film grain
 - [`<mo-grid-glow>`](usa-grid-glow.md) — Grid glow
 - [`<mo-marquee>`](usa-marquee.md) — Marquee
+- [`<mo-meteors>`](usa-meteors.md) — Meteor shower
 - [`<mo-particles>`](usa-particles.md) — Particles
+- [`<mo-retro-grid>`](usa-retro-grid.md) — Retro grid
+- [`<mo-ripple-grid>`](usa-ripple-grid.md) — Ripple grid
 - [`<mo-water-ripple>`](usa-water-ripple.md) — Water ripple
 
 ## ui
@@ -46,10 +49,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-center-bars>`](usa-center-bars.md) — Center bars
 - [`<mo-chapter-nav>`](usa-chapter-nav.md) — Chapter nav
 - [`<mo-chat-composer>`](usa-chat-composer.md) — AI chat composer
+- [`<mo-checklist>`](usa-checklist.md) — Onboarding checklist
 - [`<mo-chip-input>`](usa-chip-input.md) — Chip input
 - [`<mo-clock-control>`](usa-clock-control.md) — Motion clock control
 - [`<mo-code-export>`](usa-code-export.md) — Code export
 - [`<mo-code-shake>`](usa-code-shake.md) — Code shake
+- [`<mo-code-tabs>`](usa-code-tabs.md) — Code tabs with copy
 - [`<mo-coffee-timer>`](usa-coffee-timer.md) — Coffee timer
 - [`<mo-color-picker>`](usa-color-picker.md) — Color picker
 - [`<mo-combobox>`](usa-combobox.md) — Search combobox
@@ -87,6 +92,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
 - [`<mo-halo-segmented>`](usa-halo-segmented.md) — Halo segmented control
 - [`<mo-halo-slider>`](usa-halo-slider.md) — Halo range slider
+- [`<mo-helpful-vote>`](usa-helpful-vote.md) — Was this helpful?
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
 - [`<mo-hold-action>`](usa-hold-action.md) — Hold action
 - [`<mo-hotspots>`](usa-hotspots.md) — Image hotspots
@@ -94,6 +100,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
 - [`<mo-infinity-loop>`](usa-infinity-loop.md) — Infinity loop
+- [`<mo-inline-edit>`](usa-inline-edit.md) — Inline edit
 - [`<mo-install-button>`](usa-install-button.md) — Install button
 - [`<mo-jelly-button>`](usa-jelly-button.md) — Jelly button
 - [`<mo-json-viewer>`](usa-json-viewer.md) — JSON viewer
@@ -143,6 +150,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-pricing>`](usa-pricing.md) — Pricing table
 - [`<mo-prize-wheel>`](usa-prize-wheel.md) — Prize wheel
 - [`<mo-product-gallery>`](usa-product-gallery.md) — Product gallery
+- [`<mo-progress-tabs>`](usa-progress-tabs.md) — Autoplay feature tabs
 - [`<mo-prop-panel>`](usa-prop-panel.md) — Property panel
 - [`<mo-pull-refresh>`](usa-pull-refresh.md) — Pull to refresh
 - [`<mo-quarter-ring>`](usa-quarter-ring.md) — Quarter ring
@@ -231,12 +239,16 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-image-trail>`](usa-image-trail.md) — Image trail
 - [`<mo-lightbox>`](usa-lightbox.md) — Lightbox gallery
 - [`<mo-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
+- [`<mo-sortable-list>`](usa-sortable-list.md) — Sortable list
 - [`<mo-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
 - [`<mo-swipeable>`](usa-swipeable.md) — Swipeable
+- [`<mo-zoom-lens>`](usa-zoom-lens.md) — Zoom lens
 
 ## svg
 
 - [`<mo-anim-icon>`](usa-anim-icon.md) — Animated icons
+- [`<mo-connect-beam>`](usa-connect-beam.md) — Connection beams
+- [`<mo-donut-chart>`](usa-donut-chart.md) — Donut chart
 - [`<mo-draw>`](usa-draw.md) — Line drawing
 - [`<mo-empty-state>`](usa-empty-state.md) — Empty state
 - [`<mo-mask-reveal>`](usa-mask-reveal.md) — Mask reveal
@@ -259,10 +271,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-bento>`](usa-bento.md) — Bento grid
 - [`<mo-data-table>`](usa-data-table.md) — Sortable data table
 - [`<mo-filter-chips>`](usa-filter-chips.md) — Filter chips
+- [`<mo-heatmap>`](usa-heatmap.md) — Activity heatmap
 - [`<mo-infinite-scroll>`](usa-infinite-scroll.md) — Infinite scroll
 - [`<mo-kanban>`](usa-kanban.md) — Kanban board (drag-sort)
 - [`<mo-masonry>`](usa-masonry.md) — Masonry
 - [`<mo-masonry-flow>`](usa-masonry-flow.md) — Masonry with layout animation
+- [`<mo-rating-bars>`](usa-rating-bars.md) — Rating summary
 - [`<mo-split-pane>`](usa-split-pane.md) — Split pane
 - [`<mo-virtual-list>`](usa-virtual-list.md) — Virtual list
 
@@ -286,6 +300,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-lens-stack>`](usa-lens-stack.md) — Lens assembly · Requires: motionary/runtime/spatial-instruments
 - [`<mo-liquid-glass>`](usa-liquid-glass.md) — Liquid glass
 - [`<mo-orbit-gallery>`](usa-orbit-gallery.md) — Orbit gallery
+- [`<mo-orbit-rings>`](usa-orbit-rings.md) — Orbit rings
 
 ## click
 
@@ -299,6 +314,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-like>`](usa-like.md) — Like button
 - [`<mo-menu-toggle>`](usa-menu-toggle.md) — Hamburger → close
 - [`<mo-pull-cord>`](usa-pull-cord.md) — Lamp pull-cord switch
+- [`<mo-share-button>`](usa-share-button.md) — Share button
 - [`<mo-squish-indicator>`](usa-squish-indicator.md) — Squish indicator
 - [`<mo-squish-key>`](usa-squish-key.md) — Squish key
 - [`<mo-squish-stepper>`](usa-squish-stepper.md) — Squish stepper
@@ -365,6 +381,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-glitch>`](usa-glitch.md) — Glitch text
 - [`<mo-gradient-text>`](usa-gradient-text.md) — Gradient flow
 - [`<mo-handwriting>`](usa-handwriting.md) — Handwriting draw
+- [`<mo-letter-swap>`](usa-letter-swap.md) — Letter swap
 - [`<mo-lyrics>`](usa-lyrics.md) — Synced karaoke lyrics
 - [`<mo-odometer>`](usa-odometer.md) — Odometer counter
 - [`<mo-revision-reveal>`](usa-revision-reveal.md) — Revision reveal
@@ -372,6 +389,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-scroll-highlight>`](usa-scroll-highlight.md) — Scroll highlight
 - [`<mo-shimmer-text>`](usa-shimmer-text.md) — Shimmer text
 - [`<mo-split-text>`](usa-split-text.md) — Split-text reveal
+- [`<mo-tag-cloud>`](usa-tag-cloud.md) — Tag cloud
 - [`<mo-text-loupe>`](usa-text-loupe.md) — Text loupe
 - [`<mo-text-rotate>`](usa-text-rotate.md) — Rotating words
 - [`<mo-text-splitter>`](usa-text-splitter.md) — Text splitter · Requires: motionary/runtime/text

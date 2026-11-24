@@ -31,7 +31,6 @@
   <link rel="modulepreload" href="./app.js" />
 </head>
 <body>
-<a href="instruments.html" style="position:fixed;right:18px;bottom:18px;z-index:30;padding:12px 18px;background:#d4e6dc;color:#18291e;border:1px solid #ffffff35;border-radius:999px;font:12px system-ui;text-decoration:none">Spatial Instruments ↗</a>
 
   <a class="skip" href="#grid" data-i18n="skip">Skip to effects</a>
 
@@ -42,8 +41,7 @@
       <span class="brand-store" data-i18n="brand.store">Animation Store</span>
     </a>
     <div class="topbar-actions">
-      <a class="icon-btn" href="./activity.html" style="padding:0 12px" aria-label="Live activity wall">Live Activities</a>
-      <a class="icon-btn" href="./luminous.html" style="padding:0 12px" aria-label="Luminous controls lab">Luminous</a>
+      <a class="icon-btn" href="#collections" data-i18n="nav.collections" style="padding:0 12px">Collections</a>
       <a class="icon-btn" href="./components.html" data-i18n="nav.components" style="padding: 0 12px">Components</a>
       <button class="icon-btn" id="lang-toggle" type="button" data-i18n-aria="lang.label" aria-label="Switch language"><span data-i18n="lang.toggle">中文</span></button>
       <button class="icon-btn" id="theme-toggle" type="button" data-i18n-aria="theme.toggle" aria-label="Toggle theme">
@@ -63,13 +61,8 @@
         <h1 id="hero-title" data-i18n-html="hero.title">Pick an animation.<br>Take the code.</h1>
         <p class="lead" data-i18n="hero.lead">Every preset, helper and framework adapter — live, tweakable, free.</p>
         <div class="hero-actions">
-          <a class="btn btn-ghost" href="./matter.html">Matter &amp; Motion · 17.6 ↗</a>
-          <a class="btn btn-ghost" href="./moments.html">Moments &amp; Tactile · 17.9 ↗</a>
-          <a class="btn btn-ghost" href="./kit.html">UI, Components &amp; Motion · 17.10 ↗</a>
-          <a class="btn btn-ghost" href="./blocks.html">Blocks, Parts &amp; Depth · 17.11 ↗</a>
-          <a class="btn btn-ghost" href="./looks.html">Looks · 324 styles · 17.11 ↗</a>
-          <a class="btn btn-ghost" href="./styles.html">Style compare ↗</a>
           <a class="btn btn-primary" href="#grid" data-i18n="hero.cta">Browse effects</a>
+          <a class="btn btn-ghost" href="#collections" data-i18n="hero.collections">Try every release ↓</a>
           <a class="btn btn-ghost" href="./components.html" data-i18n="hero.components">Browse the animated components →</a>
           <button class="btn btn-ghost install-pill" type="button" id="hero-install"><code>npm i motionary</code><span class="copy-ico" aria-hidden="true"></span><span class="sr-only" data-i18n="hero.install">Copy install</span></button>
         </div>
@@ -77,6 +70,31 @@
       <div class="hero-art" aria-hidden="true">
         <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
       </div>
+    </section>
+
+    <section class="collections" id="collections" aria-labelledby="collections-title">
+      <div class="col-head" data-col-head>
+        <p class="kicker" data-col-kicker>Collections</p>
+        <h2 id="collections-title" data-col-title>Try every release right here.</h2>
+        <p class="lead" data-col-lead>Live widgets from each release page.</p>
+      </div>
+      <div class="col-root" data-col-root></div>
+      <nav class="col-links" data-col-links aria-label="More pages">
+        <a href="./parts.html" data-en="New in 17.12 ↗" data-zh="17.12 新品 ↗">New in 17.12 ↗</a>
+        <a href="./blocks.html" data-en="Blocks &amp; depth · 17.11 ↗" data-zh="页面块与纵深 · 17.11 ↗">Blocks &amp; depth · 17.11 ↗</a>
+        <a href="./looks.html" data-en="324 looks ↗" data-zh="324 种外观 ↗">324 looks ↗</a>
+        <a href="./kit.html" data-en="UI kit · 17.10 ↗" data-zh="界面套件 · 17.10 ↗">UI kit · 17.10 ↗</a>
+        <a href="./moments.html" data-en="Moments &amp; tactile · 17.9 ↗" data-zh="瞬间与触感 · 17.9 ↗">Moments &amp; tactile · 17.9 ↗</a>
+        <a href="./instruments.html" data-en="Spatial instruments · 17.8 ↗" data-zh="空间仪器 · 17.8 ↗">Spatial instruments · 17.8 ↗</a>
+        <a href="./forms.html" data-en="Form atelier · 17.7 ↗" data-zh="表单工坊 · 17.7 ↗">Form atelier · 17.7 ↗</a>
+        <a href="./matter.html" data-en="Matter &amp; motion · 17.6 ↗" data-zh="物质与运动 · 17.6 ↗">Matter &amp; motion · 17.6 ↗</a>
+        <a href="./activity.html" data-en="Live activities · 17.5 ↗" data-zh="实时活动 · 17.5 ↗">Live activities · 17.5 ↗</a>
+        <a href="./luminous.html" data-en="Luminous controls · 17.4 ↗" data-zh="发光控件 · 17.4 ↗">Luminous controls · 17.4 ↗</a>
+        <a href="./styles.html" data-en="Style compare ↗" data-zh="风格对比 ↗">Style compare ↗</a>
+        <a href="./playground.html" data-en="Playground ↗" data-zh="演练场 ↗">Playground ↗</a>
+        <a href="./story.html" data-en="Scroll story ↗" data-zh="滚动故事 ↗">Scroll story ↗</a>
+        <a href="./run.html" data-en="Run any component ↗" data-zh="运行任意组件 ↗">Run any component ↗</a>
+      </nav>
     </section>
 
     <section class="shop" aria-label="Effects">
@@ -127,5 +145,6 @@
 
   <noscript><p class="noscript">This showcase needs JavaScript to play the animations.</p></noscript>
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./home-collections.js"></script>
 </body>
 </html>

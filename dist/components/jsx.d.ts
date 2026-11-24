@@ -262,6 +262,10 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-checklist': {
+        'done-label'?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-chip-input': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
@@ -298,6 +302,13 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         length?: string | boolean | number;
     };
+    'usa-code-tabs': {
+        'copied-label'?: string | boolean | number;
+        'copy-label'?: string | boolean | number;
+        group?: string | boolean | number;
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-coffee-timer': {
         animated?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -333,6 +344,12 @@ interface LegacyAttributes {
         labels?: string | boolean | number;
         orientation?: string | boolean | number;
         position?: string | boolean | number;
+    };
+    'usa-connect-beam': {
+        colors?: string | boolean | number;
+        curve?: string | boolean | number;
+        duration?: string | boolean | number;
+        links?: string | boolean | number;
     };
     'usa-consent': {
         analytics?: string | boolean | number;
@@ -465,6 +482,15 @@ interface LegacyAttributes {
         magnify?: string | boolean | number;
         orientation?: string | boolean | number;
         range?: string | boolean | number;
+    };
+    'usa-donut-chart': {
+        'center-label'?: string | boolean | number;
+        colors?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        thickness?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-dot-network': {
         color?: string | boolean | number;
@@ -784,6 +810,22 @@ interface LegacyAttributes {
         stroke?: string | boolean | number;
         text?: string | boolean | number;
     };
+    'usa-heatmap': {
+        colors?: string | boolean | number;
+        label?: string | boolean | number;
+        start?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    'usa-helpful-vote': {
+        'ask-why'?: string | boolean | number;
+        'no-label'?: string | boolean | number;
+        question?: string | boolean | number;
+        'send-label'?: string | boolean | number;
+        thanks?: string | boolean | number;
+        'why-label'?: string | boolean | number;
+        'yes-label'?: string | boolean | number;
+    };
     'usa-hero-video': {
         label?: string | boolean | number;
         poster?: string | boolean | number;
@@ -880,6 +922,13 @@ interface LegacyAttributes {
         seed?: string | boolean | number;
         strength?: string | boolean | number;
     };
+    'usa-inline-edit': {
+        'allow-empty'?: string | boolean | number;
+        label?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-install-button': {
         cdn?: string | boolean | number;
         dev?: string | boolean | number;
@@ -924,6 +973,10 @@ interface LegacyAttributes {
     'usa-lens-stack': {
         label?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-letter-swap': {
+        direction?: string | boolean | number;
+        stagger?: string | boolean | number;
     };
     'usa-lightbox': {
         label?: string | boolean | number;
@@ -1073,6 +1126,12 @@ interface LegacyAttributes {
     'usa-message-list': {
         label?: string | boolean | number;
     };
+    'usa-meteors': {
+        angle?: string | boolean | number;
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
     'usa-meter-countdown': {
         animated?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -1219,6 +1278,11 @@ interface LegacyAttributes {
         max?: string | boolean | number;
         theme?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-orbit-rings': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        radius?: string | boolean | number;
     };
     'usa-organic-card': {
         seed?: string | boolean | number;
@@ -1404,6 +1468,13 @@ interface LegacyAttributes {
         value?: string | boolean | number;
         variant?: string | boolean | number;
     };
+    'usa-progress-tabs': {
+        index?: string | boolean | number;
+        interval?: string | boolean | number;
+        label?: string | boolean | number;
+        'pause-label'?: string | boolean | number;
+        'play-label'?: string | boolean | number;
+    };
     'usa-prop-panel': {
         for?: string | boolean | number;
         label?: string | boolean | number;
@@ -1453,6 +1524,12 @@ interface LegacyAttributes {
         step?: string | boolean | number;
         unit?: string | boolean | number;
     };
+    'usa-rating-bars': {
+        label?: string | boolean | number;
+        'reviews-label'?: string | boolean | number;
+        'stars-label'?: string | boolean | number;
+        values?: string | boolean | number;
+    };
     'usa-reaction-field': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -1482,6 +1559,13 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         type?: string | boolean | number;
         variant?: string | boolean | number;
+    };
+    'usa-retro-grid': {
+        angle?: string | boolean | number;
+        cell?: string | boolean | number;
+        color?: string | boolean | number;
+        speed?: string | boolean | number;
+        sun?: string | boolean | number;
     };
     'usa-reveal': {
         delay?: string | boolean | number;
@@ -1519,6 +1603,14 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         duration?: string | boolean | number;
         opacity?: string | boolean | number;
+    };
+    'usa-ripple-grid': {
+        accent?: string | boolean | number;
+        auto?: string | boolean | number;
+        color?: string | boolean | number;
+        dot?: string | boolean | number;
+        gap?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-rive': {
         animation?: string | boolean | number;
@@ -1687,6 +1779,14 @@ interface LegacyAttributes {
         position?: string | boolean | number;
         shape?: string | boolean | number;
     };
+    'usa-share-button': {
+        'copied-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        native?: string | boolean | number;
+        'share-title'?: string | boolean | number;
+        targets?: string | boolean | number;
+        url?: string | boolean | number;
+    };
     'usa-sheet': {
         label?: string | boolean | number;
         persistent?: string | boolean | number;
@@ -1763,6 +1863,13 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         'no-controls'?: string | boolean | number;
         'no-dots'?: string | boolean | number;
+    };
+    'usa-sortable-list': {
+        dropped?: string | boolean | number;
+        'grab-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        moved?: string | boolean | number;
+        picked?: string | boolean | number;
     };
     'usa-sparkline': {
         color?: string | boolean | number;
@@ -1985,6 +2092,12 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
         pressed?: string | boolean | number;
+    };
+    'usa-tag-cloud': {
+        label?: string | boolean | number;
+        'max-size'?: string | boolean | number;
+        'min-size'?: string | boolean | number;
+        still?: string | boolean | number;
     };
     'usa-terminal': {
         loop?: string | boolean | number;
@@ -2212,6 +2325,11 @@ interface LegacyAttributes {
         per?: string | boolean | number;
         xp?: string | boolean | number;
     };
+    'usa-zoom-lens': {
+        label?: string | boolean | number;
+        size?: string | boolean | number;
+        zoom?: string | boolean | number;
+    };
 }
 /** The `usa:*` events each element dispatches, keyed by tag (`detail` shape: see the element's docs). */
 interface LegacyEvents {
@@ -2314,6 +2432,10 @@ interface LegacyEvents {
     'usa-checkbox': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-checklist': {
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+    };
     'usa-chip-input': {
         'usa:change': CustomEvent<any>;
     };
@@ -2331,6 +2453,10 @@ interface LegacyEvents {
     };
     'usa-code-shake': {
         'usa:complete': CustomEvent<any>;
+    };
+    'usa-code-tabs': {
+        'usa:change': CustomEvent<any>;
+        'usa:copy': CustomEvent<any>;
     };
     'usa-coffee-timer': {
         'usa:action': CustomEvent<any>;
@@ -2354,6 +2480,7 @@ interface LegacyEvents {
     'usa-compare': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-connect-beam': {};
     'usa-consent': {
         'usa:change': CustomEvent<any>;
         'usa:consent': CustomEvent<any>;
@@ -2422,6 +2549,9 @@ interface LegacyEvents {
     };
     'usa-distort': {};
     'usa-dock': {};
+    'usa-donut-chart': {
+        'usa:select': CustomEvent<any>;
+    };
     'usa-dot-network': {};
     'usa-dotlottie': {
         'usa:custom': CustomEvent<any>;
@@ -2564,6 +2694,13 @@ interface LegacyEvents {
     'usa-handwriting': {
         'usa:complete': CustomEvent<any>;
     };
+    'usa-heatmap': {
+        'usa:select': CustomEvent<any>;
+    };
+    'usa-helpful-vote': {
+        'usa:feedback': CustomEvent<any>;
+        'usa:vote': CustomEvent<any>;
+    };
     'usa-hero-video': {};
     'usa-hold': {
         'usa:cancel': CustomEvent<any>;
@@ -2610,6 +2747,11 @@ interface LegacyEvents {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
+    'usa-inline-edit': {
+        'usa:cancel': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:edit': CustomEvent<any>;
+    };
     'usa-install-button': {
         'usa:copy': CustomEvent<any>;
     };
@@ -2637,6 +2779,7 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-letter-swap': {};
     'usa-lightbox': {
         'usa:change': CustomEvent<any>;
         'usa:close': CustomEvent<any>;
@@ -2704,6 +2847,7 @@ interface LegacyEvents {
     'usa-message-list': {
         'usa:message': CustomEvent<any>;
     };
+    'usa-meteors': {};
     'usa-meter-countdown': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -2791,6 +2935,7 @@ interface LegacyEvents {
         'usa:tick': CustomEvent<any>;
     };
     'usa-orbit-progress': {};
+    'usa-orbit-rings': {};
     'usa-organic-card': {};
     'usa-otp': {
         'usa:complete': CustomEvent<any>;
@@ -2872,6 +3017,9 @@ interface LegacyEvents {
     'usa-progress-ring': {
         'usa:complete': CustomEvent<any>;
     };
+    'usa-progress-tabs': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-prop-panel': {
         'usa:prop': CustomEvent<any>;
     };
@@ -2893,6 +3041,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-rating-bars': {
+        'usa:select': CustomEvent<any>;
+    };
     'usa-reaction-field': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -2904,6 +3055,7 @@ interface LegacyEvents {
         'usa:open': CustomEvent<any>;
     };
     'usa-retro-button': {};
+    'usa-retro-grid': {};
     'usa-reveal': {
         'usa:complete': CustomEvent<any>;
         'usa:enter': CustomEvent<any>;
@@ -2923,6 +3075,9 @@ interface LegacyEvents {
         'usa:tick': CustomEvent<any>;
     };
     'usa-ripple': {};
+    'usa-ripple-grid': {
+        'usa:ripple': CustomEvent<any>;
+    };
     'usa-rive': {
         'usa:error': CustomEvent<any>;
         'usa:load': CustomEvent<any>;
@@ -2998,6 +3153,9 @@ interface LegacyEvents {
         'usa:backend': CustomEvent<any>;
     };
     'usa-shape-divider': {};
+    'usa-share-button': {
+        'usa:share': CustomEvent<any>;
+    };
     'usa-sheet': {
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
@@ -3032,6 +3190,9 @@ interface LegacyEvents {
     'usa-snap-carousel': {
         'usa:change': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-sortable-list': {
+        'usa:sort': CustomEvent<any>;
     };
     'usa-sparkline': {};
     'usa-spatial-card': {
@@ -3139,6 +3300,7 @@ interface LegacyEvents {
     'usa-tada-button': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-tag-cloud': {};
     'usa-terminal': {
         'usa:done': CustomEvent<any>;
     };
@@ -3246,6 +3408,9 @@ interface LegacyEvents {
     'usa-xp-bar': {
         'usa:levelup': CustomEvent<any>;
         'usa:xp': CustomEvent<any>;
+    };
+    'usa-zoom-lens': {
+        'usa:zoom': CustomEvent<any>;
     };
 }
 /** Every shipped `<usa-*>` tag. */

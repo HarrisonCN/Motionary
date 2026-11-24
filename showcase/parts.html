@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文档部件、数据组件与背景动效 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px; min-width:0}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .dark {min-height:240px; padding:40px; display:grid; place-items:center; text-align:center; color:#fff; background:#0b1020; border-radius:16px}
+    .dark h3 {margin:0; font:500 clamp(24px,4vw,40px)/1.1 Georgia,serif}
+    .nodes {display:flex; justify-content:space-between; align-items:center; gap:24px; padding:30px 10px}
+    .nodes b {display:grid; place-items:center; min-width:72px; min-height:52px; padding:8px 12px; border-radius:14px; background:#fff; border:1px solid #d6d4cc}
+    .pill {display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#fff; border:1px solid #d6d4cc; font-size:12px; font-weight:600}
+    .core {display:grid; place-items:center; width:72px; height:72px; border-radius:50%; background:#2c3a6b; color:#fff; font-weight:700}
+    .big-link {font:500 clamp(26px,4vw,40px)/1.2 Georgia,serif; text-decoration:none}
+    pre {margin:0; padding:14px 16px; font:13px/1.5 ui-monospace,monospace; overflow:auto}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="blocks.html">页面块与纵深动效</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>文档部件、数据组件与背景动效</h1><p>十八个新部件：六个文档与界面部件、六个数据与交互组件、六个背景与文字动效。它们都在原生元素上增强，没有脚本时内容照常显示；开启“减少动态效果”后直接停在结果上。</p></header>
+
+    <h2 id="ui">文档与界面</h2>
+    <section class="grid" aria-label="文档与界面">
+      <article class="wide"><div class="stage block"><mo-progress-tabs label="特性" interval="4500" pause-label="暂停" play-label="播放"><section data-tab="即插即用"><p>一个标签就能用，没有构建步骤。</p></section><section data-tab="按需加载"><p>每个部件都有独立入口，只为用到的部分付出体积。</p></section><section data-tab="照顾每个人"><p>键盘可达、读屏友好，尊重“减少动态效果”。</p></section></mo-progress-tabs></div><p>进度条走满后自动切到下一个标签；悬停、聚焦或离开屏幕时暂停，也可以按暂停键。</p><output class="log" data-log="ptabs"></output></article>
+      <article><div class="stage block"><mo-code-tabs group="pm" label="安装命令" copy-label="复制" copied-label="已复制"><pre data-tab="npm">npm i motionary</pre><pre data-tab="pnpm">pnpm add motionary</pre><pre data-tab="yarn">yarn add motionary</pre></mo-code-tabs></div><p>同一个 group 的代码标签一起切换；复制按钮变成对勾。</p><output class="log" data-log="ctabs"></output></article>
+      <article><div class="stage block"><mo-code-tabs group="pm" label="导入"><pre data-tab="npm">import 'motionary/widgets/code-tabs';</pre><pre data-tab="pnpm">import 'motionary/widgets/code-tabs'; // pnpm</pre><pre data-tab="yarn">import 'motionary/widgets/code-tabs'; // yarn</pre></mo-code-tabs></div><p>切换上一个，这个也跟着变。</p></article>
+      <article><div class="stage"><mo-helpful-vote question="这篇有帮助吗？" yes-label="有" no-label="没有" thanks="谢谢反馈！" ask-why why-label="缺了什么？" send-label="发送"></mo-helpful-vote></div><p>点“没有”会先追问。不会发送到任何地方，页面自己读取事件。</p><output class="log" data-log="vote"></output></article>
+      <article><div class="stage"><mo-share-button url="https://github.com/HarrisonCN/Motionary" share-title="Motionary" label="分享" copied-label="链接已复制" targets="copy, x, linkedin, email"></mo-share-button></div><p>分享目标沿弹簧展开，Esc 或点外面收起；加 native 使用系统分享面板。</p><output class="log" data-log="share"></output></article>
+      <article><div class="stage"><mo-inline-edit label="项目名称">未命名项目</mo-inline-edit></div><p>点文字就能改；回车保存并闪一下，Esc 还原，F2 也能打开。</p><output class="log" data-log="edit"></output></article>
+      <article><div class="stage"><mo-tag-cloud label="热门标签" max-size="36"><a href="#ui" data-weight="10">动效</a><a href="#ui" data-weight="5">滚动</a><a href="#ui" data-weight="8">弹簧</a><a href="#ui" data-weight="3">SVG</a><a href="#ui" data-weight="6">WebGL</a><a href="#ui" data-weight="2">Canvas</a><a href="#ui" data-weight="7">组件</a><a href="#ui" data-weight="4">无障碍</a></mo-tag-cloud></div><p>按权重决定大小，依次浮现后轻轻浮动；悬停一个时其余变暗。</p></article>
+    </section>
+
+    <h2 id="data">数据与交互</h2>
+    <section class="grid" aria-label="数据与交互">
+      <article class="wide"><div class="stage block" style="overflow-x:auto"><mo-heatmap label="过去半年的提交" unit="次提交" start="2026-05-25" values="0,7,3,10,6,0,9,5,1,8,0,0,7,3,10,0,2,9,5,1,0,4,0,7,3,0,6,2,9,5,0,8,4,0,7,0,10,6,2,9,0,1,8,4,0,0,3,10,6,2,0,5,1,8,4,0,7,3,10,6,0,9,5,1,8,0,0,7,3,10,0,2,9,5,1,0,4,0,7,3,0,6,2,9,5,0,8,4,0,7,0,10,6,2,9,0,1,8,4,0,0,3,10,6,2,0,5,1,8,4,0,7,3,10,6,0,9,5,1,8,0,0,7,3,10,0,2,9,5,1,0,4,0,7,3,0,6,2,9,5,0,8,4,0,7,0,10,6,2,9,0,1,8,4,0,0,3,10,6,2,0,5,1,8,4,0,7,3,10,6,0,9,5,1,8,0,0,7,3,10,0,2"></mo-heatmap></div><p>扫入出现；聚焦后方向键按天、按周移动，每格读出日期和数值。</p><output class="log" data-log="heat"></output></article>
+      <article><div class="stage"><mo-donut-chart label="流量来源" values="42,28,18,12" labels="直接访问,搜索,社交,邮件" unit="千" center-label="总计"></mo-donut-chart></div><p>扇区依次画出，总数递增；图例是按钮，悬停或聚焦时突出对应扇区。</p><output class="log" data-log="donut"></output></article>
+      <article><div class="stage"><mo-rating-bars label="用户评分" values="120,48,16,6,10" reviews-label="条评价" stars-label="星"></mo-rating-bars></div><p>平均分递增、星星填充，每个星级的条形按占比生长；条形可点，用来筛选。</p><output class="log" data-log="rate"></output></article>
+      <article><div class="stage block"><mo-sortable-list label="发布步骤" grab-label="移动" picked="已拿起 {item}" moved="{item}，第 {n} 位，共 {total} 位" dropped="已放下 {item}"><ul style="display:grid; gap:8px; margin:0; padding:0; list-style:none"><li>设计</li><li>开发</li><li>测试</li><li>发布</li></ul></mo-sortable-list></div><p>拖动把手排序；键盘：空格拿起，方向键移动，空格放下，Esc 放回原处。</p><output class="log" data-log="sort"></output></article>
+      <article><div class="stage"><mo-zoom-lens zoom="3" label="放大"><img src="assets/demo-photo.jpg" alt="商品照片" style="max-width:100%; border-radius:12px"></mo-zoom-lens></div><p>指针移到图上即可放大；聚焦后用方向键移动，+ / − 调整倍数。</p><output class="log" data-log="zoom"></output></article>
+      <article><div class="stage block"><mo-checklist label="开始使用" done-label="全部完成！"><span>创建项目</span><span>邀请同事</span><span>发布第一个页面</span></mo-checklist></div><p>真正的复选框；全部勾上时进度环弹一下，标题变化。</p><output class="log" data-log="check"></output></article>
+    </section>
+
+    <h2 id="motion">背景与文字动效</h2>
+    <section class="grid" aria-label="背景与文字动效">
+      <article><div class="stage block"><mo-meteors count="18"><div class="dark"><h3>夜间发布</h3></div></mo-meteors></div><p>流星划过区块背景，离开屏幕时停止。</p></article>
+      <article><div class="stage block"><mo-retro-grid sun><div class="dark" style="background:none"><h3>回到 1986</h3></div></mo-retro-grid></div><p>向你滚来的合成波网格，可加条纹太阳。</p></article>
+      <article class="wide"><div class="stage block"><mo-connect-beam links="app>api, web>api, api>db, api>queue" colors="#22d3ee, #a855f7"><div class="nodes"><div style="display:grid; gap:18px"><b data-node="app">应用</b><b data-node="web">网站</b></div><b data-node="api">API</b><div style="display:grid; gap:18px"><b data-node="db">数据库</b><b data-node="queue">队列</b></div></div></mo-connect-beam></div><p>光脉冲沿曲线在节点之间流动；布局变化时自动重画。</p></article>
+      <article><div class="stage"><mo-orbit-rings radius="58" label="技术栈"><span class="core" data-center>核心</span><span class="pill">JS</span><span class="pill">CSS</span><span class="pill">SVG</span><span class="pill" data-ring="2">GL</span><span class="pill" data-ring="2">TS</span><span class="pill" data-ring="2">WASM</span></mo-orbit-rings></div><p>图标在两条轨道上反向环绕并保持正立；悬停或聚焦时暂停。</p></article>
+      <article><div class="stage"><mo-letter-swap stagger="22"><a class="big-link" href="#top">开始使用 Motionary</a></mo-letter-swap></div><p>悬停或聚焦时每个字母依次翻滚；读屏只读一次完整文字。</p></article>
+      <article class="wide"><div class="stage block"><mo-ripple-grid auto="3500" label="涟漪点阵，按回车产生涟漪"><div class="dark" style="background:none; color:inherit"><h3>点任意位置</h3></div></mo-ripple-grid></div><p>点击处向外扩散一圈光；也会自己产生涟漪，离开屏幕时停止。</p><output class="log" data-log="ripple"></output></article>
+    </section>
+  </main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineProgressTabs } from '../dist/widgets/progress-tabs.js';
+    import { defineCodeTabs } from '../dist/widgets/code-tabs.js';
+    import { defineHelpfulVote } from '../dist/widgets/helpful-vote.js';
+    import { defineShareButton } from '../dist/widgets/share-button.js';
+    import { defineInlineEdit } from '../dist/widgets/inline-edit.js';
+    import { defineTagCloud } from '../dist/widgets/tag-cloud.js';
+    import { defineHeatmap } from '../dist/widgets/heatmap.js';
+    import { defineDonutChart } from '../dist/widgets/donut-chart.js';
+    import { defineSortableList } from '../dist/widgets/sortable-list.js';
+    import { defineZoomLens } from '../dist/widgets/zoom-lens.js';
+    import { defineRatingBars } from '../dist/widgets/rating-bars.js';
+    import { defineChecklist } from '../dist/widgets/checklist.js';
+    import { defineMeteors } from '../dist/widgets/meteors.js';
+    import { defineConnectBeam } from '../dist/widgets/connect-beam.js';
+    import { defineRetroGrid } from '../dist/widgets/retro-grid.js';
+    import { defineOrbitRings } from '../dist/widgets/orbit-rings.js';
+    import { defineLetterSwap } from '../dist/widgets/letter-swap.js';
+    import { defineRippleGrid } from '../dist/widgets/ripple-grid.js';
+    defineMoAliases();
+    for (const define of [defineProgressTabs, defineCodeTabs, defineHelpfulVote, defineShareButton, defineInlineEdit, defineTagCloud, defineHeatmap, defineDonutChart, defineSortableList, defineZoomLens, defineRatingBars, defineChecklist, defineMeteors, defineConnectBeam, defineRetroGrid, defineOrbitRings, defineLetterSwap, defineRippleGrid]) define();
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelector(sel)?.addEventListener(`usa:${type}`, (e) => fn(e.detail));
+    on('mo-progress-tabs', 'change', (d) => log('ptabs', `tab ${d.index + 1}`));
+    on('mo-code-tabs', 'change', (d) => log('ctabs', `tab ${d.label}`));
+    on('mo-code-tabs', 'copy', (d) => log('ctabs', `copy ${d.index + 1}`));
+    on('mo-helpful-vote', 'vote', (d) => log('vote', `vote ${d.vote}`));
+    on('mo-helpful-vote', 'feedback', (d) => log('vote', `feedback ${d.vote} (${d.text.length} chars)`));
+    on('mo-share-button', 'share', (d) => log('share', `share ${d.target}`));
+    on('mo-inline-edit', 'change', (d) => log('edit', `“${d.previous}” → “${d.value}”`));
+    on('mo-heatmap', 'select', (d) => log('heat', `day ${d.index + 1}: ${d.value}`));
+    on('mo-donut-chart', 'select', (d) => log('donut', `slice ${d.index + 1}: ${d.value}`));
+    on('mo-rating-bars', 'select', (d) => log('rate', `${d.stars} stars`));
+    on('mo-sortable-list', 'sort', (d) => log('sort', `${d.from + 1} → ${d.to + 1}`));
+    on('mo-zoom-lens', 'zoom', (d) => log('zoom', `zoom ×${d.zoom}`));
+    on('mo-checklist', 'change', (d) => log('check', `${d.done} / ${d.total}`));
+    on('mo-checklist', 'complete', () => log('check', 'complete'));
+    on('mo-ripple-grid', 'ripple', (d) => log('ripple', `ripple ${Math.round(d.x)}, ${Math.round(d.y)}`));
+  </script>
+</body>
+</html>

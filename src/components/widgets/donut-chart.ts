@@ -1,0 +1,128 @@
+import { defineElement, type UsaElement } from '../base';
+import { defineMoName } from './mo-name';
+import { make } from './moments';
+import { cleanColor, formatNumber, list, tween } from './kit';
+import { numbers } from './kit-12';
+import css from './parts-kit-12.css?raw';
+
+const PALETTE = ['#6366f1', '#22d3ee', '#f59e0b', '#ec4899', '#10b981', '#8b5cf6', '#f97316', '#64748b'];
+
+/** Where each slice starts and how long it is, as fractions of the ring (a 0.5% gap between slices when more than one). */
+export function donutArcs(values: readonly number[]): { start: number; length: number }[] {
+  const vals = values.map((v) => (Number.isFinite(v) && v > 0 ? v : 0));
+  const total = vals.reduce((a, b) => a + b, 0);
+  if (!total) return vals.map(() => ({ start: 0, length: 0 }));
+  const gap = vals.filter(Boolean).length > 1 ? 0.005 : 0;
+  let at = 0;
+  return vals.map((v) => {
+    const f = v / total;
+    const out = { start: at, length: Math.max(0, f - (f ? gap : 0)) };
+    at += f;
+    return out;
+  });
+}
+
+/**
+ * A donut chart whose slices draw in one after another when it scrolls into view, with the total counting up in the
+ * middle. Hovering or focusing a slice (or its legend entry) lifts it out and shows its value and share in the middle.
+ * The legend is a list of real buttons, so the chart works by keyboard and is read as text; the SVG is decorative.
+ *
+ * Attributes: `values` (comma-separated numbers), `labels` (comma-separated), `colors` (comma-separated), `label` (Chart),
+ * `unit` (none), `thickness` (ring width as a share of the radius; 0.1–0.9; 0.38), `center-label` (Total).
+ * Event `usa:select` ({ index, value }).
+ */
+export interface UsaDonutChartElement extends UsaElement {
+  data: number[];
+}
+
+export function defineDonutChart(tag = 'usa-donut-chart'): CustomElementConstructor | undefined {
+  const ctor = defineElement(tag, Base => class DonutChart extends Base {
+    static get observedAttributes(): string[] { return ['values', 'labels', 'colors', 'label', 'unit', 'thickness', 'center-label']; }
+    private _data: number[] | null = null;
+    get data(): number[] { return this._data ?? numbers(this.str('values'), 24); }
+    set data(v: number[]) { this._data = Array.isArray(v) ? v.slice(0, 24).map((n) => (Number.isFinite(+n) && +n > 0 ? +n : 0)) : null; this.changed('values'); }
+    mount(): void {
+      const data = this.data;
+      const labels = list(this.str('labels'), 24);
+      const colors = list(this.str('colors'), 24).map(cleanColor);
+      const unit = this.str('unit');
+      const total = data.reduce((a, b) => a + b, 0);
+      const arcs = donutArcs(data);
+      const k = Math.min(0.9, Math.max(0.1, this.num('thickness', 0.38)));
+      const R = 50, w = R * k, r = R - w / 2, C = 2 * Math.PI * r;
+      const root = make('figure', 'usa-kit usa-donut');
+      root.setAttribute('aria-label', this.str('label', 'Chart'));
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('viewBox', '0 0 100 100');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.classList.add('usa-donut-svg');
+      const track = document.createElementNS(ns, 'circle');
+      track.setAttribute('class', 'usa-donut-track');
+      for (const [a, v] of [['cx', '50'], ['cy', '50'], ['r', String(r)], ['stroke-width', String(w)]]) track.setAttribute(a, v);
+      svg.append(track);
+      const name = (i: number) => labels[i] || `#${i + 1}`;
+      const fmt = (n: number) => `${formatNumber(n, 1)}${unit ? ` ${unit}` : ''}`;
+      const slices = arcs.map((a, i) => {
+        const c = document.createElementNS(ns, 'circle');
+        c.setAttribute('class', 'usa-donut-slice');
+        for (const [k2, v] of [['cx', '50'], ['cy', '50'], ['r', String(r)], ['stroke-width', String(w)]]) c.setAttribute(k2, v);
+        c.style.setProperty('--len', String(a.length * C));
+        c.style.setProperty('--c', String(C));
+        c.style.setProperty('--rot', `${a.start * 360 - 90}deg`);
+        c.style.setProperty('--mid', `${(a.start + a.length / 2) * 360 - 90}deg`);
+        c.style.setProperty('--i', String(i));
+        c.style.stroke = colors[i] || PALETTE[i % PALETTE.length];
+        svg.append(c);
+        return c;
+      });
+      const mid = make('div', 'usa-donut-mid');
+      const big = make('strong', 'usa-donut-big');
+      const small = make('span', 'usa-donut-small', this.str('center-label', 'Total'));
+      mid.append(big, small);
+      mid.setAttribute('aria-hidden', 'true');
+      const ring = make('div', 'usa-donut-ring');
+      ring.append(svg, mid);
+      const legend = make('ul', 'usa-donut-legend');
+      const keys = data.map((v, i) => {
+        const li = make('li');
+        const b = make('button', 'usa-donut-key');
+        b.type = 'button';
+        b.style.setProperty('--c', colors[i] || PALETTE[i % PALETTE.length]);
+        const pct = total ? Math.round((v / total) * 1000) / 10 : 0;
+        b.append(make('span', 'usa-donut-dot'), make('span', 'usa-donut-name', name(i)), make('span', 'usa-donut-val', `${fmt(v)} · ${pct}%`));
+        li.append(b);
+        legend.append(li);
+        return b;
+      });
+      root.append(ring, legend);
+      root.toggleAttribute('data-static', this.reduced);
+      this.append(root);
+      let stop = () => {};
+      const showTotal = (from = total) => { stop(); stop = tween(from, total, 900, (v) => { big.textContent = formatNumber(v, Number.isInteger(total) ? 0 : 1); }, this); small.textContent = this.str('center-label', 'Total'); };
+      big.textContent = formatNumber(0);
+      const pick = (i: number | null) => {
+        slices.forEach((s, j) => s.toggleAttribute('data-on', j === i));
+        keys.forEach((b, j) => b.toggleAttribute('data-on', j === i));
+        root.toggleAttribute('data-picking', i !== null);
+        if (i === null) { showTotal(); return; }
+        stop();
+        big.textContent = formatNumber(data[i], 1);
+        small.textContent = name(i);
+      };
+      keys.forEach((b, i) => {
+        this.listen(b, 'pointerenter', () => pick(i));
+        this.listen(b, 'focus', () => pick(i));
+        this.listen(b, 'click', () => this.emit('select', { index: i, value: data[i] }));
+      });
+      slices.forEach((s, i) => this.listen(s, 'pointerenter', () => pick(i)));
+      this.listen(root, 'pointerleave', () => pick(null));
+      this.listen(legend, 'focusout', (e: FocusEvent) => { if (!legend.contains(e.relatedTarget as Node)) pick(null); });
+      let shown = false;
+      this.inView((v) => { if (v && !shown) { shown = true; root.setAttribute('data-in', ''); showTotal(0); } });
+      this.onCleanup(() => { stop(); root.remove(); });
+    }
+  }, { id: 'parts-kit-12', text: css });
+  defineMoName(tag, ctor);
+  return ctor;
+}
