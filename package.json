@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 378 animated Web Components (91 core, 287 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 380 animated Web Components (91 core, 289 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,26 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/icon": {
+      "import": {
+        "types": "./dist/widgets/icon.d.ts",
+        "default": "./dist/widgets/icon.js"
+      },
+      "require": {
+        "types": "./dist/widgets/icon.d.cts",
+        "default": "./dist/widgets/icon.cjs"
+      }
+    },
+    "./widgets/icon-picker": {
+      "import": {
+        "types": "./dist/widgets/icon-picker.d.ts",
+        "default": "./dist/widgets/icon-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/icon-picker.d.cts",
+        "default": "./dist/widgets/icon-picker.cjs"
       }
     },
     "./widgets/tour": {

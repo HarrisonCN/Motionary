@@ -2553,6 +2553,16 @@ interface LegacyAttributes {
         effect?: string | boolean | number;
         stagger?: string | boolean | number;
     };
+    'usa-icon': {
+        color?: string | boolean | number;
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        motion?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
+        stroke?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
     'usa-icon-morph': {
         icons?: string | boolean | number;
         index?: string | boolean | number;
@@ -2560,6 +2570,22 @@ interface LegacyAttributes {
         preset?: string | boolean | number;
         size?: string | boolean | number;
         toggle?: string | boolean | number;
+    };
+    'usa-icon-picker': {
+        'all-label'?: string | boolean | number;
+        categories?: string | boolean | number;
+        'category-labels'?: string | boolean | number;
+        compact?: string | boolean | number;
+        copy?: string | boolean | number;
+        'count-label'?: string | boolean | number;
+        empty?: string | boolean | number;
+        height?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        'search-label'?: string | boolean | number;
+        size?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-image-trail': {
         distance?: string | boolean | number;
@@ -4532,8 +4558,14 @@ interface LegacyEvents {
     'usa-hydrate': {
         'usa:hydrated': CustomEvent<any>;
     };
+    'usa-icon': {
+        'usa:play': CustomEvent<any>;
+    };
     'usa-icon-morph': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-icon-picker': {
+        'usa:pick': CustomEvent<any>;
     };
     'usa-image-trail': {};
     'usa-image-tunnel': {

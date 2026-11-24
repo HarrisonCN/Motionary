@@ -116,6 +116,8 @@ var widgets_pixelTransition = require('../widgets/pixel-transition.cjs');
 var widgets_magnetLines = require('../widgets/magnet-lines.cjs');
 var widgets_textPressure = require('../widgets/text-pressure.cjs');
 var widgets_shuffleGrid = require('../widgets/shuffle-grid.cjs');
+var widgets_icon = require('../chunks/icon-DnkkjTwO.cjs');
+var widgets_iconPicker = require('../chunks/icon-picker-nyqD6gOw.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -707,6 +709,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.14': { 'usa-icon': widgets_icon.defineIcon, 'usa-icon-picker': widgets_iconPicker.defineIconPicker },
     '17.13': { 'usa-tour': widgets_tour.defineTour, 'usa-signature-pad': widgets_signaturePad.defineSignaturePad, 'usa-wheel-picker': widgets_wheelPicker.defineWheelPicker, 'usa-mention-input': widgets_mentionInput.defineMentionInput, 'usa-emoji-picker': widgets_emojiPicker.defineEmojiPicker, 'usa-comment-thread': widgets_commentThread.defineCommentThread, 'usa-diff-viewer': widgets_diffViewer.defineDiffViewer, 'usa-line-chart': widgets_lineChart.defineLineChart, 'usa-funnel-chart': widgets_funnelChart.defineFunnelChart, 'usa-treemap': widgets_treemap.defineTreemap, 'usa-gantt': widgets_gantt.defineGantt, 'usa-waffle-chart': widgets_waffleChart.defineWaffleChart, 'usa-split-flap': widgets_splitFlap.defineSplitFlap, 'usa-scratch-card': widgets_scratchCard.defineScratchCard, 'usa-page-flip': widgets_pageFlip.definePageFlip, 'usa-circular-text': widgets_circularText.defineCircularText, 'usa-pixel-transition': widgets_pixelTransition.definePixelTransition, 'usa-magnet-lines': widgets_magnetLines.defineMagnetLines, 'usa-text-pressure': widgets_textPressure.defineTextPressure, 'usa-shuffle-grid': widgets_shuffleGrid.defineShuffleGrid },
     '17.12': { 'usa-progress-tabs': widgets_progressTabs.defineProgressTabs, 'usa-code-tabs': widgets_codeTabs.defineCodeTabs, 'usa-helpful-vote': widgets_helpfulVote.defineHelpfulVote, 'usa-share-button': widgets_shareButton.defineShareButton, 'usa-inline-edit': widgets_inlineEdit.defineInlineEdit, 'usa-tag-cloud': widgets_tagCloud.defineTagCloud, 'usa-heatmap': widgets_heatmap.defineHeatmap, 'usa-donut-chart': widgets_donutChart.defineDonutChart, 'usa-sortable-list': widgets_sortableList.defineSortableList, 'usa-zoom-lens': widgets_zoomLens.defineZoomLens, 'usa-rating-bars': widgets_ratingBars.defineRatingBars, 'usa-checklist': widgets_checklist.defineChecklist, 'usa-meteors': widgets_meteors.defineMeteors, 'usa-connect-beam': widgets_connectBeam.defineConnectBeam, 'usa-retro-grid': widgets_retroGrid.defineRetroGrid, 'usa-orbit-rings': widgets_orbitRings.defineOrbitRings, 'usa-letter-swap': widgets_letterSwap.defineLetterSwap, 'usa-ripple-grid': widgets_rippleGrid.defineRippleGrid },
     '17.11': { 'usa-search-bar': widgets_searchBar.defineSearchBar, 'usa-subscribe': widgets_subscribe.defineSubscribe, 'usa-download-button': widgets_downloadButton.defineDownloadButton, 'usa-reveal-footer': widgets_revealFooter.defineRevealFooter, 'usa-shape-divider': widgets_shapeDivider.defineShapeDivider, 'usa-scroll-cue': widgets_scrollCue.defineScrollCue, 'usa-virtual-list': widgets_virtualList.defineVirtualList, 'usa-infinite-scroll': widgets_infiniteScroll.defineInfiniteScroll, 'usa-context-menu': widgets_contextMenu.defineContextMenu, 'usa-split-pane': widgets_splitPane.defineSplitPane, 'usa-desktop-windows': widgets_desktopWindows.defineDesktopWindows, 'usa-stack-slider': widgets_stackSlider.defineStackSlider, 'usa-morph-card': widgets_morphCard.defineMorphCard, 'usa-scroll-zoom': widgets_scrollZoom.defineScrollZoom, 'usa-scroll-bg': widgets_scrollBg.defineScrollBg, 'usa-image-tunnel': widgets_imageTunnel.defineImageTunnel, 'usa-orbit-gallery': widgets_orbitGallery.defineOrbitGallery, 'usa-clothesline': widgets_clothesline.defineClothesline, 'usa-elastic-frame': widgets_elasticFrame.defineElasticFrame, 'usa-border-beam': widgets_borderBeam.defineBorderBeam },
@@ -909,6 +912,22 @@ exports.definePixelTransition = widgets_pixelTransition.definePixelTransition;
 exports.defineMagnetLines = widgets_magnetLines.defineMagnetLines;
 exports.defineTextPressure = widgets_textPressure.defineTextPressure;
 exports.defineShuffleGrid = widgets_shuffleGrid.defineShuffleGrid;
+exports.ICONS = widgets_icon.ICONS;
+exports.ICON_CATEGORIES = widgets_icon.ICON_CATEGORIES;
+exports.ICON_GROUPS = widgets_icon.ICON_GROUPS;
+exports.ICON_MOTIONS = widgets_icon.ICON_MOTIONS;
+exports.ICON_SVG_ATTRS = widgets_icon.ICON_SVG_ATTRS;
+exports.ICON_TRIGGERS = widgets_icon.ICON_TRIGGERS;
+exports.defineIcon = widgets_icon.defineIcon;
+exports.iconCategory = widgets_icon.iconCategory;
+exports.iconElement = widgets_icon.iconElement;
+exports.iconNames = widgets_icon.iconNames;
+exports.iconParts = widgets_icon.iconParts;
+exports.iconSvg = widgets_icon.iconSvg;
+exports.searchIcons = widgets_icon.searchIcons;
+exports.defineIconPicker = widgets_iconPicker.defineIconPicker;
+exports.gridStep = widgets_iconPicker.gridStep;
+exports.iconCopyText = widgets_iconPicker.iconCopyText;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;

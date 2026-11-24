@@ -427,15 +427,16 @@ describe('home page collections', () => {
   it('puts the release pages on the home page as tabs and keeps every page as a deep link', async () => {
     expect(html).toContain('id="collections"');
     expect(html).toContain('<script type="module" src="./home-collections.js"></script>');
-    for (const page of ['studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'instruments', 'forms', 'matter', 'activity', 'luminous', 'styles'])
+    for (const page of ['icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'instruments', 'forms', 'matter', 'activity', 'luminous', 'styles'])
       expect(html, page).toContain(`href="./${page}.html"`);
     expect(html).not.toContain('position:fixed');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
-    expect(COLLECTIONS.map((c: any) => c.id)).toEqual(['studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'forms', 'matter', 'activity', 'luminous']);
+    expect(COLLECTIONS.map((c: any) => c.id)).toEqual(['icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'forms', 'matter', 'activity', 'luminous']);
     for (const c of COLLECTIONS as any[]) {
       expect(html, c.page).toContain(`href="${c.page}"`);
       expect(c.title.en && c.title.zh, c.id).toBeTruthy();
-      if (c.id !== 'looks') expect(c.items.length, c.id).toBeGreaterThanOrEqual(6);
+      // looks shows its own tiles and icons is one picker plus one icon row, so only release tabs need six demos
+      if (c.id !== 'looks' && c.id !== 'icons') expect(c.items.length, c.id).toBeGreaterThanOrEqual(6);
       for (const item of c.items) expect(item.define, item.id).toMatch(/^define[A-Z]/);
     }
   });

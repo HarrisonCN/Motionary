@@ -1,4 +1,4 @@
-# Motionary components (378)
+# Motionary components (380)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -102,6 +102,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
+- [`<mo-icon-picker>`](usa-icon-picker.md) — Icon picker
 - [`<mo-infinity-loop>`](usa-infinity-loop.md) — Infinity loop
 - [`<mo-inline-edit>`](usa-inline-edit.md) — Inline edit
 - [`<mo-install-button>`](usa-install-button.md) — Install button
@@ -259,6 +260,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-donut-chart>`](usa-donut-chart.md) — Donut chart
 - [`<mo-draw>`](usa-draw.md) — Line drawing
 - [`<mo-empty-state>`](usa-empty-state.md) — Empty state
+- [`<mo-icon>`](usa-icon.md) — Icon
 - [`<mo-line-chart>`](usa-line-chart.md) — Line chart
 - [`<mo-mask-reveal>`](usa-mask-reveal.md) — Mask reveal
 - [`<mo-morph>`](usa-morph.md) — Path morph

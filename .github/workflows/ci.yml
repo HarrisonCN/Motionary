@@ -22,7 +22,8 @@ jobs:
   test:
     name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Node 22 also runs the docs, package, size and playground checks: about 15 minutes with 17.14
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:

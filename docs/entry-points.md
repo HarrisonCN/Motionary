@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (287)
+## Widgets (289)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,8 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-icon>` | `motionary/widgets/icon` | `defineIcon()` |
+| `<usa-icon-picker>` | `motionary/widgets/icon-picker` | `defineIconPicker()` |
 | `<usa-tour>` | `motionary/widgets/tour` | `defineTour()` |
 | `<usa-signature-pad>` | `motionary/widgets/signature-pad` | `defineSignaturePad()` |
 | `<usa-wheel-picker>` | `motionary/widgets/wheel-picker` | `defineWheelPicker()` |

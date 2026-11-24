@@ -1,12 +1,13 @@
 /**
- * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab).
+ * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab).
  *
- * Every release page (17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
+ * Every release page (17.14 icons, 17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
  * 17.4 luminous) gets a tab with a handful of its widgets running live, so most of them can be tried without leaving
  * the home page. The full pages stay as deep links. Nothing is loaded until the section comes near the screen: then only
  * the open tab's widget entries are imported from ../dist (or the CDN build as a fallback), one module per widget, and
  * the other tabs load when they are opened.
  */
+import { components as icons } from './catalog/icons.js';
 import { components as studio } from './catalog/studio.js';
 import { components as parts } from './catalog/parts.js';
 import { components as blocks } from './catalog/blocks.js';
@@ -26,6 +27,13 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 
 /** The tabs, newest first. `page` is the full demo page each one links to. */
 export const COLLECTIONS = [
+  {
+    id: 'icons', since: '17.14', page: './icons.html',
+    title: { en: '253 icons', zh: '253 个图标' },
+    blurb: { en: 'Original line icons in 14 categories, with a searchable picker and twelve motions.', zh: '14 类原创线条图标，带可搜索的选择器和 12 种动效。' },
+    items: pick(icons, 'icon-picker icon'),
+    total: icons.length,
+  },
   {
     id: 'studio', since: '17.13', page: './studio.html',
     title: { en: 'New in 17.13', zh: '17.13 新品' },
@@ -126,7 +134,7 @@ const STR = {
 };
 
 /** Demos that need more room than one grid column. */
-const WIDE = new Set(['line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
+const WIDE = new Set(['icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
 
 const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose', 'clay-cherry', 'neumorph-cobalt', 'retro-teal', 'synth-velvet', 'luxe-sand', 'editorial-olive', 'sketch-plum', 'pill-aurora'];
 

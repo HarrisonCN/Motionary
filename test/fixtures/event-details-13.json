@@ -2023,6 +2023,16 @@
       "usa:change": [
         "{index, values}"
       ]
+    },
+    "usa-icon": {
+      "usa:play": [
+        "{motion, name}"
+      ]
+    },
+    "usa-icon-picker": {
+      "usa:pick": [
+        "{category, copied, name}"
+      ]
     }
   }
 }

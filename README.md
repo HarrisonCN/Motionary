@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->378<!--/fact--> animated `<mo-*>` custom elements:
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->380<!--/fact--> animated `<mo-*>` custom elements:
 buttons, cards, forms, loaders, page blocks, physics, page transitions, generative backgrounds, Lottie, WebGL and more.
 It works in plain HTML, React, Vue, Svelte, Solid and Angular, and in desktop web views (Electron, Tauri, WebView2).
 There are no runtime dependencies, every entry point is tree-shakeable with its gzip size measured in CI, and every
@@ -48,7 +48,7 @@ Try it online: [StackBlitz examples](./examples/stackblitz/README.md).
 |---|---|---|
 | **Scroll reveal** | 214 presets in 14 families: 33 in the core and 181 more in `motionary/presets/extended` (fades, zooms, 3D flips, clip-path shapes, blur and mask, bounce, glitch, scroll-linked `scrub-*`). Plus `timeline()`, `staggerChildren()` and `parallax()` | [Presets](./docs/presets.md) · [API](./docs/API.md) |
 | **Core components** | <!--fact:core-->91<!--/fact--> elements in `motionary/components`, imported by category: text, buttons, cards, backgrounds, transitions, gestures, SVG, WebGL and more | [Components](#components) |
-| **Widgets** | <!--fact:widgets-->287<!--/fact--> elements, each with its own entry point `motionary/widgets/<name>`: page blocks, interface parts, forms, data and media, depth surfaces, loaders, tactile controls, live activity cards and 3D instruments | [Collections](#collections) |
+| **Widgets** | <!--fact:widgets-->289<!--/fact--> elements, each with its own entry point `motionary/widgets/<name>`: page blocks, interface parts, forms, data and media, depth surfaces, loaders, tactile controls, live activity cards and 3D instruments | [Collections](#collections) |
 | **Effects** | <!--fact:effects-->159<!--/fact--> effects, each with its own entry point `motionary/effects/<name>`, or on any element through `<mo-fx>` | [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) |
 | **Style variants and looks** | Six built-in variants (`minimal`, `neon`, `glass`, `brutalist`, `fluent`, `material`) set through shared design tokens, plus 1020 looks for the kit widgets: 20 palettes × 17 treatments × 3 families | [Style variants](#style-variants) · [Looks](#looks) |
 | **Motion Core and runtime** | `createMotion()` from `motionary/core` (about 2.5 KB gzip), and `motionary/runtime` with <!--fact:runtimeModules-->21<!--/fact--> modules in three tiers: scroll scenes, smooth scrolling, text splitting, SVG, sprites, GIF / APNG / WebP, Lottie, WebGL2, glTF / OBJ, 2D physics | [Runtime](#runtime-and-tiers) |
@@ -271,6 +271,7 @@ Recent releases add widgets in themed sets. Each set has a lab page and an API p
 
 | Collection | What is in it | Lab · Docs |
 |---|---|---|
+| Icons (17.14) | 253 icons: original line icons in 14 categories (arrows, interface, media, files, communication, devices, weather, commerce, editor, maps and travel, people, nature, shapes, time), drawn on one 24px grid in the text colour. `mo-icon` plays one of 12 motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view; `mo-icon-picker` searches them in English or Chinese and copies a name, tag or SVG | [Lab](https://harrisoncn.github.io/Motionary/showcase/icons.html) · [Docs](./docs/icons-17-14.md) |
 | Studio: Collaboration, Charts & Playful Motion (17.13) | 20 widgets: collaboration and input (product tour, signature pad, wheel picker, mention input, emoji picker, comment thread, diff viewer), data charts (line, funnel, treemap, Gantt, waffle) and playful motion (split-flap, scratch card, page flip, circular text, pixel transition, magnet lines, text pressure, shuffle grid). Styled by the [1020 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [Docs](./docs/studio-17-13.md) |
 | Parts & Home Collections (17.12) | 18 widgets: UI parts (progress tabs, code tabs, helpful vote, share button, inline edit, tag cloud), data and interaction (heatmap, donut chart, sortable list, zoom lens, rating bars, checklist) and motion surfaces (meteors, connect beam, retro grid, orbit rings, letter swap, ripple grid) | [Lab](https://harrisoncn.github.io/Motionary/showcase/parts.html) · [Docs](./docs/parts-17-12.md) |
 | Blocks, Parts & Depth (17.11) | 20 widgets: page blocks (search bar, subscribe, download button, reveal footer, shape divider), interface parts (virtual list, infinite scroll, context menu, split pane, desktop windows, morph card) and depth surfaces (scroll zoom, image tunnel, orbit gallery, border beam). Styled by the [1020 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [Docs](./docs/blocks-17-11.md) |
@@ -439,7 +440,7 @@ Measured on the 17.9.0 build (minified + gzip), generated by `scripts/size.mjs -
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
 | `motionary/components/lite` (every element, CSS on demand) | 72.27 KB | 79.00 KB |
 | `motionary/components` (every element + CSS) | 88.91 KB | 93.75 KB |
-| `dist/components.umd.js` (CDN, everything) | 112.41 KB | 115.75 KB |
+| `dist/components.umd.js` (CDN, everything) | 112.42 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - No scroll listeners by default (IntersectionObserver instead), and animations stay on the compositor (`transform`,
