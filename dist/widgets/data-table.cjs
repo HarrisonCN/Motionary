@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_dataTable = require('../chunks/data-table-DjJedDO4.cjs');
+var widgets_dataTable = require('../chunks/data-table-Dy9guuEA.cjs');
 
 
 

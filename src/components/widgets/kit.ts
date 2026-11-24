@@ -88,3 +88,11 @@ export function safeImageUrl(u: string): string {
   const s = String(u ?? '').trim();
   return /^(https?:|data:image\/|\/|\.{1,2}\/|[^:]*$)/i.test(s) ? s : '';
 }
+
+/** A CSS color the browser accepts, or ''. Without `CSS.supports` only plain words, hex, rgb/hsl/oklch() pass. */
+export function cleanColor(value: string): string {
+  const v = String(value ?? '').trim();
+  if (!v || v.length > 64 || /[;{}<>]|url\(/i.test(v)) return '';
+  if (typeof CSS !== 'undefined' && CSS.supports) return CSS.supports('color', v) ? v : '';
+  return /^(#[0-9a-f]{3,8}|[a-z]+|(rgb|rgba|hsl|hsla|oklch|oklab|lab|lch)\([^()]*\))$/i.test(v) ? v : '';
+}

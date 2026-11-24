@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_emptyState = require('../chunks/empty-state-CXSS-SW6.cjs');
+var widgets_emptyState = require('../chunks/empty-state-CCHJt8uP.cjs');
 
 
 

@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { l as list, m as measure, f as flip } from '../chunks/kit-Dmjuhvd8.js';
+import { l as list, m as measure, f as flip } from '../chunks/kit-DugHPVcq.js';
 import { c as css } from '../chunks/data-media-Dlw8-L0c.js';
 
 function defineFilterChips(tag = 'usa-filter-chips') {

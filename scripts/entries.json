@@ -1587,6 +1587,266 @@
  },
  {
   "kind": "widget",
+  "name": "search-bar",
+  "entry": "motionary/widgets/search-bar",
+  "src": "src/entries/widgets/search-bar.ts",
+  "tag": "usa-search-bar",
+  "define": "defineSearchBar",
+  "types": [
+   "UsaSearchBarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/search-bar"
+ },
+ {
+  "kind": "widget",
+  "name": "subscribe",
+  "entry": "motionary/widgets/subscribe",
+  "src": "src/entries/widgets/subscribe.ts",
+  "tag": "usa-subscribe",
+  "define": "defineSubscribe",
+  "types": [
+   "UsaSubscribeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/subscribe"
+ },
+ {
+  "kind": "widget",
+  "name": "download-button",
+  "entry": "motionary/widgets/download-button",
+  "src": "src/entries/widgets/download-button.ts",
+  "tag": "usa-download-button",
+  "define": "defineDownloadButton",
+  "types": [
+   "UsaDownloadButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/download-button"
+ },
+ {
+  "kind": "widget",
+  "name": "reveal-footer",
+  "entry": "motionary/widgets/reveal-footer",
+  "src": "src/entries/widgets/reveal-footer.ts",
+  "tag": "usa-reveal-footer",
+  "define": "defineRevealFooter",
+  "types": [
+   "UsaRevealFooterElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/reveal-footer"
+ },
+ {
+  "kind": "widget",
+  "name": "shape-divider",
+  "entry": "motionary/widgets/shape-divider",
+  "src": "src/entries/widgets/shape-divider.ts",
+  "tag": "usa-shape-divider",
+  "define": "defineShapeDivider",
+  "types": [
+   "UsaShapeDividerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/shape-divider"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-cue",
+  "entry": "motionary/widgets/scroll-cue",
+  "src": "src/entries/widgets/scroll-cue.ts",
+  "tag": "usa-scroll-cue",
+  "define": "defineScrollCue",
+  "types": [
+   "UsaScrollCueElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-cue"
+ },
+ {
+  "kind": "widget",
+  "name": "virtual-list",
+  "entry": "motionary/widgets/virtual-list",
+  "src": "src/entries/widgets/virtual-list.ts",
+  "tag": "usa-virtual-list",
+  "define": "defineVirtualList",
+  "types": [
+   "UsaVirtualListElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/virtual-list"
+ },
+ {
+  "kind": "widget",
+  "name": "infinite-scroll",
+  "entry": "motionary/widgets/infinite-scroll",
+  "src": "src/entries/widgets/infinite-scroll.ts",
+  "tag": "usa-infinite-scroll",
+  "define": "defineInfiniteScroll",
+  "types": [
+   "UsaInfiniteScrollElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/infinite-scroll"
+ },
+ {
+  "kind": "widget",
+  "name": "context-menu",
+  "entry": "motionary/widgets/context-menu",
+  "src": "src/entries/widgets/context-menu.ts",
+  "tag": "usa-context-menu",
+  "define": "defineContextMenu",
+  "types": [
+   "UsaContextMenuElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/context-menu"
+ },
+ {
+  "kind": "widget",
+  "name": "split-pane",
+  "entry": "motionary/widgets/split-pane",
+  "src": "src/entries/widgets/split-pane.ts",
+  "tag": "usa-split-pane",
+  "define": "defineSplitPane",
+  "types": [
+   "UsaSplitPaneElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/split-pane"
+ },
+ {
+  "kind": "widget",
+  "name": "desktop-windows",
+  "entry": "motionary/widgets/desktop-windows",
+  "src": "src/entries/widgets/desktop-windows.ts",
+  "tag": "usa-desktop-windows",
+  "define": "defineDesktopWindows",
+  "types": [
+   "UsaDesktopWindowsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/desktop-windows"
+ },
+ {
+  "kind": "widget",
+  "name": "stack-slider",
+  "entry": "motionary/widgets/stack-slider",
+  "src": "src/entries/widgets/stack-slider.ts",
+  "tag": "usa-stack-slider",
+  "define": "defineStackSlider",
+  "types": [
+   "UsaStackSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/stack-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "morph-card",
+  "entry": "motionary/widgets/morph-card",
+  "src": "src/entries/widgets/morph-card.ts",
+  "tag": "usa-morph-card",
+  "define": "defineMorphCard",
+  "types": [
+   "UsaMorphCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/morph-card"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-zoom",
+  "entry": "motionary/widgets/scroll-zoom",
+  "src": "src/entries/widgets/scroll-zoom.ts",
+  "tag": "usa-scroll-zoom",
+  "define": "defineScrollZoom",
+  "types": [
+   "UsaScrollZoomElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-zoom"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-bg",
+  "entry": "motionary/widgets/scroll-bg",
+  "src": "src/entries/widgets/scroll-bg.ts",
+  "tag": "usa-scroll-bg",
+  "define": "defineScrollBg",
+  "types": [
+   "UsaScrollBgElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-bg"
+ },
+ {
+  "kind": "widget",
+  "name": "image-tunnel",
+  "entry": "motionary/widgets/image-tunnel",
+  "src": "src/entries/widgets/image-tunnel.ts",
+  "tag": "usa-image-tunnel",
+  "define": "defineImageTunnel",
+  "types": [
+   "UsaImageTunnelElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/image-tunnel"
+ },
+ {
+  "kind": "widget",
+  "name": "orbit-gallery",
+  "entry": "motionary/widgets/orbit-gallery",
+  "src": "src/entries/widgets/orbit-gallery.ts",
+  "tag": "usa-orbit-gallery",
+  "define": "defineOrbitGallery",
+  "types": [
+   "UsaOrbitGalleryElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/orbit-gallery"
+ },
+ {
+  "kind": "widget",
+  "name": "clothesline",
+  "entry": "motionary/widgets/clothesline",
+  "src": "src/entries/widgets/clothesline.ts",
+  "tag": "usa-clothesline",
+  "define": "defineClothesline",
+  "types": [
+   "UsaClotheslineElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/clothesline"
+ },
+ {
+  "kind": "widget",
+  "name": "elastic-frame",
+  "entry": "motionary/widgets/elastic-frame",
+  "src": "src/entries/widgets/elastic-frame.ts",
+  "tag": "usa-elastic-frame",
+  "define": "defineElasticFrame",
+  "types": [
+   "UsaElasticFrameElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/elastic-frame"
+ },
+ {
+  "kind": "widget",
+  "name": "border-beam",
+  "entry": "motionary/widgets/border-beam",
+  "src": "src/entries/widgets/border-beam.ts",
+  "tag": "usa-border-beam",
+  "define": "defineBorderBeam",
+  "types": [
+   "UsaBorderBeamElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/border-beam"
+ },
+ {
+  "kind": "widget",
   "name": "sidebar",
   "entry": "motionary/widgets/sidebar",
   "src": "src/entries/widgets/sidebar.ts",

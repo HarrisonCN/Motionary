@@ -1,4 +1,4 @@
-# Motionary components (320)
+# Motionary components (340)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -55,6 +55,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-combobox>`](usa-combobox.md) — Search combobox
 - [`<mo-command-palette>`](usa-command-palette.md) — Command palette (⌘K)
 - [`<mo-consent>`](usa-consent.md) — Preference consent
+- [`<mo-context-menu>`](usa-context-menu.md) — Context menu
 - [`<mo-copy-button>`](usa-copy-button.md) — Copy button
 - [`<mo-countdown>`](usa-countdown.md) — Flip countdown
 - [`<mo-cta-popup>`](usa-cta-popup.md) — Deliberate popup
@@ -156,6 +157,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-route-sparkline>`](usa-route-sparkline.md) — Route sparkline
 - [`<mo-scene>`](usa-scene.md) — Cinematic scene
 - [`<mo-scrub-number>`](usa-scrub-number.md) — Scrub number
+- [`<mo-search-bar>`](usa-search-bar.md) — Expanding search bar
 - [`<mo-search-field>`](usa-search-field.md) — Cancelable async search
 - [`<mo-segmented>`](usa-segmented.md) — Segmented control
 - [`<mo-select>`](usa-select.md) — Native select
@@ -174,6 +176,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-sticky-wall>`](usa-sticky-wall.md) — Sticky-note wall
 - [`<mo-stories>`](usa-stories.md) — Stories viewer
 - [`<mo-strength-meter>`](usa-strength-meter.md) — Strength meter
+- [`<mo-subscribe>`](usa-subscribe.md) — Newsletter sign-up
 - [`<mo-suggestion-chips>`](usa-suggestion-chips.md) — Suggestion chips
 - [`<mo-sun-timeline>`](usa-sun-timeline.md) — Sun timeline
 - [`<mo-sweep-lines>`](usa-sweep-lines.md) — Sweep lines
@@ -212,7 +215,11 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-horizontal-scroll>`](usa-horizontal-scroll.md) — Horizontal scroll section
 - [`<mo-loading-bar>`](usa-loading-bar.md) — Top loading bar
 - [`<mo-motion-switch>`](usa-motion-switch.md) — Motion intensity
+- [`<mo-reveal-footer>`](usa-reveal-footer.md) — Reveal footer
+- [`<mo-scroll-bg>`](usa-scroll-bg.md) — Scroll background
+- [`<mo-scroll-cue>`](usa-scroll-cue.md) — Scroll cue
 - [`<mo-scroll-velocity>`](usa-scroll-velocity.md) — Scroll velocity
+- [`<mo-scroll-zoom>`](usa-scroll-zoom.md) — Scroll zoom
 - [`<mo-scrollspy>`](usa-scrollspy.md) — Scrollspy table of contents
 - [`<mo-splash>`](usa-splash.md) — Splash screen
 - [`<mo-sticky-cta>`](usa-sticky-cta.md) — Sticky call to action
@@ -220,6 +227,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## gesture
 
 - [`<mo-analog-stick>`](usa-analog-stick.md) — Analog stick
+- [`<mo-desktop-windows>`](usa-desktop-windows.md) — Desktop windows
 - [`<mo-image-trail>`](usa-image-trail.md) — Image trail
 - [`<mo-lightbox>`](usa-lightbox.md) — Lightbox gallery
 - [`<mo-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
@@ -234,6 +242,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-mask-reveal>`](usa-mask-reveal.md) — Mask reveal
 - [`<mo-morph>`](usa-morph.md) — Path morph
 - [`<mo-path-motion>`](usa-path-motion.md) — Path motion
+- [`<mo-shape-divider>`](usa-shape-divider.md) — Shape divider
 
 ## fx
 
@@ -250,9 +259,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-bento>`](usa-bento.md) — Bento grid
 - [`<mo-data-table>`](usa-data-table.md) — Sortable data table
 - [`<mo-filter-chips>`](usa-filter-chips.md) — Filter chips
+- [`<mo-infinite-scroll>`](usa-infinite-scroll.md) — Infinite scroll
 - [`<mo-kanban>`](usa-kanban.md) — Kanban board (drag-sort)
 - [`<mo-masonry>`](usa-masonry.md) — Masonry
 - [`<mo-masonry-flow>`](usa-masonry-flow.md) — Masonry with layout animation
+- [`<mo-split-pane>`](usa-split-pane.md) — Split pane
+- [`<mo-virtual-list>`](usa-virtual-list.md) — Virtual list
 
 ## timeline
 
@@ -263,12 +275,25 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-spring-lab>`](usa-spring-lab.md) — Spring laboratory
 - [`<mo-timeline>`](usa-timeline.md) — Timeline
 
+## depth
+
+- [`<mo-border-beam>`](usa-border-beam.md) — Border beam
+- [`<mo-contour-relief>`](usa-contour-relief.md) — Contour relief · Requires: motionary/runtime/spatial-instruments
+- [`<mo-cube>`](usa-cube.md) — 3D cube
+- [`<mo-depth>`](usa-depth.md) — Depth parallax
+- [`<mo-image-tunnel>`](usa-image-tunnel.md) — Image tunnel
+- [`<mo-iris-diaphragm>`](usa-iris-diaphragm.md) — Iris diaphragm · Requires: motionary/runtime/spatial-instruments
+- [`<mo-lens-stack>`](usa-lens-stack.md) — Lens assembly · Requires: motionary/runtime/spatial-instruments
+- [`<mo-liquid-glass>`](usa-liquid-glass.md) — Liquid glass
+- [`<mo-orbit-gallery>`](usa-orbit-gallery.md) — Orbit gallery
+
 ## click
 
 - [`<mo-button>`](usa-button.md) — Button deformation
 - [`<mo-checkbox>`](usa-checkbox.md) — Animated checkbox
 - [`<mo-click>`](usa-click.md) — Click effects
 - [`<mo-double-tap>`](usa-double-tap.md) — Double tap
+- [`<mo-download-button>`](usa-download-button.md) — Download button
 - [`<mo-hold>`](usa-hold.md) — Hold to confirm
 - [`<mo-icon-morph>`](usa-icon-morph.md) — Icon morph
 - [`<mo-like>`](usa-like.md) — Like button
@@ -290,6 +315,8 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-expand-cards>`](usa-expand-cards.md) — Expanding cards
 - [`<mo-fan-carousel>`](usa-fan-carousel.md) — Fan carousel
 - [`<mo-hover-reveal-list>`](usa-hover-reveal-list.md) — Hover reveal list
+- [`<mo-morph-card>`](usa-morph-card.md) — Morphing card
+- [`<mo-stack-slider>`](usa-stack-slider.md) — Stack slider
 - [`<mo-sticky-stack>`](usa-sticky-stack.md) — Sticky stack
 
 ## feedback
@@ -305,6 +332,20 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-toaster>`](usa-toaster.md) — Toasts
 - [`<mo-weather-card>`](usa-weather-card.md) — Animated weather card
 
+## physics
+
+- [`<mo-clothesline>`](usa-clothesline.md) — Clothesline
+- [`<mo-draggable>`](usa-draggable.md) — Draggable
+- [`<mo-elastic-frame>`](usa-elastic-frame.md) — Elastic frame
+- [`<mo-elastic-mesh>`](usa-elastic-mesh.md) — Elastic mesh
+- [`<mo-gravity-well>`](usa-gravity-well.md) — Gravity well
+- [`<mo-ink-flow>`](usa-ink-flow.md) — Ink flow
+- [`<mo-liquid-metal>`](usa-liquid-metal.md) — Liquid metal
+- [`<mo-magnetic-field>`](usa-magnetic-field.md) — Magnetic field
+- [`<mo-overscroll>`](usa-overscroll.md) — Elastic overscroll
+- [`<mo-reaction-field>`](usa-reaction-field.md) — Reaction field
+- [`<mo-spring>`](usa-spring.md) — Spring effects
+
 ## interaction
 
 - [`<mo-compare>`](usa-compare.md) — Before / after compare
@@ -316,15 +357,6 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-spotlight>`](usa-spotlight.md) — Reveal highlight
 - [`<mo-tilt>`](usa-tilt.md) — 3D tilt card
 - [`<mo-volume-knob>`](usa-volume-knob.md) — Volume knob
-
-## depth
-
-- [`<mo-contour-relief>`](usa-contour-relief.md) — Contour relief · Requires: motionary/runtime/spatial-instruments
-- [`<mo-cube>`](usa-cube.md) — 3D cube
-- [`<mo-depth>`](usa-depth.md) — Depth parallax
-- [`<mo-iris-diaphragm>`](usa-iris-diaphragm.md) — Iris diaphragm · Requires: motionary/runtime/spatial-instruments
-- [`<mo-lens-stack>`](usa-lens-stack.md) — Lens assembly · Requires: motionary/runtime/spatial-instruments
-- [`<mo-liquid-glass>`](usa-liquid-glass.md) — Liquid glass
 
 ## text
 
@@ -352,18 +384,6 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-liquid>`](usa-liquid.md) — Liquid image
 - [`<mo-post-fx>`](usa-post-fx.md) — Post-processing
 - [`<mo-shader>`](usa-shader.md) — Shader background
-
-## physics
-
-- [`<mo-draggable>`](usa-draggable.md) — Draggable
-- [`<mo-elastic-mesh>`](usa-elastic-mesh.md) — Elastic mesh
-- [`<mo-gravity-well>`](usa-gravity-well.md) — Gravity well
-- [`<mo-ink-flow>`](usa-ink-flow.md) — Ink flow
-- [`<mo-liquid-metal>`](usa-liquid-metal.md) — Liquid metal
-- [`<mo-magnetic-field>`](usa-magnetic-field.md) — Magnetic field
-- [`<mo-overscroll>`](usa-overscroll.md) — Elastic overscroll
-- [`<mo-reaction-field>`](usa-reaction-field.md) — Reaction field
-- [`<mo-spring>`](usa-spring.md) — Spring effects
 
 ## packs
 
