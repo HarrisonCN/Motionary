@@ -501,8 +501,10 @@ const LOOK_TREATMENTS = {
         inset: (p) => ({ radius: '12px', line: 'transparent', soft: mixHex(p.ink, 0.07, p.paper), shadow: `inset 0 2px 6px ${alpha('#000000', p.dark ? 0.6 : 0.16)}, inset 0 0 0 1px ${alpha(p.ink, 0.08)}`, cta: p.accent, onCta: p.on }),
         hairline: (p) => ({ radius: '0px', bw: '1px', line: alpha(p.ink, 0.32), soft: p.paper, shadow: NONE, cta: 'transparent', onCta: p.ink, dash: '1 3', glow: `0 0 0 1px ${alpha(p.accent, 0.18)}` }),
         dusk: (p) => {
-            const d = darkSet(p, '#1b1f2e', p.accent, 0.12, '#e6e9f5');
-            return { ...d, soft: mixHex('#ffffff', 0.07, d.paper), line: 'rgb(255 255 255 / .1)', radius: '14px', shadow: '0 18px 36px -20px rgb(0 0 0 / .9)', glow: `0 1px 0 ${alpha(p.a2, 0.4)} inset` };
+            const d = darkSet(p, '#141826', p.accent, 0.1, '#e6e9f5');
+            // the second accent lifted toward white, so accent text stays readable on the slate
+            const lit = mixHex(p.a2, 0.55, '#ffffff');
+            return { ...d, accent: lit, cta: lit, soft: mixHex('#ffffff', 0.07, d.paper), line: 'rgb(255 255 255 / .1)', radius: '14px', shadow: '0 18px 36px -20px rgb(0 0 0 / .9)', glow: `0 1px 0 ${alpha(p.a2, 0.4)} inset` };
         },
     },
     motion: {
