@@ -2718,6 +2718,20 @@ Pick a hue from dots on a ring; the ring turns the short way to bring the pick t
 <!-- or: <section data-usa-hydrate="blur">…</section> + hydrateMotion() -->
 ```
 
+### <mo-icon> (legacy <usa-icon>) — Icon
+
+One of 253 original line icons in the text colour, with twelve motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view.
+
+- Import: `import { defineIcon } from 'motionary/components/widgets'; defineIcon();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `name`, `size`, `stroke`, `color`, `label`, `motion`, `trigger`, `duration`
+- Events: `usa:play`
+- Methods: `play()`
+
+```html
+<p style="display:flex;gap:18px;flex-wrap:wrap;font-size:28px;margin:0"><mo-icon name="bell" motion="ring" trigger="loop" size="32" label="Notifications"></mo-icon><mo-icon name="heart" motion="beat" trigger="loop" size="32" color="#e11d48"></mo-icon><mo-icon name="refresh" motion="spin" trigger="loop" size="32"></mo-icon><mo-icon name="sparkles" motion="pulse" trigger="loop" size="32" color="#a855f7"></mo-icon><mo-icon name="send" motion="float" trigger="loop" size="32"></mo-icon><mo-icon name="settings" motion="draw" trigger="loop" size="32"></mo-icon></p>
+```
+
 ### <mo-icon-morph> (legacy <usa-icon-morph>) — Icon morph
 
 Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.
@@ -2731,6 +2745,20 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 ```html
 <usa-icon-morph icons="play,pause" labels="Play,Pause" toggle></usa-icon-morph>
 <usa-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></usa-icon-morph>
+```
+
+### <mo-icon-picker> (legacy <usa-icon-picker>) — Icon picker
+
+Search 253 line icons by name or category, filter with chips, walk the grid with arrow keys and pick one; it can copy the name, an <mo-icon> tag or the svg.
+
+- Import: `import { defineIconPicker } from 'motionary/components/widgets'; defineIconPicker();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `name`, `copy`, `categories`, `category-labels`, `size`, `height`, `compact`, `label`, `search-label`, `placeholder`, `all-label`, `empty`, `count-label`
+- Events: `usa:pick`
+- Methods: `search()`
+
+```html
+<mo-icon-picker value="heart" copy="tag" height="260"></mo-icon-picker>
 ```
 
 ### <mo-image-trail> (legacy <usa-image-trail>) — Image trail
