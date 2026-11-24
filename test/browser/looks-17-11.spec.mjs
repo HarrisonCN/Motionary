@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('17.11 looks page shows 108 looks per family and restyles the real widgets', async ({ page }, info) => {
+test('17.11 looks page shows 340 looks per family (17.14) and restyles the real widgets', async ({ page }, info) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/showcase/looks.html');
 
   const tiles = page.locator('[data-grid] .tile');
   const stage = page.locator('#stage');
-  await expect(tiles).toHaveCount(108);
-  await expect(page.locator('[data-count="ui"]')).toHaveText('(108)');
+  await expect(tiles).toHaveCount(340);
+  await expect(page.locator('[data-count="ui"]')).toHaveText('(340)');
   await expect(stage).toHaveAttribute('data-mo-look', 'solid-indigo');
 
   const sub = stage.locator('mo-subscribe .usa-sub-btn');
@@ -22,7 +22,7 @@ test('17.11 looks page shows 108 looks per family and restyles the real widgets'
   await expect.poll(() => stage.locator('mo-search-bar .usa-sbar').evaluate((el) => getComputedStyle(el).borderTopWidth)).toBe('3px');
 
   await page.getByRole('tab', { name: /组件/ }).click();
-  await expect(tiles).toHaveCount(108);
+  await expect(tiles).toHaveCount(340);
   await expect(stage).toHaveAttribute('data-mo-look', 'flat-indigo');
   await expect(stage.locator('mo-split-pane')).toBeVisible();
   await page.getByRole('button', { name: '试用 cyber-grape' }).click();
@@ -30,7 +30,7 @@ test('17.11 looks page shows 108 looks per family and restyles the real widgets'
 
   await page.getByRole('tab', { name: /动效/ }).click();
   await page.getByRole('button', { name: '琥珀' }).click();
-  await expect(tiles).toHaveCount(9);
+  await expect(tiles).toHaveCount(17);
   await page.getByRole('button', { name: '试用 noir-amber' }).click();
   await expect.poll(() => stage.locator('mo-clothesline img').first().evaluate((el) => getComputedStyle(el).filter)).toContain('grayscale');
 

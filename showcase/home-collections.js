@@ -49,10 +49,10 @@ export const COLLECTIONS = [
   },
   {
     id: 'looks', since: '17.11', page: './looks.html',
-    title: { en: '324 looks', zh: '324 种外观' },
-    blurb: { en: 'Twelve palettes × nine treatments for the 17.11 widgets. Click one to try it.', zh: '十二种配色 × 九种处理，作用于 17.11 部件。点一个试试。' },
+    title: { en: '1020 looks', zh: '1020 种外观' },
+    blurb: { en: 'Twenty palettes × seventeen treatments in each of three families (17.14 added 696). Click one to try it.', zh: '二十种配色 × 每类十七种处理，共三类（17.14 新增 696 种）。点一个试试。' },
     items: [],
-    total: 324,
+    total: 1020,
   },
   {
     id: 'kit', since: '17.10', page: './kit.html',
@@ -128,7 +128,7 @@ const STR = {
 /** Demos that need more room than one grid column. */
 const WIDE = new Set(['line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
 
-const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose'];
+const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose', 'clay-cherry', 'neumorph-cobalt', 'retro-teal', 'synth-velvet', 'luxe-sand', 'editorial-olive', 'sketch-plum', 'pill-aurora'];
 
 const lang = () => (document.documentElement.lang || '').toLowerCase().startsWith('zh') ? 'zh' : 'en';
 const t = (key, vars = {}) => (STR[lang()][key] || STR.en[key]).replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? ''));

@@ -50,7 +50,7 @@ Try it online: [StackBlitz examples](./examples/stackblitz/README.md).
 | **Core components** | <!--fact:core-->91<!--/fact--> elements in `motionary/components`, imported by category: text, buttons, cards, backgrounds, transitions, gestures, SVG, WebGL and more | [Components](#components) |
 | **Widgets** | <!--fact:widgets-->287<!--/fact--> elements, each with its own entry point `motionary/widgets/<name>`: page blocks, interface parts, forms, data and media, depth surfaces, loaders, tactile controls, live activity cards and 3D instruments | [Collections](#collections) |
 | **Effects** | <!--fact:effects-->159<!--/fact--> effects, each with its own entry point `motionary/effects/<name>`, or on any element through `<mo-fx>` | [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) |
-| **Style variants and looks** | Six built-in variants (`minimal`, `neon`, `glass`, `brutalist`, `fluent`, `material`) set through shared design tokens, plus 324 looks for the 17.11 widgets: 12 palettes × 9 treatments × 3 families | [Style variants](#style-variants) · [Looks](#looks) |
+| **Style variants and looks** | Six built-in variants (`minimal`, `neon`, `glass`, `brutalist`, `fluent`, `material`) set through shared design tokens, plus 1020 looks for the kit widgets: 20 palettes × 17 treatments × 3 families | [Style variants](#style-variants) · [Looks](#looks) |
 | **Motion Core and runtime** | `createMotion()` from `motionary/core` (about 2.5 KB gzip), and `motionary/runtime` with <!--fact:runtimeModules-->21<!--/fact--> modules in three tiers: scroll scenes, smooth scrolling, text splitting, SVG, sprites, GIF / APNG / WebP, Lottie, WebGL2, glTF / OBJ, 2D physics | [Runtime](#runtime-and-tiers) |
 | **Frameworks** | `motionary/react`, `motionary/vue`, `motionary/svelte`, `motionary/solid`, `motionary/angular`, plus element wrappers. Importing on the server does nothing | [Frameworks](#frameworks) |
 | **AI workflow** | Copy as AI prompt in every playground, an Agent Skill, a read-only MCP server and a local text-to-motion parser | [AI workflow](#ai-workflow) |
@@ -212,7 +212,7 @@ Everything runs in the browser with no install. The site is built from [`showcas
 | [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<mo-player>` |
 | [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` scroll-storytelling templates |
 | [Style compare](https://harrisoncn.github.io/Motionary/showcase/styles.html) | One component in all six style variants, each with its own copy button |
-| [Looks](https://harrisoncn.github.io/Motionary/showcase/looks.html) | All 324 looks; pick one and the live widgets above switch to it |
+| [Looks](https://harrisoncn.github.io/Motionary/showcase/looks.html) | All 1020 looks; pick one and the live widgets above switch to it |
 | [Cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | One preset on the web, in a mini program and in HarmonyOS ArkUI |
 | [demo/index.html](./demo/index.html) | Every preset, no build step (open it locally) |
 
@@ -271,9 +271,9 @@ Recent releases add widgets in themed sets. Each set has a lab page and an API p
 
 | Collection | What is in it | Lab · Docs |
 |---|---|---|
-| Studio: Collaboration, Charts & Playful Motion (17.13) | 20 widgets: collaboration and input (product tour, signature pad, wheel picker, mention input, emoji picker, comment thread, diff viewer), data charts (line, funnel, treemap, Gantt, waffle) and playful motion (split-flap, scratch card, page flip, circular text, pixel transition, magnet lines, text pressure, shuffle grid). Styled by the [324 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [Docs](./docs/studio-17-13.md) |
+| Studio: Collaboration, Charts & Playful Motion (17.13) | 20 widgets: collaboration and input (product tour, signature pad, wheel picker, mention input, emoji picker, comment thread, diff viewer), data charts (line, funnel, treemap, Gantt, waffle) and playful motion (split-flap, scratch card, page flip, circular text, pixel transition, magnet lines, text pressure, shuffle grid). Styled by the [1020 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [Docs](./docs/studio-17-13.md) |
 | Parts & Home Collections (17.12) | 18 widgets: UI parts (progress tabs, code tabs, helpful vote, share button, inline edit, tag cloud), data and interaction (heatmap, donut chart, sortable list, zoom lens, rating bars, checklist) and motion surfaces (meteors, connect beam, retro grid, orbit rings, letter swap, ripple grid) | [Lab](https://harrisoncn.github.io/Motionary/showcase/parts.html) · [Docs](./docs/parts-17-12.md) |
-| Blocks, Parts & Depth (17.11) | 20 widgets: page blocks (search bar, subscribe, download button, reveal footer, shape divider), interface parts (virtual list, infinite scroll, context menu, split pane, desktop windows, morph card) and depth surfaces (scroll zoom, image tunnel, orbit gallery, border beam). Styled by the [324 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [Docs](./docs/blocks-17-11.md) |
+| Blocks, Parts & Depth (17.11) | 20 widgets: page blocks (search bar, subscribe, download button, reveal footer, shape divider), interface parts (virtual list, infinite scroll, context menu, split pane, desktop windows, morph card) and depth surfaces (scroll zoom, image tunnel, orbit gallery, border beam). Styled by the [1020 looks](#looks) | [Lab](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [Docs](./docs/blocks-17-11.md) |
 | UI, Components & Motion (17.10) | 21 widgets: page blocks (sidebar, scrollspy, pricing, bento, sticky CTA), data and media (lightbox, data table, JSON viewer, hotspots) and motion surfaces (horizontal scroll, image trail, liquid glass, path motion) | [Lab](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [Docs](./docs/kit-17-10.md) |
 | Moments & Tactile (17.9) | 34 widgets: micro-interactions, squishy tactile controls, pure-CSS loaders, form moments (chip input, plan picker, elastic slider, strength meter) | [Lab](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [Docs](./docs/moments-tactile.md) |
 | Spatial Instruments (17.8) | 3 drag-to-explore 3D cards and 3 effects, on an opt-in Three.js renderer | [Lab](https://harrisoncn.github.io/Motionary/showcase/instruments.html) · [Docs](./docs/runtime/spatial-instruments.md) |
@@ -301,8 +301,8 @@ You can also set the tokens yourself. See them side by side on the
 
 ### Looks
 
-The 17.11 widgets also come with 324 ready-made looks: 12 palettes × 9 treatments in each of three families (UI,
-components, motion), 108 each. A treatment changes borders, radius, shadows, glow, frosted glass, type, picture filters,
+The kit widgets also come with 1020 ready-made looks: 20 palettes × 17 treatments in each of three families (UI,
+components, motion), 340 each (17.14 added eight palettes and eight treatments per family). A treatment changes borders, radius, shadows, glow, frosted glass, type, picture filters,
 frames and loop speed, not only colors, and every look passes WCAG AA text contrast. Looks set the `--mo-kit-*` tokens,
 so any widget that reads them can wear any look.
 
