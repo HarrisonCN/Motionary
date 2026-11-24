@@ -24,25 +24,29 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->320<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->320<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
-各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
-
-サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
+各バージョンの変更点：[CHANGELOG.md](./CHANGELOG.md) · サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
 
 ## 目次
 
-[特長](#特長) · [インストール](#インストール) · [クイックスタート](#クイックスタート) · [ランタイムの階層](#ランタイムと階層) · [コンポーネント](#コンポーネントギャラリープレイグラウンド) · [CLI](#cli) · [MCP サーバーと AI](#mcp-サーバーと-ai) · [Figma プラグイン](#figma-プラグイン) · [アクセシビリティ](#アクセシビリティ) · [サイズ上限](#サイズ上限) · [13 へのアップグレード](#13-へのアップグレード) · [バージョン](#バージョンと互換性) · [ドキュメント](#ドキュメント) · [コントリビュート](#コントリビュート) · [リファレンス](#リファレンス)
+[含まれるもの](#含まれるもの) · [インストール](#インストール) · [クイックスタート](#クイックスタート) · [デモ](#デモとプレイグラウンド) · [コンポーネント](#コンポーネント) · [スタイルバリアント](#スタイルバリアント) · [ランタイム](#ランタイムと階層) · [AI ワークフロー](#ai-ワークフロー) · [CLI](#cli) · [Figma プラグイン](#figma-プラグイン) · [アクセシビリティ](#アクセシビリティ) · [パフォーマンス](#パフォーマンスとサイズ) · [バージョン](#バージョンとアップグレード) · [ドキュメント](#ドキュメント) · [コントリビュート](#コントリビュート) · [ライセンス](#ライセンス) · [リファレンス](#リファレンス)
 
-## 特長
+## 含まれるもの
 
-- **スクロール表示プリセット 214 種**を 14 のファミリーで提供（コアに 33 種、`motionary/presets/extended` にさらに 181 種）。フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、奥行き、グリッチ、スクロール量に連動する `scrub-*` など。`timeline()`、`staggerChildren()`、`parallax()` もあります。
-- **`<mo-*>` Web Components <!--fact:public-->320<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->229<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->159<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
-- **Motion Core**：`motionary/core` の `createMotion()`。プラグイン方式のエンジンで、gzip 後およそ 2.5 KB（過去の参考値 10 KB）です。
-- **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と <!--fact:runtimeModules-->21<!--/fact--> のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
-- **どのフレームワークでも**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`。要素用のラッパー `motionary/components/react` · `vue` · `svelte` · `solid` もあります。サーバー側でインポートしても何も起きません。
-- **ツール群**：AI アシスタント向けの MCP サーバー、ローカルで動くモーション解析器（任意の LLM も接続可能）、Figma プラグイン、CSS / ミニプログラム WXSS / HarmonyOS ArkTS へ書き出す CLI、そしてメジャーバージョンごとの codemod。
-- **アクセシビリティが標準**：どこでも reduced motion に対応し、ユーザー向けのモーション切り替えも用意。すべての要素が同じコンポーネント規約（属性・イベント・キーボード・ライフサイクル）に従い、CI で検証されます。
+| 分野 | 内容 | ここから |
+|---|---|---|
+| **スクロール表示** | 14 系統・214 個のプリセット：コアに 33 個、`motionary/presets/extended` にさらに 181 個（フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、グリッチ、スクロール連動の `scrub-*`）。ほかに `timeline()`、`staggerChildren()`、`parallax()` | [プリセット](./docs/presets.md) · [API](./docs/API.md) |
+| **コアコンポーネント** | `motionary/components` の <!--fact:core-->91<!--/fact--> 個の要素。テキスト、ボタン、カード、背景、トランジション、ジェスチャー、SVG、WebGL などのカテゴリ単位でインポート | [コンポーネント](#コンポーネント) |
+| **ウィジェット** | <!--fact:widgets-->229<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、フォーム、データとメディア、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
+| **エフェクト** | <!--fact:effects-->159<!--/fact--> 個のエフェクト。それぞれ独立したエントリ `motionary/effects/<name>` を持ち、`<mo-fx>` で任意の要素にも付けられる | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) |
+| **スタイルバリアント** | 6 つの組み込みスタイル（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`）。共通のデザイントークンで切り替え | [スタイルバリアント](#スタイルバリアント) |
+| **Motion Core とランタイム** | `motionary/core` の `createMotion()`（約 2.5 KB gzip）と、`motionary/runtime` および 3 階層の <!--fact:runtimeModules-->21<!--/fact--> モジュール：スクロールシーン、スムーズスクロール、テキスト分割、SVG、スプライト、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [ランタイム](#ランタイムと階層) |
+| **フレームワーク** | `motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular` と要素ラッパー。サーバーでインポートしても何も起きません | [フレームワーク](#フレームワーク) |
+| **AI ワークフロー** | すべてのプレイグラウンドにある「AI プロンプトとしてコピー」、Agent Skill、読み取り専用の MCP サーバー、ローカルで動くテキストからモーションへの変換 | [AI ワークフロー](#ai-ワークフロー) |
+| **ツール** | CLI（プロジェクト診断、CSS / ミニプログラム WXSS / HarmonyOS ArkTS への書き出し、モーショントークン、codemod）、Figma プラグイン、Motion Studio | [CLI](#cli) · [Figma プラグイン](#figma-プラグイン) |
+
+数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照してください。
 
 ## インストール
 
@@ -50,27 +54,21 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 npm i motionary
 ```
 
-ビルドツールを使わない場合は CDN からどうぞ。URL はメジャーバージョン（`@<!--ver:major-->17<!--/ver-->`）で固定します。本番環境では正確なバージョンと SRI を指定してください（[docs/cdn-sri.md](./docs/cdn-sri.md)）。
+ビルドなしで使うなら CDN を。URL はメジャーバージョンに固定されます（`@<!--ver:major-->17<!--/ver-->`）。本番環境では正確なバージョンと SRI で固定してください（[docs/cdn-sri.md](./docs/cdn-sri.md)）：
 
 ```html
 <script src="https://unpkg.com/motionary@17/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
+<script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- プリセット +181 -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
-17.3.1 ではファイルツリー、ダウンロードメニュー、映画のタイトルシーケンスを追加しました。[使用例と個別インポート](./docs/gallery-components.md)。
+jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。
 
-17.7 では Form Atelier の9コンポーネントと4つの描画エフェクトを追加。ネイティブフォーム、キーボード操作、リセットに対応。[デモ](./showcase/forms.html) · [API](./docs/form-atelier.md) · [ロードマップ](./docs/coverage-roadmap.md)。
+**要素名。** 17.3 から既定の要素名は `<mo-*>` です。CDN バンドル、`defineComponents()`、`defineWidgets()`、17.3 以降のウィジェットは自分でこの名前を登録します。コンポーネントやカテゴリを ES モジュールで個別にインポートするときは、先に `motionary/components/mo` の `defineMoAliases()` を呼んでください。旧名 `<usa-*>` は非推奨のエイリアスとして引き続き動き、`npx -p motionary mo-codemod tags --write` でコード中の旧名を書き換えられます。`usa:*` イベントと `--usa-*` CSS プロパティはどちらの名前でも有効です（[v17 移行ガイド](./docs/migrating-to-v17.md)）。
 
-17.6 では Matter & Motion の13コンポーネントと6つの独立エフェクトを追加。[デモ](./showcase/matter.html) · [API と参考](./docs/matter-motion.md)。
-
-17.5 ではライブアクティビティ 15 個と動画を参考にしたカードウォールを追加しました。[デモ](./showcase/activity.html) · [API](./docs/live-activities.md)。コンポーネント数とサイズに上限はありません。
-
-17.3 から `<mo-*>` が既定の要素名です。CDN バンドル、`defineComponents()`、`defineWidgets()` が登録し、17.3 以降の新しいウィジェットは自分で登録します。単一のコンポーネントやカテゴリを ES モジュールで読み込む場合は、先に `motionary/components/mo` の `defineMoAliases()` を呼び出してください（インポートの範囲を保つため、コンポーネント単位のエントリには含めていません）。`<usa-*>` 名は非推奨の別名として引き続き動作します（削除は将来のメジャー以降）。`npx -p motionary mo-codemod tags --write` でコード内の名前を一括変更できます。どちらのタグ名でも `usa:*` イベントと `--usa-*` CSS カスタムプロパティを使えます。[v17 移行ガイド](./docs/migrating-to-v17.md)
-
-jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
+**`use-scroll-animate` から移行する場合：** 旧パッケージも同じバージョンで公開され続けます。切り替えるときは、インポートと URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 
 ## クイックスタート
 
@@ -82,8 +80,8 @@ jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`�
 
 <script type="module">
   import ScrollAnimate from 'motionary';
-  import 'motionary/presets/extended'; // 任意：プリセット +181 種（bounce-in-up、clip-diamond など）
-  ScrollAnimate.init();                // すべての [data-sa] を対象にする
+  import 'motionary/presets/extended'; // 任意：プリセット +181（bounce-in-up、clip-diamond など）
+  ScrollAnimate.init();                // すべての [data-sa] を処理
 </script>
 ```
 
@@ -97,23 +95,9 @@ import ScrollAnimate, { staggerChildren, parallax } from 'motionary';
 ScrollAnimate.observe('.card', { animation: 'zoom-in-up', duration: 800, easing: 'spring' });
 staggerChildren(document.querySelector('.grid'), { animation: 'stagger-pop', stagger: 60 });
 parallax('.hero-bg', { speed: 0.3 });
-// ブラウザが対応していればネイティブのスクロールタイムラインを使い、メインスレッドの外で動かす
+// ネイティブのスクロールタイムライン：ブラウザが対応していればメインスレッドの外で動く
 ScrollAnimate.observe('.logo', { animation: 'scrub-spin', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
 ```
-
-### Motion Core（`motionary/core`）
-
-```js
-import { createMotion } from 'motionary/core';
-import { retro, cinema } from 'motionary/plugins';
-
-const motion = createMotion().use(retro, cinema);
-motion.reveal('.card', 'fade-up', { stagger: 80 });       // スクロールで登場
-motion.bind(button, 'vhs-glitch', { trigger: 'click' });  // トリガーにエフェクトを割り当てる
-await motion.play(hero, 'dolly-in', { duration: 900 });   // 1 回再生して終了を待つ
-```
-
-詳しくは [docs/core.md](./docs/core.md)。
 
 ### Web Components
 
@@ -128,9 +112,23 @@ await motion.play(hero, 'dolly-in', { duration: 900 });   // 1 回再生して�
 <mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
+### Motion Core（`motionary/core`）
+
+```js
+import { createMotion } from 'motionary/core';
+import { retro, cinema } from 'motionary/plugins';
+
+const motion = createMotion().use(retro, cinema);
+motion.reveal('.card', 'fade-up', { stagger: 80 });       // スクロールで登場
+motion.bind(button, 'vhs-glitch', { trigger: 'click' });  // トリガーにエフェクトを割り当てる
+await motion.play(hero, 'dolly-in', { duration: 900 });   // 一度再生して終わりを待つ
+```
+
+詳細：[docs/core.md](./docs/core.md)。
+
 ### フレームワーク
 
-アダプターはそれぞれ独立したエントリポイントで、アンマウント時に後片付けもします。
+各アダプターは独立したエントリポイントで、アンマウント時に後片付けをします。
 
 ```jsx
 // React
@@ -166,59 +164,57 @@ const { animateRef } = useScrollAnimate({ animation: 'zoom-in' });
 ```jsx
 // Solid
 import { scrollAnimate } from 'motionary/solid';
-scrollAnimate; // ディレクティブの import を残す（TypeScript）
+scrollAnimate; // ディレクティブのインポートを残す（TypeScript）
 export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>Hello</div>;
 ```
 
 ```ts
-// Angular（standalone）：<mo-*> 要素を使う
+// Angular（standalone）：<mo-*> 要素（と旧名の <usa-*>）
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { provideUsa, usaDetail } from 'motionary/angular';
 // app.config.ts：providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   （登録するカテゴリ）
-@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<mo-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></mo-checkbox>` })
-export class Settings { on = false; }
+// usa:* イベント：Angular 17+ では `(usa:change)` がコンパイルできないため、docs/frameworks-ssr.md にある 6 行の `[usaOn]` ディレクティブを使う
+@Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<mo-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></mo-checkbox>` })
+export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
-SSR、Next.js、Nuxt、SvelteKit については [docs/frameworks-ssr.md](./docs/frameworks-ssr.md)。公開サブパスの一覧（レイヤー別）は [docs/public-api.md](./docs/public-api.md) にあります。
+要素ラッパーは `motionary/components/react` · `vue` · `svelte` · `solid` にあります。SSR、Next.js、Nuxt、SvelteKit は [docs/frameworks-ssr.md](./docs/frameworks-ssr.md) を参照してください（React 19 + SSR では、ハイドレーション後の要素に `onusa:*` props が付かないため、ref と `bindUsa` で `usa:*` イベントを結び付けます）。テスト済みのフレームワークのバージョン：[docs/frameworks-matrix.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/frameworks-matrix.md)。レイヤーごとの公開サブパス一覧：[docs/public-api.md](./docs/public-api.md)。
 
-## ランタイムと階層
+## デモとプレイグラウンド
 
-`motionary/runtime` は Motionary 独自のアニメーションランタイムです。共有の ticker と tween・timeline エンジンに加え、機能やファイル形式ごとのモジュール（`motionary/runtime/<module>`）で構成されます。使うモジュールを `use()` で登録します。各モジュールはいずれかの階層に属し、同じ階層か下の階層にしか依存しません。そのため、基本機能だけのページが WebGL・3D・物理演算のコードを読み込むことはありません。
+すべてブラウザだけで動き、インストールは不要です。サイトは [`showcase/`](./showcase/) からビルドされます。
 
-| 階層 | モジュール | バンドル（gzip、13.0） | 参考値 |
-|---|---|---:|---:|
-| **Basic** | core（ticker・tween・timeline）、`scroll`、`text`、`format-css`、`format-motion` | 10.83 KB | 12 KB |
-| **Standard** | Basic ＋ `smooth`、`drag-snap`、`format-svg`、`format-sprite`、`format-gif`、`format-apng`、`format-webp`、`vector`（Lottie / dotLottie）、`lottie-state`、公式 Rive ランタイム | 33.74 KB | 37 KB |
-| **Advanced** | Standard ＋ `gl`（WebGL2）、`format-gltf`、`format-obj`、`gltf-anim`、`gltf-decoders`（Draco / KTX2）、`physics`、`format-scene` | 54.55 KB | 60 KB |
-
-```js
-import { use } from 'motionary/runtime';
-import { scroll } from 'motionary/runtime/scroll';
-import { defineScrollScene } from 'motionary/components/widgets';
-
-use(scroll);          // 先にモジュールを登録（core も一緒に登録される）
-defineScrollScene();  // そのあとで、それを使うコンポーネントを登録
-```
-
-モジュールが必要なコンポーネントには、ギャラリーで **Requires:** バッジが付きます。モジュールが足りないときは、インストール・インポート・CDN の方法を示すわかりやすいエラーを出します。詳しくは [docs/runtime-tiers.md](./docs/runtime-tiers.md) と、モジュールごとのページ [docs/runtime/](./docs/runtime/) を参照してください。
-
-## コンポーネント・ギャラリー・プレイグラウンド
-
-| ページ | 内容 |
+| ページ | できること |
 |---|---|
 | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) | すべてのプリセットとエフェクトを、デスクトップとスマホのサイズでプレビュー・調整・コピー |
-| [コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html) | ギャラリー：各 `<mo-*>` 要素の属性、前提モジュール、階層 |
-| [コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html) | コンポーネントごとに動く完全なページ。編集して **Run**、**Copy**、**Download** — 3 つともエディタの内容そのものを使います（ダウンロードしたファイルは単体で動作）。HTML (CDN) はページ全体を実行し、npm + bundler はインポートマップでモジュールを実行。前提モジュールの不足やエラーは修正方法付きで表示。`run.html#usa-tilt` のようなディープリンクにも対応 |
-| [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレーム編集。`<mo-player>` 用の JSON を書き出せます |
+| [コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html) | すべての `<mo-*>` 要素と、その属性・前提条件・階層 |
+| [コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html) | 各コンポーネントを完全な実行可能ページとして表示。編集して **実行**・**コピー**・**ダウンロード**（どれもエディタの内容そのまま）。HTML（CDN）か、import map 経由の npm + バンドラーで動かせます。前提条件が足りないときは、直すための 1 行を表示します。`run.html#usa-tilt` のようなディープリンクにも対応 |
+| [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレームエディタ。`<mo-player>` 用の JSON を書き出す |
 | [スクロールストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` のスクロールストーリーテンプレート |
-| [クロスプラットフォームプレビュー](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 1 つのプリセットを Web・ミニプログラム・HarmonyOS ArkUI で見比べる |
-| [demo/index.html](./demo/index.html) | 全プリセット。ビルド不要（ローカルで開くだけ） |
+| [スタイル比較](https://harrisoncn.github.io/Motionary/showcase/styles.html) | 1 つのコンポーネントを 6 つのスタイルバリアントで並べ、それぞれにコピーボタン付き |
+| [クロスプラットフォームプレビュー](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 1 つのプリセットを Web、ミニプログラム、HarmonyOS ArkUI で表示 |
+| [demo/index.html](./demo/index.html) | 全プリセット、ビルド不要（ローカルで開く） |
 
-カテゴリ単位（`motionary/components/cards`）、全部まとめて（`motionary/components`）、CSS をオンデマンドで読み込むビルド（`motionary/components/lite`）、ウィジェット 1 つだけ（`motionary/widgets/<name>`、例：`motionary/widgets/toast-stack`）のいずれでもインポートできます。全要素は [docs/components.md](./docs/components.md)、要素ごとのページは [docs/components/](./docs/components/README.md)、全エントリポイントは [docs/entry-points.md](./docs/entry-points.md) にあります。
+テーマ別のコレクションにもそれぞれラボページがあります。[コレクション](#コレクション)を参照してください。
+
+## コンポーネント
+
+用途に合ったインポートを選んでください：
+
+| インポート | 登録されるもの |
+|---|---|
+| `motionary/components` | すべてのコア要素（`defineComponents()`）。`motionary/components/lazy` の `lazyDefine()` ならページにあるタグだけ |
+| `motionary/components/<category>` | 1 カテゴリ。例：`motionary/components/cards` |
+| `motionary/components/lite` | すべてのコア要素。CSS はオンデマンド |
+| `motionary/widgets/<name>` | 1 ウィジェット。例：`motionary/widgets/toast-stack` |
+| `motionary/components/widgets` | すべてのウィジェット（`defineWidgets()`、または特定リリース分だけの `defineWidgets('17.9')`） |
+| `motionary/effects/<name>` | 1 エフェクト |
+
+すべての要素：[docs/components.md](./docs/components.md) · 要素ごとのページ：[docs/components/](./docs/components/README.md) · すべてのエントリポイント：[docs/entry-points.md](./docs/entry-points.md)。一部のウィジェットは先にランタイムモジュールの登録が必要です。ギャラリーには **Requires:** バッジが表示され、一覧は[リファレンス](#リファレンス)にあります。
 
 <details>
-<summary><b><code>motionary/components</code> の <!--fact:core-->91<!--/fact--> コア要素</b></summary>
+<summary><b><code>motionary/components</code> の <!--fact:core-->91<!--/fact--> 個のコア要素</b></summary>
 
 <!-- core-table:start -->
 | カテゴリ | エントリ | 要素 |
@@ -247,37 +243,74 @@ defineScrollScene();  // そのあとで、それを使うコンポーネント�
 
 </details>
 
-## CLI
+### コレクション
 
-どれも `motionary` パッケージに含まれていて、`npx` で実行できます。
+最近のリリースでは、ウィジェットをテーマごとにまとめて追加しています。各コレクションにラボページと API ドキュメントがあります：
 
-| コマンド | 内容 |
-|---|---|
-| `npx motionary doctor [paths…] [--json]` | プロジェクト内の削除済みインポートパスと旧イベント名を一覧表示。見つかると終了コード 1 を返すので、CI にもそのまま組み込めます |
-| `npx motionary export --target css\|wxss\|arkts [--presets a,b] [--rpx] [--out file]` | プリセットとモーショントークンを CSS、ミニプログラムの WXSS、HarmonyOS の ArkTS に書き出す（[docs/cross-platform.md](./docs/cross-platform.md)） |
-| `npx motionary compat <version> [--json]` | そのバージョンのプロジェクトで使えるもの、その後に変わったもの（[docs/version-compat.md](./docs/version-compat.md)） |
-| `npx usa-codemod-13 [--write] [paths…]` | 13.0 で削除されたパスと、`@10` / `@11` / `@12` に固定された CDN URL を書き換えます。`--write` を付けなければドライランです。それ以前のメジャーには `usa-codemod-5` … `usa-codemod-12` があります |
-| `npx create-motionary-plugin <name>` | テストと署名スクリプト付きのエフェクトプラグインのひな形を作成 |
-| `npx -y -p motionary motionary-mcp` | MCP サーバーを起動（次の節） |
+| コレクション | 内容 | ラボ · ドキュメント |
+|---|---|---|
+| UI・コンポーネント・モーション（17.10） | 21 ウィジェット：ページブロック（サイドバー、スクロールスパイ、料金表、ベントーグリッド、追従 CTA）、データとメディア（ライトボックス、データテーブル、JSON ビューア、ホットスポット）、モーションサーフェス（横スクロール、画像トレイル、リキッドグラス、パスモーション） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [ドキュメント](./docs/kit-17-10.md) |
+| Moments & Tactile（17.9） | 34 ウィジェット：マイクロインタラクション、むにっとした触感コントロール、CSS だけのローダー、フォームの小さな演出（チップ入力、プラン選択、弾むスライダー、強度メーター） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [ドキュメント](./docs/moments-tactile.md) |
+| Spatial Instruments（17.8） | ドラッグで探る 3D カード 3 種とエフェクト 3 種。オプトインの Three.js レンダラーで描画 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/instruments.html) · [ドキュメント](./docs/runtime/spatial-instruments.md) |
+| Form Atelier（17.7） | フォームウィジェット 12 種（セレクト、コンボボックス、複数選択、パスワード、範囲スライダー、ステップフォーム）と SVG フィードバックエフェクト 4 種 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/forms.html) · [ドキュメント](./docs/form-atelier.md) |
+| Matter & Motion（17.6） | 触れるフィールド、流体タイポグラフィ、カーブラボなど 13 種とエフェクト 6 種 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/matter.html) · [ドキュメント](./docs/matter-motion.md) |
+| ライブアクティビティ（17.5） | コンパクトなアクティビティカード 15 種（フライト状況、配達追跡、ワークアウトプレイヤー）と、漂うカードウォール | [ラボ](https://harrisoncn.github.io/Motionary/showcase/activity.html) · [ドキュメント](./docs/live-activities.md) |
+| Luminous controls（17.4） | 光るコントロール 6 種：昼夜スイッチ、パーティクルのアイコンとボタン、ハロースライダー、軌道プログレス | [ラボ](https://harrisoncn.github.io/Motionary/showcase/luminous.html) · [ドキュメント](./docs/luminous-controls.md) |
 
-## MCP サーバーと AI
+それ以前のウィジェット（ファイルツリー、ダウンロードメニュー、映画のタイトルシーケンスなど）：[docs/gallery-components.md](./docs/gallery-components.md)。
 
-`motionary-mcp` は読み取り専用の [Model Context Protocol](https://modelcontextprotocol.io) サーバーです。Claude、Cursor、VS Code、Windsurf、Zed などの MCP クライアントからコンポーネントカタログを検索でき、前提モジュールのインストール・インポート・登録が正しい順序で済んだスニペットを受け取れます。
+## スタイルバリアント
+
+すべての要素は同じデザイントークン（`--usa-accent`、`--usa-surface`、`--usa-text`、`--usa-radius`、`--usa-font` など）を読みます。バリアントはそれらをまとめて設定します。要素に `variant="glass"`、任意の祖先に `data-usa-variant="glass"` を付けるか、ページ全体を切り替えます：
+
+```js
+import { setVariant } from 'motionary/components/ui';
+setVariant('glass'); // minimal · neon · glass · brutalist · fluent · material
+```
+
+トークンを自分で設定することもできます。並べて比べるには [スタイル比較ページ](https://harrisoncn.github.io/Motionary/showcase/styles.html) と [docs/components.md](./docs/components.md) を参照してください。
+
+## ランタイムと階層
+
+`motionary/runtime` は Motionary 独自のアニメーションランタイムです。共有の ticker、tween、timeline エンジンと、機能やファイル形式ごとのモジュール（`motionary/runtime/<module>`）で構成されます。使うものを `use()` で登録します。各モジュールはひとつの階層に属し、同じ階層かそれより下にしか依存しないので、基本的なページが WebGL・3D・物理のコードをダウンロードすることはありません。
+
+| 階層 | モジュール | バンドル（gzip、13.0） | 参考値 |
+|---|---|---:|---:|
+| **Basic** | コア（ticker、tween、timeline）、`scroll`、`text`、`format-css`、`format-motion` | 10.83 KB | 12 KB |
+| **Standard** | Basic + `smooth`、`drag-snap`、`format-svg`、`format-sprite`、`format-gif`、`format-apng`、`format-webp`、`vector`（Lottie / dotLottie）、`lottie-state`、公式 Rive ランタイム | 33.74 KB | 37 KB |
+| **Advanced** | Standard + `gl`（WebGL2）、`format-gltf`、`format-obj`、`gltf-anim`、`gltf-decoders`（Draco / KTX2）、`physics`、`format-scene` | 54.55 KB | 60 KB |
+
+```js
+import { use } from 'motionary/runtime';
+import { scroll } from 'motionary/runtime/scroll';
+import { defineScrollScene } from 'motionary/components/widgets';
+
+use(scroll);          // 先にモジュールを登録（コアも一緒に登録される）
+defineScrollScene();  // 次にそれを必要とするコンポーネント
+```
+
+必要なモジュールが足りないコンポーネントは、インストール・インポート・CDN の直し方を示すわかりやすいエラーを投げます。詳細は [docs/runtime-tiers.md](./docs/runtime-tiers.md)、モジュールごとのページ [docs/runtime/](./docs/runtime/)、この README 末尾の[リファレンス](#リファレンス)を参照してください。
+
+## AI ワークフロー
+
+**AI プロンプトとしてコピー。** アニメーションストアのエフェクト詳細、タイムラインエディタ、コンポーネントプレイグラウンドに **Copy as AI prompt** ボタンがあります。調整したすべての値を含むコードをコピーし、そのままコーディングアシスタントに貼り付けられます。
+
+**Agent Skill。** [`skills/motionary/SKILL.md`](./skills/motionary/SKILL.md) は、Claude Code や Codex など Agent Skills を読むエージェントに、Motionary コンポーネントのインストール・登録・選び方と守るべきルールを教えます。`npx skills add HarrisonCN/Motionary` で追加するか、フォルダーを `.claude/skills/` にコピーしてください。
+
+**MCP サーバー。** `motionary-mcp` は読み取り専用の [Model Context Protocol](https://modelcontextprotocol.io) サーバーです。Claude、Cursor、VS Code、Windsurf、Zed などの MCP クライアントからコンポーネントカタログを検索でき、前提条件のインストール・インポート・登録が正しい順序で入ったスニペットを受け取れます。
 
 ```json
 { "mcpServers": { "motionary": { "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] } } }
 ```
 
-Claude Code の場合：`claude mcp add motionary -- npx -y -p motionary motionary-mcp`。
+Claude Code：`claude mcp add motionary -- npx -y -p motionary motionary-mcp`。
 
 - ツール：`list_components`、`search_components`、`get_component`、`get_example`、`scaffold_snippet`、`suggest_motion`、`validate_snippet`、`check_compat`。
-- `validate_snippet { mount: true }` は、jsdom（オプションの peer 依存：`npm i -D jsdom`）上で実際のバンドルを使ってマークアップをマウントし、コンポーネント規約に沿っているかを検査します。スニペット自体のスクリプトは実行されません。
-- 回答はプロジェクトにインストールされているバージョンに合わせて返ります。`check_compat` は、そのバージョンに足りないものや挙動が違うものを一覧にします。
-- ガイド全文：[docs/mcp.md](./docs/mcp.md)。
+- `validate_snippet { mount: true }` は、実際のバンドルを使って jsdom（任意の peer 依存：`npm i -D jsdom`）にマークアップをマウントし、コンポーネント契約に照らしてチェックします。スニペット内のスクリプトは実行しません。
+- 回答はプロジェクトにインストールされたバージョンに合わせて返ります。`check_compat` はそのバージョンに足りないものや挙動の違いを一覧にします。
+- 完全なガイド：[docs/mcp.md](./docs/mcp.md)。
 
-**Agent Skill。** `skills/motionary/SKILL.md` は、Claude Code や Codex など Agent Skills に対応したエージェントに、Motionary コンポーネントのインストール・登録・選び方と守るべきルールを伝えます。`npx skills add HarrisonCN/Motionary` で追加するか、フォルダーを `.claude/skills/` にコピーしてください。ギャラリーの各エフェクト、プレイグラウンド、実行ページにある **AI プロンプトとしてコピー** ボタンは、コードと調整したすべての値をまとめてアシスタントに渡します。
-
-**文章からモーションを作る。** `motionary/tooling/ai` は「カードを下からゆっくり順番にフェードイン」のような説明文を、エフェクト・キーフレーム・CSS・対応するコンポーネントに変換します。標準の解析器はローカルで動き、結果は決定的です（英語と中国語に対応）。自分の LLM を使いたい場合は、`suggestMotion()` に provider を渡します。Motionary はベンダーの SDK を同梱しておらず、provider を渡さない限りネットワークにアクセスしません。モデルの回答は JSON Schema で検証され、通らなければローカルの結果に切り替わります。
+**テキストからモーションへ。** `motionary/tooling/ai` は「カードを一枚ずつゆっくりフェードアップ」のような説明を、エフェクト、キーフレーム、CSS、対応するコンポーネントに変換します。既定のパーサーはローカルで動き、結果は決定的です（英語と中国語に対応）。自前の LLM を使うには `suggestMotion()` に provider を渡します。Motionary はベンダー SDK を同梱せず、provider を渡さない限りネットワークリクエストもしません。回答は JSON Schema で検証され、通らなければローカルの結果を使います。
 
 ```ts
 import { suggestMotion } from 'motionary/tooling/ai';
@@ -285,32 +318,37 @@ const { intent, source } = await suggestMotion('cards cascade in like falling do
 el.animate(intent.keyframes, intent.options);
 ```
 
-関連：[docs/ai-provider.md](./docs/ai-provider.md) · [プロンプトガイド](./docs/ai-prompt-guide.md) · [AGENTS.md](./AGENTS.md) · サイトのルートで [`components.json`](https://harrisoncn.github.io/Motionary/components.json) と [`llms.txt`](https://harrisoncn.github.io/Motionary/llms.txt) を配信しています。
+詳細：[AGENTS.md](./AGENTS.md) · [docs/ai-provider.md](./docs/ai-provider.md) · [プロンプトガイド](./docs/ai-prompt-guide.md) · サイトでは [`components.json`](https://harrisoncn.github.io/Motionary/components.json) と [`llms.txt`](https://harrisoncn.github.io/Motionary/llms.txt) を公開しています。
+
+## CLI
+
+すべて `motionary` パッケージに含まれ、`npx` で実行できます：
+
+| コマンド | 内容 |
+|---|---|
+| `npx motionary doctor [paths…] [--json]` | プロジェクト内の削除済みインポートパスと旧イベント名を一覧にします。見つかると終了コード 1 になるので CI で使えます |
+| `npx motionary export --target css\|wxss\|arkts [--presets a,b] [--rpx] [--out file]` | プリセットとモーショントークンを CSS、ミニプログラム WXSS、HarmonyOS ArkTS に書き出します（[docs/cross-platform.md](./docs/cross-platform.md)） |
+| `npx motionary compat <version> [--json]` | そのバージョンのプロジェクトで使えるものと、それ以降の変更点（[docs/version-compat.md](./docs/version-compat.md)） |
+| `npx motionary tokens import-figma\|export-figma\|validate\|css …` | Motion Tokens 2.0：Figma Variables JSON ↔ W3C デザイントークン / CSS の変換と、トークンファイルの検証。ネットワークは使いません（[docs/motion-tokens.md](./docs/motion-tokens.md)） |
+| `npx -p motionary mo-codemod tags --write` | コード中の `<usa-*>` タグを `<mo-*>` に書き換えます |
+| `npx usa-codemod-13 [--write] [paths…]` | 13.0 で削除されたパスと、`@10` / `@11` / `@12` に固定された CDN URL を書き換えます。`--write` を付けない限りドライランです。`usa-codemod-11` と `usa-codemod-12` はそれ以前のメジャー用です |
+| `npx create-motionary-plugin <name>` | テストと署名スクリプト付きのエフェクトプラグインのひな形を作ります |
+| `npx -y -p motionary motionary-mcp` | MCP サーバーを起動します（[AI ワークフロー](#ai-ワークフロー)） |
 
 ## Figma プラグイン
 
-[figma-plugin/](./figma-plugin/README.md)（`node_modules/motionary/figma-plugin/` にも同梱）は、選択中のレイヤーを 3 つの形式で書き出します。**そのまま開ける HTML ページ**（トークン、正しい順序の前提スクリプト、レイヤーごとに 1 要素）、**CSS トークン**、そして **motion.tokens.json**（W3C デザイントークン）です。コンポーネント名を付けたレイヤー（`usa-tilt` など）はその要素になり、Figma 変数の `motion/duration/*` と `motion/easing/*` は既定のトークンを上書きします。プラグインはネットワークにアクセスせず、ドキュメントを書き換えることもありません。詳しくは [figma-plugin/README.md](./figma-plugin/README.md) と [docs/motion-tokens.md](./docs/motion-tokens.md) を参照してください。
-
-## 安定コアと実験的な機能
-
-Motionary の方針は **依存ゼロ・サイズ実測・アクセシブルなモーション** です。安定コアは、スクロール API（`motionary`）、
-`motionary/core`、`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` コンポーネントと
-ウィジェット、フレームワークアダプター、CLI です。17.x のマイナーリリースでコンポーネントとエフェクトを追加し（依存ゼロ、個別のサイズ計測、同じアクセシビリティ規約）、既存の機能も磨いていきます。新しいメジャーは予定していません。
-
-**実験的**（マイナーリリースで変わる可能性があり、安定性の約束の対象外）：Motion Studio（`motionary/studio/*`、16.2 のプラグイン API と
-16.3 のパフォーマンス予算を含む）、AI アシスタントとプロバイダー（`motionary/studio/ai`、`motionary/ai*`）、MCP サーバー（`motionary-mcp`）、
-Figma プラグイン、クロスプラットフォーム書き出し（`npx motionary export`）。詳しくは [docs/stability.md](./docs/stability.md)。
+[figma-plugin/](./figma-plugin/README.md)（`node_modules/motionary/figma-plugin/` にも同梱）は、現在の選択範囲を **完全な HTML ページ**（トークン、順番どおりの前提スクリプト、レイヤーごとに 1 要素）、**CSS トークン**、**motion.tokens.json**（W3C デザイントークン）として書き出します。コンポーネント名を付けたレイヤー（`usa-tilt`）はその要素になり、Figma 変数 `motion/duration/*` と `motion/easing/*` は既定のトークンを上書きします。プラグインはネットワークにアクセスせず、ドキュメントも編集しません。Motion Tokens 2.0 のフルセットは `npx motionary tokens export-figma` / `import-figma` で Figma Variables とやり取りできます。[figma-plugin/README.md](./figma-plugin/README.md) と [docs/motion-tokens.md](./docs/motion-tokens.md) を参照してください。
 
 ## アクセシビリティ
 
-- `prefers-reduced-motion: reduce` のときは、スクロール表示がすぐにコンテンツを表示し（登場・パララックス・scrub の動きなし）、コンポーネントも落ち着いた状態に切り替わります（`staticAlternative()`、`adaptKeyframes()`）。
-- `motionary/components/a11y`：`setMotionSensitivity()` でユーザーが点滅・ループ・パララックスをオフにできます。ライブリージョン用の `announce()`、`auditMotionA11y()`、`baselineReport()` もあります。`<mo-motion-switch>` はすぐに使えるモーション切り替えスイッチです。
-- すべての要素が同じ[コンポーネント規約](./docs/component-contract.md)（キーボード、フォーカス、イベント、ライフサイクル、reduced motion）に従い、CI の `npm run check:contract` で検証されます。
-- 詳しくは [docs/accessibility.md](./docs/accessibility.md)。
+- `prefers-reduced-motion: reduce` では、スクロール表示はすぐにコンテンツを表示し（登場・パララックス・scrub なし）、コンポーネントは落ち着いた状態に切り替わります（`staticAlternative()`、`adaptKeyframes()`）。
+- `motionary/components/a11y`：`setMotionSensitivity()` でユーザーが点滅・ループ・パララックスをオフにできます。ライブリージョン用の `announce()`、`auditMotionA11y()`、`baselineReport()` もあります。`<mo-motion-switch>` はユーザー向けのモーション切り替えスイッチです。
+- すべての要素はひとつの[コンポーネント契約](./docs/component-contract.md)（キーボード、フォーカス、イベント、ライフサイクル、モーション軽減）に従い、`npm run check:contract` が CI で検査します。
+- 詳細：[docs/accessibility.md](./docs/accessibility.md)。
 
-## サイズ上限
+## パフォーマンスとサイズ
 
-コンポーネント数とサイズに上限はありません。[`size-budget.json`](./size-budget.json) は過去の参考値を保持します。CI はサイズを報告し、出力とドキュメントの整合性を確認します。参考値を超えても失敗しません。[サイズ方針](./docs/size-policy.md)を参照してください。
+コンポーネント数と成果物のサイズに上限はありません。[`size-budget.json`](./size-budget.json) は過去の参考値を残し、CI は実測サイズを報告します。参考値を超えても CI は失敗しません（[サイズポリシー](./docs/size-policy.md)）。
 
 <!-- size-table:start -->
 17.9.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
@@ -330,55 +368,40 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `dist/components.umd.js`（CDN、すべて） | 112.10 KB | 115.75 KB |
 <!-- size-table:end -->
 
-既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
+- 既定ではスクロールリスナーを使わず（IntersectionObserver を使用）、アニメーションはコンポジタ上で動くプロパティ（`transform`、`opacity`、`filter`、`clip-path`）だけを使います。
+- インポートに副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。
+- すべての PR で、ヘッドレス Chrome により初回表示の転送量、スクリプト時間、GPU リソース、フレームの安定性を計測します（[docs/perf-ci.md](./docs/perf-ci.md)）。
+- ソースマップは npm には含めません。タグ付きの git ツリー（各ファイルの `sourceMappingURL` がそこを指す）にあり、16.3 からは各 GitHub リリースにも `sourcemaps` アーカイブとして添付されます（[docs/source-maps.md](./docs/source-maps.md)）。
+- 詳細：[docs/performance.md](./docs/performance.md)。
 
-**対応ブラウザ：** 2023 年以降のエバーグリーンブラウザ（Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24）。View Transitions やスクロール駆動アニメーションは、ブラウザが対応していれば使い、未対応なら JavaScript にフォールバックします。`baselineReport()` で個々のブラウザを確認できます。
+**ブラウザ：** 2023 年以降のエバーグリーンブラウザ（Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24）。View Transitions とスクロール駆動アニメーションは対応ブラウザで使い、非対応なら JavaScript にフォールバックします。`baselineReport()` で特定のブラウザを確認できます。
 
-## 13 へのアップグレード
+## バージョンとアップグレード
 
-13.0 の破壊的変更は 1 つだけです：**11.5 で非推奨になったインポートパスを削除しました。** 置き換え先は同じファイルを指しているので、挙動もバンドルサイズも変わりません。
+- **npm dist-tags：** `latest` は現在のメジャーの最新リリースです（<!--ver:version-->17.9.0<!--/ver-->。14.1 からはマイナーリリースでも更新されます）。各マイナーには専用のタグ `v<major>-<minor>`（例：`v15-0`）があり、`v15-line` は 15.x 系、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで公開されます。
+- **CDN：** URL はメジャーに固定されます（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）も引き続き使えます。
+- **セマンティックバージョニング：** 破壊的変更はメジャーでのみ行い、移行ガイドと codemod を用意します。非推奨の API は次のメジャーまで残り、`@deprecated` の型が付きますが、実行時の警告は出ません。
+- **安定版と実験的機能：** スクロール API、`motionary/core`、プリセット、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` コンポーネントとウィジェット、フレームワークアダプター、CLI は安定版です。Motion Studio（`motionary/studio/*`）、AI アシスタントと provider、MCP サーバー、Figma プラグイン、クロスプラットフォームの書き出しは実験的で、マイナーリリースで変わることがあります（[docs/stability.md](./docs/stability.md)）。
+- **各バージョンにあるもの：** 各コンポーネントとランタイムモジュールの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。詳細：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。
 
-```bash
-npx motionary doctor            # プロジェクト内の削除済みパス（と残っている旧イベント名）を一覧表示
-npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に固定された CDN URL も @13 に
-```
-
-| 削除されたパス | 代わりに使うもの |
-|---|---|
-| ~~motionary/components/core~~ | `motionary/core` |
-| ~~motionary/components/ai~~ | `motionary/tooling/ai` |
-| ~~motionary/components/design~~、~~motionary/design~~ | `motionary/tooling/design` |
-| ~~motionary/components/angular~~ | `motionary/angular` |
-| ~~motionary/manifest.json~~、~~motionary/manifest.schema.json~~ | `motionary/tooling/manifest.json`、`motionary/tooling/manifest.schema.json` |
-
-`use-scroll-animate/…` も同様です。ガイド全文は [docs/upgrading-13.md](./docs/upgrading-13.md)。それ以前のメジャー：[12](./docs/upgrading-12.md) · [11](./docs/upgrading-11.md) · [10](./docs/upgrading-10.md) · [9](./docs/upgrading-9.md) · [8](./docs/upgrading-8.md) · [7](./docs/upgrading-7.md) · [6](./docs/upgrading-6.md) · [5](./docs/upgrading-5.md) · [4](./docs/upgrading-4.md) · [3](./docs/upgrading-3.md) · [2](./docs/deprecations.md)。ほかのライブラリからの移行：[AOS](./docs/migration-from-aos.md) · [GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)。
-
-## バージョンと互換性
-
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.9.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
-- **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
-- **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
-- **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
-- 詳細：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。
+移行ガイド：[17](./docs/migrating-to-v17.md) · [16](./docs/migrating-to-v16.md) · [15](./docs/migrating-to-v15.md) · [14](./docs/migrating-to-v14.md) · [13](./docs/upgrading-13.md) · [12](./docs/upgrading-12.md) · [11](./docs/upgrading-11.md) · [10](./docs/upgrading-10.md) · [9](./docs/upgrading-9.md) · [8](./docs/upgrading-8.md) · [7](./docs/upgrading-7.md) · [6](./docs/upgrading-6.md) · [5](./docs/upgrading-5.md) · [4](./docs/upgrading-4.md) · [3](./docs/upgrading-3.md) · [2](./docs/deprecations.md)。他のライブラリから：[AOS](./docs/migration-from-aos.md) · [GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)。`npx motionary doctor` でまだ直す必要がある箇所を探せます。
 
 ## ドキュメント
 
-| テーマ | ドキュメント |
+| トピック | ドキュメント |
 |---|---|
-| リファレンス | [API](./docs/API.md) · [プリセット](./docs/presets.md)（全 214 種）· [コンポーネント](./docs/components.md) · [エントリポイント](./docs/entry-points.md) · [レイヤー別の公開 API](./docs/public-api.md) · [Motion Core](./docs/core.md) |
+| リファレンス | [API](./docs/API.md) · [プリセット](./docs/presets.md)（全 214 種） · [コンポーネント](./docs/components.md) · [エントリポイント](./docs/entry-points.md) · [レイヤー別の公開 API](./docs/public-api.md) · [Motion Core](./docs/core.md) · [タイムラインエディタのモデル](./docs/timeline-editor.md) |
 | ランタイム | [ランタイムの階層](./docs/runtime-tiers.md) · [モジュール](./docs/runtime/) · [互換性マトリクス](./docs/compat-matrix.md) |
-| プラットフォーム | [フレームワークと SSR](./docs/frameworks-ssr.md) · [Windows アプリ](./docs/windows-apps.md) · [ハイブリッドアプリ（MAUI、Flutter、Electron、Tauri）](./docs/hybrid-apps.md) · [クロスプラットフォーム書き出し](./docs/cross-platform.md) · [サンプル](./examples/) |
-| デザインと AI | [モーショントークン](./docs/motion-tokens.md) · [Figma プラグイン](./figma-plugin/README.md) · [MCP サーバー](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [プロンプトガイド](./docs/ai-prompt-guide.md) |
-| 品質 | [アクセシビリティ](./docs/accessibility.md) · [コンポーネント規約](./docs/component-contract.md) · [パフォーマンス](./docs/performance.md) · [パフォーマンス CI](./docs/perf-ci.md) · [Tree-shaking](./docs/tree-shaking.md) · [ソースマップ](./docs/source-maps.md) |
+| プラットフォーム | [フレームワークと SSR](./docs/frameworks-ssr.md) · [フレームワークマトリクス](https://github.com/HarrisonCN/Motionary/blob/main/docs/frameworks-matrix.md) · [Windows アプリ](./docs/windows-apps.md) · [ハイブリッドアプリ（MAUI、Flutter、Electron、Tauri）](./docs/hybrid-apps.md) · [クロスプラットフォーム書き出し](./docs/cross-platform.md) · [サンプル](./examples/) |
+| デザインと AI | [Motion Studio 2.0 アプリ](./docs/studio-app.md) · [Motion Studio](./docs/studio.md) · [Studio の書き出し](./docs/studio-export.md) · [Studio テンプレート](./docs/studio-templates.md) · [Studio AI アシスタント](./docs/studio-ai.md) · [Studio アセット](./docs/studio-assets.md) · [Studio キャンバス](./docs/studio-canvas.md) · [レイアウトモーション 2.0](./docs/layout-motion.md) · [モーショントークン 2.0](./docs/motion-tokens.md) · [Figma プラグイン](./figma-plugin/README.md) · [MCP サーバー](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [プロンプトガイド](./docs/ai-prompt-guide.md) |
+| 品質 | [アクセシビリティ](./docs/accessibility.md) · [コンポーネント契約](./docs/component-contract.md) · [パフォーマンス](./docs/performance.md) · [パフォーマンス CI](./docs/perf-ci.md) · [スケジューリング](./docs/scheduling.md) · [Tree-shaking](./docs/tree-shaking.md) · [ソースマップ](./docs/source-maps.md) |
 | プロジェクト | [アーキテクチャ](./docs/architecture.md) · [ロードマップ](./docs/ROADMAP.md) · [バージョン](./docs/versions.md) · [変更履歴](./CHANGELOG.md) |
 
-アーキテクチャは Motion Core、ランタイム、コンポーネント、ツールの 4 層で、その上にフレームワーク用のエントリがあります。レイヤー間のインポートルールは `test/architecture.test.ts` で検証しています（[docs/architecture.md](./docs/architecture.md)）。
-
-この README 以外の `docs/` のドキュメントは主に英語です（ロードマップは中国語）。
+アーキテクチャは 4 層（Motion Core、ランタイム、コンポーネント、ツール）で、その上にフレームワーク用エントリがあります。層間のインポート規則は `test/architecture.test.ts` が検査します（[docs/architecture.md](./docs/architecture.md)）。`docs/` のドキュメントは英語で、ロードマップのみ中国語です。
 
 ## コントリビュート
 
-Issue や Pull Request を歓迎します。[CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。PR を出す前に `npm test`、`npm run build`、`npm run check:contract`、`npm run check:peer-docs`、`npm run size:check` を実行してください。挙動を変えたときは、[README.md](./README.md)、[README_zh.md](./README_zh.md)、このファイルを一緒に更新してください。
+Issue と Pull Request を歓迎します。[CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。PR を出す前に `npm test`、`npm run build`、`npm run check:docs`、`npm run check:contract`、`npm run check:peer-docs`、`npm run size:check` を実行してください。挙動を変えたときは、[README.md](./README.md)、[README_zh.md](./README_zh.md)、このファイルを一緒に更新してください。数値、バージョン、自動生成と記された表はスクリプト（`node scripts/facts.mjs`、`node scripts/readme-sync.mjs`、`node scripts/gen-runtime-docs.mjs`）が書き込むので、手で編集しないでください。
 
 ## ライセンス
 
