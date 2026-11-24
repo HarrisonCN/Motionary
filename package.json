@@ -3180,6 +3180,26 @@
         "default": "./dist/widgets/title-sequence.cjs"
       }
     },
+    "./widgets/icon": {
+      "import": {
+        "types": "./dist/widgets/icon.d.ts",
+        "default": "./dist/widgets/icon.js"
+      },
+      "require": {
+        "types": "./dist/widgets/icon.d.cts",
+        "default": "./dist/widgets/icon.cjs"
+      }
+    },
+    "./widgets/icon-picker": {
+      "import": {
+        "types": "./dist/widgets/icon-picker.d.ts",
+        "default": "./dist/widgets/icon-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/icon-picker.d.cts",
+        "default": "./dist/widgets/icon-picker.cjs"
+      }
+    },
     "./widgets/tour": {
       "import": {
         "types": "./dist/widgets/tour.d.ts",
