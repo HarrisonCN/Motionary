@@ -1,6 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
+var spring = require('../chunks/spring-DoapHVAk.cjs');
 
 var css$4 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
@@ -52,16 +53,18 @@ function defineRipple(tag = 'usa-ripple') {
     }, { id: 'ripple', text: css$4 });
 }
 
-var css$3 = "usa-magnetic{display:inline-block}usa-magnetic>*{transform:translate3d(var(--usa-mx,0px),var(--usa-my,0px),0);transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}usa-magnetic[data-active]>*{transition-duration:0.15s;transition-timing-function:ease-out}@media (prefers-reduced-motion:reduce){usa-magnetic>*,usa-tilt,usa-toggle .usa-toggle-knob{transition:none}}";
+var css$3 = "usa-magnetic{display:inline-block}usa-magnetic>*{transform:translate3d(var(--usa-mx,0px),var(--usa-my,0px),0);transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}usa-magnetic[data-active]>*{transition-duration:0.15s;transition-timing-function:ease-out}@media (prefers-reduced-motion:reduce){usa-magnetic>*,usa-tilt,usa-toggle .usa-toggle-knob{transition:none}}usa-magnetic[data-releasing]>*{transition:none}";
 
 function defineMagnetic(tag = 'usa-magnetic') {
     return base.defineElement(tag, (Base) => class UsaMagnetic extends Base {
         constructor() {
             super(...arguments);
             this._frame = 0;
+            this._off = { x: 0, y: 0 };
+            this._vel = { x: 0, y: 0 };
         }
         static get observedAttributes() {
-            return ['strength', 'radius', 'disabled'];
+            return ['strength', 'radius', 'disabled', 'release'];
         }
         mount() {
             if (this.reduced || this.flag('disabled'))
@@ -72,6 +75,7 @@ function defineMagnetic(tag = 'usa-magnetic') {
             const radius = this.num('radius', 60);
             let x = 0;
             let y = 0;
+            let at = 0;
             let active = false;
             const apply = () => {
                 this._frame = 0;
@@ -81,16 +85,25 @@ function defineMagnetic(tag = 'usa-magnetic') {
                 const near = Math.abs(dx) < r.width / 2 + radius && Math.abs(dy) < r.height / 2 + radius;
                 if (near) {
                     active = true;
+                    if (this._springs)
+                        this.settle();
                     this.setAttribute('data-active', '');
+                    this._off = { x: dx * strength, y: dy * strength };
                     this.style.setProperty('--usa-mx', `${(dx * strength).toFixed(2)}px`);
                     this.style.setProperty('--usa-my', `${(dy * strength).toFixed(2)}px`);
                 }
-                else if (active)
-                    this.release();
+                else if (active) {
+                    active = false;
+                    this.release(this.str('release') === 'spring');
+                }
             };
             this.listen(document, 'pointermove', (e) => {
                 if (e.pointerType !== 'mouse' && e.pointerType !== 'pen')
                     return;
+                const t = base.now(), dt = Math.max(8, t - at) / 1000;
+                if (at)
+                    this._vel = { x: (e.clientX - x) / dt, y: (e.clientY - y) / dt };
+                at = t;
                 x = e.clientX;
                 y = e.clientY;
                 if (!this._frame)
@@ -99,10 +112,43 @@ function defineMagnetic(tag = 'usa-magnetic') {
             this.listen(document, 'pointerleave', () => this.release());
             this.listen(window, 'blur', () => this.release());
         }
-        release() {
+        release(spring$1 = false) {
             base.caf(this._frame);
             this._frame = 0;
             this.removeAttribute('data-active');
+            const { x, y } = this._off;
+            this._off = { x: 0, y: 0 };
+            if (spring$1 && !this.reduced && (x || y)) {
+                // the pointer's exit speed, scaled like the offset and capped so a flick cannot throw the content away
+                const cap = 1600, k = this.num('strength', 0.35);
+                const vx = Math.max(-cap, Math.min(cap, this._vel.x * k)), vy = Math.max(-cap, Math.min(cap, this._vel.y * k));
+                this.settle();
+                this.setAttribute('data-releasing', '');
+                const write = () => {
+                    const [sx, sy] = this._springs;
+                    this.style.setProperty('--usa-mx', `${sx.value.toFixed(2)}px`);
+                    this.style.setProperty('--usa-my', `${sy.value.toFixed(2)}px`);
+                };
+                const rest = () => { if (this._springs && !this._springs[0].animating && !this._springs[1].animating)
+                    this.settle(); };
+                const cfg = { stiffness: 240, damping: 13, mass: 1 };
+                this._springs = [
+                    spring.createSpring({ value: x, spring: cfg, onUpdate: write, onRest: rest }),
+                    spring.createSpring({ value: y, spring: cfg, onUpdate: write, onRest: rest }),
+                ];
+                this._springs[0].set(0, vx);
+                this._springs[1].set(0, vy);
+                return;
+            }
+            this.settle();
+        }
+        /** Stop a spring release and clear the offset. */
+        settle() {
+            if (this._springs) {
+                this._springs.forEach((s) => s.stop());
+                this._springs = undefined;
+            }
+            this.removeAttribute('data-releasing');
             this.style.removeProperty('--usa-mx');
             this.style.removeProperty('--usa-my');
         }

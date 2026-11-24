@@ -352,6 +352,10 @@ interface UsaRippleElement extends UsaElement {
  * (px of attraction beyond the element's edge, 60), `disabled`. Only on
  * devices with a fine pointer that hovers; off under reduced motion.
  * Writes one `transform` per frame through `--usa-mx` / `--usa-my`.
+ *
+ * 17.9: `release="spring"` — when the pointer leaves, the content springs home from where it was, carrying the speed
+ * the pointer left with (a fast exit overshoots a little and settles, a slow one glides back). The default (`ease`)
+ * keeps the CSS transition.
  */
 type UsaMagneticElement = UsaElement;
 
@@ -1673,6 +1677,11 @@ interface LegacyAttributes {
         opacity?: string | boolean | number;
         speed?: string | boolean | number;
     };
+    'usa-analog-stick': {
+        'dead-zone'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-anim-icon': {
         label?: string | boolean | number;
         name?: string | boolean | number;
@@ -1754,6 +1763,11 @@ interface LegacyAttributes {
     'usa-breadcrumbs': {
         label?: string | boolean | number;
         max?: string | boolean | number;
+    };
+    'usa-bulge-volume': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-button': {
         deform?: string | boolean | number;
@@ -1888,6 +1902,15 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-copy-button': {
+        disabled?: string | boolean | number;
+        'done-label'?: string | boolean | number;
+        duration?: string | boolean | number;
+        'fail-label'?: string | boolean | number;
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+        text?: string | boolean | number;
+    };
     'usa-countdown': {
         label?: string | boolean | number;
         labels?: string | boolean | number;
@@ -2010,6 +2033,11 @@ interface LegacyAttributes {
         trigger?: string | boolean | number;
     };
     'usa-drawer': {};
+    'usa-eclipse-toggle': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-elastic-mesh': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2248,6 +2276,14 @@ interface LegacyAttributes {
         status?: string | boolean | number;
         title?: string | boolean | number;
     };
+    'usa-hue-orbit': {
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hue?: string | boolean | number;
+        label?: string | boolean | number;
+        lightness?: string | boolean | number;
+        saturation?: string | boolean | number;
+    };
     'usa-hydrate': {
         duration?: string | boolean | number;
         effect?: string | boolean | number;
@@ -2390,6 +2426,7 @@ interface LegacyAttributes {
     'usa-magnetic': {
         disabled?: string | boolean | number;
         radius?: string | boolean | number;
+        release?: string | boolean | number;
         strength?: string | boolean | number;
     };
     'usa-magnetic-field': {
@@ -2526,6 +2563,18 @@ interface LegacyAttributes {
     'usa-navbar': {
         target?: string | boolean | number;
         threshold?: string | boolean | number;
+    };
+    'usa-notch-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        notches?: string | boolean | number;
+        snap?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-notification-bell': {
         label?: string | boolean | number;
@@ -3065,6 +3114,20 @@ interface LegacyAttributes {
         mass?: string | boolean | number;
         stiffness?: string | boolean | number;
     };
+    'usa-squish-key': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        shape?: string | boolean | number;
+        tone?: string | boolean | number;
+    };
+    'usa-squish-stepper': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-stagger': {
         delay?: string | boolean | number;
         distance?: string | boolean | number;
@@ -3211,6 +3274,12 @@ interface LegacyAttributes {
         themes?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-tile-relay': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        size?: string | boolean | number;
+    };
     'usa-tilt': {
         disabled?: string | boolean | number;
         glare?: string | boolean | number;
@@ -3250,6 +3319,12 @@ interface LegacyAttributes {
         format?: string | boolean | number;
         groups?: string | boolean | number;
         label?: string | boolean | number;
+    };
+    'usa-transfer-button': {
+        direction?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        progress?: string | boolean | number;
     };
     'usa-transit-progress': {
         animated?: string | boolean | number;
@@ -3360,6 +3435,10 @@ interface LegacyEvents {
         'usa:add': CustomEvent<any>;
     };
     'usa-ambient': {};
+    'usa-analog-stick': {
+        'usa:move': CustomEvent<any>;
+        'usa:release': CustomEvent<any>;
+    };
     'usa-anim-icon': {};
     'usa-audio': {
         'usa:audio-error': CustomEvent<any>;
@@ -3386,6 +3465,10 @@ interface LegacyEvents {
     'usa-bottom-sheet': {};
     'usa-breadcrumbs': {
         'usa:expand': CustomEvent<any>;
+    };
+    'usa-bulge-volume': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-button': {
         'usa:state': CustomEvent<any>;
@@ -3463,6 +3546,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-copy-button': {
+        'usa:copy': CustomEvent<any>;
+    };
     'usa-countdown': {
         'usa:done': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
@@ -3523,6 +3609,9 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
     };
     'usa-drawer': {};
+    'usa-eclipse-toggle': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-elastic-mesh': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -3629,6 +3718,9 @@ interface LegacyEvents {
     };
     'usa-hud-panel': {
         'usa:boot': CustomEvent<any>;
+    };
+    'usa-hue-orbit': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-hydrate': {
         'usa:hydrated': CustomEvent<any>;
@@ -3779,6 +3871,11 @@ interface LegacyEvents {
     'usa-navbar': {
         'usa:hide': CustomEvent<any>;
         'usa:show': CustomEvent<any>;
+    };
+    'usa-notch-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:detent': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-notification-bell': {
         'usa:notify': CustomEvent<any>;
@@ -4022,6 +4119,13 @@ interface LegacyEvents {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
+    'usa-squish-key': {
+        'usa:press': CustomEvent<any>;
+    };
+    'usa-squish-stepper': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-stagger': {
         'usa:complete': CustomEvent<any>;
         'usa:enter': CustomEvent<any>;
@@ -4100,6 +4204,7 @@ interface LegacyEvents {
     'usa-theme-switcher': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-tile-relay': {};
     'usa-tilt': {};
     'usa-timeline': {
         'usa:complete': CustomEvent<any>;
@@ -4120,6 +4225,10 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:export': CustomEvent<any>;
         'usa:import': CustomEvent<any>;
+    };
+    'usa-transfer-button': {
+        'usa:complete': CustomEvent<any>;
+        'usa:transfer': CustomEvent<any>;
     };
     'usa-transit-progress': {
         'usa:action': CustomEvent<any>;

@@ -30,6 +30,10 @@ declare function defineRipple(tag?: string): CustomElementConstructor | undefine
  * (px of attraction beyond the element's edge, 60), `disabled`. Only on
  * devices with a fine pointer that hovers; off under reduced motion.
  * Writes one `transform` per frame through `--usa-mx` / `--usa-my`.
+ *
+ * 17.9: `release="spring"` — when the pointer leaves, the content springs home from where it was, carrying the speed
+ * the pointer left with (a fast exit overshoots a little and settles, a slow one glides back). The default (`ease`)
+ * keeps the CSS transition.
  */
 type UsaMagneticElement = UsaElement;
 declare function defineMagnetic(tag?: string): CustomElementConstructor | undefined;
