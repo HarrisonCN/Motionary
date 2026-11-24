@@ -66,6 +66,9 @@ A few starting points:
 | Small UI parts | `<mo-progress-tabs>`, `<mo-code-tabs>`, `<mo-helpful-vote>`, `<mo-share-button>`, `<mo-inline-edit>`, `<mo-tag-cloud>` |
 | Data and interaction | `<mo-heatmap>`, `<mo-donut-chart>`, `<mo-sortable-list>`, `<mo-zoom-lens>`, `<mo-rating-bars>`, `<mo-checklist>` |
 | Decorative motion | `<mo-meteors>`, `<mo-connect-beam>`, `<mo-retro-grid>`, `<mo-orbit-rings>`, `<mo-letter-swap>`, `<mo-ripple-grid>` |
+| Collaboration and input | `<mo-tour>`, `<mo-signature-pad>`, `<mo-wheel-picker>`, `<mo-mention-input>`, `<mo-emoji-picker>`, `<mo-comment-thread>`, `<mo-diff-viewer>` |
+| Charts | `<mo-line-chart>`, `<mo-funnel-chart>`, `<mo-treemap>`, `<mo-gantt>`, `<mo-waffle-chart>` |
+| Playful motion | `<mo-split-flap>`, `<mo-scratch-card>`, `<mo-page-flip>`, `<mo-circular-text>`, `<mo-pixel-transition>`, `<mo-magnet-lines>`, `<mo-text-pressure>`, `<mo-shuffle-grid>` |
 | Ready-made looks for those widgets | `look="neon-ocean"` (324 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
 
 ## 3. Rules

@@ -1587,6 +1587,266 @@
  },
  {
   "kind": "widget",
+  "name": "tour",
+  "entry": "motionary/widgets/tour",
+  "src": "src/entries/widgets/tour.ts",
+  "tag": "usa-tour",
+  "define": "defineTour",
+  "types": [
+   "UsaTourElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tour"
+ },
+ {
+  "kind": "widget",
+  "name": "signature-pad",
+  "entry": "motionary/widgets/signature-pad",
+  "src": "src/entries/widgets/signature-pad.ts",
+  "tag": "usa-signature-pad",
+  "define": "defineSignaturePad",
+  "types": [
+   "UsaSignaturePadElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/signature-pad"
+ },
+ {
+  "kind": "widget",
+  "name": "wheel-picker",
+  "entry": "motionary/widgets/wheel-picker",
+  "src": "src/entries/widgets/wheel-picker.ts",
+  "tag": "usa-wheel-picker",
+  "define": "defineWheelPicker",
+  "types": [
+   "UsaWheelPickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/wheel-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "mention-input",
+  "entry": "motionary/widgets/mention-input",
+  "src": "src/entries/widgets/mention-input.ts",
+  "tag": "usa-mention-input",
+  "define": "defineMentionInput",
+  "types": [
+   "UsaMentionInputElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/mention-input"
+ },
+ {
+  "kind": "widget",
+  "name": "emoji-picker",
+  "entry": "motionary/widgets/emoji-picker",
+  "src": "src/entries/widgets/emoji-picker.ts",
+  "tag": "usa-emoji-picker",
+  "define": "defineEmojiPicker",
+  "types": [
+   "UsaEmojiPickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/emoji-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "comment-thread",
+  "entry": "motionary/widgets/comment-thread",
+  "src": "src/entries/widgets/comment-thread.ts",
+  "tag": "usa-comment-thread",
+  "define": "defineCommentThread",
+  "types": [
+   "UsaCommentThreadElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/comment-thread"
+ },
+ {
+  "kind": "widget",
+  "name": "diff-viewer",
+  "entry": "motionary/widgets/diff-viewer",
+  "src": "src/entries/widgets/diff-viewer.ts",
+  "tag": "usa-diff-viewer",
+  "define": "defineDiffViewer",
+  "types": [
+   "UsaDiffViewerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/diff-viewer"
+ },
+ {
+  "kind": "widget",
+  "name": "line-chart",
+  "entry": "motionary/widgets/line-chart",
+  "src": "src/entries/widgets/line-chart.ts",
+  "tag": "usa-line-chart",
+  "define": "defineLineChart",
+  "types": [
+   "UsaLineChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/line-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "funnel-chart",
+  "entry": "motionary/widgets/funnel-chart",
+  "src": "src/entries/widgets/funnel-chart.ts",
+  "tag": "usa-funnel-chart",
+  "define": "defineFunnelChart",
+  "types": [
+   "UsaFunnelChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/funnel-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "treemap",
+  "entry": "motionary/widgets/treemap",
+  "src": "src/entries/widgets/treemap.ts",
+  "tag": "usa-treemap",
+  "define": "defineTreemap",
+  "types": [
+   "UsaTreemapElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/treemap"
+ },
+ {
+  "kind": "widget",
+  "name": "gantt",
+  "entry": "motionary/widgets/gantt",
+  "src": "src/entries/widgets/gantt.ts",
+  "tag": "usa-gantt",
+  "define": "defineGantt",
+  "types": [
+   "UsaGanttElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gantt"
+ },
+ {
+  "kind": "widget",
+  "name": "waffle-chart",
+  "entry": "motionary/widgets/waffle-chart",
+  "src": "src/entries/widgets/waffle-chart.ts",
+  "tag": "usa-waffle-chart",
+  "define": "defineWaffleChart",
+  "types": [
+   "UsaWaffleChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/waffle-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "split-flap",
+  "entry": "motionary/widgets/split-flap",
+  "src": "src/entries/widgets/split-flap.ts",
+  "tag": "usa-split-flap",
+  "define": "defineSplitFlap",
+  "types": [
+   "UsaSplitFlapElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/split-flap"
+ },
+ {
+  "kind": "widget",
+  "name": "scratch-card",
+  "entry": "motionary/widgets/scratch-card",
+  "src": "src/entries/widgets/scratch-card.ts",
+  "tag": "usa-scratch-card",
+  "define": "defineScratchCard",
+  "types": [
+   "UsaScratchCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scratch-card"
+ },
+ {
+  "kind": "widget",
+  "name": "page-flip",
+  "entry": "motionary/widgets/page-flip",
+  "src": "src/entries/widgets/page-flip.ts",
+  "tag": "usa-page-flip",
+  "define": "definePageFlip",
+  "types": [
+   "UsaPageFlipElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/page-flip"
+ },
+ {
+  "kind": "widget",
+  "name": "circular-text",
+  "entry": "motionary/widgets/circular-text",
+  "src": "src/entries/widgets/circular-text.ts",
+  "tag": "usa-circular-text",
+  "define": "defineCircularText",
+  "types": [
+   "UsaCircularTextElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/circular-text"
+ },
+ {
+  "kind": "widget",
+  "name": "pixel-transition",
+  "entry": "motionary/widgets/pixel-transition",
+  "src": "src/entries/widgets/pixel-transition.ts",
+  "tag": "usa-pixel-transition",
+  "define": "definePixelTransition",
+  "types": [
+   "UsaPixelTransitionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/pixel-transition"
+ },
+ {
+  "kind": "widget",
+  "name": "magnet-lines",
+  "entry": "motionary/widgets/magnet-lines",
+  "src": "src/entries/widgets/magnet-lines.ts",
+  "tag": "usa-magnet-lines",
+  "define": "defineMagnetLines",
+  "types": [
+   "UsaMagnetLinesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/magnet-lines"
+ },
+ {
+  "kind": "widget",
+  "name": "text-pressure",
+  "entry": "motionary/widgets/text-pressure",
+  "src": "src/entries/widgets/text-pressure.ts",
+  "tag": "usa-text-pressure",
+  "define": "defineTextPressure",
+  "types": [
+   "UsaTextPressureElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/text-pressure"
+ },
+ {
+  "kind": "widget",
+  "name": "shuffle-grid",
+  "entry": "motionary/widgets/shuffle-grid",
+  "src": "src/entries/widgets/shuffle-grid.ts",
+  "tag": "usa-shuffle-grid",
+  "define": "defineShuffleGrid",
+  "types": [
+   "UsaShuffleGridElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/shuffle-grid"
+ },
+ {
+  "kind": "widget",
   "name": "progress-tabs",
   "entry": "motionary/widgets/progress-tabs",
   "src": "src/entries/widgets/progress-tabs.ts",

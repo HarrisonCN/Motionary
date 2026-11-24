@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 358 animated Web Components (91 core, 267 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 378 animated Web Components (91 core, 287 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,206 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/tour": {
+      "import": {
+        "types": "./dist/widgets/tour.d.ts",
+        "default": "./dist/widgets/tour.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tour.d.cts",
+        "default": "./dist/widgets/tour.cjs"
+      }
+    },
+    "./widgets/signature-pad": {
+      "import": {
+        "types": "./dist/widgets/signature-pad.d.ts",
+        "default": "./dist/widgets/signature-pad.js"
+      },
+      "require": {
+        "types": "./dist/widgets/signature-pad.d.cts",
+        "default": "./dist/widgets/signature-pad.cjs"
+      }
+    },
+    "./widgets/wheel-picker": {
+      "import": {
+        "types": "./dist/widgets/wheel-picker.d.ts",
+        "default": "./dist/widgets/wheel-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/wheel-picker.d.cts",
+        "default": "./dist/widgets/wheel-picker.cjs"
+      }
+    },
+    "./widgets/mention-input": {
+      "import": {
+        "types": "./dist/widgets/mention-input.d.ts",
+        "default": "./dist/widgets/mention-input.js"
+      },
+      "require": {
+        "types": "./dist/widgets/mention-input.d.cts",
+        "default": "./dist/widgets/mention-input.cjs"
+      }
+    },
+    "./widgets/emoji-picker": {
+      "import": {
+        "types": "./dist/widgets/emoji-picker.d.ts",
+        "default": "./dist/widgets/emoji-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/emoji-picker.d.cts",
+        "default": "./dist/widgets/emoji-picker.cjs"
+      }
+    },
+    "./widgets/comment-thread": {
+      "import": {
+        "types": "./dist/widgets/comment-thread.d.ts",
+        "default": "./dist/widgets/comment-thread.js"
+      },
+      "require": {
+        "types": "./dist/widgets/comment-thread.d.cts",
+        "default": "./dist/widgets/comment-thread.cjs"
+      }
+    },
+    "./widgets/diff-viewer": {
+      "import": {
+        "types": "./dist/widgets/diff-viewer.d.ts",
+        "default": "./dist/widgets/diff-viewer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/diff-viewer.d.cts",
+        "default": "./dist/widgets/diff-viewer.cjs"
+      }
+    },
+    "./widgets/line-chart": {
+      "import": {
+        "types": "./dist/widgets/line-chart.d.ts",
+        "default": "./dist/widgets/line-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/line-chart.d.cts",
+        "default": "./dist/widgets/line-chart.cjs"
+      }
+    },
+    "./widgets/funnel-chart": {
+      "import": {
+        "types": "./dist/widgets/funnel-chart.d.ts",
+        "default": "./dist/widgets/funnel-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/funnel-chart.d.cts",
+        "default": "./dist/widgets/funnel-chart.cjs"
+      }
+    },
+    "./widgets/treemap": {
+      "import": {
+        "types": "./dist/widgets/treemap.d.ts",
+        "default": "./dist/widgets/treemap.js"
+      },
+      "require": {
+        "types": "./dist/widgets/treemap.d.cts",
+        "default": "./dist/widgets/treemap.cjs"
+      }
+    },
+    "./widgets/gantt": {
+      "import": {
+        "types": "./dist/widgets/gantt.d.ts",
+        "default": "./dist/widgets/gantt.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gantt.d.cts",
+        "default": "./dist/widgets/gantt.cjs"
+      }
+    },
+    "./widgets/waffle-chart": {
+      "import": {
+        "types": "./dist/widgets/waffle-chart.d.ts",
+        "default": "./dist/widgets/waffle-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/waffle-chart.d.cts",
+        "default": "./dist/widgets/waffle-chart.cjs"
+      }
+    },
+    "./widgets/split-flap": {
+      "import": {
+        "types": "./dist/widgets/split-flap.d.ts",
+        "default": "./dist/widgets/split-flap.js"
+      },
+      "require": {
+        "types": "./dist/widgets/split-flap.d.cts",
+        "default": "./dist/widgets/split-flap.cjs"
+      }
+    },
+    "./widgets/scratch-card": {
+      "import": {
+        "types": "./dist/widgets/scratch-card.d.ts",
+        "default": "./dist/widgets/scratch-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scratch-card.d.cts",
+        "default": "./dist/widgets/scratch-card.cjs"
+      }
+    },
+    "./widgets/page-flip": {
+      "import": {
+        "types": "./dist/widgets/page-flip.d.ts",
+        "default": "./dist/widgets/page-flip.js"
+      },
+      "require": {
+        "types": "./dist/widgets/page-flip.d.cts",
+        "default": "./dist/widgets/page-flip.cjs"
+      }
+    },
+    "./widgets/circular-text": {
+      "import": {
+        "types": "./dist/widgets/circular-text.d.ts",
+        "default": "./dist/widgets/circular-text.js"
+      },
+      "require": {
+        "types": "./dist/widgets/circular-text.d.cts",
+        "default": "./dist/widgets/circular-text.cjs"
+      }
+    },
+    "./widgets/pixel-transition": {
+      "import": {
+        "types": "./dist/widgets/pixel-transition.d.ts",
+        "default": "./dist/widgets/pixel-transition.js"
+      },
+      "require": {
+        "types": "./dist/widgets/pixel-transition.d.cts",
+        "default": "./dist/widgets/pixel-transition.cjs"
+      }
+    },
+    "./widgets/magnet-lines": {
+      "import": {
+        "types": "./dist/widgets/magnet-lines.d.ts",
+        "default": "./dist/widgets/magnet-lines.js"
+      },
+      "require": {
+        "types": "./dist/widgets/magnet-lines.d.cts",
+        "default": "./dist/widgets/magnet-lines.cjs"
+      }
+    },
+    "./widgets/text-pressure": {
+      "import": {
+        "types": "./dist/widgets/text-pressure.d.ts",
+        "default": "./dist/widgets/text-pressure.js"
+      },
+      "require": {
+        "types": "./dist/widgets/text-pressure.d.cts",
+        "default": "./dist/widgets/text-pressure.cjs"
+      }
+    },
+    "./widgets/shuffle-grid": {
+      "import": {
+        "types": "./dist/widgets/shuffle-grid.d.ts",
+        "default": "./dist/widgets/shuffle-grid.js"
+      },
+      "require": {
+        "types": "./dist/widgets/shuffle-grid.d.cts",
+        "default": "./dist/widgets/shuffle-grid.cjs"
       }
     },
     "./widgets/progress-tabs": {

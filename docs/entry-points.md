@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (267)
+## Widgets (287)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,26 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-tour>` | `motionary/widgets/tour` | `defineTour()` |
+| `<usa-signature-pad>` | `motionary/widgets/signature-pad` | `defineSignaturePad()` |
+| `<usa-wheel-picker>` | `motionary/widgets/wheel-picker` | `defineWheelPicker()` |
+| `<usa-mention-input>` | `motionary/widgets/mention-input` | `defineMentionInput()` |
+| `<usa-emoji-picker>` | `motionary/widgets/emoji-picker` | `defineEmojiPicker()` |
+| `<usa-comment-thread>` | `motionary/widgets/comment-thread` | `defineCommentThread()` |
+| `<usa-diff-viewer>` | `motionary/widgets/diff-viewer` | `defineDiffViewer()` |
+| `<usa-line-chart>` | `motionary/widgets/line-chart` | `defineLineChart()` |
+| `<usa-funnel-chart>` | `motionary/widgets/funnel-chart` | `defineFunnelChart()` |
+| `<usa-treemap>` | `motionary/widgets/treemap` | `defineTreemap()` |
+| `<usa-gantt>` | `motionary/widgets/gantt` | `defineGantt()` |
+| `<usa-waffle-chart>` | `motionary/widgets/waffle-chart` | `defineWaffleChart()` |
+| `<usa-split-flap>` | `motionary/widgets/split-flap` | `defineSplitFlap()` |
+| `<usa-scratch-card>` | `motionary/widgets/scratch-card` | `defineScratchCard()` |
+| `<usa-page-flip>` | `motionary/widgets/page-flip` | `definePageFlip()` |
+| `<usa-circular-text>` | `motionary/widgets/circular-text` | `defineCircularText()` |
+| `<usa-pixel-transition>` | `motionary/widgets/pixel-transition` | `definePixelTransition()` |
+| `<usa-magnet-lines>` | `motionary/widgets/magnet-lines` | `defineMagnetLines()` |
+| `<usa-text-pressure>` | `motionary/widgets/text-pressure` | `defineTextPressure()` |
+| `<usa-shuffle-grid>` | `motionary/widgets/shuffle-grid` | `defineShuffleGrid()` |
 | `<usa-progress-tabs>` | `motionary/widgets/progress-tabs` | `defineProgressTabs()` |
 | `<usa-code-tabs>` | `motionary/widgets/code-tabs` | `defineCodeTabs()` |
 | `<usa-helpful-vote>` | `motionary/widgets/helpful-vote` | `defineHelpfulVote()` |

@@ -1926,6 +1926,103 @@
       "usa:zoom": [
         "{zoom}"
       ]
+    },
+    "usa-comment-thread": {
+      "usa:like": [
+        "{index, liked, likes}"
+      ],
+      "usa:reply": [
+        "{index, text}"
+      ],
+      "usa:toggle": [
+        "{index, open}"
+      ]
+    },
+    "usa-diff-viewer": {
+      "usa:mode": [
+        "{mode}"
+      ]
+    },
+    "usa-emoji-picker": {
+      "usa:pick": [
+        "{emoji, name}"
+      ]
+    },
+    "usa-funnel-chart": {
+      "usa:select": [
+        "{index, overall, step, value}"
+      ]
+    },
+    "usa-gantt": {
+      "usa:select": [
+        "{index}"
+      ]
+    },
+    "usa-line-chart": {
+      "usa:point": [
+        "{index}"
+      ],
+      "usa:toggle": [
+        "{series, visible}"
+      ]
+    },
+    "usa-mention-input": {
+      "usa:mention": [
+        "{name}"
+      ]
+    },
+    "usa-page-flip": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-pixel-transition": {
+      "usa:change": [
+        "{flipped}"
+      ]
+    },
+    "usa-scratch-card": {
+      "usa:reveal": [
+        "{by}"
+      ]
+    },
+    "usa-shuffle-grid": {
+      "usa:shuffle": [
+        "{order}"
+      ]
+    },
+    "usa-signature-pad": {
+      "usa:change": [
+        "{empty, strokes, typed}"
+      ]
+    },
+    "usa-split-flap": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-tour": {
+      "usa:end": [
+        "{completed}"
+      ],
+      "usa:step": [
+        "{index}"
+      ]
+    },
+    "usa-treemap": {
+      "usa:select": [
+        "{index, share, value}"
+      ]
+    },
+    "usa-waffle-chart": {
+      "usa:select": [
+        "{cells, index, value}"
+      ]
+    },
+    "usa-wheel-picker": {
+      "usa:change": [
+        "{index, values}"
+      ]
     }
   }
 }
