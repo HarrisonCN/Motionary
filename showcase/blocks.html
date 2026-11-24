@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>页面块、组件与纵深动效 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {position:relative; padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .cue {display:flex; justify-content:center; padding-top:24px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .demo-box {display:grid; place-items:center; min-height:90px; padding:16px; border-radius:14px; background:#ecebe5; font-weight:600}
+    .area {display:grid; place-items:center; min-height:120px; border:2px dashed #cfccc2; border-radius:14px; color:#6b6a62}
+    .pane {padding:16px; line-height:1.6}
+    .feed {display:grid; gap:8px; margin:0; padding:0; list-style:none}
+    .feed li {padding:12px 14px; border-radius:12px; background:#ecebe5}
+    .card-face {padding:18px; border-radius:14px; background:#ecebe5; text-align:left}
+    .card-face strong {display:block; font-size:1.1rem}
+    figure {margin:0}
+    figure figcaption {font:12px/1.4 system-ui; padding-top:6px; text-align:center}
+    .panel {display:grid; place-items:center; min-height:70vh; padding:40px; font:500 clamp(28px,5vw,56px)/1.1 Georgia,serif; text-align:center}
+    .zoom-cap {color:#fff; text-shadow:0 2px 20px rgb(0 0 0 / .5); font:500 clamp(28px,5vw,64px)/1 Georgia,serif}
+    .foot {display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; padding:64px max(20px,calc((100% - 1120px)/2)); background:#1b1b1a; color:#f4f3ef}
+    .foot a {color:#c9c6ff}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><mo-search-bar label="搜索组件" placeholder="搜索 17.11 组件…" suggestions="搜索栏, 订阅表单, 下载按钮, 揭开式页脚, 形状分隔线, 向下滚动提示, 虚拟列表, 无限加载, 右键菜单, 可调分栏, 桌面窗口, 叠卡滑块, 形变卡片, 滚动放大, 滚动换色, 图片隧道, 环绕画廊, 晾衣绳, 弹性边框, 边框光束" width="300px"></mo-search-bar><span><a href="kit.html">界面、组件与动效</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>页面块、组件与纵深动效</h1><p>二十个新部件：六个页面块、七个组件、七个动效。它们都在原生元素上增强，没有脚本时内容照常显示；开启“减少动态效果”后直接停在结果上。按 <kbd>/</kbd> 可以打开右上角的搜索。</p>
+      <div class="cue"><mo-scroll-cue kind="mouse" label="向下滚动" text="向下滚动" target="#ui"></mo-scroll-cue></div>
+    </header>
+    <output class="log" data-log="search"></output>
+
+    <h2 id="ui" tabindex="-1">页面块</h2>
+    <section class="grid" aria-label="页面块">
+      <article><div class="stage"><mo-search-bar label="搜索文档" placeholder="试试“分栏”" suggestions="可调分栏, 叠卡滑块, 滚动放大, 环绕画廊, 晾衣绳" expanded shortcut="none"></mo-search-bar></div><p>按钮展开成搜索框，方向键选择联想，Esc 先清空再收起。</p></article>
+      <article><div class="stage block"><mo-subscribe label="邮箱地址" placeholder="you@example.com" button-label="订阅" success="已订阅，请查收邮件。" invalid="请输入有效的邮箱地址"></mo-subscribe></div><p>地址不对时抖动并提示；页面可以拦下事件，自己发请求后再调用 done()。</p><output class="log" data-log="subscribe"></output></article>
+      <article><div class="stage"><mo-download-button label="下载" done-label="已下载" duration="2600"></mo-download-button></div><p>按下后按钮里填充进度，结束时画出对勾。真实下载由页面设置 progress。</p><output class="log" data-log="download"></output></article>
+      <article><div class="stage"><mo-scroll-cue kind="chevron" label="向下滚动"></mo-scroll-cue><mo-scroll-cue kind="line" label="向下滚动"></mo-scroll-cue><mo-scroll-cue kind="mouse" label="向下滚动"></mo-scroll-cue></div><p>三种滚动提示。页面滚过 40px 后淡出，回到顶部再出现。</p></article>
+      <article class="wide"><div class="stage block"><div class="demo-box" style="border-radius:14px 14px 0 0">上一段</div><mo-shape-divider shape="wave" layers="3" animate height="70" color="#2c3a6b"></mo-shape-divider><div class="stage" style="gap:20px; padding:12px 0"><mo-shape-divider shape="curve" height="40" style="width:150px; color:#c69ff7"></mo-shape-divider><mo-shape-divider shape="tilt" height="40" style="width:150px; color:#9fb8f7"></mo-shape-divider><mo-shape-divider shape="arrow" height="40" style="width:150px; color:#f6c28b"></mo-shape-divider><mo-shape-divider shape="zigzag" height="40" style="width:150px; color:#86efac"></mo-shape-divider><mo-shape-divider shape="steps" height="40" style="width:150px; color:#fda4af"></mo-shape-divider></div></div><p>六种形状，波浪可以叠三层并缓慢漂移，离开屏幕时停止。</p></article>
+    </section>
+
+    <h2 id="components">组件</h2>
+    <section class="grid" aria-label="组件">
+      <article><div class="stage block"><mo-virtual-list label="一万行" height="220px" row-height="36"></mo-virtual-list></div><p>一万行数据，只渲染屏幕上的那些。方向键、翻页键、Home / End 都能滚动。</p><output class="log" data-log="vlist"></output></article>
+      <article><div class="stage block"><mo-infinite-scroll root-margin="80px" button-label="加载更多" label="正在加载" end-label="已经到底了"><ul class="feed"><li>第 1 条</li><li>第 2 条</li><li>第 3 条</li></ul></mo-infinite-scroll></div><p>接近底部时自动请求下一页，新内容依次浮现；加载三页后结束。</p><output class="log" data-log="inf"></output></article>
+      <article><div class="stage block"><mo-context-menu label="文件操作"><div class="area">在这里点右键（触屏长按，键盘按菜单键）</div><menu><button type="button">复制</button><button type="button">重命名</button><button type="button" aria-disabled="true">移动（不可用）</button><hr><button type="button">删除</button></menu></mo-context-menu></div><p>菜单从指针处展开，贴边时翻转；方向键、首字母、Esc 都可用。</p><output class="log" data-log="ctx"></output></article>
+      <article class="wide"><div class="stage block"><mo-split-pane position="38" min="20" max="80" height="220px" label="调整分栏"><div class="pane"><strong>目录</strong><p>拖动中间的手柄，或聚焦后用方向键调整；回车把左栏折到最小，双击弹回。</p></div><div class="pane"><strong>内容</strong><p>右栏随之变宽。两栏都可以单独滚动。</p></div></mo-split-pane></div><output class="log" data-log="split"></output></article>
+      <article class="wide"><div class="stage block"><mo-desktop-windows height="360px" label="演示桌面" close-label="关闭"><div data-title="便签" data-width="240"><p>拖动标题栏移动窗口，点一下置顶。</p></div><div data-title="音乐" data-width="220"><p>正在播放：雨声。</p></div><div data-title="终端" data-width="300"><code>$ npm i motionary</code></div></mo-desktop-windows></div><p>关闭的窗口缩向底部任务栏，点任务栏按钮再打开。聚焦标题栏后可用方向键移动。</p><output class="log" data-log="desk"></output></article>
+      <article><div class="stage block"><mo-stack-slider label="卡片" loop prev-label="上一张" next-label="下一张"><div class="card-face"><strong>一</strong>滑动或点按钮</div><div class="card-face"><strong>二</strong>后面的卡片露出一点</div><div class="card-face"><strong>三</strong>方向键也可以</div><div class="card-face"><strong>四</strong>循环播放</div></mo-stack-slider></div><output class="log" data-log="stack"></output></article>
+      <article><div class="stage block"><mo-morph-card close-label="关闭"><div class="card-face"><strong>滚动放大</strong>点开看详情</div><div data-detail hidden><h3>滚动放大</h3><p>圆角卡片随滚动放大到全屏，再浮出说明。详情面板从卡片本身的位置形变展开，关闭时缩回去，焦点也回到卡片上。</p></div></mo-morph-card></div><p>共享元素形变：卡片长成对话框。</p><output class="log" data-log="morph"></output></article>
+    </section>
+
+    <h2 id="motion">动效</h2>
+    <section class="grid" aria-label="动效">
+      <article class="wide"><div class="stage block"><mo-orbit-gallery label="环绕画廊" height="380px" item-width="160" pause-label="暂停旋转" play-label="继续旋转"><img src="assets/demo-photo.jpg" alt="照片 1"><img src="assets/demo-photo.jpg" alt="照片 2"><img src="assets/demo-photo.jpg" alt="照片 3"><img src="assets/demo-photo.jpg" alt="照片 4"><img src="assets/demo-photo.jpg" alt="照片 5"><img src="assets/demo-photo.jpg" alt="照片 6"><img src="assets/demo-photo.jpg" alt="照片 7"><img src="assets/demo-photo.jpg" alt="照片 8"></mo-orbit-gallery></div><p>拖动带惯性旋转并停在最近一张；方向键逐张切换；右下角可以暂停。</p><output class="log" data-log="orbit"></output></article>
+      <article class="wide"><div class="stage block"><mo-clothesline label="晾衣绳" sag="28" item-width="150px"><figure><img src="assets/demo-photo.jpg" alt="海边"><figcaption>海边</figcaption></figure><figure><img src="assets/demo-photo.jpg" alt="森林"><figcaption>森林</figcaption></figure><figure><img src="assets/demo-photo.jpg" alt="城市"><figcaption>城市</figcaption></figure><figure><img src="assets/demo-photo.jpg" alt="山顶"><figcaption>山顶</figcaption></figure></mo-clothesline></div><p>鼠标掠过照片会摆动；按住往下拉，绳子会被拉弯。</p></article>
+      <article><div class="stage"><mo-elastic-frame stretch="24" radius="20"><strong>靠近边缘试试</strong><p>边框会向指针鼓起。</p></mo-elastic-frame></div><p>橡皮边框，离开后带回弹。</p></article>
+      <article><div class="stage"><mo-border-beam glow colors="#22d3ee, #a855f7"><strong>边框光束</strong><p>一道光沿边框流动。</p></mo-border-beam><mo-border-beam reverse duration="4" colors="#f59e0b, #ef4444"><strong>反向</strong></mo-border-beam></div><p>纯 CSS 驱动，离开屏幕时暂停。</p></article>
+    </section>
+
+    <h2 id="scroll">滚动动效</h2>
+    <p>下面三段跟着页面滚动：放大、换色、隧道。窄屏或减少动态效果时变成普通排版。</p>
+  </main>
+  <mo-scroll-zoom from="0.4" radius="32" length="240vh" label="滚动放大"><img src="assets/demo-photo.jpg" alt="海边全景"><p class="zoom-cap">铺满整个屏幕</p></mo-scroll-zoom>
+  <mo-scroll-bg line="0.55"><section class="panel" data-bg="#f1f0ec" data-fg="#1b1b1a">米白</section><section class="panel" data-bg="#1b1b1a" data-fg="#f4f3ef">墨黑</section><section class="panel" data-bg="#2c3a6b" data-fg="#f4f3ef">靛蓝</section><section class="panel" data-bg="#f6c28b" data-fg="#1b1b1a">杏色</section></mo-scroll-bg>
+  <output class="log" data-log="bg" style="padding:8px 20px"></output>
+  <mo-image-tunnel label="图片隧道" length="60"><img src="assets/demo-photo.jpg" alt="隧道照片 1"><img src="assets/demo-photo.jpg" alt="隧道照片 2"><img src="assets/demo-photo.jpg" alt="隧道照片 3"><img src="assets/demo-photo.jpg" alt="隧道照片 4"><img src="assets/demo-photo.jpg" alt="隧道照片 5"><img src="assets/demo-photo.jpg" alt="隧道照片 6"></mo-image-tunnel>
+  <mo-shape-divider shape="curve" height="60" color="#1b1b1a" position="bottom"></mo-shape-divider>
+  <mo-reveal-footer shift="55"><div class="foot"><div><strong>Motionary 17.11</strong><p style="color:#c9c6c0">页脚从页面下方被揭开。</p></div><a href="#top">回到顶部</a></div></mo-reveal-footer>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineSearchBar } from '../dist/widgets/search-bar.js';
+    import { defineSubscribe } from '../dist/widgets/subscribe.js';
+    import { defineDownloadButton } from '../dist/widgets/download-button.js';
+    import { defineRevealFooter } from '../dist/widgets/reveal-footer.js';
+    import { defineShapeDivider } from '../dist/widgets/shape-divider.js';
+    import { defineScrollCue } from '../dist/widgets/scroll-cue.js';
+    import { defineVirtualList } from '../dist/widgets/virtual-list.js';
+    import { defineInfiniteScroll } from '../dist/widgets/infinite-scroll.js';
+    import { defineContextMenu } from '../dist/widgets/context-menu.js';
+    import { defineSplitPane } from '../dist/widgets/split-pane.js';
+    import { defineDesktopWindows } from '../dist/widgets/desktop-windows.js';
+    import { defineStackSlider } from '../dist/widgets/stack-slider.js';
+    import { defineMorphCard } from '../dist/widgets/morph-card.js';
+    import { defineScrollZoom } from '../dist/widgets/scroll-zoom.js';
+    import { defineScrollBg } from '../dist/widgets/scroll-bg.js';
+    import { defineImageTunnel } from '../dist/widgets/image-tunnel.js';
+    import { defineOrbitGallery } from '../dist/widgets/orbit-gallery.js';
+    import { defineClothesline } from '../dist/widgets/clothesline.js';
+    import { defineElasticFrame } from '../dist/widgets/elastic-frame.js';
+    import { defineBorderBeam } from '../dist/widgets/border-beam.js';
+    defineMoAliases();
+    for (const define of [defineSearchBar, defineSubscribe, defineDownloadButton, defineRevealFooter, defineShapeDivider, defineScrollCue, defineVirtualList, defineInfiniteScroll, defineContextMenu, defineSplitPane, defineDesktopWindows, defineStackSlider, defineMorphCard, defineScrollZoom, defineScrollBg, defineImageTunnel, defineOrbitGallery, defineClothesline, defineElasticFrame, defineBorderBeam]) define();
+    const list = document.querySelector('mo-virtual-list');
+    list.items = Array.from({ length: 10000 }, (_, i) => `第 ${i + 1} 行 · 只渲染看得见的部分`);
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelector(sel)?.addEventListener(`usa:${type}`, (e) => fn(e.detail));
+    on('nav mo-search-bar', 'search', (d) => log('search', `search “${d.query}”`));
+    on('mo-subscribe', 'subscribe', () => log('subscribe', 'subscribe (address not shown)'));
+    on('mo-download-button', 'start', () => log('download', 'start'));
+    on('mo-download-button', 'done', () => log('download', 'done'));
+    on('mo-virtual-list', 'range', (d) => log('vlist', `rows ${d.start + 1}–${d.end}`));
+    on('mo-context-menu', 'select', (d) => log('ctx', `select ${d.label}`));
+    on('mo-split-pane', 'change', (d) => log('split', `position ${d.position}%`));
+    on('mo-desktop-windows', 'focus', (d) => log('desk', `focus ${d.index}`));
+    on('mo-desktop-windows', 'close', (d) => log('desk', `close ${d.index}`));
+    on('mo-stack-slider', 'change', (d) => log('stack', `card ${d.index + 1}`));
+    on('mo-morph-card', 'open', () => log('morph', 'open'));
+    on('mo-morph-card', 'close', () => log('morph', 'close'));
+    on('mo-orbit-gallery', 'change', (d) => log('orbit', `front ${d.index + 1}`));
+    on('mo-orbit-gallery', 'select', (d) => log('orbit', `select ${d.index + 1}`));
+    on('mo-scroll-bg', 'change', (d) => log('bg', `section ${d.index + 1} ${d.color}`));
+    const inf = document.querySelector('mo-infinite-scroll');
+    inf?.addEventListener('usa:load', (e) => {
+      log('inf', `load page ${e.detail.page}`);
+      setTimeout(() => {
+        const ul = inf.querySelector('ul');
+        const n = ul.children.length;
+        for (let i = 1; i <= 3; i++) { const li = document.createElement('li'); li.textContent = `第 ${n + i} 条`; ul.append(li); }
+        if (e.detail.page >= 4) inf.end(); else inf.done();
+      }, 600);
+    });
+  </script>
+</body>
+</html>

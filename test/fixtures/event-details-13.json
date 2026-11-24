@@ -1721,6 +1721,130 @@
       "usa:show": [
         "(none)"
       ]
+    },
+    "usa-clothesline": {
+      "usa:swing": [
+        "{index}"
+      ]
+    },
+    "usa-context-menu": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "{x, y}"
+      ],
+      "usa:select": [
+        "{index, label}"
+      ]
+    },
+    "usa-desktop-windows": {
+      "usa:close": [
+        "{index}"
+      ],
+      "usa:focus": [
+        "{index}"
+      ],
+      "usa:move": [
+        "{index, x, y}"
+      ],
+      "usa:open": [
+        "{index}"
+      ]
+    },
+    "usa-download-button": {
+      "usa:done": [
+        "(none)"
+      ],
+      "usa:start": [
+        "(none)"
+      ]
+    },
+    "usa-image-tunnel": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-infinite-scroll": {
+      "usa:end": [
+        "(none)"
+      ],
+      "usa:load": [
+        "{page}"
+      ]
+    },
+    "usa-morph-card": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
+    "usa-orbit-gallery": {
+      "usa:change": [
+        "{index}"
+      ],
+      "usa:select": [
+        "{index}"
+      ]
+    },
+    "usa-reveal-footer": {
+      "usa:reveal": [
+        "(none)"
+      ]
+    },
+    "usa-scroll-bg": {
+      "usa:change": [
+        "{color, index}"
+      ]
+    },
+    "usa-scroll-cue": {
+      "usa:hide": [
+        "(none)"
+      ],
+      "usa:show": [
+        "(none)"
+      ]
+    },
+    "usa-scroll-zoom": {
+      "usa:progress": [
+        "{progress}"
+      ]
+    },
+    "usa-search-bar": {
+      "usa:search": [
+        "{query}"
+      ],
+      "usa:toggle": [
+        "{expanded}"
+      ]
+    },
+    "usa-split-pane": {
+      "usa:change": [
+        "{position}"
+      ]
+    },
+    "usa-stack-slider": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-subscribe": {
+      "usa:done": [
+        "(none)"
+      ],
+      "usa:error": [
+        "{message}"
+      ],
+      "usa:subscribe": [
+        "{email}"
+      ]
+    },
+    "usa-virtual-list": {
+      "usa:range": [
+        "{end, start}"
+      ]
     }
   }
 }

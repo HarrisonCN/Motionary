@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 320 animated Web Components (91 core, 229 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 340 animated Web Components (91 core, 249 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,206 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/search-bar": {
+      "import": {
+        "types": "./dist/widgets/search-bar.d.ts",
+        "default": "./dist/widgets/search-bar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/search-bar.d.cts",
+        "default": "./dist/widgets/search-bar.cjs"
+      }
+    },
+    "./widgets/subscribe": {
+      "import": {
+        "types": "./dist/widgets/subscribe.d.ts",
+        "default": "./dist/widgets/subscribe.js"
+      },
+      "require": {
+        "types": "./dist/widgets/subscribe.d.cts",
+        "default": "./dist/widgets/subscribe.cjs"
+      }
+    },
+    "./widgets/download-button": {
+      "import": {
+        "types": "./dist/widgets/download-button.d.ts",
+        "default": "./dist/widgets/download-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/download-button.d.cts",
+        "default": "./dist/widgets/download-button.cjs"
+      }
+    },
+    "./widgets/reveal-footer": {
+      "import": {
+        "types": "./dist/widgets/reveal-footer.d.ts",
+        "default": "./dist/widgets/reveal-footer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/reveal-footer.d.cts",
+        "default": "./dist/widgets/reveal-footer.cjs"
+      }
+    },
+    "./widgets/shape-divider": {
+      "import": {
+        "types": "./dist/widgets/shape-divider.d.ts",
+        "default": "./dist/widgets/shape-divider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/shape-divider.d.cts",
+        "default": "./dist/widgets/shape-divider.cjs"
+      }
+    },
+    "./widgets/scroll-cue": {
+      "import": {
+        "types": "./dist/widgets/scroll-cue.d.ts",
+        "default": "./dist/widgets/scroll-cue.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-cue.d.cts",
+        "default": "./dist/widgets/scroll-cue.cjs"
+      }
+    },
+    "./widgets/virtual-list": {
+      "import": {
+        "types": "./dist/widgets/virtual-list.d.ts",
+        "default": "./dist/widgets/virtual-list.js"
+      },
+      "require": {
+        "types": "./dist/widgets/virtual-list.d.cts",
+        "default": "./dist/widgets/virtual-list.cjs"
+      }
+    },
+    "./widgets/infinite-scroll": {
+      "import": {
+        "types": "./dist/widgets/infinite-scroll.d.ts",
+        "default": "./dist/widgets/infinite-scroll.js"
+      },
+      "require": {
+        "types": "./dist/widgets/infinite-scroll.d.cts",
+        "default": "./dist/widgets/infinite-scroll.cjs"
+      }
+    },
+    "./widgets/context-menu": {
+      "import": {
+        "types": "./dist/widgets/context-menu.d.ts",
+        "default": "./dist/widgets/context-menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/context-menu.d.cts",
+        "default": "./dist/widgets/context-menu.cjs"
+      }
+    },
+    "./widgets/split-pane": {
+      "import": {
+        "types": "./dist/widgets/split-pane.d.ts",
+        "default": "./dist/widgets/split-pane.js"
+      },
+      "require": {
+        "types": "./dist/widgets/split-pane.d.cts",
+        "default": "./dist/widgets/split-pane.cjs"
+      }
+    },
+    "./widgets/desktop-windows": {
+      "import": {
+        "types": "./dist/widgets/desktop-windows.d.ts",
+        "default": "./dist/widgets/desktop-windows.js"
+      },
+      "require": {
+        "types": "./dist/widgets/desktop-windows.d.cts",
+        "default": "./dist/widgets/desktop-windows.cjs"
+      }
+    },
+    "./widgets/stack-slider": {
+      "import": {
+        "types": "./dist/widgets/stack-slider.d.ts",
+        "default": "./dist/widgets/stack-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/stack-slider.d.cts",
+        "default": "./dist/widgets/stack-slider.cjs"
+      }
+    },
+    "./widgets/morph-card": {
+      "import": {
+        "types": "./dist/widgets/morph-card.d.ts",
+        "default": "./dist/widgets/morph-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/morph-card.d.cts",
+        "default": "./dist/widgets/morph-card.cjs"
+      }
+    },
+    "./widgets/scroll-zoom": {
+      "import": {
+        "types": "./dist/widgets/scroll-zoom.d.ts",
+        "default": "./dist/widgets/scroll-zoom.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-zoom.d.cts",
+        "default": "./dist/widgets/scroll-zoom.cjs"
+      }
+    },
+    "./widgets/scroll-bg": {
+      "import": {
+        "types": "./dist/widgets/scroll-bg.d.ts",
+        "default": "./dist/widgets/scroll-bg.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-bg.d.cts",
+        "default": "./dist/widgets/scroll-bg.cjs"
+      }
+    },
+    "./widgets/image-tunnel": {
+      "import": {
+        "types": "./dist/widgets/image-tunnel.d.ts",
+        "default": "./dist/widgets/image-tunnel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/image-tunnel.d.cts",
+        "default": "./dist/widgets/image-tunnel.cjs"
+      }
+    },
+    "./widgets/orbit-gallery": {
+      "import": {
+        "types": "./dist/widgets/orbit-gallery.d.ts",
+        "default": "./dist/widgets/orbit-gallery.js"
+      },
+      "require": {
+        "types": "./dist/widgets/orbit-gallery.d.cts",
+        "default": "./dist/widgets/orbit-gallery.cjs"
+      }
+    },
+    "./widgets/clothesline": {
+      "import": {
+        "types": "./dist/widgets/clothesline.d.ts",
+        "default": "./dist/widgets/clothesline.js"
+      },
+      "require": {
+        "types": "./dist/widgets/clothesline.d.cts",
+        "default": "./dist/widgets/clothesline.cjs"
+      }
+    },
+    "./widgets/elastic-frame": {
+      "import": {
+        "types": "./dist/widgets/elastic-frame.d.ts",
+        "default": "./dist/widgets/elastic-frame.js"
+      },
+      "require": {
+        "types": "./dist/widgets/elastic-frame.d.cts",
+        "default": "./dist/widgets/elastic-frame.cjs"
+      }
+    },
+    "./widgets/border-beam": {
+      "import": {
+        "types": "./dist/widgets/border-beam.d.ts",
+        "default": "./dist/widgets/border-beam.js"
+      },
+      "require": {
+        "types": "./dist/widgets/border-beam.d.cts",
+        "default": "./dist/widgets/border-beam.cjs"
       }
     },
     "./widgets/sidebar": {

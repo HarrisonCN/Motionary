@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { o as ownChildren, d as dataNum } from '../chunks/kit-Dmjuhvd8.js';
+import { o as ownChildren, d as dataNum } from '../chunks/kit-DugHPVcq.js';
 import { c as css } from '../chunks/ui-blocks-CBiLi5cj.js';
 
 function defineBento(tag = 'usa-bento') {

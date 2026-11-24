@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (229)
+## Widgets (249)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,26 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-search-bar>` | `motionary/widgets/search-bar` | `defineSearchBar()` |
+| `<usa-subscribe>` | `motionary/widgets/subscribe` | `defineSubscribe()` |
+| `<usa-download-button>` | `motionary/widgets/download-button` | `defineDownloadButton()` |
+| `<usa-reveal-footer>` | `motionary/widgets/reveal-footer` | `defineRevealFooter()` |
+| `<usa-shape-divider>` | `motionary/widgets/shape-divider` | `defineShapeDivider()` |
+| `<usa-scroll-cue>` | `motionary/widgets/scroll-cue` | `defineScrollCue()` |
+| `<usa-virtual-list>` | `motionary/widgets/virtual-list` | `defineVirtualList()` |
+| `<usa-infinite-scroll>` | `motionary/widgets/infinite-scroll` | `defineInfiniteScroll()` |
+| `<usa-context-menu>` | `motionary/widgets/context-menu` | `defineContextMenu()` |
+| `<usa-split-pane>` | `motionary/widgets/split-pane` | `defineSplitPane()` |
+| `<usa-desktop-windows>` | `motionary/widgets/desktop-windows` | `defineDesktopWindows()` |
+| `<usa-stack-slider>` | `motionary/widgets/stack-slider` | `defineStackSlider()` |
+| `<usa-morph-card>` | `motionary/widgets/morph-card` | `defineMorphCard()` |
+| `<usa-scroll-zoom>` | `motionary/widgets/scroll-zoom` | `defineScrollZoom()` |
+| `<usa-scroll-bg>` | `motionary/widgets/scroll-bg` | `defineScrollBg()` |
+| `<usa-image-tunnel>` | `motionary/widgets/image-tunnel` | `defineImageTunnel()` |
+| `<usa-orbit-gallery>` | `motionary/widgets/orbit-gallery` | `defineOrbitGallery()` |
+| `<usa-clothesline>` | `motionary/widgets/clothesline` | `defineClothesline()` |
+| `<usa-elastic-frame>` | `motionary/widgets/elastic-frame` | `defineElasticFrame()` |
+| `<usa-border-beam>` | `motionary/widgets/border-beam` | `defineBorderBeam()` |
 | `<usa-sidebar>` | `motionary/widgets/sidebar` | `defineSidebar()` |
 | `<usa-scrollspy>` | `motionary/widgets/scrollspy` | `defineScrollspy()` |
 | `<usa-pricing>` | `motionary/widgets/pricing` | `definePricing()` |

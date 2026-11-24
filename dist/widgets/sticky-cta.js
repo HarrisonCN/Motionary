@@ -1,7 +1,7 @@
 import { f as defineElement, r as raf, b as caf } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { o as ownChildren } from '../chunks/kit-Dmjuhvd8.js';
+import { o as ownChildren } from '../chunks/kit-DugHPVcq.js';
 import { c as css } from '../chunks/ui-blocks-CBiLi5cj.js';
 
 function defineStickyCta(tag = 'usa-sticky-cta') {

@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->320<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->340<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンの変更点：[CHANGELOG.md](./CHANGELOG.md) · サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
 
@@ -38,9 +38,9 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 |---|---|---|
 | **スクロール表示** | 14 系統・214 個のプリセット：コアに 33 個、`motionary/presets/extended` にさらに 181 個（フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、グリッチ、スクロール連動の `scrub-*`）。ほかに `timeline()`、`staggerChildren()`、`parallax()` | [プリセット](./docs/presets.md) · [API](./docs/API.md) |
 | **コアコンポーネント** | `motionary/components` の <!--fact:core-->91<!--/fact--> 個の要素。テキスト、ボタン、カード、背景、トランジション、ジェスチャー、SVG、WebGL などのカテゴリ単位でインポート | [コンポーネント](#コンポーネント) |
-| **ウィジェット** | <!--fact:widgets-->229<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、フォーム、データとメディア、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
+| **ウィジェット** | <!--fact:widgets-->249<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、インターフェース部品、フォーム、データとメディア、奥行きのモーション、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
 | **エフェクト** | <!--fact:effects-->159<!--/fact--> 個のエフェクト。それぞれ独立したエントリ `motionary/effects/<name>` を持ち、`<mo-fx>` で任意の要素にも付けられる | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) |
-| **スタイルバリアント** | 6 つの組み込みスタイル（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`）。共通のデザイントークンで切り替え | [スタイルバリアント](#スタイルバリアント) |
+| **スタイルバリアントとスタイルプリセット** | 6 つの組み込みスタイルバリアント（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`）。共通のデザイントークンで切り替え。さらに 17.11 ウィジェット向けの 324 種のスタイルプリセット：12 パレット × 9 トリートメント × 3 ファミリー | [スタイルバリアント](#スタイルバリアント) · [スタイルプリセット](#スタイルプリセット) |
 | **Motion Core とランタイム** | `motionary/core` の `createMotion()`（約 2.5 KB gzip）と、`motionary/runtime` および 3 階層の <!--fact:runtimeModules-->21<!--/fact--> モジュール：スクロールシーン、スムーズスクロール、テキスト分割、SVG、スプライト、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [ランタイム](#ランタイムと階層) |
 | **フレームワーク** | `motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular` と要素ラッパー。サーバーでインポートしても何も起きません | [フレームワーク](#フレームワーク) |
 | **AI ワークフロー** | すべてのプレイグラウンドにある「AI プロンプトとしてコピー」、Agent Skill、読み取り専用の MCP サーバー、ローカルで動くテキストからモーションへの変換 | [AI ワークフロー](#ai-ワークフロー) |
@@ -193,6 +193,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 | [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレームエディタ。`<mo-player>` 用の JSON を書き出す |
 | [スクロールストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` のスクロールストーリーテンプレート |
 | [スタイル比較](https://harrisoncn.github.io/Motionary/showcase/styles.html) | 1 つのコンポーネントを 6 つのスタイルバリアントで並べ、それぞれにコピーボタン付き |
+| [スタイルプリセット](https://harrisoncn.github.io/Motionary/showcase/looks.html) | 324 種すべて。1 つ選ぶと、ページ上の実際のウィジェットがその見た目に切り替わる |
 | [クロスプラットフォームプレビュー](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 1 つのプリセットを Web、ミニプログラム、HarmonyOS ArkUI で表示 |
 | [demo/index.html](./demo/index.html) | 全プリセット、ビルド不要（ローカルで開く） |
 
@@ -249,6 +250,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 | コレクション | 内容 | ラボ · ドキュメント |
 |---|---|---|
+| ブロック・部品・奥行き（17.11） | 20 ウィジェット：ページブロック（検索バー、購読フォーム、ダウンロードボタン、リビールフッター、シェイプディバイダー）、インターフェース部品（仮想リスト、無限スクロール、コンテキストメニュー、分割ペイン、デスクトップウィンドウ、モーフカード）、奥行きのモーション（スクロールズーム、画像トンネル、オービットギャラリー、ボーダービーム）。[324 種のスタイルプリセット](#スタイルプリセット)に対応 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [ドキュメント](./docs/blocks-17-11.md) |
 | UI・コンポーネント・モーション（17.10） | 21 ウィジェット：ページブロック（サイドバー、スクロールスパイ、料金表、ベントーグリッド、追従 CTA）、データとメディア（ライトボックス、データテーブル、JSON ビューア、ホットスポット）、モーションサーフェス（横スクロール、画像トレイル、リキッドグラス、パスモーション） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [ドキュメント](./docs/kit-17-10.md) |
 | Moments & Tactile（17.9） | 34 ウィジェット：マイクロインタラクション、むにっとした触感コントロール、CSS だけのローダー、フォームの小さな演出（チップ入力、プラン選択、弾むスライダー、強度メーター） | [ラボ](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [ドキュメント](./docs/moments-tactile.md) |
 | Spatial Instruments（17.8） | ドラッグで探る 3D カード 3 種とエフェクト 3 種。オプトインの Three.js レンダラーで描画 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/instruments.html) · [ドキュメント](./docs/runtime/spatial-instruments.md) |
@@ -269,6 +271,20 @@ setVariant('glass'); // minimal · neon · glass · brutalist · fluent · mater
 ```
 
 トークンを自分で設定することもできます。並べて比べるには [スタイル比較ページ](https://harrisoncn.github.io/Motionary/showcase/styles.html) と [docs/components.md](./docs/components.md) を参照してください。
+
+### スタイルプリセット
+
+17.11 のウィジェットには、すぐに使えるスタイルプリセットが 324 種あります。12 パレット × 9 トリートメントを UI・コンポーネント・モーションの 3 ファミリーそれぞれに用意し、各 108 種です。トリートメントは色だけでなく、枠線、角丸、影、グロー、すりガラス、書体、画像フィルター、フレーム、ループ速度まで変えます。どのプリセットも文字のコントラストは WCAG AA を満たします。プリセットは `--mo-kit-*` トークンだけを設定するので、このトークンを読むウィジェットならどれでも使えます。
+
+```js
+import { adoptLooks, applyLook } from 'motionary/components/widgets';
+
+adoptLooks();                 // すべてのプリセット。adoptLooks('ui') なら 1 つのファミリーだけ
+// <mo-subscribe look="neon-ocean"></mo-subscribe>、または任意の祖先に data-mo-look="neon-ocean"
+applyLook(document.querySelector('mo-split-pane'), 'frosted-grape');
+```
+
+一覧は [スタイルプリセットのページ](https://harrisoncn.github.io/Motionary/showcase/looks.html) で見られます。名前、トークン、ヘルパー関数は [docs/looks-17-11.md](./docs/looks-17-11.md) にあります。
 
 ## ランタイムと階層
 
@@ -363,9 +379,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 72.03 KB | 79.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 88.60 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 112.10 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 72.11 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 88.70 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 112.20 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 既定ではスクロールリスナーを使わず（IntersectionObserver を使用）、アニメーションはコンポジタ上で動くプロパティ（`transform`、`opacity`、`filter`、`clip-path`）だけを使います。
@@ -390,7 +406,7 @@ el.animate(intent.keyframes, intent.options);
 
 | トピック | ドキュメント |
 |---|---|
-| リファレンス | [API](./docs/API.md) · [プリセット](./docs/presets.md)（全 214 種） · [コンポーネント](./docs/components.md) · [エントリポイント](./docs/entry-points.md) · [レイヤー別の公開 API](./docs/public-api.md) · [Motion Core](./docs/core.md) · [タイムラインエディタのモデル](./docs/timeline-editor.md) |
+| リファレンス | [API](./docs/API.md) · [プリセット](./docs/presets.md)（全 214 種） · [コンポーネント](./docs/components.md) · [スタイルプリセット](./docs/looks-17-11.md) · [エントリポイント](./docs/entry-points.md) · [レイヤー別の公開 API](./docs/public-api.md) · [Motion Core](./docs/core.md) · [タイムラインエディタのモデル](./docs/timeline-editor.md) |
 | ランタイム | [ランタイムの階層](./docs/runtime-tiers.md) · [モジュール](./docs/runtime/) · [互換性マトリクス](./docs/compat-matrix.md) |
 | プラットフォーム | [フレームワークと SSR](./docs/frameworks-ssr.md) · [フレームワークマトリクス](https://github.com/HarrisonCN/Motionary/blob/main/docs/frameworks-matrix.md) · [Windows アプリ](./docs/windows-apps.md) · [ハイブリッドアプリ（MAUI、Flutter、Electron、Tauri）](./docs/hybrid-apps.md) · [クロスプラットフォーム書き出し](./docs/cross-platform.md) · [サンプル](./examples/) |
 | デザインと AI | [Motion Studio 2.0 アプリ](./docs/studio-app.md) · [Motion Studio](./docs/studio.md) · [Studio の書き出し](./docs/studio-export.md) · [Studio テンプレート](./docs/studio-templates.md) · [Studio AI アシスタント](./docs/studio-ai.md) · [Studio アセット](./docs/studio-assets.md) · [Studio キャンバス](./docs/studio-canvas.md) · [レイアウトモーション 2.0](./docs/layout-motion.md) · [モーショントークン 2.0](./docs/motion-tokens.md) · [Figma プラグイン](./figma-plugin/README.md) · [MCP サーバー](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [プロンプトガイド](./docs/ai-prompt-guide.md) |

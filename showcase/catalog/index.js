@@ -22,8 +22,9 @@ import * as instruments from './instruments.js';
 import * as moments from './moments.js';
 import * as tactile from './tactile.js';
 import * as kit from './kit.js';
+import * as blocks from './blocks.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit, blocks];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));

@@ -2892,6 +2892,106 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/search-bar' (per-entry, fixed)",
+    "import": "import { defineSearchBar } from 'pkg/widgets/search-bar'; console.log(defineSearchBar);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/subscribe' (per-entry, fixed)",
+    "import": "import { defineSubscribe } from 'pkg/widgets/subscribe'; console.log(defineSubscribe);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/download-button' (per-entry, fixed)",
+    "import": "import { defineDownloadButton } from 'pkg/widgets/download-button'; console.log(defineDownloadButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/reveal-footer' (per-entry, fixed)",
+    "import": "import { defineRevealFooter } from 'pkg/widgets/reveal-footer'; console.log(defineRevealFooter);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/shape-divider' (per-entry, fixed)",
+    "import": "import { defineShapeDivider } from 'pkg/widgets/shape-divider'; console.log(defineShapeDivider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-cue' (per-entry, fixed)",
+    "import": "import { defineScrollCue } from 'pkg/widgets/scroll-cue'; console.log(defineScrollCue);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/virtual-list' (per-entry, fixed)",
+    "import": "import { defineVirtualList } from 'pkg/widgets/virtual-list'; console.log(defineVirtualList);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/infinite-scroll' (per-entry, fixed)",
+    "import": "import { defineInfiniteScroll } from 'pkg/widgets/infinite-scroll'; console.log(defineInfiniteScroll);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/context-menu' (per-entry, fixed)",
+    "import": "import { defineContextMenu } from 'pkg/widgets/context-menu'; console.log(defineContextMenu);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/split-pane' (per-entry, fixed)",
+    "import": "import { defineSplitPane } from 'pkg/widgets/split-pane'; console.log(defineSplitPane);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/desktop-windows' (per-entry, fixed)",
+    "import": "import { defineDesktopWindows } from 'pkg/widgets/desktop-windows'; console.log(defineDesktopWindows);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/stack-slider' (per-entry, fixed)",
+    "import": "import { defineStackSlider } from 'pkg/widgets/stack-slider'; console.log(defineStackSlider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/morph-card' (per-entry, fixed)",
+    "import": "import { defineMorphCard } from 'pkg/widgets/morph-card'; console.log(defineMorphCard);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-zoom' (per-entry, fixed)",
+    "import": "import { defineScrollZoom } from 'pkg/widgets/scroll-zoom'; console.log(defineScrollZoom);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-bg' (per-entry, fixed)",
+    "import": "import { defineScrollBg } from 'pkg/widgets/scroll-bg'; console.log(defineScrollBg);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/image-tunnel' (per-entry, fixed)",
+    "import": "import { defineImageTunnel } from 'pkg/widgets/image-tunnel'; console.log(defineImageTunnel);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/orbit-gallery' (per-entry, fixed)",
+    "import": "import { defineOrbitGallery } from 'pkg/widgets/orbit-gallery'; console.log(defineOrbitGallery);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/clothesline' (per-entry, fixed)",
+    "import": "import { defineClothesline } from 'pkg/widgets/clothesline'; console.log(defineClothesline);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/elastic-frame' (per-entry, fixed)",
+    "import": "import { defineElasticFrame } from 'pkg/widgets/elastic-frame'; console.log(defineElasticFrame);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/border-beam' (per-entry, fixed)",
+    "import": "import { defineBorderBeam } from 'pkg/widgets/border-beam'; console.log(defineBorderBeam);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->320<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：按钮、卡片、表单、加载动画、页面区块、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。纯 HTML、React、Vue、Svelte、Solid、Angular，以及 Electron、Tauri、WebView2 这类桌面 Web 视图都能直接使用。运行时零依赖，每个入口都可 tree-shaking 并在 CI 中实测 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->340<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：按钮、卡片、表单、加载动画、页面区块、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。纯 HTML、React、Vue、Svelte、Solid、Angular，以及 Electron、Tauri、WebView2 这类桌面 Web 视图都能直接使用。运行时零依赖，每个入口都可 tree-shaking 并在 CI 中实测 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明：[CHANGELOG.md](./CHANGELOG.md) · 供应链：[docs/supply-chain.md](./docs/supply-chain.md) · 带 SRI 哈希的 CDN 用法：[docs/cdn-sri.md](./docs/cdn-sri.md) · 与 AOS、GSAP、Lenis、Motion 的对比：[docs/compare](./docs/compare/README.md) · 在线试用：[StackBlitz 示例](./examples/stackblitz/README.md)。
 
@@ -38,9 +38,9 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 |---|---|---|
 | **滚动显现** | 14 个系列共 214 个预设：核心 33 个，`motionary/presets/extended` 再提供 181 个（淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、故障风、随滚动进度变化的 `scrub-*`）。另有 `timeline()`、`staggerChildren()`、`parallax()` | [预设](./docs/presets.md) · [API](./docs/API.md) |
 | **核心组件** | `motionary/components` 中的 <!--fact:core-->91<!--/fact--> 个元素，按分类导入：文字、按钮、卡片、背景、过渡、手势、SVG、WebGL 等 | [组件](#组件) |
-| **小部件** | <!--fact:widgets-->229<!--/fact--> 个元素，每个都有独立入口 `motionary/widgets/<name>`：页面区块、表单、数据与媒体、加载动画、触感控件、实时动态卡片、3D 仪器 | [主题合集](#主题合集) |
+| **小部件** | <!--fact:widgets-->249<!--/fact--> 个元素，每个都有独立入口 `motionary/widgets/<name>`：页面区块、界面部件、表单、数据与媒体、纵深动效、加载动画、触感控件、实时动态卡片、3D 仪器 | [主题合集](#主题合集) |
 | **效果** | <!--fact:effects-->159<!--/fact--> 个效果，每个都有独立入口 `motionary/effects/<name>`，也可以通过 `<mo-fx>` 加到任意元素上 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) |
-| **风格变体** | 六种内置风格（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`），通过共享的设计令牌切换 | [风格变体](#风格变体) |
+| **风格变体与样式预设** | 六种内置风格变体（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`），通过共享的设计令牌切换；另有 17.11 小部件专用的 324 种样式预设：12 套配色 × 9 种效果 × 3 类 | [风格变体](#风格变体) · [样式预设](#样式预设) |
 | **Motion Core 与运行时** | `motionary/core` 的 `createMotion()`（约 2.5 KB gzip），以及 `motionary/runtime` 和分为三级的 <!--fact:runtimeModules-->21<!--/fact--> 个模块：滚动场景、平滑滚动、文字拆分、SVG、精灵图、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [运行时](#运行时与分级) |
 | **框架** | `motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装。在服务端导入不会产生任何副作用 | [框架](#框架) |
 | **AI 工作流** | 每个演练场都有“复制为 AI 提示词”，另有 Agent Skill、只读 MCP 服务器和本地的文字转动效解析器 | [AI 工作流](#ai-工作流) |
@@ -193,6 +193,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 | [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑器，导出给 `<mo-player>` 用的 JSON |
 | [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` 滚动叙事模板 |
 | [风格对照](https://harrisoncn.github.io/Motionary/showcase/styles.html) | 同一个组件的六种风格变体，每种都有自己的复制按钮 |
+| [样式预设](https://harrisoncn.github.io/Motionary/showcase/looks.html) | 全部 324 种样式预设，点一种，页面上的真实组件就换上它 |
 | [跨平台预览](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 同一个预设分别在 Web、小程序和鸿蒙 ArkUI 中的效果 |
 | [demo/index.html](./demo/index.html) | 全部预设，无需构建（本地直接打开） |
 
@@ -249,6 +250,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 | 合集 | 内容 | 实验页 · 文档 |
 |---|---|---|
+| 页面块、组件与纵深动效（17.11） | 20 个小部件：页面区块（搜索栏、订阅框、下载按钮、揭示式页脚、形状分隔线）、界面部件（虚拟列表、无限滚动、右键菜单、分栏、桌面窗口、变形卡片）和纵深动效（滚动缩放、图片隧道、环绕画廊、边框光束）。可配合 [324 种样式预设](#样式预设) | [实验页](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [文档](./docs/blocks-17-11.md) |
 | 界面、组件与动效（17.10） | 21 个小部件：页面区块（侧边栏、目录跟随、价格表、便当格布局、吸底按钮）、数据与媒体（灯箱、数据表、JSON 查看器、热点图）和动效界面（横向滚动、图片拖尾、液态玻璃、路径动画） | [实验页](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [文档](./docs/kit-17-10.md) |
 | 微交互与触感（17.9） | 34 个小部件：微交互、Q 弹的触感控件、纯 CSS 加载动画、表单细节（标签输入、套餐选择、弹性滑块、密码强度） | [实验页](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [文档](./docs/moments-tactile.md) |
 | 空间仪器（17.8） | 3 个可拖动探索的 3D 卡片和 3 个效果，基于可选的 Three.js 渲染器 | [实验页](https://harrisoncn.github.io/Motionary/showcase/instruments.html) · [文档](./docs/runtime/spatial-instruments.md) |
@@ -269,6 +271,20 @@ setVariant('glass'); // minimal · neon · glass · brutalist · fluent · mater
 ```
 
 令牌也可以自己设置。并排对比见 [风格对照页](https://harrisoncn.github.io/Motionary/showcase/styles.html) 和 [docs/components.md](./docs/components.md)。
+
+### 样式预设
+
+17.11 的小部件另有 324 种现成的样式预设：12 套配色 × 9 种效果，分界面、组件、动效三类，每类 108 种。效果改的不只是颜色，还有边框、圆角、阴影、发光、毛玻璃、字体、图片滤镜、相框和循环速度；每种预设的文字对比度都达到 WCAG AA。预设只设置 `--mo-kit-*` 令牌，所以任何读取这些令牌的小部件都能用任意一种。
+
+```js
+import { adoptLooks, applyLook } from 'motionary/components/widgets';
+
+adoptLooks();                 // 加载全部预设，或 adoptLooks('ui') 只加载一类
+// <mo-subscribe look="neon-ocean"></mo-subscribe>，或在任意祖先元素上写 data-mo-look="neon-ocean"
+applyLook(document.querySelector('mo-split-pane'), 'frosted-grape');
+```
+
+在 [样式预设页](https://harrisoncn.github.io/Motionary/showcase/looks.html) 浏览全部预设；名称、令牌和辅助函数见 [docs/looks-17-11.md](./docs/looks-17-11.md)。
 
 ## 运行时与分级
 
@@ -363,9 +379,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 72.03 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 88.60 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 112.10 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 72.11 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 88.70 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 112.20 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 默认不注册滚动监听（改用 IntersectionObserver），动画只走合成层属性（`transform`、`opacity`、`filter`、`clip-path`）。
@@ -390,7 +406,7 @@ el.animate(intent.keyframes, intent.options);
 
 | 主题 | 文档 |
 |---|---|
-| 参考 | [API](./docs/API.md) · [预设](./docs/presets.md)（全部 214 个） · [组件](./docs/components.md) · [入口](./docs/entry-points.md) · [按分层的公开 API](./docs/public-api.md) · [Motion Core](./docs/core.md) · [时间线编辑器模型](./docs/timeline-editor.md) |
+| 参考 | [API](./docs/API.md) · [预设](./docs/presets.md)（全部 214 个） · [组件](./docs/components.md) · [样式预设](./docs/looks-17-11.md) · [入口](./docs/entry-points.md) · [按分层的公开 API](./docs/public-api.md) · [Motion Core](./docs/core.md) · [时间线编辑器模型](./docs/timeline-editor.md) |
 | 运行时 | [运行时分级](./docs/runtime-tiers.md) · [模块](./docs/runtime/) · [兼容性矩阵](./docs/compat-matrix.md) |
 | 平台 | [框架与 SSR](./docs/frameworks-ssr.md) · [框架矩阵](https://github.com/HarrisonCN/Motionary/blob/main/docs/frameworks-matrix.md) · [Windows 应用](./docs/windows-apps.md) · [混合应用（MAUI、Flutter、Electron、Tauri）](./docs/hybrid-apps.md) · [跨平台导出](./docs/cross-platform.md) · [示例](./examples/) |
 | 设计与 AI | [Motion Studio 2.0 应用](./docs/studio-app.md) · [Motion Studio](./docs/studio.md) · [Studio 导出](./docs/studio-export.md) · [Studio 模板](./docs/studio-templates.md) · [Studio AI 助手](./docs/studio-ai.md) · [Studio 素材](./docs/studio-assets.md) · [Studio 画布](./docs/studio-canvas.md) · [布局动效 2.0](./docs/layout-motion.md) · [动效令牌 2.0](./docs/motion-tokens.md) · [Figma 插件](./figma-plugin/README.md) · [MCP 服务器](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [提示词指南](./docs/ai-prompt-guide.md) |
