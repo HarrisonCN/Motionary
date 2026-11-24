@@ -20,4 +20,4 @@ function defineElasticMesh(tag = 'usa-elastic-mesh') {
 }
 
 export { defineElasticMesh };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/elastic-mesh.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/elastic-mesh.js.map

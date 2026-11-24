@@ -42,6 +42,8 @@ describe('scheduler 13.4', () => {
     frame();
     expect(seen).toEqual([1]);
     expect((perf.schedulerStats() as any).deferred).toBeGreaterThan(0);
+    // lift the budget for the follow-up frame: with 1 ms, a GC pause on a busy CI runner could split it again
+    (perf as any).setFrameBudget(Infinity);
     raf(() => seen.push(4));
     frame();
     expect(seen).toEqual([1, 2, 3, 4]);

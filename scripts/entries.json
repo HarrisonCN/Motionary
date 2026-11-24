@@ -1587,6 +1587,448 @@
  },
  {
   "kind": "widget",
+  "name": "eclipse-toggle",
+  "entry": "motionary/widgets/eclipse-toggle",
+  "src": "src/entries/widgets/eclipse-toggle.ts",
+  "tag": "usa-eclipse-toggle",
+  "define": "defineEclipseToggle",
+  "types": [
+   "UsaEclipseToggleElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/eclipse-toggle"
+ },
+ {
+  "kind": "widget",
+  "name": "hue-orbit",
+  "entry": "motionary/widgets/hue-orbit",
+  "src": "src/entries/widgets/hue-orbit.ts",
+  "tag": "usa-hue-orbit",
+  "define": "defineHueOrbit",
+  "types": [
+   "UsaHueOrbitElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hue-orbit"
+ },
+ {
+  "kind": "widget",
+  "name": "notch-slider",
+  "entry": "motionary/widgets/notch-slider",
+  "src": "src/entries/widgets/notch-slider.ts",
+  "tag": "usa-notch-slider",
+  "define": "defineNotchSlider",
+  "types": [
+   "UsaNotchSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/notch-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "bulge-volume",
+  "entry": "motionary/widgets/bulge-volume",
+  "src": "src/entries/widgets/bulge-volume.ts",
+  "tag": "usa-bulge-volume",
+  "define": "defineBulgeVolume",
+  "types": [
+   "UsaBulgeVolumeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bulge-volume"
+ },
+ {
+  "kind": "widget",
+  "name": "copy-button",
+  "entry": "motionary/widgets/copy-button",
+  "src": "src/entries/widgets/copy-button.ts",
+  "tag": "usa-copy-button",
+  "define": "defineCopyButton",
+  "types": [
+   "UsaCopyButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/copy-button"
+ },
+ {
+  "kind": "widget",
+  "name": "tile-relay",
+  "entry": "motionary/widgets/tile-relay",
+  "src": "src/entries/widgets/tile-relay.ts",
+  "tag": "usa-tile-relay",
+  "define": "defineTileRelay",
+  "types": [
+   "UsaTileRelayElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tile-relay"
+ },
+ {
+  "kind": "widget",
+  "name": "squish-key",
+  "entry": "motionary/widgets/squish-key",
+  "src": "src/entries/widgets/squish-key.ts",
+  "tag": "usa-squish-key",
+  "define": "defineSquishKey",
+  "types": [
+   "UsaSquishKeyElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/squish-key"
+ },
+ {
+  "kind": "widget",
+  "name": "squish-stepper",
+  "entry": "motionary/widgets/squish-stepper",
+  "src": "src/entries/widgets/squish-stepper.ts",
+  "tag": "usa-squish-stepper",
+  "define": "defineSquishStepper",
+  "types": [
+   "UsaSquishStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/squish-stepper"
+ },
+ {
+  "kind": "widget",
+  "name": "analog-stick",
+  "entry": "motionary/widgets/analog-stick",
+  "src": "src/entries/widgets/analog-stick.ts",
+  "tag": "usa-analog-stick",
+  "define": "defineAnalogStick",
+  "types": [
+   "UsaAnalogStickElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/analog-stick"
+ },
+ {
+  "kind": "widget",
+  "name": "transfer-button",
+  "entry": "motionary/widgets/transfer-button",
+  "src": "src/entries/widgets/transfer-button.ts",
+  "tag": "usa-transfer-button",
+  "define": "defineTransferButton",
+  "types": [
+   "UsaTransferButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/transfer-button"
+ },
+ {
+  "kind": "widget",
+  "name": "six-dot-orbit",
+  "entry": "motionary/widgets/six-dot-orbit",
+  "src": "src/entries/widgets/six-dot-orbit.ts",
+  "tag": "usa-six-dot-orbit",
+  "define": "defineSixDotOrbit",
+  "types": [
+   "UsaSixDotOrbitElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/six-dot-orbit"
+ },
+ {
+  "kind": "widget",
+  "name": "center-bars",
+  "entry": "motionary/widgets/center-bars",
+  "src": "src/entries/widgets/center-bars.ts",
+  "tag": "usa-center-bars",
+  "define": "defineCenterBars",
+  "types": [
+   "UsaCenterBarsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/center-bars"
+ },
+ {
+  "kind": "widget",
+  "name": "quarter-ring",
+  "entry": "motionary/widgets/quarter-ring",
+  "src": "src/entries/widgets/quarter-ring.ts",
+  "tag": "usa-quarter-ring",
+  "define": "defineQuarterRing",
+  "types": [
+   "UsaQuarterRingElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/quarter-ring"
+ },
+ {
+  "kind": "widget",
+  "name": "triple-pulse",
+  "entry": "motionary/widgets/triple-pulse",
+  "src": "src/entries/widgets/triple-pulse.ts",
+  "tag": "usa-triple-pulse",
+  "define": "defineTriplePulse",
+  "types": [
+   "UsaTriplePulseElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/triple-pulse"
+ },
+ {
+  "kind": "widget",
+  "name": "breath-orb",
+  "entry": "motionary/widgets/breath-orb",
+  "src": "src/entries/widgets/breath-orb.ts",
+  "tag": "usa-breath-orb",
+  "define": "defineBreathOrb",
+  "types": [
+   "UsaBreathOrbElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/breath-orb"
+ },
+ {
+  "kind": "widget",
+  "name": "three-dot-bounce",
+  "entry": "motionary/widgets/three-dot-bounce",
+  "src": "src/entries/widgets/three-dot-bounce.ts",
+  "tag": "usa-three-dot-bounce",
+  "define": "defineThreeDotBounce",
+  "types": [
+   "UsaThreeDotBounceElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/three-dot-bounce"
+ },
+ {
+  "kind": "widget",
+  "name": "infinity-loop",
+  "entry": "motionary/widgets/infinity-loop",
+  "src": "src/entries/widgets/infinity-loop.ts",
+  "tag": "usa-infinity-loop",
+  "define": "defineInfinityLoop",
+  "types": [
+   "UsaInfinityLoopElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/infinity-loop"
+ },
+ {
+  "kind": "widget",
+  "name": "sweep-lines",
+  "entry": "motionary/widgets/sweep-lines",
+  "src": "src/entries/widgets/sweep-lines.ts",
+  "tag": "usa-sweep-lines",
+  "define": "defineSweepLines",
+  "types": [
+   "UsaSweepLinesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sweep-lines"
+ },
+ {
+  "kind": "widget",
+  "name": "wifi-signal",
+  "entry": "motionary/widgets/wifi-signal",
+  "src": "src/entries/widgets/wifi-signal.ts",
+  "tag": "usa-wifi-signal",
+  "define": "defineWifiSignal",
+  "types": [
+   "UsaWifiSignalElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/wifi-signal"
+ },
+ {
+  "kind": "widget",
+  "name": "text-reveal",
+  "entry": "motionary/widgets/text-reveal",
+  "src": "src/entries/widgets/text-reveal.ts",
+  "tag": "usa-text-reveal",
+  "define": "defineTextReveal",
+  "types": [
+   "UsaTextRevealElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/text-reveal"
+ },
+ {
+  "kind": "widget",
+  "name": "jelly-button",
+  "entry": "motionary/widgets/jelly-button",
+  "src": "src/entries/widgets/jelly-button.ts",
+  "tag": "usa-jelly-button",
+  "define": "defineJellyButton",
+  "types": [
+   "UsaJellyButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/jelly-button"
+ },
+ {
+  "kind": "widget",
+  "name": "bounce-button",
+  "entry": "motionary/widgets/bounce-button",
+  "src": "src/entries/widgets/bounce-button.ts",
+  "tag": "usa-bounce-button",
+  "define": "defineBounceButton",
+  "types": [
+   "UsaBounceButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bounce-button"
+ },
+ {
+  "kind": "widget",
+  "name": "tada-button",
+  "entry": "motionary/widgets/tada-button",
+  "src": "src/entries/widgets/tada-button.ts",
+  "tag": "usa-tada-button",
+  "define": "defineTadaButton",
+  "types": [
+   "UsaTadaButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tada-button"
+ },
+ {
+  "kind": "widget",
+  "name": "groove-toggle",
+  "entry": "motionary/widgets/groove-toggle",
+  "src": "src/entries/widgets/groove-toggle.ts",
+  "tag": "usa-groove-toggle",
+  "define": "defineGrooveToggle",
+  "types": [
+   "UsaGrooveToggleElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/groove-toggle"
+ },
+ {
+  "kind": "widget",
+  "name": "cart-badge",
+  "entry": "motionary/widgets/cart-badge",
+  "src": "src/entries/widgets/cart-badge.ts",
+  "tag": "usa-cart-badge",
+  "define": "defineCartBadge",
+  "types": [
+   "UsaCartBadgeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/cart-badge"
+ },
+ {
+  "kind": "widget",
+  "name": "chip-input",
+  "entry": "motionary/widgets/chip-input",
+  "src": "src/entries/widgets/chip-input.ts",
+  "tag": "usa-chip-input",
+  "define": "defineChipInput",
+  "types": [
+   "UsaChipInputElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/chip-input"
+ },
+ {
+  "kind": "widget",
+  "name": "plan-picker",
+  "entry": "motionary/widgets/plan-picker",
+  "src": "src/entries/widgets/plan-picker.ts",
+  "tag": "usa-plan-picker",
+  "define": "definePlanPicker",
+  "types": [
+   "UsaPlanPickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/plan-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "align-switch",
+  "entry": "motionary/widgets/align-switch",
+  "src": "src/entries/widgets/align-switch.ts",
+  "tag": "usa-align-switch",
+  "define": "defineAlignSwitch",
+  "types": [
+   "UsaAlignSwitchElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/align-switch"
+ },
+ {
+  "kind": "widget",
+  "name": "elastic-slider",
+  "entry": "motionary/widgets/elastic-slider",
+  "src": "src/entries/widgets/elastic-slider.ts",
+  "tag": "usa-elastic-slider",
+  "define": "defineElasticSlider",
+  "types": [
+   "UsaElasticSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/elastic-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "code-shake",
+  "entry": "motionary/widgets/code-shake",
+  "src": "src/entries/widgets/code-shake.ts",
+  "tag": "usa-code-shake",
+  "define": "defineCodeShake",
+  "types": [
+   "UsaCodeShakeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/code-shake"
+ },
+ {
+  "kind": "widget",
+  "name": "strength-meter",
+  "entry": "motionary/widgets/strength-meter",
+  "src": "src/entries/widgets/strength-meter.ts",
+  "tag": "usa-strength-meter",
+  "define": "defineStrengthMeter",
+  "types": [
+   "UsaStrengthMeterElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/strength-meter"
+ },
+ {
+  "kind": "widget",
+  "name": "step-track",
+  "entry": "motionary/widgets/step-track",
+  "src": "src/entries/widgets/step-track.ts",
+  "tag": "usa-step-track",
+  "define": "defineStepTrack",
+  "types": [
+   "UsaStepTrackElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/step-track"
+ },
+ {
+  "kind": "widget",
+  "name": "elastic-accordion",
+  "entry": "motionary/widgets/elastic-accordion",
+  "src": "src/entries/widgets/elastic-accordion.ts",
+  "tag": "usa-elastic-accordion",
+  "define": "defineElasticAccordion",
+  "types": [
+   "UsaElasticAccordionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/elastic-accordion"
+ },
+ {
+  "kind": "widget",
+  "name": "squish-indicator",
+  "entry": "motionary/widgets/squish-indicator",
+  "src": "src/entries/widgets/squish-indicator.ts",
+  "tag": "usa-squish-indicator",
+  "define": "defineSquishIndicator",
+  "types": [
+   "UsaSquishIndicatorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/squish-indicator"
+ },
+ {
+  "kind": "widget",
   "name": "lens-stack",
   "entry": "motionary/widgets/lens-stack",
   "src": "src/entries/widgets/lens-stack.ts",

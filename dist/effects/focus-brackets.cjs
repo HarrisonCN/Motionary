@@ -15,4 +15,4 @@ function registerFocusBrackets() {
 exports.effect = effect;
 exports.register = registerFocusBrackets;
 exports.registerFocusBrackets = registerFocusBrackets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/focus-brackets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/focus-brackets.cjs.map

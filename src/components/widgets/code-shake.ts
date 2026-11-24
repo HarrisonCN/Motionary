@@ -1,0 +1,123 @@
+import { defineElement, type UsaElement } from '../base';
+import { defineMoName } from './mo-name';
+import { bound, make } from './moments';
+import css from './moments-ui.css?raw';
+
+/** A side-to-side shake that dies down. */
+export const SHAKE_FRAMES: Keyframe[] = [
+  { transform: 'translateX(0)' },
+  { transform: 'translateX(-9px)', offset: 0.12 },
+  { transform: 'translateX(8px)', offset: 0.28 },
+  { transform: 'translateX(-6px)', offset: 0.44 },
+  { transform: 'translateX(4px)', offset: 0.6 },
+  { transform: 'translateX(-2px)', offset: 0.78 },
+  { transform: 'translateX(0)' },
+];
+
+/** Keep the digits of `text`, at most `length` of them. */
+export function digitsOf(text: string, length: number): string[] {
+  return Array.from(String(text).replace(/\D/g, '')).slice(0, length);
+}
+
+/**
+ * A one-time code field: one box per digit that moves focus on as you type, takes a pasted code across the boxes,
+ * and shakes and clears when the page calls `reject()`. `accept()` marks it as right. The code never leaves the element
+ * in an event; the page reads `value` when `usa:complete` fires.
+ *
+ * Attributes: `length` (4–8, 4), `label` (Verification code), `disabled`. Property `value`. Methods `reject()`,
+ * `accept()`, `clear()`. Events `usa:complete` ({ length }) when every box is filled.
+ */
+export interface UsaCodeShakeElement extends UsaElement {
+  readonly value: string;
+  reject(): void;
+  accept(): void;
+  clear(): void;
+}
+
+export function defineCodeShake(tag = 'usa-code-shake'): CustomElementConstructor | undefined {
+  const ctor = defineElement(tag, Base => class CodeShake extends Base {
+    static get observedAttributes(): string[] { return ['length', 'label', 'disabled']; }
+    private _boxes: HTMLInputElement[] = [];
+    private _sync?: () => void;
+    private _shake?: () => void;
+    private _state?: (state: '' | 'ok' | 'error') => void;
+    get value(): string { return this._boxes.map((b) => b.value).join(''); }
+    reject(): void { this._shake?.(); }
+    accept(): void { this._state?.('ok'); }
+    clear(): void {
+      this._boxes.forEach((b) => { b.value = ''; });
+      this._state?.('');
+      this._boxes[0]?.focus();
+    }
+    changed(name: string): void { if (name === 'length') super.changed(name); else this._sync?.(); }
+    mount(): void {
+      const length = Math.round(bound(this.num('length', 4), 4, 8, 4));
+      const root = make('fieldset', 'usa-moment usa-code');
+      const legend = make('legend', 'usa-code-label');
+      const row = make('span', 'usa-code-row');
+      const status = make('span', 'usa-sr');
+      status.setAttribute('role', 'status');
+      const boxes = Array.from({ length }, (_, i) => {
+        const box = make('input', 'usa-code-box');
+        box.type = 'text'; box.inputMode = 'numeric'; box.maxLength = 1; box.autocomplete = i === 0 ? 'one-time-code' : 'off';
+        box.setAttribute('pattern', '[0-9]*');
+        box.setAttribute('aria-label', `Digit ${i + 1} of ${length}`);
+        row.append(box);
+        return box;
+      });
+      this._boxes = boxes;
+      root.append(legend, row, status);
+      this.append(root);
+      let run: Animation | null = null;
+      const state = (s: '' | 'ok' | 'error') => {
+        if (s) root.dataset.state = s; else delete root.dataset.state;
+        status.textContent = s === 'ok' ? 'Code accepted' : s === 'error' ? 'Wrong code, try again' : '';
+      };
+      this._state = state;
+      this._shake = () => {
+        state('error');
+        run?.cancel();
+        run = this.motion(row, SHAKE_FRAMES, { duration: 460, easing: 'ease-out' });
+        boxes.forEach((b) => { b.value = ''; });
+        boxes[0]?.focus();
+      };
+      const fill = (from: number, text: string) => {
+        const digits = digitsOf(text, length - from);
+        digits.forEach((d, k) => { boxes[from + k].value = d; });
+        const next = Math.min(length - 1, from + digits.length);
+        boxes[next].focus();
+        if (boxes.every((b) => b.value)) this.emit('complete', { length });
+      };
+      const sync = () => {
+        legend.textContent = this.str('label', 'Verification code');
+        const disabled = this.flag('disabled');
+        root.disabled = disabled;
+        root.toggleAttribute('data-static', this.reduced);
+      };
+      this._sync = sync;
+      boxes.forEach((box, i) => {
+        this.listen(box, 'input', () => {
+          if (root.dataset.state) state('');
+          const text = box.value;
+          box.value = '';
+          if (text) fill(i, text);
+        });
+        this.listen(box, 'keydown', (e: KeyboardEvent) => {
+          if (e.key === 'Backspace' && !box.value && i > 0) { boxes[i - 1].value = ''; boxes[i - 1].focus(); e.preventDefault(); }
+          else if (e.key === 'ArrowLeft' && i > 0) { boxes[i - 1].focus(); e.preventDefault(); }
+          else if (e.key === 'ArrowRight' && i < length - 1) { boxes[i + 1].focus(); e.preventDefault(); }
+        });
+        this.listen(box, 'paste', (e: ClipboardEvent) => {
+          e.preventDefault();
+          if (root.dataset.state) state('');
+          fill(i, e.clipboardData?.getData('text') || '');
+        });
+        this.listen(box, 'focus', () => box.select());
+      });
+      this.onCleanup(() => { run?.cancel(); root.remove(); this._boxes = []; this._sync = undefined; this._shake = undefined; this._state = undefined; });
+      sync();
+    }
+  }, { id: 'moment-ui', text: css });
+  defineMoName(tag, ctor);
+  return ctor;
+}

@@ -22,4 +22,4 @@ function defineReactionField(tag = 'usa-reaction-field') {
 }
 
 exports.defineReactionField = defineReactionField;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/reaction-field.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/reaction-field.cjs.map

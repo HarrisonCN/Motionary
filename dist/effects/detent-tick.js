@@ -11,4 +11,4 @@ function registerDetentTick() {
 }
 
 export { effect, registerDetentTick as register, registerDetentTick };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/detent-tick.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/detent-tick.js.map

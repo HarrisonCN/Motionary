@@ -2,7 +2,8 @@
  * Visual playground (v3.7): no build step, dogfoods ../dist/components.js
  * (CDN fallback). State lives in the URL hash so compositions can be shared.
  */
-import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DEFAULT_STATE, DEFAULT_TRACKS, TRACK_PRESETS, TRACK_LIMITS, findEffect, newTrack, normalizeTracks, tracksDuration, trackBar, dragTrack, timelineMarkup, listPresets, savePreset, loadPreset, deletePreset, presetToJSON, presetFromJSON, newLayer, composeMarkup, playgroundSnippets, encodeState, decodeState } from './playground-core.js';
+import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DEFAULT_STATE, DEFAULT_TRACKS, TRACK_PRESETS, TRACK_LIMITS, findEffect, newTrack, normalizeTracks, tracksDuration, trackBar, dragTrack, timelineMarkup, listPresets, savePreset, loadPreset, deletePreset, presetToJSON, presetFromJSON, newLayer, composeMarkup, playgroundSnippets, playgroundParams, encodeState, decodeState } from './playground-core.js';
+import { paramPrompt } from './param-prompt.js';
 import { highlight } from './codegen.js';
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
@@ -225,6 +226,7 @@ async function boot() {
     setTimeout(() => (btn.textContent = t(idle)), 1200);
   };
   $('#pg-copy').addEventListener('click', () => copy($('#pg-copy'), playgroundSnippets(state)[tab], 'copied', 'copy'));
+  $('#pg-copy-prompt').addEventListener('click', () => copy($('#pg-copy-prompt'), paramPrompt({ name: t('title'), params: playgroundParams(state), code: playgroundSnippets(state).html, fence: 'html', lang }), 'copied', 'copyPrompt'));
   $('#pg-share').addEventListener('click', () => copy($('#pg-share'), location.href, 'copied', 'share'));
   $('#pg-lang').addEventListener('click', () => {
     lang = lang === 'zh' ? 'en' : 'zh';

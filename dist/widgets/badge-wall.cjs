@@ -5,4 +5,4 @@ var widgets_badgeWall = require('../chunks/badge-wall-nHmls1DJ.cjs');
 
 
 exports.defineBadgeWall = widgets_badgeWall.defineBadgeWall;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/badge-wall.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/badge-wall.cjs.map

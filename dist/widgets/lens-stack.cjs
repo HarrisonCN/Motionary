@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var instrumentPanel = require('../chunks/instrument-panel-BFEIBs0Q.cjs');
+var instrumentPanel = require('../chunks/instrument-panel-DDBfyoY7.cjs');
 
 function defineLensStack(tag = 'usa-lens-stack') {
     const ctor = base.defineElement(tag, Base => class LensStack extends Base {
@@ -20,4 +20,4 @@ function defineLensStack(tag = 'usa-lens-stack') {
 }
 
 exports.defineLensStack = defineLensStack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/lens-stack.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/lens-stack.cjs.map

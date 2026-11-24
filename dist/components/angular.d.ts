@@ -352,6 +352,10 @@ interface UsaRippleElement extends UsaElement {
  * (px of attraction beyond the element's edge, 60), `disabled`. Only on
  * devices with a fine pointer that hovers; off under reduced motion.
  * Writes one `transform` per frame through `--usa-mx` / `--usa-my`.
+ *
+ * 17.9: `release="spring"` — when the pointer leaves, the content springs home from where it was, carrying the speed
+ * the pointer left with (a fast exit overshoots a little and settles, a slow one glides back). The default (`ease`)
+ * keeps the CSS transition.
  */
 type UsaMagneticElement = UsaElement;
 
@@ -1685,12 +1689,22 @@ interface LegacyAttributes {
         item?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-align-switch': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-ambient': {
         color?: string | boolean | number;
         density?: string | boolean | number;
         effect?: string | boolean | number;
         opacity?: string | boolean | number;
         speed?: string | boolean | number;
+    };
+    'usa-analog-stick': {
+        'dead-zone'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-anim-icon': {
         label?: string | boolean | number;
@@ -1770,9 +1784,24 @@ interface LegacyAttributes {
         snap?: string | boolean | number;
         start?: string | boolean | number;
     };
+    'usa-bounce-button': {
+        direction?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-breadcrumbs': {
         label?: string | boolean | number;
         max?: string | boolean | number;
+    };
+    'usa-breath-orb': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+    };
+    'usa-bulge-volume': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-button': {
         deform?: string | boolean | number;
@@ -1812,10 +1841,22 @@ interface LegacyAttributes {
         perspective?: string | boolean | number;
         radius?: string | boolean | number;
     };
+    'usa-cart-badge': {
+        'add-label'?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+    };
     'usa-cart-drawer': {
         currency?: string | boolean | number;
         items?: string | boolean | number;
         label?: string | boolean | number;
+    };
+    'usa-center-bars': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-chapter-nav': {
         for?: string | boolean | number;
@@ -1842,6 +1883,14 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-chip-input': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-click': {
         color?: string | boolean | number;
         count?: string | boolean | number;
@@ -1858,6 +1907,11 @@ interface LegacyAttributes {
     'usa-code-export': {
         for?: string | boolean | number;
         formats?: string | boolean | number;
+    };
+    'usa-code-shake': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        length?: string | boolean | number;
     };
     'usa-coffee-timer': {
         animated?: string | boolean | number;
@@ -1906,6 +1960,15 @@ interface LegacyAttributes {
     'usa-contour-relief': {
         label?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-copy-button': {
+        disabled?: string | boolean | number;
+        'done-label'?: string | boolean | number;
+        duration?: string | boolean | number;
+        'fail-label'?: string | boolean | number;
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+        text?: string | boolean | number;
     };
     'usa-countdown': {
         label?: string | boolean | number;
@@ -2029,6 +2092,16 @@ interface LegacyAttributes {
         trigger?: string | boolean | number;
     };
     'usa-drawer': {};
+    'usa-eclipse-toggle': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    'usa-elastic-accordion': {
+        disabled?: string | boolean | number;
+        heading?: string | boolean | number;
+        open?: string | boolean | number;
+    };
     'usa-elastic-mesh': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2037,6 +2110,17 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         paused?: string | boolean | number;
         strength?: string | boolean | number;
+    };
+    'usa-elastic-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        ticks?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-equalizer': {
         bands?: string | boolean | number;
@@ -2217,6 +2301,11 @@ interface LegacyAttributes {
         radius?: string | boolean | number;
         size?: string | boolean | number;
     };
+    'usa-groove-toggle': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+    };
     'usa-gyro-card': {
         glare?: string | boolean | number;
         max?: string | boolean | number;
@@ -2267,6 +2356,14 @@ interface LegacyAttributes {
         status?: string | boolean | number;
         title?: string | boolean | number;
     };
+    'usa-hue-orbit': {
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hue?: string | boolean | number;
+        label?: string | boolean | number;
+        lightness?: string | boolean | number;
+        saturation?: string | boolean | number;
+    };
     'usa-hydrate': {
         duration?: string | boolean | number;
         effect?: string | boolean | number;
@@ -2279,6 +2376,11 @@ interface LegacyAttributes {
         preset?: string | boolean | number;
         size?: string | boolean | number;
         toggle?: string | boolean | number;
+    };
+    'usa-infinity-loop': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-ink-flow': {
         accent?: string | boolean | number;
@@ -2301,6 +2403,11 @@ interface LegacyAttributes {
     'usa-iris-diaphragm': {
         label?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-jelly-button': {
+        disabled?: string | boolean | number;
+        glyph?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-kanban': {
         label?: string | boolean | number;
@@ -2409,6 +2516,7 @@ interface LegacyAttributes {
     'usa-magnetic': {
         disabled?: string | boolean | number;
         radius?: string | boolean | number;
+        release?: string | boolean | number;
         strength?: string | boolean | number;
     };
     'usa-magnetic-field': {
@@ -2546,6 +2654,18 @@ interface LegacyAttributes {
         target?: string | boolean | number;
         threshold?: string | boolean | number;
     };
+    'usa-notch-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        notches?: string | boolean | number;
+        snap?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-notification-bell': {
         label?: string | boolean | number;
     };
@@ -2679,6 +2799,13 @@ interface LegacyAttributes {
         min?: string | boolean | number;
         preset?: string | boolean | number;
     };
+    'usa-plan-picker': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        plans?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-player': {
         controls?: string | boolean | number;
         loop?: string | boolean | number;
@@ -2753,6 +2880,11 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
         threshold?: string | boolean | number;
+    };
+    'usa-quarter-ring': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-race-telemetry': {
         animated?: string | boolean | number;
@@ -2984,6 +3116,11 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         listen?: string | boolean | number;
     };
+    'usa-six-dot-orbit': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+    };
     'usa-skeleton': {
         avatar?: string | boolean | number;
         circle?: string | boolean | number;
@@ -3084,6 +3221,27 @@ interface LegacyAttributes {
         mass?: string | boolean | number;
         stiffness?: string | boolean | number;
     };
+    'usa-squish-indicator': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-squish-key': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        shape?: string | boolean | number;
+        tone?: string | boolean | number;
+    };
+    'usa-squish-stepper': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-stagger': {
         delay?: string | boolean | number;
         distance?: string | boolean | number;
@@ -3113,6 +3271,12 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-step-track': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        steps?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-stepper': {
         clickable?: string | boolean | number;
         label?: string | boolean | number;
@@ -3136,6 +3300,12 @@ interface LegacyAttributes {
         template?: string | boolean | number;
         zoom?: string | boolean | number;
     };
+    'usa-strength-meter': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+    };
     'usa-suggestion-chips': {
         dismiss?: string | boolean | number;
         items?: string | boolean | number;
@@ -3153,6 +3323,11 @@ interface LegacyAttributes {
         sunset?: string | boolean | number;
         'sunset-label'?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-sweep-lines': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-swipe-deck': {
         label?: string | boolean | number;
@@ -3180,6 +3355,11 @@ interface LegacyAttributes {
     'usa-tabs': {
         indicator?: string | boolean | number;
     };
+    'usa-tada-button': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+    };
     'usa-terminal': {
         loop?: string | boolean | number;
         prompt?: string | boolean | number;
@@ -3190,6 +3370,12 @@ interface LegacyAttributes {
     'usa-text-loupe': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    'usa-text-reveal': {
+        by?: string | boolean | number;
+        once?: string | boolean | number;
+        stagger?: string | boolean | number;
         text?: string | boolean | number;
     };
     'usa-text-rotate': {
@@ -3229,6 +3415,17 @@ interface LegacyAttributes {
         target?: string | boolean | number;
         themes?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-three-dot-bounce': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+    };
+    'usa-tile-relay': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        size?: string | boolean | number;
     };
     'usa-tilt': {
         disabled?: string | boolean | number;
@@ -3270,6 +3467,12 @@ interface LegacyAttributes {
         groups?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-transfer-button': {
+        direction?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        progress?: string | boolean | number;
+    };
     'usa-transit-progress': {
         animated?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -3277,6 +3480,11 @@ interface LegacyAttributes {
         running?: string | boolean | number;
         stations?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-triple-pulse': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-typewriter': {
         delay?: string | boolean | number;
@@ -3347,6 +3555,11 @@ interface LegacyAttributes {
         temp?: string | boolean | number;
         unit?: string | boolean | number;
     };
+    'usa-wifi-signal': {
+        label?: string | boolean | number;
+        level?: string | boolean | number;
+        searching?: string | boolean | number;
+    };
     'usa-worker-canvas': {
         label?: string | boolean | number;
         scene?: string | boolean | number;
@@ -3378,7 +3591,14 @@ interface LegacyEvents {
     'usa-add-to-cart': {
         'usa:add': CustomEvent<any>;
     };
+    'usa-align-switch': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-ambient': {};
+    'usa-analog-stick': {
+        'usa:move': CustomEvent<any>;
+        'usa:release': CustomEvent<any>;
+    };
     'usa-anim-icon': {};
     'usa-audio': {
         'usa:audio-error': CustomEvent<any>;
@@ -3403,8 +3623,16 @@ interface LegacyEvents {
     };
     'usa-blobs': {};
     'usa-bottom-sheet': {};
+    'usa-bounce-button': {
+        'usa:press': CustomEvent<any>;
+    };
     'usa-breadcrumbs': {
         'usa:expand': CustomEvent<any>;
+    };
+    'usa-breath-orb': {};
+    'usa-bulge-volume': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-button': {
         'usa:state': CustomEvent<any>;
@@ -3425,11 +3653,16 @@ interface LegacyEvents {
     'usa-carousel-3d': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-cart-badge': {
+        'usa:add': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
     'usa-cart-drawer': {
         'usa:change': CustomEvent<any>;
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
     };
+    'usa-center-bars': {};
     'usa-chapter-nav': {
         'usa:chapter': CustomEvent<any>;
     };
@@ -3443,6 +3676,9 @@ interface LegacyEvents {
     'usa-checkbox': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-chip-input': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-click': {
         'usa:click-effect': CustomEvent<any>;
     };
@@ -3451,6 +3687,9 @@ interface LegacyEvents {
     };
     'usa-code-export': {
         'usa:copy': CustomEvent<any>;
+    };
+    'usa-code-shake': {
+        'usa:complete': CustomEvent<any>;
     };
     'usa-coffee-timer': {
         'usa:action': CustomEvent<any>;
@@ -3481,6 +3720,9 @@ interface LegacyEvents {
     'usa-contour-relief': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
+    };
+    'usa-copy-button': {
+        'usa:copy': CustomEvent<any>;
     };
     'usa-countdown': {
         'usa:done': CustomEvent<any>;
@@ -3542,9 +3784,19 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
     };
     'usa-drawer': {};
+    'usa-eclipse-toggle': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-elastic-accordion': {
+        'usa:toggle': CustomEvent<any>;
+    };
     'usa-elastic-mesh': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
+    };
+    'usa-elastic-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-equalizer': {
         'usa:change': CustomEvent<any>;
@@ -3622,6 +3874,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-grid-glow': {};
+    'usa-groove-toggle': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-gyro-card': {
         'usa:tilt': CustomEvent<any>;
     };
@@ -3649,12 +3904,16 @@ interface LegacyEvents {
     'usa-hud-panel': {
         'usa:boot': CustomEvent<any>;
     };
+    'usa-hue-orbit': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-hydrate': {
         'usa:hydrated': CustomEvent<any>;
     };
     'usa-icon-morph': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-infinity-loop': {};
     'usa-ink-flow': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -3665,6 +3924,9 @@ interface LegacyEvents {
     'usa-iris-diaphragm': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
+    };
+    'usa-jelly-button': {
+        'usa:press': CustomEvent<any>;
     };
     'usa-kanban': {
         'usa:move': CustomEvent<any>;
@@ -3799,6 +4061,11 @@ interface LegacyEvents {
         'usa:hide': CustomEvent<any>;
         'usa:show': CustomEvent<any>;
     };
+    'usa-notch-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:detent': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-notification-bell': {
         'usa:notify': CustomEvent<any>;
         'usa:read': CustomEvent<any>;
@@ -3857,6 +4124,9 @@ interface LegacyEvents {
     'usa-pinch-zoom': {
         'usa:zoom': CustomEvent<any>;
     };
+    'usa-plan-picker': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-player': {
         'usa:finish': CustomEvent<any>;
         'usa:ready': CustomEvent<any>;
@@ -3893,6 +4163,7 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-pull-refresh': {};
+    'usa-quarter-ring': {};
     'usa-race-telemetry': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -4000,6 +4271,7 @@ interface LegacyEvents {
     'usa-shortcut': {
         'usa:trigger': CustomEvent<any>;
     };
+    'usa-six-dot-orbit': {};
     'usa-skeleton': {
         'usa:loaded': CustomEvent<any>;
     };
@@ -4041,6 +4313,16 @@ interface LegacyEvents {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
+    'usa-squish-indicator': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-squish-key': {
+        'usa:press': CustomEvent<any>;
+    };
+    'usa-squish-stepper': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-stagger': {
         'usa:complete': CustomEvent<any>;
         'usa:enter': CustomEvent<any>;
@@ -4053,6 +4335,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
+    };
+    'usa-step-track': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-stepper': {
         'usa:change': CustomEvent<any>;
@@ -4068,6 +4353,9 @@ interface LegacyEvents {
     'usa-story': {
         'usa:step': CustomEvent<any>;
     };
+    'usa-strength-meter': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-suggestion-chips': {
         'usa:pick': CustomEvent<any>;
     };
@@ -4077,6 +4365,7 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
     };
+    'usa-sweep-lines': {};
     'usa-swipe-deck': {
         'usa:empty': CustomEvent<any>;
         'usa:swipe': CustomEvent<any>;
@@ -4094,6 +4383,9 @@ interface LegacyEvents {
     'usa-tabs': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-tada-button': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-terminal': {
         'usa:done': CustomEvent<any>;
     };
@@ -4101,6 +4393,7 @@ interface LegacyEvents {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
+    'usa-text-reveal': {};
     'usa-text-rotate': {
         'usa:change': CustomEvent<any>;
     };
@@ -4119,6 +4412,8 @@ interface LegacyEvents {
     'usa-theme-switcher': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-three-dot-bounce': {};
+    'usa-tile-relay': {};
     'usa-tilt': {};
     'usa-timeline': {
         'usa:complete': CustomEvent<any>;
@@ -4140,12 +4435,17 @@ interface LegacyEvents {
         'usa:export': CustomEvent<any>;
         'usa:import': CustomEvent<any>;
     };
+    'usa-transfer-button': {
+        'usa:complete': CustomEvent<any>;
+        'usa:transfer': CustomEvent<any>;
+    };
     'usa-transit-progress': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
     };
+    'usa-triple-pulse': {};
     'usa-typewriter': {
         'usa:complete': CustomEvent<any>;
     };
@@ -4177,6 +4477,7 @@ interface LegacyEvents {
     'usa-water-ripple': {};
     'usa-wave-text': {};
     'usa-weather-card': {};
+    'usa-wifi-signal': {};
     'usa-worker-canvas': {
         'usa:backend': CustomEvent<any>;
     };

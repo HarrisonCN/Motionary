@@ -62,6 +62,7 @@
         <button role="tab" data-k="esm" aria-selected="false">npm + bundler</button>
         <button id="run" type="button" title="Ctrl/Cmd + Enter">Run ▶</button>
         <button id="copy" type="button">Copy</button>
+        <button id="copy-prompt" type="button" title="The edited code and its attribute values, as a prompt for an AI coding assistant">Copy as AI prompt</button>
         <button id="download" type="button">Download .html</button>
         <button id="reset" type="button" title="Back to the sample for this tab">Reset</button>
         <span id="msg" aria-live="polite"></span>
@@ -77,6 +78,7 @@
   <script type="module">
     // 13.0.2: the editor is the one source of truth — Run previews it, Copy and Download hand it out unchanged.
     import { depsLabel, starterCode, downloadFile, previewDocument, checkCode, explainReport, exportsToMap } from './runnable.js';
+    import { paramPrompt } from './param-prompt.js';
     const $ = (id) => document.getElementById(id);
     const res = await fetch('../dist/manifest.json').catch(() => null);
     const m = res && res.ok ? await res.json() : await (await fetch('../components.json')).json();
@@ -156,6 +158,17 @@
     $('run').addEventListener('click', run);
     $('reset').addEventListener('click', () => { edits.delete(`${cur.tag}|${tab}`); load(); run(); });
     $('copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText(editorCode()); $('msg').textContent = 'Copied'; } catch { $('code').select(); $('msg').textContent = 'Press Ctrl/Cmd+C'; } });
+    // 17.9: the edited code plus the attribute values on the component, as a prompt for an AI coding assistant
+    const tunedAttrs = (code) => {
+      const doc = new DOMParser().parseFromString(code, 'text/html');
+      const el = doc.querySelector(`${cur.tag}, ${cur.tag.replace(/^usa-/, 'mo-')}`);
+      return el ? [...el.attributes].map((a) => [a.name, a.value === '' ? 'true' : a.value]) : [];
+    };
+    $('copy-prompt').addEventListener('click', async () => {
+      const code = editorCode();
+      const text = paramPrompt({ name: cur.title, tag: cur.tag, params: tunedAttrs(code), code, fence: 'html' });
+      try { await navigator.clipboard.writeText(text); $('msg').textContent = 'Prompt copied'; } catch { $('msg').textContent = 'Copy failed'; }
+    });
     $('download').addEventListener('click', () => {
       const f = downloadFile(cur, tab, editorCode());
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([f.text], { type: f.type })), download: f.name });

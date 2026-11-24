@@ -77,4 +77,4 @@ const DRAW_FX = [
 function registerDrawPack() { registerEffects(DRAW_FX); }
 
 export { DRAW_FX, registerDrawPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/fx-draw.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/fx-draw.js.map

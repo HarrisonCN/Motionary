@@ -26,4 +26,4 @@ function defineWorkoutPlayer(tag = 'usa-workout-player') {
 }
 
 exports.defineWorkoutPlayer = defineWorkoutPlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/workout-player.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/workout-player.cjs.map

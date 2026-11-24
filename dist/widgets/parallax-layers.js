@@ -102,4 +102,4 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
 }
 
 export { defineParallaxLayers };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/parallax-layers.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/parallax-layers.js.map

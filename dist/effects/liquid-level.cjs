@@ -15,4 +15,4 @@ function registerLiquidLevel() {
 exports.effect = effect;
 exports.register = registerLiquidLevel;
 exports.registerLiquidLevel = registerLiquidLevel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/liquid-level.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/liquid-level.cjs.map

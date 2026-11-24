@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-Dl9RztS5.js';
+import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-BfMtueXl.js';
 
 function defineLensStack(tag = 'usa-lens-stack') {
     const ctor = defineElement(tag, Base => class LensStack extends Base {
@@ -18,4 +18,4 @@ function defineLensStack(tag = 'usa-lens-stack') {
 }
 
 export { defineLensStack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/lens-stack.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/lens-stack.js.map

@@ -2580,14 +2580,231 @@ function defineRipple(tag = 'usa-ripple') {
     });
 }
 
+const SPRING_PRESETS = {
+    default: { stiffness: 170, damping: 26, mass: 1 },
+    gentle: { stiffness: 120, damping: 14, mass: 1 },
+    wobbly: { stiffness: 180, damping: 12, mass: 1 },
+    stiff: { stiffness: 210, damping: 20, mass: 1 },
+    bouncy: { stiffness: 300, damping: 10, mass: 1 },
+    slow: { stiffness: 280, damping: 60, mass: 1 },
+    molasses: { stiffness: 280, damping: 120, mass: 1 },
+};
+/** Resolve a preset name or a partial config to a full config. */
+function resolveSpring(input) {
+    const base = typeof input === 'string' ? SPRING_PRESETS[input] || SPRING_PRESETS.default : { ...SPRING_PRESETS.default, ...(input || {}) };
+    const pos = (v, d) => (typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : d);
+    const o = (typeof input === 'object' && input) || {};
+    return {
+        stiffness: pos(base.stiffness, 170),
+        damping: Math.max(0, Number.isFinite(base.damping) ? base.damping : 26),
+        mass: pos(base.mass, 1),
+        velocity: Number.isFinite(o.velocity) ? o.velocity : 0,
+        precision: pos(o.precision, 0.001),
+    };
+}
+/** One integration step (semi-implicit Euler) towards `to`. Returns [x, v]. */
+function stepSpring(cfg, x, v, to, dt) {
+    const a = (-cfg.stiffness * (x - to) - cfg.damping * v) / cfg.mass;
+    const nv = v + a * dt;
+    return [x + nv * dt, nv];
+}
+const cache = /*#__PURE__*/ new Map();
+/**
+ * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1
+ * (overshoot); `duration` is the time to rest, in ms (max 10 s).
+ */
+function springSamples(input, fps = 60) {
+    const cfg = resolveSpring(input);
+    const key = `${cfg.stiffness}|${cfg.damping}|${cfg.mass}|${cfg.velocity}|${cfg.precision}|${fps}`;
+    const hit = cache.get(key);
+    if (hit)
+        return hit;
+    const values = [0];
+    let x = 0;
+    let v = cfg.velocity;
+    const frame = 1000 / fps;
+    let t = 0;
+    let next = frame;
+    while (t < 10000) {
+        [x, v] = stepSpring(cfg, x, v, 1, 0.001);
+        t += 1;
+        if (t >= next) {
+            values.push(x);
+            next += frame;
+            if (Math.abs(1 - x) < cfg.precision && Math.abs(v) < cfg.precision * 10)
+                break;
+        }
+    }
+    values[values.length - 1] = 1;
+    const out = { values, duration: Math.round(t) };
+    if (cache.size > 64)
+        cache.clear();
+    cache.set(key, out);
+    return out;
+}
+/** `true` when CSS `linear()` easing is supported. */
+function supportsLinearEasing() {
+    return typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('animation-timing-function', 'linear(0, 1)');
+}
+/**
+ * The spring as `{ easing, duration }` for `el.animate()` / CSS. `easing` is
+ * a `linear(…)` function with at most `points` stops (default 48), or a
+ * cubic-bezier overshoot where `linear()` is unsupported.
+ */
+function springEasing(input, points = 48) {
+    const { values, duration } = springSamples(input);
+    if (!supportsLinearEasing())
+        return { easing: EASE_SPRING, duration: Math.min(duration, 1200) };
+    return { easing: linearEasing(values, points), duration };
+}
+/** Build a CSS `linear()` easing from samples (down-sampled to `points`). */
+function linearEasing(values, points = 48) {
+    const n = values.length;
+    const step = Math.max(1, Math.ceil((n - 1) / Math.max(2, points - 1)));
+    const out = [];
+    for (let i = 0; i < n - 1; i += step)
+        out.push(String(Math.round(values[i] * 1000) / 1000));
+    out.push('1');
+    return `linear(${out.join(', ')})`;
+}
+/**
+ * Animate `el` between keyframes with spring timing (WAAPI). Under reduced
+ * motion the final frame is applied immediately. Returns the Animation (or
+ * `null` without WAAPI / under reduced motion).
+ */
+function spring(el, keyframes, input, options = {}) {
+    const target = el;
+    if (prefersReducedMotion() || typeof target.animate !== 'function') {
+        applyFrame(target, keyframes[keyframes.length - 1]);
+        return null;
+    }
+    const { easing, duration } = springEasing(input);
+    return target.animate(keyframes, { duration: duration * motionScale(), easing, fill: 'both', ...options });
+}
+/**
+ * An interruptible spring-animated number: call `set()` as often as you like,
+ * the motion keeps its velocity (like iOS / Framer springs). Reduced motion
+ * jumps straight to the target.
+ */
+function createSpring(opts = {}) {
+    let cfg = resolveSpring(opts.spring);
+    let x = opts.value ?? 0;
+    let v = 0;
+    let to = x;
+    let id = 0;
+    let last = 0;
+    let running = false;
+    const stop = () => {
+        if (running)
+            caf(id);
+        running = false;
+    };
+    const loop = () => {
+        const t = now();
+        let dt = Math.min(64, Math.max(1, t - last));
+        last = t;
+        while (dt > 0) {
+            const s = Math.min(dt, 4);
+            [x, v] = stepSpring(cfg, x, v, to, s / 1000);
+            dt -= s;
+        }
+        const scale = Math.max(1, Math.abs(to) * 0.0005);
+        if (Math.abs(to - x) < cfg.precision * scale * 10 && Math.abs(v) < cfg.precision * scale * 100) {
+            x = to;
+            v = 0;
+            running = false;
+            opts.onUpdate?.(x, 0);
+            opts.onRest?.(x);
+            return;
+        }
+        opts.onUpdate?.(x, v);
+        id = raf(loop);
+    };
+    const api = {
+        get value() {
+            return x;
+        },
+        get velocity() {
+            return v;
+        },
+        get target() {
+            return to;
+        },
+        get animating() {
+            return running;
+        },
+        set(target, velocity) {
+            to = target;
+            if (velocity !== undefined && Number.isFinite(velocity))
+                v = velocity;
+            if (prefersReducedMotion()) {
+                api.jump(target);
+                opts.onRest?.(target);
+                return;
+            }
+            if (!running) {
+                running = true;
+                last = now();
+                id = raf(loop);
+            }
+        },
+        jump(value) {
+            stop();
+            x = to = value;
+            v = 0;
+            opts.onUpdate?.(x, 0);
+        },
+        stop() {
+            stop();
+            v = 0;
+            to = x;
+        },
+        configure(input) {
+            cfg = resolveSpring(input);
+        },
+    };
+    return api;
+}
+/* ------------------------------------------------------------------ */
+/* Inertia + snapping                                                  */
+/* ------------------------------------------------------------------ */
+/**
+ * Where a flick at `velocity` (units/s) comes to rest with exponential
+ * decay: `value + velocity · timeConstant` (default 0.325 s, iOS-like).
+ */
+function projectInertia(value, velocity, timeConstant = 0.325) {
+    return value + velocity * timeConstant;
+}
+/** Snap to a grid (`number`) or the nearest of a list of points. */
+function snapTo(value, to) {
+    if (Array.isArray(to)) {
+        if (!to.length)
+            return value;
+        return to.reduce((best, p) => (Math.abs(p - value) < Math.abs(best - value) ? p : best), to[0]);
+    }
+    if (typeof to === 'number' && to > 0)
+        return Math.round(value / to) * to;
+    return value;
+}
+/** iOS-style rubber-band resistance: how far content moves when pulled `distance` past an edge. */
+function rubberBand(distance, dimension, constant = 0.55) {
+    if (dimension <= 0)
+        return 0;
+    const sign = distance < 0 ? -1 : 1;
+    const d = Math.abs(distance);
+    return sign * (1 - 1 / ((d * constant) / dimension + 1)) * dimension;
+}
+
 function defineMagnetic(tag = 'usa-magnetic') {
     return defineElement(tag, (Base) => class UsaMagnetic extends Base {
         constructor() {
             super(...arguments);
             this._frame = 0;
+            this._off = { x: 0, y: 0 };
+            this._vel = { x: 0, y: 0 };
         }
         static get observedAttributes() {
-            return ['strength', 'radius', 'disabled'];
+            return ['strength', 'radius', 'disabled', 'release'];
         }
         mount() {
             if (this.reduced || this.flag('disabled'))
@@ -2598,6 +2815,7 @@ function defineMagnetic(tag = 'usa-magnetic') {
             const radius = this.num('radius', 60);
             let x = 0;
             let y = 0;
+            let at = 0;
             let active = false;
             const apply = () => {
                 this._frame = 0;
@@ -2607,16 +2825,25 @@ function defineMagnetic(tag = 'usa-magnetic') {
                 const near = Math.abs(dx) < r.width / 2 + radius && Math.abs(dy) < r.height / 2 + radius;
                 if (near) {
                     active = true;
+                    if (this._springs)
+                        this.settle();
                     this.setAttribute('data-active', '');
+                    this._off = { x: dx * strength, y: dy * strength };
                     this.style.setProperty('--usa-mx', `${(dx * strength).toFixed(2)}px`);
                     this.style.setProperty('--usa-my', `${(dy * strength).toFixed(2)}px`);
                 }
-                else if (active)
-                    this.release();
+                else if (active) {
+                    active = false;
+                    this.release(this.str('release') === 'spring');
+                }
             };
             this.listen(document, 'pointermove', (e) => {
                 if (e.pointerType !== 'mouse' && e.pointerType !== 'pen')
                     return;
+                const t = now(), dt = Math.max(8, t - at) / 1000;
+                if (at)
+                    this._vel = { x: (e.clientX - x) / dt, y: (e.clientY - y) / dt };
+                at = t;
                 x = e.clientX;
                 y = e.clientY;
                 if (!this._frame)
@@ -2625,10 +2852,43 @@ function defineMagnetic(tag = 'usa-magnetic') {
             this.listen(document, 'pointerleave', () => this.release());
             this.listen(window, 'blur', () => this.release());
         }
-        release() {
+        release(spring = false) {
             caf(this._frame);
             this._frame = 0;
             this.removeAttribute('data-active');
+            const { x, y } = this._off;
+            this._off = { x: 0, y: 0 };
+            if (spring && !this.reduced && (x || y)) {
+                // the pointer's exit speed, scaled like the offset and capped so a flick cannot throw the content away
+                const cap = 1600, k = this.num('strength', 0.35);
+                const vx = Math.max(-cap, Math.min(cap, this._vel.x * k)), vy = Math.max(-cap, Math.min(cap, this._vel.y * k));
+                this.settle();
+                this.setAttribute('data-releasing', '');
+                const write = () => {
+                    const [sx, sy] = this._springs;
+                    this.style.setProperty('--usa-mx', `${sx.value.toFixed(2)}px`);
+                    this.style.setProperty('--usa-my', `${sy.value.toFixed(2)}px`);
+                };
+                const rest = () => { if (this._springs && !this._springs[0].animating && !this._springs[1].animating)
+                    this.settle(); };
+                const cfg = { stiffness: 240, damping: 13, mass: 1 };
+                this._springs = [
+                    createSpring({ value: x, spring: cfg, onUpdate: write, onRest: rest }),
+                    createSpring({ value: y, spring: cfg, onUpdate: write, onRest: rest }),
+                ];
+                this._springs[0].set(0, vx);
+                this._springs[1].set(0, vy);
+                return;
+            }
+            this.settle();
+        }
+        /** Stop a spring release and clear the offset. */
+        settle() {
+            if (this._springs) {
+                this._springs.forEach((s) => s.stop());
+                this._springs = undefined;
+            }
+            this.removeAttribute('data-releasing');
             this.style.removeProperty('--usa-mx');
             this.style.removeProperty('--usa-my');
         }
@@ -4351,221 +4611,6 @@ function defineTransitionComponents() {
     defineDialog();
     defineAccordion();
     defineViewSwitch();
-}
-
-const SPRING_PRESETS = {
-    default: { stiffness: 170, damping: 26, mass: 1 },
-    gentle: { stiffness: 120, damping: 14, mass: 1 },
-    wobbly: { stiffness: 180, damping: 12, mass: 1 },
-    stiff: { stiffness: 210, damping: 20, mass: 1 },
-    bouncy: { stiffness: 300, damping: 10, mass: 1 },
-    slow: { stiffness: 280, damping: 60, mass: 1 },
-    molasses: { stiffness: 280, damping: 120, mass: 1 },
-};
-/** Resolve a preset name or a partial config to a full config. */
-function resolveSpring(input) {
-    const base = typeof input === 'string' ? SPRING_PRESETS[input] || SPRING_PRESETS.default : { ...SPRING_PRESETS.default, ...(input || {}) };
-    const pos = (v, d) => (typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : d);
-    const o = (typeof input === 'object' && input) || {};
-    return {
-        stiffness: pos(base.stiffness, 170),
-        damping: Math.max(0, Number.isFinite(base.damping) ? base.damping : 26),
-        mass: pos(base.mass, 1),
-        velocity: Number.isFinite(o.velocity) ? o.velocity : 0,
-        precision: pos(o.precision, 0.001),
-    };
-}
-/** One integration step (semi-implicit Euler) towards `to`. Returns [x, v]. */
-function stepSpring(cfg, x, v, to, dt) {
-    const a = (-cfg.stiffness * (x - to) - cfg.damping * v) / cfg.mass;
-    const nv = v + a * dt;
-    return [x + nv * dt, nv];
-}
-const cache = /*#__PURE__*/ new Map();
-/**
- * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1
- * (overshoot); `duration` is the time to rest, in ms (max 10 s).
- */
-function springSamples(input, fps = 60) {
-    const cfg = resolveSpring(input);
-    const key = `${cfg.stiffness}|${cfg.damping}|${cfg.mass}|${cfg.velocity}|${cfg.precision}|${fps}`;
-    const hit = cache.get(key);
-    if (hit)
-        return hit;
-    const values = [0];
-    let x = 0;
-    let v = cfg.velocity;
-    const frame = 1000 / fps;
-    let t = 0;
-    let next = frame;
-    while (t < 10000) {
-        [x, v] = stepSpring(cfg, x, v, 1, 0.001);
-        t += 1;
-        if (t >= next) {
-            values.push(x);
-            next += frame;
-            if (Math.abs(1 - x) < cfg.precision && Math.abs(v) < cfg.precision * 10)
-                break;
-        }
-    }
-    values[values.length - 1] = 1;
-    const out = { values, duration: Math.round(t) };
-    if (cache.size > 64)
-        cache.clear();
-    cache.set(key, out);
-    return out;
-}
-/** `true` when CSS `linear()` easing is supported. */
-function supportsLinearEasing() {
-    return typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('animation-timing-function', 'linear(0, 1)');
-}
-/**
- * The spring as `{ easing, duration }` for `el.animate()` / CSS. `easing` is
- * a `linear(…)` function with at most `points` stops (default 48), or a
- * cubic-bezier overshoot where `linear()` is unsupported.
- */
-function springEasing(input, points = 48) {
-    const { values, duration } = springSamples(input);
-    if (!supportsLinearEasing())
-        return { easing: EASE_SPRING, duration: Math.min(duration, 1200) };
-    return { easing: linearEasing(values, points), duration };
-}
-/** Build a CSS `linear()` easing from samples (down-sampled to `points`). */
-function linearEasing(values, points = 48) {
-    const n = values.length;
-    const step = Math.max(1, Math.ceil((n - 1) / Math.max(2, points - 1)));
-    const out = [];
-    for (let i = 0; i < n - 1; i += step)
-        out.push(String(Math.round(values[i] * 1000) / 1000));
-    out.push('1');
-    return `linear(${out.join(', ')})`;
-}
-/**
- * Animate `el` between keyframes with spring timing (WAAPI). Under reduced
- * motion the final frame is applied immediately. Returns the Animation (or
- * `null` without WAAPI / under reduced motion).
- */
-function spring(el, keyframes, input, options = {}) {
-    const target = el;
-    if (prefersReducedMotion() || typeof target.animate !== 'function') {
-        applyFrame(target, keyframes[keyframes.length - 1]);
-        return null;
-    }
-    const { easing, duration } = springEasing(input);
-    return target.animate(keyframes, { duration: duration * motionScale(), easing, fill: 'both', ...options });
-}
-/**
- * An interruptible spring-animated number: call `set()` as often as you like,
- * the motion keeps its velocity (like iOS / Framer springs). Reduced motion
- * jumps straight to the target.
- */
-function createSpring(opts = {}) {
-    let cfg = resolveSpring(opts.spring);
-    let x = opts.value ?? 0;
-    let v = 0;
-    let to = x;
-    let id = 0;
-    let last = 0;
-    let running = false;
-    const stop = () => {
-        if (running)
-            caf(id);
-        running = false;
-    };
-    const loop = () => {
-        const t = now();
-        let dt = Math.min(64, Math.max(1, t - last));
-        last = t;
-        while (dt > 0) {
-            const s = Math.min(dt, 4);
-            [x, v] = stepSpring(cfg, x, v, to, s / 1000);
-            dt -= s;
-        }
-        const scale = Math.max(1, Math.abs(to) * 0.0005);
-        if (Math.abs(to - x) < cfg.precision * scale * 10 && Math.abs(v) < cfg.precision * scale * 100) {
-            x = to;
-            v = 0;
-            running = false;
-            opts.onUpdate?.(x, 0);
-            opts.onRest?.(x);
-            return;
-        }
-        opts.onUpdate?.(x, v);
-        id = raf(loop);
-    };
-    const api = {
-        get value() {
-            return x;
-        },
-        get velocity() {
-            return v;
-        },
-        get target() {
-            return to;
-        },
-        get animating() {
-            return running;
-        },
-        set(target, velocity) {
-            to = target;
-            if (velocity !== undefined && Number.isFinite(velocity))
-                v = velocity;
-            if (prefersReducedMotion()) {
-                api.jump(target);
-                opts.onRest?.(target);
-                return;
-            }
-            if (!running) {
-                running = true;
-                last = now();
-                id = raf(loop);
-            }
-        },
-        jump(value) {
-            stop();
-            x = to = value;
-            v = 0;
-            opts.onUpdate?.(x, 0);
-        },
-        stop() {
-            stop();
-            v = 0;
-            to = x;
-        },
-        configure(input) {
-            cfg = resolveSpring(input);
-        },
-    };
-    return api;
-}
-/* ------------------------------------------------------------------ */
-/* Inertia + snapping                                                  */
-/* ------------------------------------------------------------------ */
-/**
- * Where a flick at `velocity` (units/s) comes to rest with exponential
- * decay: `value + velocity · timeConstant` (default 0.325 s, iOS-like).
- */
-function projectInertia(value, velocity, timeConstant = 0.325) {
-    return value + velocity * timeConstant;
-}
-/** Snap to a grid (`number`) or the nearest of a list of points. */
-function snapTo(value, to) {
-    if (Array.isArray(to)) {
-        if (!to.length)
-            return value;
-        return to.reduce((best, p) => (Math.abs(p - value) < Math.abs(best - value) ? p : best), to[0]);
-    }
-    if (typeof to === 'number' && to > 0)
-        return Math.round(value / to) * to;
-    return value;
-}
-/** iOS-style rubber-band resistance: how far content moves when pulled `distance` past an edge. */
-function rubberBand(distance, dimension, constant = 0.55) {
-    if (dimension <= 0)
-        return 0;
-    const sign = distance < 0 ? -1 : 1;
-    const d = Math.abs(distance);
-    return sign * (1 - 1 / ((d * constant) / dimension + 1)) * dimension;
 }
 
 const SPRING_EFFECTS = ['bounce-in', 'pop', 'drop', 'jelly', 'rubber-band'];
@@ -10480,7 +10525,7 @@ const rewriteTagSelectors = (text, replaceTag) => {
 };
 
 // Generated from the component manifest.
-const publicTagNames = 'accordion acrylic activity-wall add-to-cart ambient anim-icon audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bezier-lab bg-generator blobs bottom-sheet breadcrumbs button card card-stack carousel carousel-3d cart-drawer chapter-nav chat-composer check checkbox click clock-control code-export coffee-timer color-picker combobox command-palette compare consent contour-relief countdown counter cta-popup cube cube-gallery cursor date-picker delivery-tracker depth dialog disclosure distort dock dot-network dotlottie double-tap download-menu draggable draw drawer elastic-mesh equalizer fab festival-banner field file-drop file-tree flight-status fluid-type form-stepper fullpage fullscreen-menu fx gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe glucose-sparkline gpu-particles gradient-text grain gravity-well grid-glow gyro-card halo-segmented halo-slider handwriting hero-video hold hold-action hud-panel hydrate icon-morph ink-flow install-button iris-diaphragm kanban keyframe-editor kpi leaderboard lens-stack like liquid liquid-metal liquid-nav loading-bar location-card lottie lottie-icon lottie-player luminous-switch lyrics magnetic magnetic-field marquee mask-reveal masonry masonry-flow mega-menu menu menu-toggle message-list meter-countdown milestones modal morph motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme multi-select music-player native-preview nav-flyout nav-morph navbar notification-bell number-stepper odometer orbit-pass orbit-progress organic-card otp overscroll pack pagination panorama parallax-layers particle-button particle-icon particles password pause-all perf-monitor physics-playground pinch-zoom player plugin-card plugin-store popover post-fx presence press prize-wheel product-gallery progress progress-ring prop-panel pull-cord pull-refresh race-telemetry radar range-slider reaction-field reactions red-envelope retro-button reveal revision-reveal ride-status ripple rive route-sparkline route-transition scene scramble scroll-highlight scroll-progress scroll-ring scroll-scene scrolly scrub-number search-field segmented select shader shader-backdrop sheet shimmer-text shortcut skeleton skeleton-reveal sketch-chart slider smooth-scroll snap-carousel sparkline spatial-card spinner splash split-text spotlight spring spring-lab stagger star-rating status-pill stepper sticky-stack sticky-wall stories story suggestion-chips sun-timeline swipe-deck swipeable switch tab-bar tabs terminal text-loupe text-rotate text-splitter textarea theme-surface theme-switcher tilt timeline tip title-sequence toast-stack toaster token-editor transit-progress typewriter upload-progress validation-summary video-card view-switch vital-wave voice-button volume-knob water-ripple wave-text weather-card worker-canvas workout-player xp-bar';
+const publicTagNames = 'accordion acrylic activity-wall add-to-cart align-switch ambient analog-stick anim-icon audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bezier-lab bg-generator blobs bottom-sheet bounce-button breadcrumbs breath-orb bulge-volume button card card-stack carousel carousel-3d cart-badge cart-drawer center-bars chapter-nav chat-composer check checkbox chip-input click clock-control code-export code-shake coffee-timer color-picker combobox command-palette compare consent contour-relief copy-button countdown counter cta-popup cube cube-gallery cursor date-picker delivery-tracker depth dialog disclosure distort dock dot-network dotlottie double-tap download-menu draggable draw drawer eclipse-toggle elastic-accordion elastic-mesh elastic-slider equalizer fab festival-banner field file-drop file-tree flight-status fluid-type form-stepper fullpage fullscreen-menu fx gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe glucose-sparkline gpu-particles gradient-text grain gravity-well grid-glow groove-toggle gyro-card halo-segmented halo-slider handwriting hero-video hold hold-action hud-panel hue-orbit hydrate icon-morph infinity-loop ink-flow install-button iris-diaphragm jelly-button kanban keyframe-editor kpi leaderboard lens-stack like liquid liquid-metal liquid-nav loading-bar location-card lottie lottie-icon lottie-player luminous-switch lyrics magnetic magnetic-field marquee mask-reveal masonry masonry-flow mega-menu menu menu-toggle message-list meter-countdown milestones modal morph motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme multi-select music-player native-preview nav-flyout nav-morph navbar notch-slider notification-bell number-stepper odometer orbit-pass orbit-progress organic-card otp overscroll pack pagination panorama parallax-layers particle-button particle-icon particles password pause-all perf-monitor physics-playground pinch-zoom plan-picker player plugin-card plugin-store popover post-fx presence press prize-wheel product-gallery progress progress-ring prop-panel pull-cord pull-refresh quarter-ring race-telemetry radar range-slider reaction-field reactions red-envelope retro-button reveal revision-reveal ride-status ripple rive route-sparkline route-transition scene scramble scroll-highlight scroll-progress scroll-ring scroll-scene scrolly scrub-number search-field segmented select shader shader-backdrop sheet shimmer-text shortcut six-dot-orbit skeleton skeleton-reveal sketch-chart slider smooth-scroll snap-carousel sparkline spatial-card spinner splash split-text spotlight spring spring-lab squish-indicator squish-key squish-stepper stagger star-rating status-pill step-track stepper sticky-stack sticky-wall stories story strength-meter suggestion-chips sun-timeline sweep-lines swipe-deck swipeable switch tab-bar tabs tada-button terminal text-loupe text-reveal text-rotate text-splitter textarea theme-surface theme-switcher three-dot-bounce tile-relay tilt timeline tip title-sequence toast-stack toaster token-editor transfer-button transit-progress triple-pulse typewriter upload-progress validation-summary video-card view-switch vital-wave voice-button volume-knob water-ripple wave-text weather-card wifi-signal worker-canvas workout-player xp-bar';
 
 /**
  * motionary/components/mo — the 17.0 `<mo-*>` names.
@@ -11334,4 +11379,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/lite.cjs.map

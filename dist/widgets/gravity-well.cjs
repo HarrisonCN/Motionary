@@ -22,4 +22,4 @@ function defineGravityWell(tag = 'usa-gravity-well') {
 }
 
 exports.defineGravityWell = defineGravityWell;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/gravity-well.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/gravity-well.cjs.map

@@ -24,4 +24,4 @@ function defineFlightStatus(tag = 'usa-flight-status') {
 }
 
 export { defineFlightStatus };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/flight-status.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/flight-status.js.map

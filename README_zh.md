@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->265<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->299<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,7 +37,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->265<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->174<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->159<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->299<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->208<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->159<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（历史参考 10 KB）。
 - **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->21<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
@@ -275,6 +275,8 @@ Claude Code：`claude mcp add motionary -- npx -y -p motionary motionary-mcp`。
 - 回答会按你项目中安装的版本给出；`check_compat` 会列出该版本缺少或行为不同的部分。
 - 完整指南：[docs/mcp.md](./docs/mcp.md)。
 
+**Agent Skill。** `skills/motionary/SKILL.md` 告诉 Claude Code、Codex 等支持 Agent Skills 的智能体：怎样安装、注册和挑选 Motionary 组件，以及要遵守哪些规则。用 `npx skills add HarrisonCN/Motionary` 安装，或把这个文件夹复制到 `.claude/skills/`。动效库里每个效果、演练场和代码运行页都有 **复制为 AI 提示词** 按钮，会把代码和你调过的全部参数一起交给 AI 助手。
+
 **用文字描述动效。** `motionary/tooling/ai` 能把“卡片从下往上依次淡入”这样的描述转换成效果、关键帧、CSS 以及对应的组件。默认解析器在本地运行、结果确定（支持中文和英文）。如果想用自己的 LLM，给 `suggestMotion()` 传入一个 provider 即可。Motionary 不内置任何厂商 SDK，也不会主动发起网络请求，除非你传入了 provider。模型的回答会经过 JSON Schema 校验，不通过时自动回退到本地结果。
 
 ```ts
@@ -311,7 +313,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 组件数量、单组件及整体包体积均不设上限。[`size-budget.json`](./size-budget.json) 保留历史参考值；CI 只报告体积并验证构建产物和文档一致性，超出参考值不会失败。详见[体积策略](./docs/size-policy.md)。
 
 <!-- size-table:start -->
-17.8.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.9.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 历史参考 |
 |---|---:|---:|
@@ -323,9 +325,9 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 71.55 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 87.99 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 111.46 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 71.93 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 88.49 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 111.99 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
@@ -353,7 +355,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.8.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.9.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

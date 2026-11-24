@@ -49,4 +49,4 @@ function defineNumberStepper(tag = 'usa-number-stepper') {
 }
 
 export { defineNumberStepper };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/number-stepper.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/number-stepper.js.map

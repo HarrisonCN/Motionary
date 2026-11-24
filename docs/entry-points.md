@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (174)
+## Widgets (208)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,40 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-eclipse-toggle>` | `motionary/widgets/eclipse-toggle` | `defineEclipseToggle()` |
+| `<usa-hue-orbit>` | `motionary/widgets/hue-orbit` | `defineHueOrbit()` |
+| `<usa-notch-slider>` | `motionary/widgets/notch-slider` | `defineNotchSlider()` |
+| `<usa-bulge-volume>` | `motionary/widgets/bulge-volume` | `defineBulgeVolume()` |
+| `<usa-copy-button>` | `motionary/widgets/copy-button` | `defineCopyButton()` |
+| `<usa-tile-relay>` | `motionary/widgets/tile-relay` | `defineTileRelay()` |
+| `<usa-squish-key>` | `motionary/widgets/squish-key` | `defineSquishKey()` |
+| `<usa-squish-stepper>` | `motionary/widgets/squish-stepper` | `defineSquishStepper()` |
+| `<usa-analog-stick>` | `motionary/widgets/analog-stick` | `defineAnalogStick()` |
+| `<usa-transfer-button>` | `motionary/widgets/transfer-button` | `defineTransferButton()` |
+| `<usa-six-dot-orbit>` | `motionary/widgets/six-dot-orbit` | `defineSixDotOrbit()` |
+| `<usa-center-bars>` | `motionary/widgets/center-bars` | `defineCenterBars()` |
+| `<usa-quarter-ring>` | `motionary/widgets/quarter-ring` | `defineQuarterRing()` |
+| `<usa-triple-pulse>` | `motionary/widgets/triple-pulse` | `defineTriplePulse()` |
+| `<usa-breath-orb>` | `motionary/widgets/breath-orb` | `defineBreathOrb()` |
+| `<usa-three-dot-bounce>` | `motionary/widgets/three-dot-bounce` | `defineThreeDotBounce()` |
+| `<usa-infinity-loop>` | `motionary/widgets/infinity-loop` | `defineInfinityLoop()` |
+| `<usa-sweep-lines>` | `motionary/widgets/sweep-lines` | `defineSweepLines()` |
+| `<usa-wifi-signal>` | `motionary/widgets/wifi-signal` | `defineWifiSignal()` |
+| `<usa-text-reveal>` | `motionary/widgets/text-reveal` | `defineTextReveal()` |
+| `<usa-jelly-button>` | `motionary/widgets/jelly-button` | `defineJellyButton()` |
+| `<usa-bounce-button>` | `motionary/widgets/bounce-button` | `defineBounceButton()` |
+| `<usa-tada-button>` | `motionary/widgets/tada-button` | `defineTadaButton()` |
+| `<usa-groove-toggle>` | `motionary/widgets/groove-toggle` | `defineGrooveToggle()` |
+| `<usa-cart-badge>` | `motionary/widgets/cart-badge` | `defineCartBadge()` |
+| `<usa-chip-input>` | `motionary/widgets/chip-input` | `defineChipInput()` |
+| `<usa-plan-picker>` | `motionary/widgets/plan-picker` | `definePlanPicker()` |
+| `<usa-align-switch>` | `motionary/widgets/align-switch` | `defineAlignSwitch()` |
+| `<usa-elastic-slider>` | `motionary/widgets/elastic-slider` | `defineElasticSlider()` |
+| `<usa-code-shake>` | `motionary/widgets/code-shake` | `defineCodeShake()` |
+| `<usa-strength-meter>` | `motionary/widgets/strength-meter` | `defineStrengthMeter()` |
+| `<usa-step-track>` | `motionary/widgets/step-track` | `defineStepTrack()` |
+| `<usa-elastic-accordion>` | `motionary/widgets/elastic-accordion` | `defineElasticAccordion()` |
+| `<usa-squish-indicator>` | `motionary/widgets/squish-indicator` | `defineSquishIndicator()` |
 | `<usa-lens-stack>` | `motionary/widgets/lens-stack` | `defineLensStack()` |
 | `<usa-iris-diaphragm>` | `motionary/widgets/iris-diaphragm` | `defineIrisDiaphragm()` |
 | `<usa-contour-relief>` | `motionary/widgets/contour-relief` | `defineContourRelief()` |

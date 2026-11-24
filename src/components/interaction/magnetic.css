@@ -8,3 +8,5 @@ usa-magnetic[data-active] > * { transition-duration: 0.15s; transition-timing-fu
 @media (prefers-reduced-motion: reduce) {
   usa-magnetic > *, usa-tilt, usa-toggle .usa-toggle-knob { transition: none; }
 }
+/* 17.9: release="spring" — the spring writes every frame, so the transition must not smooth it again */
+usa-magnetic[data-releasing] > * { transition: none; }
