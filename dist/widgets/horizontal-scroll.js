@@ -1,0 +1,2 @@
+export { d as defineHorizontalScroll } from '../chunks/horizontal-scroll-DgeR12ZG.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/horizontal-scroll.js.map
