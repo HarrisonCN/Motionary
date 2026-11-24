@@ -6,6 +6,16 @@ var widgets_formStepper = require('../widgets/form-stepper.cjs');
 var widgets_select = require('../widgets/select.cjs');
 var widgets_combobox = require('../widgets/combobox.cjs');
 var widgets_multiSelect = require('../widgets/multi-select.cjs');
+var widgets_eclipseToggle = require('../widgets/eclipse-toggle.cjs');
+var widgets_hueOrbit = require('../chunks/hue-orbit-BGfcmKZH.cjs');
+var widgets_notchSlider = require('../widgets/notch-slider.cjs');
+var widgets_bulgeVolume = require('../widgets/bulge-volume.cjs');
+var widgets_copyButton = require('../widgets/copy-button.cjs');
+var widgets_tileRelay = require('../chunks/tile-relay-mMK6LAU0.cjs');
+var widgets_squishKey = require('../widgets/squish-key.cjs');
+var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
+var widgets_analogStick = require('../chunks/analog-stick-BkLE7nqQ.cjs');
+var widgets_transferButton = require('../widgets/transfer-button.cjs');
 var widgets_lensStack = require('../widgets/lens-stack.cjs');
 var widgets_irisDiaphragm = require('../widgets/iris-diaphragm.cjs');
 var widgets_contourRelief = require('../widgets/contour-relief.cjs');
@@ -216,6 +226,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.9': { 'usa-eclipse-toggle': widgets_eclipseToggle.defineEclipseToggle, 'usa-hue-orbit': widgets_hueOrbit.defineHueOrbit, 'usa-notch-slider': widgets_notchSlider.defineNotchSlider, 'usa-bulge-volume': widgets_bulgeVolume.defineBulgeVolume, 'usa-copy-button': widgets_copyButton.defineCopyButton, 'usa-tile-relay': widgets_tileRelay.defineTileRelay, 'usa-squish-key': widgets_squishKey.defineSquishKey, 'usa-squish-stepper': widgets_squishStepper.defineSquishStepper, 'usa-analog-stick': widgets_analogStick.defineAnalogStick, 'usa-transfer-button': widgets_transferButton.defineTransferButton },
     '17.8': { 'usa-lens-stack': widgets_lensStack.defineLensStack, 'usa-iris-diaphragm': widgets_irisDiaphragm.defineIrisDiaphragm, 'usa-contour-relief': widgets_contourRelief.defineContourRelief },
     '17.7': { 'usa-textarea': widgets_textarea.defineTextarea, 'usa-search-field': widgets_searchField.defineSearchField, 'usa-form-stepper': widgets_formStepper.defineFormStepper, 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
     '17.6': { 'usa-gravity-well': widgets_gravityWell.defineGravityWell, 'usa-liquid-metal': widgets_liquidMetal.defineLiquidMetal, 'usa-reaction-field': widgets_reactionField.defineReactionField, 'usa-ink-flow': widgets_inkFlow.defineInkFlow, 'usa-fluid-type': widgets_fluidType.defineFluidType, 'usa-magnetic-field': widgets_magneticField.defineMagneticField, 'usa-elastic-mesh': widgets_elasticMesh.defineElasticMesh, 'usa-spring-lab': widgets_springLab.defineSpringLab, 'usa-bezier-lab': widgets_bezierLab.defineBezierLab, 'usa-text-loupe': widgets_textLoupe.defineTextLoupe, 'usa-revision-reveal': widgets_revisionReveal.defineRevisionReveal, 'usa-hold-action': widgets_holdAction.defineHoldAction, 'usa-scrub-number': widgets_scrubNumber.defineScrubNumber },
@@ -242,6 +253,19 @@ exports.defineFormStepper = widgets_formStepper.defineFormStepper;
 exports.defineSelect = widgets_select.defineSelect;
 exports.defineCombobox = widgets_combobox.defineCombobox;
 exports.defineMultiSelect = widgets_multiSelect.defineMultiSelect;
+exports.defineEclipseToggle = widgets_eclipseToggle.defineEclipseToggle;
+exports.defineHueOrbit = widgets_hueOrbit.defineHueOrbit;
+exports.hueColor = widgets_hueOrbit.hueColor;
+exports.defineNotchSlider = widgets_notchSlider.defineNotchSlider;
+exports.defineBulgeVolume = widgets_bulgeVolume.defineBulgeVolume;
+exports.defineCopyButton = widgets_copyButton.defineCopyButton;
+exports.defineTileRelay = widgets_tileRelay.defineTileRelay;
+exports.relayOrder = widgets_tileRelay.relayOrder;
+exports.defineSquishKey = widgets_squishKey.defineSquishKey;
+exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
+exports.deadZone = widgets_analogStick.deadZone;
+exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
+exports.defineTransferButton = widgets_transferButton.defineTransferButton;
 exports.defineLensStack = widgets_lensStack.defineLensStack;
 exports.defineIrisDiaphragm = widgets_irisDiaphragm.defineIrisDiaphragm;
 exports.defineContourRelief = widgets_contourRelief.defineContourRelief;
