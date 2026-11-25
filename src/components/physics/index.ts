@@ -4,6 +4,9 @@
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 import { defineSpring, type UsaSpringElement } from './spring-effect';
 import { defineDraggable, type UsaDraggableElement } from './draggable';
@@ -27,6 +30,18 @@ export {
   rubberBand,
 } from './spring';
 export type { SpringConfig, SpringPreset, SpringInput, SpringValue, SpringValueOptions } from './spring';
+export {
+  MICRO_SPRINGS,
+  MICRO_FEELS,
+  springFromFeel,
+  springFeel,
+  microSpring,
+  springSolution,
+  settleTime,
+  microEasing,
+  createSpringGroup,
+} from './spring-solver';
+export type { SpringFeel, SpringPhysics, MicroSpring, MicroFeel, MicroSpringInput, SpringGroup, SpringGroupOptions } from './spring-solver';
 export type { UsaSpringElement, UsaDraggableElement, UsaOverscrollElement };
 
 /** Register every component of this category under its default tag. */

@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (301)
+## Widgets (309)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,14 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-micro>` | `motionary/widgets/micro` | `defineMicro()` |
+| `<usa-micro-switch>` | `motionary/widgets/micro-switch` | `defineMicroSwitch()` |
+| `<usa-micro-checkbox>` | `motionary/widgets/micro-checkbox` | `defineMicroCheckbox()` |
+| `<usa-micro-input>` | `motionary/widgets/micro-input` | `defineMicroInput()` |
+| `<usa-micro-button>` | `motionary/widgets/micro-button` | `defineMicroButton()` |
+| `<usa-micro-slider>` | `motionary/widgets/micro-slider` | `defineMicroSlider()` |
+| `<usa-micro-segmented>` | `motionary/widgets/micro-segmented` | `defineMicroSegmented()` |
+| `<usa-micro-stepper>` | `motionary/widgets/micro-stepper` | `defineMicroStepper()` |
 | `<usa-radial-menu>` | `motionary/widgets/radial-menu` | `defineRadialMenu()` |
 | `<usa-hover-card>` | `motionary/widgets/hover-card` | `defineHoverCard()` |
 | `<usa-toggle-group>` | `motionary/widgets/toggle-group` | `defineToggleGroup()` |

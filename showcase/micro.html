@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>微交互系统 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 24px}
+    h1,h2,h3,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:52px 0 16px}
+    h3 {font-size:.95rem; font-weight:600}
+    p {max-width:46em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .feelbar {position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; background:color-mix(in srgb,#f1f0ec 88%,transparent); backdrop-filter:blur(8px)}
+    .feelbar span {font-size:.85rem; color:#55544e}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:16px; min-height:210px; padding:22px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:110px; min-width:0}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    mo-micro[fx~="focus"] button:focus-visible {outline:none}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .tile {display:grid; place-items:center; width:132px; height:92px; border-radius:18px; background:#fff; border:1px solid #e2e0d8; font-weight:600; color:#2c3a6b; user-select:none}
+    .tile.dark {background:#1e1b4b; color:#fff; border-color:#1e1b4b}
+    .cta {padding:14px 22px; border:0; border-radius:14px; background:#4f46e5; color:#fff; font:inherit; font-weight:600; cursor:pointer}
+    .arena {position:relative; height:180px; border-radius:16px; background:repeating-linear-gradient(0deg,transparent 0 39px,#e8e6de 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,#e8e6de 39px 40px); border:1px solid #e2e0d8; overflow:hidden}
+    .arena mo-micro {position:absolute; left:20px; top:20px}
+    .chip {display:grid; place-items:center; width:80px; height:80px; border-radius:20px; background:#4f46e5; color:#fff; font-weight:700}
+    .lab {display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:22px; align-items:start}
+    @media(max-width:760px) {.lab {grid-template-columns:1fr}}
+    canvas {display:block; width:100%; height:220px; border-radius:14px; background:#fff; border:1px solid #e2e0d8}
+    .track {position:relative; height:56px; margin-top:14px; border-radius:999px; background:#fff; border:1px solid #e2e0d8; cursor:pointer}
+    .ball {position:absolute; left:8px; top:8px; width:40px; height:40px; border-radius:50%; background:#4f46e5; box-shadow:0 6px 16px rgb(79 70 229 / .35)}
+    dl {display:grid; grid-template-columns:auto 1fr; gap:6px 14px; margin:14px 0 0; font:13px ui-monospace,monospace}
+    dt {color:#6b6a62}
+    dd {margin:0}
+    pre {margin:12px 0 0; padding:14px 16px; border-radius:14px; background:#1b1b1a; color:#f1f0ec; font:12.5px/1.55 ui-monospace,monospace; overflow:auto; white-space:pre-wrap}
+    .row {display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+    .row button {padding:8px 14px; border-radius:999px; border:1px solid #d6d4cc; background:#fff; font:inherit; font-size:.85rem; cursor:pointer}
+    .stack {display:grid; gap:14px; width:100%}
+    .looks {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px}
+    .look {display:grid; gap:16px; justify-items:start; padding:22px; border-radius:22px; background:var(--mo-kit-paper,#fff); color:var(--mo-kit-ink,#18181b)}
+    .look small {font:12px ui-monospace,monospace; opacity:.7}
+    .card {padding:18px 20px; border-radius:16px; background:#fff; border:1px solid #e2e0d8; max-width:260px}
+    .card strong {display:block; margin-bottom:4px}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="toolkit.html">界面部件与数据图表</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>微交互系统</h1><p>所有动作都跑在同一套弹簧上：闭式解算、和帧率无关，可随时打断并保留速度。按压、悬停、磁吸、倾斜、光晕、拖拽和反馈冲量在同一个元素上叠加而不打架；七种手感一键换掉整页的节奏，外观预设照样适用。开启“减少动态效果”后什么都不动，反馈改为短暂的描边提示。</p></header>
+
+    <div class="feelbar"><span>整页手感</span><mo-micro-segmented id="feel" label="整页手感" options="默认,利落,干脆,顺滑,弹性,俏皮,沉稳,厚重" values="default,crisp,snappy,smooth,bouncy,playful,calm,heavy" value="default"></mo-micro-segmented></div>
+
+    <h2 id="lab">弹簧实验室</h2>
+    <section class="lab" aria-label="弹簧实验室">
+      <div>
+        <canvas id="curve" width="720" height="440" role="img" aria-label="弹簧从 0 到 1 的位移曲线"></canvas>
+        <div class="track" id="track" title="点击让小球弹到另一端，中途再点会带着速度折返"><span class="ball" id="ball"></span></div>
+      </div>
+      <div class="stack">
+        <mo-micro-segmented id="preset" label="预设" options="snappy,smooth,bouncy,elastic,pop,jelly" value="bouncy"></mo-micro-segmented>
+        <mo-micro-slider id="duration" label="响应时间" min="80" max="1200" step="10" value="480" unit="ms"></mo-micro-slider>
+        <mo-micro-slider id="bounce" label="回弹" min="-0.6" max="0.9" step="0.01" value="0.38"></mo-micro-slider>
+        <dl id="facts"></dl>
+        <pre id="code"></pre>
+      </div>
+    </section>
+
+    <h2 id="behaviours">行为</h2>
+    <section class="grid" aria-label="微交互行为">
+      <article><div class="stage"><mo-micro fx="press"><button class="cta" type="button">按压</button></mo-micro></div><p>按下迅速下沉，松手带一点过冲弹回；键盘空格、回车同样有效。</p><output class="log" data-log="press"></output></article>
+      <article><div class="stage"><mo-micro fx="hover lift press"><div class="tile">悬停抬升</div></mo-micro></div><p>悬停时轻轻放大并抬起，阴影随高度加深；按下时又被压低。</p></article>
+      <article><div class="stage"><mo-micro fx="magnetic press" strength="0.45" reach="18"><button class="cta" type="button">磁吸</button></mo-micro></div><p>靠向指针；快速离开时带着指针的速度甩出去再弹回原位。</p></article>
+      <article><div class="stage"><mo-micro fx="tilt glow hover" tilt="12"><div class="tile dark">倾斜 + 光晕</div></mo-micro></div><p>朝指针方向 3D 倾斜，光晕跟着指针走，颜色取外观的强调色。</p></article>
+      <article><div class="stage"><mo-micro fx="squish press"><div class="tile">果冻</div></mo-micro></div><p>按住被压扁，松手像果冻一样晃回来。</p></article>
+      <article><div class="stage"><mo-micro fx="press focus" style="border-radius:14px"><button class="cta" type="button">用 Tab 聚焦我</button></mo-micro></div><p>键盘聚焦时，焦点框从外向内弹进来。</p></article>
+      <article class="wide"><div class="stage block"><div class="arena"><mo-micro fx="drag press" snap="40" tabindex="0" aria-label="可拖动方块，方向键移动"><div class="chip">拖我</div></mo-micro></div></div><p>一比一跟手拖动；拖出边界有橡皮筋阻力，松手按速度惯性滑行、对齐 40px 网格。聚焦后方向键也能移动（Shift 加大步长）。</p><output class="log" data-log="drag"></output></article>
+    </section>
+
+    <h2 id="feedback">反馈冲量</h2>
+    <section class="grid" aria-label="反馈冲量">
+      <article class="wide"><div class="stage"><mo-micro id="target" fx="hover"><div class="card"><strong>通知卡片</strong>点下面的按钮，给它一个反馈冲量。冲量直接加在弹簧速度上，连点会叠加。</div></mo-micro></div>
+        <div class="row" id="kinds"><button type="button" data-kind="shake">摇头 shake</button><button type="button" data-kind="nod">点头 nod</button><button type="button" data-kind="pop">弹出 pop</button><button type="button" data-kind="wiggle">扭动 wiggle</button><button type="button" data-kind="jelly">果冻 jelly</button><button type="button" data-kind="nudge">轻推 nudge</button><button type="button" data-kind="bump">顶起 bump</button><button type="button" data-kind="attention">注意 attention</button></div></article>
+    </section>
+
+    <h2 id="controls">表单部件</h2>
+    <section class="grid" aria-label="弹簧表单部件">
+      <article><div class="stage"><div class="stack" style="justify-items:start"><mo-micro-switch label="无线网络" checked></mo-micro-switch><mo-micro-switch label="蓝牙" size="sm"></mo-micro-switch><mo-micro-switch label="飞行模式" size="lg"></mo-micro-switch></div></div><p>旋钮移动时被速度拉长，可以直接拖动或轻甩，两端有橡皮筋阻力。</p><output class="log" data-log="switch"></output></article>
+      <article><div class="stage"><div class="stack" style="justify-items:start"><mo-micro-checkbox label="记住我" checked></mo-micro-checkbox><mo-micro-checkbox label="订阅更新"></mo-micro-checkbox><mo-micro-checkbox label="全选（部分已选）" indeterminate></mo-micro-checkbox></div></div><p>按下压扁，松开弹性填色再画勾；取消时先擦掉勾。</p><output class="log" data-log="check"></output></article>
+      <article><div class="stage block"><div class="stack"><mo-micro-input label="邮箱" type="email" required success hint="只用来接收通知" error="请填写有效的邮箱地址"></mo-micro-input><mo-micro-input label="昵称" maxlength="12" hint="最多 12 个字"></mo-micro-input></div></div><p>标签弹性上浮，焦点线从点击处展开；离开时校验，无效就轻摇一次并读出提示，有效就弹出勾。</p><output class="log" data-log="input"></output></article>
+      <article><div class="stage"><mo-micro-button id="save" label="保存" loading-label="正在保存" success-label="已保存" error-label="重试"></mo-micro-button><mo-micro-button id="fail" label="会失败的请求" variant="soft" error-label="失败了"></mo-micro-button></div><p>执行时收成转圈，成功弹出勾，失败摇一摇，随后弹回原样；每个状态都会被读屏读出。</p><output class="log" data-log="button"></output></article>
+      <article><div class="stage block"><div class="stack"><mo-micro-slider label="音量" value="40" step="5" unit="%"></mo-micro-slider><mo-micro-slider label="档位" min="1" max="5" step="1" value="3"></mo-micro-slider></div></div><p>松手后落到最近的刻度；拖出两端轨道会像橡皮一样拉长再晃回来，键盘顶到头也会顶一下。</p><output class="log" data-log="slider"></output></article>
+      <article><div class="stage"><mo-micro-segmented label="视图" options="列表,看板,日历" value="看板"></mo-micro-segmented></div><p>选中块的前沿快、后沿慢，滑过去时会向新选项拉伸；方向键切换。</p><output class="log" data-log="seg"></output></article>
+      <article><div class="stage"><mo-micro-stepper label="人数" value="2" min="1" max="12"></mo-micro-stepper></div><p>数字弹性滚动，按住越来越快；到达上下限时数字顶一下再弹回。</p><output class="log" data-log="step"></output></article>
+    </section>
+
+    <h2 id="markup">标记写法</h2>
+    <section class="grid" aria-label="标记写法">
+      <article class="wide"><div class="stage"><button class="cta" type="button" data-mo-micro="press hover focus">data-mo-micro</button><div class="tile" data-mo-micro="tilt glow lift" data-mo-tilt="10">tilt glow lift</div><button class="cta" type="button" data-mo-micro="magnetic press" data-mo-strength="0.5" style="background:#0f766e">magnetic</button></div>
+        <pre>&lt;button data-mo-micro="press hover focus"&gt;…&lt;/button&gt;
+import { applyMicro } from 'motionary/components/interaction';
+applyMicro(); // 之后新增、修改、移除的 data-mo-micro 元素也会自动处理</pre></article>
+    </section>
+
+    <h2 id="looks">外观</h2>
+    <section class="looks" aria-label="外观示例" id="looksRow"></section>
+  </main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineWidgets, adoptLooks, applyLook, lookNames } from '../dist/components/widgets.js';
+    import { applyMicro } from '../dist/components/interaction.js';
+    import { MICRO_SPRINGS, springFromFeel, springFeel, springSolution, settleTime, createSpringGroup } from '../dist/components/physics.js';
+    defineMoAliases();
+    defineWidgets('17.16');
+    adoptLooks('ui');
+    applyMicro();
+
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail, el)));
+
+    // whole-page feel
+    document.getElementById('feel').addEventListener('usa:change', (e) => {
+      const f = e.detail.value === 'default' ? null : e.detail.value;
+      document.querySelectorAll('mo-micro, mo-micro-switch, mo-micro-checkbox, mo-micro-input, mo-micro-button, mo-micro-slider, mo-micro-segmented, mo-micro-stepper').forEach((el) => {
+        if (el.id === 'feel') return;
+        f ? el.setAttribute('feel', f) : el.removeAttribute('feel');
+      });
+      document.querySelectorAll('[data-mo-micro]:not(mo-micro)').forEach((el) => {
+        f ? el.setAttribute('data-mo-feel', f) : el.removeAttribute('data-mo-feel');
+        el.setAttribute('data-mo-micro', el.getAttribute('data-mo-micro'));
+      });
+    });
+
+    // spring lab
+    const canvas = document.getElementById('curve');
+    const ctx = canvas.getContext('2d');
+    const ball = document.getElementById('ball');
+    const track = document.getElementById('track');
+    let feel = { ...MICRO_SPRINGS.bouncy };
+    const lab = createSpringGroup({ x: 0 }, { spring: feel, owner: ball, onUpdate: (v) => (ball.style.transform = `translateX(${v.x.toFixed(2)}px)`) });
+    let side = 0;
+    track.addEventListener('click', () => {
+      side = 1 - side;
+      lab.set({ x: side * (track.clientWidth - 58) }, { spring: feel });
+    });
+    const draw = () => {
+      const p = springFromFeel(feel);
+      const T = Math.max(300, settleTime(p));
+      const f = springSolution(p, 0, 1);
+      const w = canvas.width, h = canvas.height, pad = 28;
+      const y = (v) => h - pad - v * (h - pad * 2) * 0.72;
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = '#e2e0d8'; ctx.lineWidth = 2; ctx.setLineDash([6, 6]);
+      ctx.beginPath(); ctx.moveTo(pad, y(1)); ctx.lineTo(w - pad, y(1)); ctx.stroke();
+      ctx.setLineDash([]); ctx.strokeStyle = '#4f46e5'; ctx.lineWidth = 4; ctx.beginPath();
+      for (let i = 0; i <= 240; i++) { const t = (T * i) / 240; const px = pad + (i / 240) * (w - pad * 2); const py = y(f(t)[0]); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+      ctx.stroke();
+      ctx.fillStyle = '#6b6a62'; ctx.font = '22px ui-monospace, monospace'; ctx.fillText(`${Math.round(T)} ms`, w - pad - 110, h - 6);
+      const info = springFeel(p);
+      document.getElementById('facts').innerHTML = [['stiffness', p.stiffness.toFixed(1)], ['damping', p.damping.toFixed(2)], ['mass', '1'], ['阻尼比', info.dampingRatio.toFixed(3)], ['静止用时', `${Math.round(settleTime(p))} ms`]].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+      document.getElementById('code').textContent = `import { createSpringGroup } from 'motionary/components/physics';\nconst s = createSpringGroup({ x: 0 }, {\n  spring: { duration: ${Math.round(feel.duration)}, bounce: ${feel.bounce} },\n  onUpdate: (v) => (el.style.transform = \`translateX(\${v.x}px)\`),\n});\ns.set({ x: 240 }); // 中途再 set 会保留速度`;
+    };
+    const dur = document.getElementById('duration');
+    const bnc = document.getElementById('bounce');
+    const sync = () => { feel = { duration: dur.value, bounce: bnc.value }; draw(); };
+    dur.addEventListener('usa:input', sync);
+    bnc.addEventListener('usa:input', sync);
+    document.getElementById('preset').addEventListener('usa:change', (e) => {
+      const s = MICRO_SPRINGS[e.detail.value];
+      dur.value = s.duration;
+      bnc.value = s.bounce;
+      sync();
+    });
+    draw();
+
+    // behaviours, feedback
+    on('mo-micro[fx="press"]', 'release', () => log('press', `released at ${new Date().toLocaleTimeString()}`));
+    on('.arena mo-micro', 'drag-end', (d) => log('drag', `x ${Math.round(d.x)}, y ${Math.round(d.y)}`));
+    const target = document.getElementById('target');
+    document.getElementById('kinds').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-kind]');
+      if (b) target.feedback(b.dataset.kind);
+    });
+
+    // controls
+    on('mo-micro-switch', 'change', (d, el) => log('switch', `${el.getAttribute('label')}: ${d.checked ? '开' : '关'}`));
+    on('mo-micro-checkbox', 'change', (d, el) => log('check', `${el.getAttribute('label')}: ${d.checked}`));
+    on('mo-micro-input', 'invalid', (d) => log('input', `invalid: ${d.message}`));
+    on('mo-micro-input', 'valid', (d) => log('input', `valid: ${d.value}`));
+    on('mo-micro-button', 'state', (d, el) => log('button', `${el.getAttribute('label')}: ${d.state}`));
+    document.getElementById('save').addEventListener('usa:action', (e) => e.detail.run(new Promise((r) => setTimeout(r, 1200))));
+    document.getElementById('fail').addEventListener('usa:action', (e) => e.detail.run(new Promise((_, no) => setTimeout(() => no(new Error('demo')), 1000))));
+    on('mo-micro-slider', 'change', (d, el) => el.closest('#controls, .grid') && log('slider', `${el.getAttribute('label')}: ${d.value}`));
+    on('mo-micro-segmented', 'change', (d, el) => el.closest('.grid') && log('seg', `${d.index + 1}: ${d.value}`));
+    on('mo-micro-stepper', 'change', (d) => log('step', String(d.value)));
+
+    // the same controls under three looks
+    const names = lookNames('ui');
+    const picks = [names[0], names[Math.floor(names.length / 3)], names[Math.floor((names.length * 2) / 3)]].filter(Boolean);
+    const row = document.getElementById('looksRow');
+    for (const name of picks) {
+      const box = document.createElement('div');
+      box.className = 'look';
+      box.innerHTML = `<small>look="${name}"</small><mo-micro-switch label="提醒" checked></mo-micro-switch><mo-micro-segmented label="周期" options="日,周,月" value="周"></mo-micro-segmented><mo-micro-slider label="亮度" value="70" unit="%"></mo-micro-slider><mo-micro-button label="继续"></mo-micro-button>`;
+      applyLook(box, name);
+      row.append(box);
+    }
+  </script>
+</body>
+</html>

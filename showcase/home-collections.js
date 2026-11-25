@@ -1,5 +1,5 @@
 /**
- * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab).
+ * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab).
  *
  * Every release page (17.14 icons, 17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
  * 17.4 luminous) gets a tab with a handful of its widgets running live, so most of them can be tried without leaving
@@ -7,6 +7,7 @@
  * the open tab's widget entries are imported from ../dist (or the CDN build as a fallback), one module per widget, and
  * the other tabs load when they are opened.
  */
+import { components as micro } from './catalog/micro.js';
 import { components as toolkit } from './catalog/toolkit.js';
 import { components as icons } from './catalog/icons.js';
 import { components as studio } from './catalog/studio.js';
@@ -28,6 +29,13 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 
 /** The tabs, newest first. `page` is the full demo page each one links to. */
 export const COLLECTIONS = [
+  {
+    id: 'micro', since: '17.16', page: './micro.html',
+    title: { en: 'Micro-interactions', zh: '微交互' },
+    blurb: { en: 'Spring physics for every press, toggle, drag and error: interruptible, velocity-aware, calm under reduced motion.', zh: '按压、切换、拖拽、报错都用真实弹簧：可打断、保留速度，减少动态效果时安静切换。' },
+    items: pick(micro, 'micro-switch micro-checkbox micro-segmented micro-slider micro-stepper micro-button micro-input micro'),
+    total: micro.length,
+  },
   {
     id: 'toolkit', since: '17.15', page: './toolkit.html',
     title: { en: 'New in 17.15', zh: '17.15 新品' },
