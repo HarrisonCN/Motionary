@@ -71,8 +71,9 @@ function defineRadialMenu(tag = 'usa-radial-menu') {
                 const i = focusables.findIndex((f, k) => f.contains(e.target) || items[k].contains(e.target));
                 if (i < 0)
                     return;
-                this.emit('select', { index: i, label: (items[i].getAttribute('aria-label') || items[i].textContent || '').trim() });
+                // close first, so a listener that reacts to the pick sees the menu already shut
                 set(false);
+                this.emit('select', { index: i, label: (items[i].getAttribute('aria-label') || items[i].textContent || '').trim() });
             });
             this.listen(root, 'keydown', (e) => {
                 if (e.key === 'Escape' && this._open) {

@@ -2055,7 +2055,7 @@ declare function defineIconPicker(tag?: string): CustomElementConstructor | unde
  * A round button that fans its own children out on a circle around it. The children (buttons or links) are moved into
  * the menu and put back when the element is removed. The toggle says whether the menu is open (`aria-expanded`); the
  * arrow keys move round the items, Home and End jump to the ends, Escape closes the menu and focus goes back to the
- * toggle. Picking an item closes the menu.
+ * toggle. Picking an item closes the menu, then fires `usa:select`.
  *
  * Attributes: `open`, `label` (Menu), `radius` (px; 84), `start` (degrees, 0 = east, -90 = north; -90),
  * `spread` (degrees; 360), `icon` (the toggle's text; ＋).
