@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('17.11 looks page shows 510 looks per family (17.15) and restyles the real widgets', async ({ page }, info) => {
+test('17.11 looks page shows 680 looks per family (17.17) and restyles the real widgets', async ({ page }, info) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/showcase/looks.html');
 
   const tiles = page.locator('[data-grid] .tile');
   const stage = page.locator('#stage');
-  await expect(tiles).toHaveCount(510);
-  await expect(page.locator('[data-count="ui"]')).toHaveText('(510)');
+  await expect(tiles).toHaveCount(680);
+  await expect(page.locator('[data-count="ui"]')).toHaveText('(680)');
   await expect(stage).toHaveAttribute('data-mo-look', 'solid-indigo');
 
   const sub = stage.locator('mo-subscribe .usa-sub-btn');
@@ -20,9 +20,11 @@ test('17.11 looks page shows 510 looks per family (17.15) and restyles the real 
 
   await page.getByRole('button', { name: '试用 brutal-amber' }).click();
   await expect.poll(() => stage.locator('mo-search-bar .usa-sbar').evaluate((el) => getComputedStyle(el).borderTopWidth)).toBe('3px');
+  // 17.17: the look also sets the micro-interaction feel
+  await expect.poll(() => stage.evaluate((el) => getComputedStyle(el).getPropertyValue('--mo-feel').trim())).toBe('heavy');
 
   await page.getByRole('tab', { name: /组件/ }).click();
-  await expect(tiles).toHaveCount(510);
+  await expect(tiles).toHaveCount(680);
   await expect(stage).toHaveAttribute('data-mo-look', 'flat-indigo');
   await expect(stage.locator('mo-split-pane')).toBeVisible();
   await page.getByRole('button', { name: '试用 cyber-grape' }).click();

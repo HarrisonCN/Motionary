@@ -4,7 +4,7 @@ Ten everyday parts built on the 17.16 spring core and `micro()`. Every motion is
 `createSpringGroup()`, so it can be interrupted at any moment and keeps its velocity when it is; feedback such as a
 shake or a nod comes from `feedback()`. No runtime dependency, third-party code, font or image is bundled; these are
 original implementations written against Motionary's element base and contract rules. They read the same `--mo-kit-*`
-tokens as the 17.10–17.16 kits, so the [1530 looks](./looks-17-11.md) restyle them, and each takes the page's feel
+tokens as the 17.10–17.16 kits, so the [2040 looks](./looks-17-11.md) restyle them, and each takes the page's feel
 from its `feel` attribute, a parent's `data-mo-feel` or `--mo-feel`. Under reduced motion every spring jumps to its
 target and impulses do nothing; state changes are still announced.
 

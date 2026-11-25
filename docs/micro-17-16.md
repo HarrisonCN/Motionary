@@ -4,7 +4,7 @@ One spring core, one interaction engine and eight elements built on them. Everyt
 solved in closed form, so it looks the same at 30, 60 or 144 Hz, can be interrupted at any moment and keeps its
 velocity when it is. No runtime dependency, third-party code, font or image is bundled; these are original
 implementations written against Motionary's element base and contract rules. The controls read the same `--mo-kit-*`
-tokens as the 17.10–17.15 kits, so the [1530 looks](./looks-17-11.md) restyle them too, and a look's `--mo-kit-speed`
+tokens as the 17.10–17.15 kits, so the [2040 looks](./looks-17-11.md) restyle them too, and a look's `--mo-kit-speed`
 speeds their springs up or slows them down.
 
 Live demo: [`showcase/micro.html`](../showcase/micro.html) (spring lab with a live curve, every behaviour, feedback

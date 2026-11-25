@@ -19,7 +19,7 @@ describe('17.14 looks: over two hundred more per family', () => {
       expect(treatments).toHaveLength(17);
       expect(treatments.slice(9)).toEqual([...NEW_TREATMENTS[family]]);
       const names = lookNames(family);
-      expect(names).toHaveLength(510); // 17.15 added ten palettes
+      expect(names).toHaveLength(680); // 17.15 and 17.17 added ten palettes each
       // 17.11 had 9 × 12 = 108 per family: 232 more
       expect(names.length - 108).toBeGreaterThanOrEqual(200);
     }
@@ -79,8 +79,8 @@ describe('17.14 looks: over two hundred more per family', () => {
     const doc = readFileSync('docs/looks-17-11.md', 'utf8');
     for (const family of LOOK_FAMILIES) for (const t of NEW_TREATMENTS[family]) expect(doc, t).toContain(`\`${t}\``);
     for (const p of NEW_PALETTES) expect(doc, p).toContain(`\`${p}\``);
-    expect(readFileSync('showcase/looks.html', 'utf8')).toContain('1530');
-    expect(readFileSync('showcase/home-collections.js', 'utf8')).toContain('total: 1530');
+    expect(readFileSync('showcase/looks.html', 'utf8')).toContain('2040');
+    expect(readFileSync('showcase/home-collections.js', 'utf8')).toContain('total: 2040');
     expect(readFileSync('CHANGELOG.md', 'utf8')).toContain('17.14');
   });
 });
