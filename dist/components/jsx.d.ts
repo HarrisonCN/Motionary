@@ -123,6 +123,19 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         values?: string | boolean | number;
     };
+    'usa-bar-race': {
+        colors?: string | boolean | number;
+        'frame-label'?: string | boolean | number;
+        frames?: string | boolean | number;
+        interval?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        'pause-label'?: string | boolean | number;
+        'play-label'?: string | boolean | number;
+        top?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
+    };
     'usa-bento': {
         collapse?: string | boolean | number;
         columns?: string | boolean | number;
@@ -182,6 +195,19 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-bullet-chart': {
+        colors?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        max?: string | boolean | number;
+        'met-label'?: string | boolean | number;
+        'missed-label'?: string | boolean | number;
+        ranges?: string | boolean | number;
+        'target-label'?: string | boolean | number;
+        targets?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
+    };
     'usa-button': {
         deform?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -190,6 +216,20 @@ interface LegacyAttributes {
         reset?: string | boolean | number;
         shape?: string | boolean | number;
         state?: string | boolean | number;
+    };
+    'usa-calendar-strip': {
+        days?: string | boolean | number;
+        label?: string | boolean | number;
+        locale?: string | boolean | number;
+        marks?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        'next-label'?: string | boolean | number;
+        'prev-label'?: string | boolean | number;
+        start?: string | boolean | number;
+        value?: string | boolean | number;
+        'week-start'?: string | boolean | number;
     };
     'usa-card': {
         color?: string | boolean | number;
@@ -330,6 +370,15 @@ interface LegacyAttributes {
     'usa-color-picker': {
         swatches?: string | boolean | number;
     };
+    'usa-color-swatches': {
+        colors?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        names?: string | boolean | number;
+        shape?: string | boolean | number;
+        size?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-combobox': {
         disabled?: string | boolean | number;
         hint?: string | boolean | number;
@@ -364,6 +413,13 @@ interface LegacyAttributes {
         labels?: string | boolean | number;
         orientation?: string | boolean | number;
         position?: string | boolean | number;
+    };
+    'usa-comparison-table': {
+        'badge-label'?: string | boolean | number;
+        'diff-label'?: string | boolean | number;
+        differences?: string | boolean | number;
+        highlight?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-connect-beam': {
         colors?: string | boolean | number;
@@ -525,6 +581,16 @@ interface LegacyAttributes {
         color?: string | boolean | number;
         gap?: string | boolean | number;
         radius?: string | boolean | number;
+    };
+    'usa-dot-plot': {
+        compare?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        series?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-dotlottie': {
         'state-machine'?: string | boolean | number;
@@ -905,6 +971,12 @@ interface LegacyAttributes {
     'usa-hotspots': {
         label?: string | boolean | number;
         pulse?: string | boolean | number;
+    };
+    'usa-hover-card': {
+        'close-delay'?: string | boolean | number;
+        open?: string | boolean | number;
+        'open-delay'?: string | boolean | number;
+        placement?: string | boolean | number;
     };
     'usa-hover-reveal-list': {
         label?: string | boolean | number;
@@ -1628,6 +1700,23 @@ interface LegacyAttributes {
         speed?: string | boolean | number;
         targets?: string | boolean | number;
     };
+    'usa-radial-bars': {
+        colors?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        max?: string | boolean | number;
+        size?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    'usa-radial-menu': {
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        open?: string | boolean | number;
+        radius?: string | boolean | number;
+        spread?: string | boolean | number;
+        start?: string | boolean | number;
+    };
     'usa-range-slider': {
         disabled?: string | boolean | number;
         high?: string | boolean | number;
@@ -1984,6 +2073,15 @@ interface LegacyAttributes {
         step?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-slope-chart': {
+        after?: string | boolean | number;
+        before?: string | boolean | number;
+        'from-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        'to-label'?: string | boolean | number;
+        unit?: string | boolean | number;
+    };
     'usa-smooth-scroll': {
         anchors?: string | boolean | number;
         duration?: string | boolean | number;
@@ -2329,6 +2427,17 @@ interface LegacyAttributes {
         reverse?: string | boolean | number;
         scale?: string | boolean | number;
     };
+    'usa-time-picker': {
+        'am-label'?: string | boolean | number;
+        'hour-label'?: string | boolean | number;
+        hour12?: string | boolean | number;
+        label?: string | boolean | number;
+        'minute-label'?: string | boolean | number;
+        name?: string | boolean | number;
+        'pm-label'?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-timeline': {
         duration?: string | boolean | number;
         overlap?: string | boolean | number;
@@ -2354,6 +2463,16 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         max?: string | boolean | number;
         position?: string | boolean | number;
+    };
+    'usa-toggle-group': {
+        label?: string | boolean | number;
+        multiple?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        required?: string | boolean | number;
+        size?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-token-editor': {
         apply?: string | boolean | number;
@@ -2553,6 +2672,9 @@ interface LegacyEvents {
         'usa:unlock': CustomEvent<any>;
     };
     'usa-bar-chart': {};
+    'usa-bar-race': {
+        'usa:frame': CustomEvent<any>;
+    };
     'usa-bento': {};
     'usa-bezier-lab': {
         'usa:action': CustomEvent<any>;
@@ -2575,9 +2697,16 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-bullet-chart': {
+        'usa:select': CustomEvent<any>;
+    };
     'usa-button': {
         'usa:state': CustomEvent<any>;
         'usa:submit': CustomEvent<any>;
+    };
+    'usa-calendar-strip': {
+        'usa:change': CustomEvent<any>;
+        'usa:page': CustomEvent<any>;
     };
     'usa-card': {
         'usa:collapse': CustomEvent<any>;
@@ -2654,6 +2783,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-color-swatches': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-combobox': {
         'usa:change': CustomEvent<any>;
         'usa:query': CustomEvent<any>;
@@ -2670,6 +2802,9 @@ interface LegacyEvents {
     };
     'usa-compare': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-comparison-table': {
+        'usa:filter': CustomEvent<any>;
     };
     'usa-connect-beam': {};
     'usa-consent': {
@@ -2747,6 +2882,9 @@ interface LegacyEvents {
         'usa:select': CustomEvent<any>;
     };
     'usa-dot-network': {};
+    'usa-dot-plot': {
+        'usa:select': CustomEvent<any>;
+    };
     'usa-dotlottie': {
         'usa:custom': CustomEvent<any>;
         'usa:error': CustomEvent<any>;
@@ -2921,6 +3059,9 @@ interface LegacyEvents {
     'usa-hotspots': {
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
+    };
+    'usa-hover-card': {
+        'usa:toggle': CustomEvent<any>;
     };
     'usa-hover-reveal-list': {
         'usa:change': CustomEvent<any>;
@@ -3260,6 +3401,13 @@ interface LegacyEvents {
     'usa-radar': {
         'usa:ping': CustomEvent<any>;
     };
+    'usa-radial-bars': {
+        'usa:select': CustomEvent<any>;
+    };
+    'usa-radial-menu': {
+        'usa:select': CustomEvent<any>;
+        'usa:toggle': CustomEvent<any>;
+    };
     'usa-range-slider': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
@@ -3414,6 +3562,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-slope-chart': {
+        'usa:select': CustomEvent<any>;
+    };
     'usa-smooth-scroll': {
         'usa:ready': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
@@ -3566,6 +3717,9 @@ interface LegacyEvents {
     'usa-three-dot-bounce': {};
     'usa-tile-relay': {};
     'usa-tilt': {};
+    'usa-time-picker': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-timeline': {
         'usa:complete': CustomEvent<any>;
     };
@@ -3580,6 +3734,9 @@ interface LegacyEvents {
     };
     'usa-toaster': {
         'usa:toast': CustomEvent<any>;
+    };
+    'usa-toggle-group': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-token-editor': {
         'usa:change': CustomEvent<any>;

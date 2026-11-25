@@ -118,6 +118,18 @@ var widgets_textPressure = require('../widgets/text-pressure.cjs');
 var widgets_shuffleGrid = require('../widgets/shuffle-grid.cjs');
 var widgets_icon = require('../chunks/icon-B5mClvXb.cjs');
 var widgets_iconPicker = require('../chunks/icon-picker-DU1LBm-R.cjs');
+var widgets_radialMenu = require('../widgets/radial-menu.cjs');
+var widgets_hoverCard = require('../widgets/hover-card.cjs');
+var widgets_toggleGroup = require('../widgets/toggle-group.cjs');
+var widgets_timePicker = require('../widgets/time-picker.cjs');
+var widgets_colorSwatches = require('../widgets/color-swatches.cjs');
+var widgets_calendarStrip = require('../widgets/calendar-strip.cjs');
+var widgets_comparisonTable = require('../widgets/comparison-table.cjs');
+var widgets_radialBars = require('../widgets/radial-bars.cjs');
+var widgets_barRace = require('../widgets/bar-race.cjs');
+var widgets_bulletChart = require('../widgets/bullet-chart.cjs');
+var widgets_slopeChart = require('../widgets/slope-chart.cjs');
+var widgets_dotPlot = require('../widgets/dot-plot.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -285,6 +297,7 @@ var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
+var kit15 = require('../chunks/kit-15-D1Ovwhys.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
@@ -367,6 +380,18 @@ function hueOf(hex) {
     const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
     return Math.round((h * 60 + 360) % 360);
 }
+/** WCAG contrast ratio of two hex colors. */
+function contrastRatio(a, b) {
+    const lum = (hex) => {
+        const [r, g, b2] = rgbOf(hex).map((v) => {
+            const c = v / 255;
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b2;
+    };
+    const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+}
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 const NONE = '0 0 0 transparent';
 /** A dark surface tinted by `tint`, with light ink and the bright accent: shared by neon, terminal, cyber, console. */
@@ -376,7 +401,10 @@ const darkSet = (p, base, tint, amount, ink) => {
 };
 /** A light surface even for the dark palettes: deep ink and a deep accent. */
 const lightSet = (p, paper) => {
-    const accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    let accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    // a very bright accent (obsidian's lime) is still too light for white text after that mix: deepen it until it reads
+    for (let t = 0.56; p.dark && t > 0.2 && contrastRatio('#ffffff', accent) < 4.5; t -= 0.06)
+        accent = mixHex(p.accent, t, '#111111');
     return { dark: false, paper, bg: paper, ink: p.dark ? mixHex(p.accent, 0.22, '#14121a') : p.ink, accent, onAccent: '#ffffff' };
 };
 const LOOK_TREATMENTS = {
@@ -721,6 +749,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.15': { 'usa-radial-menu': widgets_radialMenu.defineRadialMenu, 'usa-hover-card': widgets_hoverCard.defineHoverCard, 'usa-toggle-group': widgets_toggleGroup.defineToggleGroup, 'usa-time-picker': widgets_timePicker.defineTimePicker, 'usa-color-swatches': widgets_colorSwatches.defineColorSwatches, 'usa-calendar-strip': widgets_calendarStrip.defineCalendarStrip, 'usa-comparison-table': widgets_comparisonTable.defineComparisonTable, 'usa-radial-bars': widgets_radialBars.defineRadialBars, 'usa-bar-race': widgets_barRace.defineBarRace, 'usa-bullet-chart': widgets_bulletChart.defineBulletChart, 'usa-slope-chart': widgets_slopeChart.defineSlopeChart, 'usa-dot-plot': widgets_dotPlot.defineDotPlot },
     '17.14': { 'usa-icon': widgets_icon.defineIcon, 'usa-icon-picker': widgets_iconPicker.defineIconPicker },
     '17.13': { 'usa-tour': widgets_tour.defineTour, 'usa-signature-pad': widgets_signaturePad.defineSignaturePad, 'usa-wheel-picker': widgets_wheelPicker.defineWheelPicker, 'usa-mention-input': widgets_mentionInput.defineMentionInput, 'usa-emoji-picker': widgets_emojiPicker.defineEmojiPicker, 'usa-comment-thread': widgets_commentThread.defineCommentThread, 'usa-diff-viewer': widgets_diffViewer.defineDiffViewer, 'usa-line-chart': widgets_lineChart.defineLineChart, 'usa-funnel-chart': widgets_funnelChart.defineFunnelChart, 'usa-treemap': widgets_treemap.defineTreemap, 'usa-gantt': widgets_gantt.defineGantt, 'usa-waffle-chart': widgets_waffleChart.defineWaffleChart, 'usa-split-flap': widgets_splitFlap.defineSplitFlap, 'usa-scratch-card': widgets_scratchCard.defineScratchCard, 'usa-page-flip': widgets_pageFlip.definePageFlip, 'usa-circular-text': widgets_circularText.defineCircularText, 'usa-pixel-transition': widgets_pixelTransition.definePixelTransition, 'usa-magnet-lines': widgets_magnetLines.defineMagnetLines, 'usa-text-pressure': widgets_textPressure.defineTextPressure, 'usa-shuffle-grid': widgets_shuffleGrid.defineShuffleGrid },
     '17.12': { 'usa-progress-tabs': widgets_progressTabs.defineProgressTabs, 'usa-code-tabs': widgets_codeTabs.defineCodeTabs, 'usa-helpful-vote': widgets_helpfulVote.defineHelpfulVote, 'usa-share-button': widgets_shareButton.defineShareButton, 'usa-inline-edit': widgets_inlineEdit.defineInlineEdit, 'usa-tag-cloud': widgets_tagCloud.defineTagCloud, 'usa-heatmap': widgets_heatmap.defineHeatmap, 'usa-donut-chart': widgets_donutChart.defineDonutChart, 'usa-sortable-list': widgets_sortableList.defineSortableList, 'usa-zoom-lens': widgets_zoomLens.defineZoomLens, 'usa-rating-bars': widgets_ratingBars.defineRatingBars, 'usa-checklist': widgets_checklist.defineChecklist, 'usa-meteors': widgets_meteors.defineMeteors, 'usa-connect-beam': widgets_connectBeam.defineConnectBeam, 'usa-retro-grid': widgets_retroGrid.defineRetroGrid, 'usa-orbit-rings': widgets_orbitRings.defineOrbitRings, 'usa-letter-swap': widgets_letterSwap.defineLetterSwap, 'usa-ripple-grid': widgets_rippleGrid.defineRippleGrid },
@@ -940,6 +969,18 @@ exports.searchIcons = widgets_icon.searchIcons;
 exports.defineIconPicker = widgets_iconPicker.defineIconPicker;
 exports.gridStep = widgets_iconPicker.gridStep;
 exports.iconCopyText = widgets_iconPicker.iconCopyText;
+exports.defineRadialMenu = widgets_radialMenu.defineRadialMenu;
+exports.defineHoverCard = widgets_hoverCard.defineHoverCard;
+exports.defineToggleGroup = widgets_toggleGroup.defineToggleGroup;
+exports.defineTimePicker = widgets_timePicker.defineTimePicker;
+exports.defineColorSwatches = widgets_colorSwatches.defineColorSwatches;
+exports.defineCalendarStrip = widgets_calendarStrip.defineCalendarStrip;
+exports.defineComparisonTable = widgets_comparisonTable.defineComparisonTable;
+exports.defineRadialBars = widgets_radialBars.defineRadialBars;
+exports.defineBarRace = widgets_barRace.defineBarRace;
+exports.defineBulletChart = widgets_bulletChart.defineBulletChart;
+exports.defineSlopeChart = widgets_slopeChart.defineSlopeChart;
+exports.defineDotPlot = widgets_dotPlot.defineDotPlot;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1180,6 +1221,24 @@ exports.moveItem = kit12.moveItem;
 exports.numbers = kit12.numbers;
 exports.rovingIndex = kit12.rovingIndex;
 exports.seeded = kit12.seeded;
+exports.arcDash = kit15.arcDash;
+exports.cellMark = kit15.cellMark;
+exports.dayText = kit15.dayText;
+exports.formatTime = kit15.formatTime;
+exports.frameValues = kit15.frameValues;
+exports.hour12 = kit15.hour12;
+exports.inkOn = kit15.inkOn;
+exports.luminance = kit15.luminance;
+exports.parseDay = kit15.parseDay;
+exports.raceRanks = kit15.raceRanks;
+exports.radialSpots = kit15.radialSpots;
+exports.relativeChange = kit15.relativeChange;
+exports.rowDiffers = kit15.rowDiffers;
+exports.signedNumbers = kit15.signedNumbers;
+exports.spreadLabels = kit15.spreadLabels;
+exports.stepTime = kit15.stepTime;
+exports.timeParts = kit15.timeParts;
+exports.weekStartOf = kit15.weekStartOf;
 exports.angleTo = kit13.angleTo;
 exports.changedSpan = kit13.changedSpan;
 exports.clampTo = kit13.clampTo;
