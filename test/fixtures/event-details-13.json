@@ -2033,6 +2033,72 @@
       "usa:pick": [
         "{category, copied, name}"
       ]
+    },
+    "usa-bar-race": {
+      "usa:frame": [
+        "{index, leader, name}"
+      ]
+    },
+    "usa-bullet-chart": {
+      "usa:select": [
+        "{index, met, target, value}"
+      ]
+    },
+    "usa-calendar-strip": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:page": [
+        "{start}"
+      ]
+    },
+    "usa-color-swatches": {
+      "usa:change": [
+        "{index, name, value}"
+      ]
+    },
+    "usa-comparison-table": {
+      "usa:filter": [
+        "{differences, hidden}"
+      ]
+    },
+    "usa-dot-plot": {
+      "usa:select": [
+        "{compare, index, value}"
+      ]
+    },
+    "usa-hover-card": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-radial-bars": {
+      "usa:select": [
+        "{index, max, value}"
+      ]
+    },
+    "usa-radial-menu": {
+      "usa:select": [
+        "{index, label}"
+      ],
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-slope-chart": {
+      "usa:select": [
+        "{after, before, change, index}"
+      ]
+    },
+    "usa-time-picker": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-toggle-group": {
+      "usa:change": [
+        "{index, value}"
+      ]
     }
   }
 }

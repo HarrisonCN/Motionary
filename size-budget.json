@@ -3192,6 +3192,66 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/radial-menu' (per-entry, fixed)",
+    "import": "import { defineRadialMenu } from 'pkg/widgets/radial-menu'; console.log(defineRadialMenu);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/hover-card' (per-entry, fixed)",
+    "import": "import { defineHoverCard } from 'pkg/widgets/hover-card'; console.log(defineHoverCard);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/toggle-group' (per-entry, fixed)",
+    "import": "import { defineToggleGroup } from 'pkg/widgets/toggle-group'; console.log(defineToggleGroup);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/time-picker' (per-entry, fixed)",
+    "import": "import { defineTimePicker } from 'pkg/widgets/time-picker'; console.log(defineTimePicker);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/color-swatches' (per-entry, fixed)",
+    "import": "import { defineColorSwatches } from 'pkg/widgets/color-swatches'; console.log(defineColorSwatches);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/calendar-strip' (per-entry, fixed)",
+    "import": "import { defineCalendarStrip } from 'pkg/widgets/calendar-strip'; console.log(defineCalendarStrip);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/comparison-table' (per-entry, fixed)",
+    "import": "import { defineComparisonTable } from 'pkg/widgets/comparison-table'; console.log(defineComparisonTable);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/radial-bars' (per-entry, fixed)",
+    "import": "import { defineRadialBars } from 'pkg/widgets/radial-bars'; console.log(defineRadialBars);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bar-race' (per-entry, fixed)",
+    "import": "import { defineBarRace } from 'pkg/widgets/bar-race'; console.log(defineBarRace);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bullet-chart' (per-entry, fixed)",
+    "import": "import { defineBulletChart } from 'pkg/widgets/bullet-chart'; console.log(defineBulletChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/slope-chart' (per-entry, fixed)",
+    "import": "import { defineSlopeChart } from 'pkg/widgets/slope-chart'; console.log(defineSlopeChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/dot-plot' (per-entry, fixed)",
+    "import": "import { defineDotPlot } from 'pkg/widgets/dot-plot'; console.log(defineDotPlot);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

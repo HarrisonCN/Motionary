@@ -1587,6 +1587,162 @@
  },
  {
   "kind": "widget",
+  "name": "radial-menu",
+  "entry": "motionary/widgets/radial-menu",
+  "src": "src/entries/widgets/radial-menu.ts",
+  "tag": "usa-radial-menu",
+  "define": "defineRadialMenu",
+  "types": [
+   "UsaRadialMenuElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/radial-menu"
+ },
+ {
+  "kind": "widget",
+  "name": "hover-card",
+  "entry": "motionary/widgets/hover-card",
+  "src": "src/entries/widgets/hover-card.ts",
+  "tag": "usa-hover-card",
+  "define": "defineHoverCard",
+  "types": [
+   "UsaHoverCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hover-card"
+ },
+ {
+  "kind": "widget",
+  "name": "toggle-group",
+  "entry": "motionary/widgets/toggle-group",
+  "src": "src/entries/widgets/toggle-group.ts",
+  "tag": "usa-toggle-group",
+  "define": "defineToggleGroup",
+  "types": [
+   "UsaToggleGroupElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/toggle-group"
+ },
+ {
+  "kind": "widget",
+  "name": "time-picker",
+  "entry": "motionary/widgets/time-picker",
+  "src": "src/entries/widgets/time-picker.ts",
+  "tag": "usa-time-picker",
+  "define": "defineTimePicker",
+  "types": [
+   "UsaTimePickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/time-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "color-swatches",
+  "entry": "motionary/widgets/color-swatches",
+  "src": "src/entries/widgets/color-swatches.ts",
+  "tag": "usa-color-swatches",
+  "define": "defineColorSwatches",
+  "types": [
+   "UsaColorSwatchesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/color-swatches"
+ },
+ {
+  "kind": "widget",
+  "name": "calendar-strip",
+  "entry": "motionary/widgets/calendar-strip",
+  "src": "src/entries/widgets/calendar-strip.ts",
+  "tag": "usa-calendar-strip",
+  "define": "defineCalendarStrip",
+  "types": [
+   "UsaCalendarStripElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/calendar-strip"
+ },
+ {
+  "kind": "widget",
+  "name": "comparison-table",
+  "entry": "motionary/widgets/comparison-table",
+  "src": "src/entries/widgets/comparison-table.ts",
+  "tag": "usa-comparison-table",
+  "define": "defineComparisonTable",
+  "types": [
+   "UsaComparisonTableElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/comparison-table"
+ },
+ {
+  "kind": "widget",
+  "name": "radial-bars",
+  "entry": "motionary/widgets/radial-bars",
+  "src": "src/entries/widgets/radial-bars.ts",
+  "tag": "usa-radial-bars",
+  "define": "defineRadialBars",
+  "types": [
+   "UsaRadialBarsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/radial-bars"
+ },
+ {
+  "kind": "widget",
+  "name": "bar-race",
+  "entry": "motionary/widgets/bar-race",
+  "src": "src/entries/widgets/bar-race.ts",
+  "tag": "usa-bar-race",
+  "define": "defineBarRace",
+  "types": [
+   "UsaBarRaceElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bar-race"
+ },
+ {
+  "kind": "widget",
+  "name": "bullet-chart",
+  "entry": "motionary/widgets/bullet-chart",
+  "src": "src/entries/widgets/bullet-chart.ts",
+  "tag": "usa-bullet-chart",
+  "define": "defineBulletChart",
+  "types": [
+   "UsaBulletChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bullet-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "slope-chart",
+  "entry": "motionary/widgets/slope-chart",
+  "src": "src/entries/widgets/slope-chart.ts",
+  "tag": "usa-slope-chart",
+  "define": "defineSlopeChart",
+  "types": [
+   "UsaSlopeChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/slope-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "dot-plot",
+  "entry": "motionary/widgets/dot-plot",
+  "src": "src/entries/widgets/dot-plot.ts",
+  "tag": "usa-dot-plot",
+  "define": "defineDotPlot",
+  "types": [
+   "UsaDotPlotElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/dot-plot"
+ },
+ {
+  "kind": "widget",
   "name": "icon",
   "entry": "motionary/widgets/icon",
   "src": "src/entries/widgets/icon.ts",
