@@ -1,6 +1,6 @@
 # Motionary 17.9.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 392 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 400 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@17/dist/components.umd.js (+ https://unpkg.com/motionary@17/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -230,6 +230,14 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-message-list>` (legacy `<usa-message-list>`; motionary/components/widgets): 7.4: a chat thread — new bubbles pop in from their side, consecutive messages group, the list sticks to the bottom (or shows a “↓ New messages” pill when you sc
 - `<mo-meteors>` (legacy `<usa-meteors>`; motionary/components/widgets): Thin meteors streak across a section behind its content; they stop off screen.
 - `<mo-meter-countdown>` (legacy `<usa-meter-countdown>`; motionary/components/widgets): A determinate ring and optional visible-only remaining-time clock.
+- `<mo-micro>` (legacy `<usa-micro>`; motionary/components/widgets): Wraps anything with spring micro-interactions: press, hover, lift, magnetic, tilt, glow, squish, drag and focus, in any mix, plus feedback impulses.
+- `<mo-micro-button>` (legacy `<usa-micro-button>`; motionary/components/widgets): An action button that folds into a spinner while working, pops a tick on success or shakes on failure, then springs back.
+- `<mo-micro-checkbox>` (legacy `<usa-micro-checkbox>`; motionary/components/widgets): The box squashes under the finger, fills with a springy pop and then draws its tick; supports indeterminate.
+- `<mo-micro-input>` (legacy `<usa-micro-input>`; motionary/components/widgets): The label floats on a spring, the focus line grows from where you clicked, and an invalid value shakes once with an announced message.
+- `<mo-micro-segmented>` (legacy `<usa-micro-segmented>`; motionary/components/widgets): The pill slides on two springs: the leading edge is quick, the trailing edge slow, so it stretches toward the new choice.
+- `<mo-micro-slider>` (legacy `<usa-micro-slider>`; motionary/components/widgets): The thumb settles onto the nearest step, squashes with its speed and shows a value bubble; dragging past an end stretches the track like rubber.
+- `<mo-micro-stepper>` (legacy `<usa-micro-stepper>`; motionary/components/widgets): Digits roll on a spring, held buttons speed up, and at a limit the number leans against it and springs back.
+- `<mo-micro-switch>` (legacy `<usa-micro-switch>`; motionary/components/widgets): A switch whose knob carries its speed: it stretches as it travels, can be dragged with rubber-band ends and flicked.
 - `<mo-milestones>` (legacy `<usa-milestones>`; motionary/components/widgets): 6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide s
 - `<mo-modal>` (legacy `<usa-modal>`; motionary/components/widgets): 6.3: native <dialog> (top layer, focus trap, Esc) with animated open / close and a blurred backdrop — scale, slide-up, flip, or origin: it grows out of the butt
 - `<mo-morph>` (legacy `<usa-morph>`; motionary/components/svg): Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, in view or automatically. Same-structure paths morph point by point.

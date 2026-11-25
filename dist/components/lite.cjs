@@ -3097,10 +3097,981 @@ function definePress(tag = 'usa-press') {
     });
 }
 
+/** Sixteen springs tuned for the parts of a micro-interaction. */
+const MICRO_SPRINGS = {
+    instant: { duration: 120, bounce: 0 },
+    snappy: { duration: 260, bounce: 0.12 },
+    smooth: { duration: 420, bounce: 0 },
+    gentle: { duration: 600, bounce: 0.05 },
+    bouncy: { duration: 480, bounce: 0.38 },
+    elastic: { duration: 650, bounce: 0.55 },
+    press: { duration: 150, bounce: 0 },
+    release: { duration: 380, bounce: 0.32 },
+    hover: { duration: 320, bounce: 0.15 },
+    toggle: { duration: 340, bounce: 0.22 },
+    drag: { duration: 110, bounce: 0 },
+    settle: { duration: 520, bounce: 0.18 },
+    pop: { duration: 360, bounce: 0.45 },
+    jelly: { duration: 700, bounce: 0.62 },
+    heavy: { duration: 800, bounce: 0.08 },
+    feather: { duration: 900, bounce: 0.25 },
+};
+/** A feel retunes every role spring: durations are divided by `speed` and `bounce` is added to their bounce. */
+const MICRO_FEELS = {
+    crisp: { speed: 1.35, bounce: -0.1 },
+    snappy: { speed: 1.2, bounce: 0 },
+    smooth: { speed: 1, bounce: -0.08 },
+    bouncy: { speed: 1, bounce: 0.18 },
+    playful: { speed: 0.9, bounce: 0.3 },
+    calm: { speed: 0.75, bounce: -0.12 },
+    heavy: { speed: 0.65, bounce: 0.05 },
+};
+const fin = (n, d) => (typeof n === 'number' && Number.isFinite(n) ? n : d);
+/** `{ duration, bounce }` → stiffness / damping / mass (mass 1 unless given). */
+function springFromFeel(feel = {}, mass = 1) {
+    const m = fin(mass, 1) > 0 ? mass : 1;
+    const T = Math.min(10000, Math.max(16, fin(feel.duration, 400))) / 1000;
+    const b = Math.min(0.95, Math.max(-0.95, fin(feel.bounce, 0)));
+    const zeta = b >= 0 ? 1 - b : 1 / (1 + b);
+    const w = (2 * Math.PI) / T;
+    return { stiffness: w * w * m, damping: 2 * zeta * w * m, mass: m };
+}
+/** Stiffness / damping / mass → `{ duration, bounce, dampingRatio }`. */
+function springFeel(p) {
+    const k = Math.max(1e-6, p.stiffness);
+    const m = Math.max(1e-6, p.mass);
+    const zeta = Math.max(0, p.damping) / (2 * Math.sqrt(k * m));
+    const duration = ((2 * Math.PI) / Math.sqrt(k / m)) * 1000;
+    return { duration, bounce: zeta <= 1 ? 1 - zeta : 1 / zeta - 1, dampingRatio: zeta };
+}
+/**
+ * Any spring description → physics: a `MICRO_SPRINGS` name, a v2.3 `SPRING_PRESETS` name, `"<duration>[ms] <bounce>"`
+ * (e.g. `"380ms 0.3"`), `{ duration, bounce }` or `{ stiffness, damping, mass }`. `feel` retunes it and `speed`
+ * (e.g. a look's `--mo-kit-speed`) shortens or stretches it. Unknown input is the `smooth` spring.
+ */
+function microSpring(input, feel, speed = 1) {
+    let f = null;
+    if (typeof input === 'string') {
+        const s = input.trim();
+        if (s in MICRO_SPRINGS)
+            f = { ...MICRO_SPRINGS[s] };
+        else if (s in SPRING_PRESETS)
+            f = springFeel(resolveSpring(s));
+        else {
+            const m = /^(\d+(?:\.\d+)?)\s*(ms|s)?(?:[\s,]+(-?\d*\.?\d+))?$/.exec(s);
+            if (m)
+                f = { duration: Number(m[1]) * (m[2] === 's' ? 1000 : 1), bounce: m[3] === undefined ? 0 : Number(m[3]) };
+        }
+    }
+    else if (input && typeof input === 'object') {
+        if ('stiffness' in input || 'damping' in input) {
+            const r = resolveSpring(input);
+            f = springFeel(r);
+            if (!feel && speed === 1)
+                return { stiffness: r.stiffness, damping: r.damping, mass: r.mass };
+        }
+        else
+            f = { duration: fin(input.duration, 400), bounce: fin(input.bounce, 0) };
+    }
+    f || (f = { ...MICRO_SPRINGS.smooth });
+    const tune = feel && MICRO_FEELS[feel];
+    const sp = Math.min(4, Math.max(0.25, fin(speed, 1) > 0 ? speed : 1)) * (tune ? tune.speed : 1);
+    return springFromFeel({ duration: f.duration / sp, bounce: f.bounce + (tune ? tune.bounce : 0) });
+}
+/**
+ * The closed-form motion from `from` towards `to` starting at `velocity` (units/s). Returns a function of elapsed
+ * time in ms that gives `[value, velocity]`.
+ */
+function springSolution(p, from, to, velocity = 0) {
+    const m = Math.max(1e-6, p.mass);
+    const k = Math.max(1e-6, p.stiffness);
+    const w = Math.sqrt(k / m);
+    const zeta = Math.max(0, p.damping) / (2 * Math.sqrt(k * m));
+    const x0 = from - to;
+    const v0 = fin(velocity, 0);
+    if (Math.abs(zeta - 1) < 1e-4) {
+        const c = v0 + w * x0;
+        return (ms) => {
+            const t = Math.max(0, ms) / 1000;
+            const e = Math.exp(-w * t);
+            return [to + e * (x0 + c * t), e * (v0 - w * c * t)];
+        };
+    }
+    if (zeta < 1) {
+        const wd = w * Math.sqrt(1 - zeta * zeta);
+        const a = zeta * w;
+        const B = (v0 + a * x0) / wd;
+        return (ms) => {
+            const t = Math.max(0, ms) / 1000;
+            const e = Math.exp(-a * t);
+            const cos = Math.cos(wd * t);
+            const sin = Math.sin(wd * t);
+            return [to + e * (x0 * cos + B * sin), e * ((B * wd - a * x0) * cos - (a * B + x0 * wd) * sin)];
+        };
+    }
+    const s = Math.sqrt(zeta * zeta - 1);
+    const r1 = -w * (zeta - s);
+    const r2 = -w * (zeta + s);
+    const c2 = (v0 - r1 * x0) / (r2 - r1);
+    const c1 = x0 - c2;
+    return (ms) => {
+        const t = Math.max(0, ms) / 1000;
+        const e1 = Math.exp(r1 * t);
+        const e2 = Math.exp(r2 * t);
+        return [to + c1 * e1 + c2 * e2, r1 * c1 * e1 + r2 * c2 * e2];
+    };
+}
+/** When a motion from `from` to `to` comes to rest within `precision` (a fraction of the distance; default 0.001), in ms (max 10 s). */
+function settleTime(p, from = 0, to = 1, velocity = 0, precision = 0.001) {
+    const f = springSolution(p, from, to, velocity);
+    const scale = Math.max(Math.abs(to - from), Math.abs(velocity) * 0.05, 1e-6) * precision;
+    let still = 0;
+    for (let t = 0; t <= 10000; t += 4) {
+        const [x, v] = f(t);
+        if (Math.abs(x - to) < scale && Math.abs(v) < scale * 20) {
+            if (!still)
+                still = t;
+            if (t - still >= 60)
+                return still;
+        }
+        else
+            still = 0;
+    }
+    return 10000;
+}
+/** The spring from 0 to 1 as a CSS `linear()` easing and its duration in ms, for `el.animate()` / transitions. */
+function microEasing(input, feel, points = 40) {
+    const p = microSpring(input, feel);
+    const duration = settleTime(p);
+    if (!supportsLinearEasing())
+        return { easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', duration: Math.min(duration, 1200) };
+    const f = springSolution(p, 0, 1);
+    const n = Math.max(2, Math.min(200, Math.round(points)));
+    const values = Array.from({ length: n + 1 }, (_, i) => f((duration * i) / n)[0]);
+    return { easing: linearEasing(values, n + 1), duration };
+}
+/**
+ * Several spring-animated numbers that share one frame loop (on the motion clock, so `setClock()` slows or pauses
+ * them too). Retargeting keeps velocity; each channel keeps the spring it was last set with.
+ */
+function createSpringGroup(initial, opts = {}) {
+    let spec = opts.spring;
+    let feel = opts.feel;
+    let speed = opts.speed ?? 1;
+    let base = microSpring(spec, feel, speed);
+    const ch = new Map();
+    const values = {};
+    let clock = 0;
+    let stopLoop = null;
+    const precision = opts.precision ?? 0.001;
+    const reduced = () => !opts.always && prefersReducedMotion();
+    const add = (name, value) => {
+        const c = { x: value, v: 0, to: value, t0: 0, p: base, f: null };
+        ch.set(name, c);
+        values[name] = value;
+        return c;
+    };
+    for (const [k, v] of Object.entries(initial))
+        add(k, fin(v, 0));
+    const chan = (name) => ch.get(name) || add(name, 0);
+    const sample = (c) => {
+        if (!c.f)
+            return;
+        [c.x, c.v] = c.f(clock - c.t0);
+    };
+    const tuned = (s) => (s === undefined ? base : microSpring(s, feel, speed));
+    const restart = (c) => {
+        c.t0 = clock;
+        c.f = springSolution(c.p, c.x, c.to, c.v);
+    };
+    let fresh = false;
+    const frame = (_t, dt) => {
+        // the scheduler's first delta after a quiet spell spans the whole quiet time: count one frame instead
+        clock += Math.min(fresh ? 16.7 : 64, Math.max(0, dt)) / Math.max(0.01, motionScale());
+        fresh = false;
+        let busy = false;
+        ch.forEach((c, name) => {
+            if (c.f) {
+                sample(c);
+                const scale = Math.max(1, Math.abs(c.to)) * precision;
+                if (Math.abs(c.x - c.to) < scale && Math.abs(c.v) < scale * 30) {
+                    c.x = c.to;
+                    c.v = 0;
+                    c.f = null;
+                }
+                else
+                    busy = true;
+            }
+            values[name] = c.x;
+        });
+        opts.onUpdate?.(values, group);
+        if (!busy) {
+            stopLoop?.();
+            stopLoop = null;
+            opts.onRest?.(values);
+        }
+    };
+    const wake = () => {
+        if (stopLoop)
+            return;
+        fresh = true;
+        stopLoop = onFrame(frame, opts.owner);
+    };
+    const group = {
+        values,
+        get animating() {
+            return !!stopLoop;
+        },
+        get: (name) => chan(name).x,
+        velocity: (name) => chan(name).v,
+        target: (name) => chan(name).to,
+        set(targets, o = {}) {
+            const p = o.spring === undefined ? undefined : tuned(o.spring);
+            if (reduced())
+                return group.jump(targets);
+            for (const [name, to] of Object.entries(targets)) {
+                if (!Number.isFinite(to))
+                    continue;
+                const c = chan(name);
+                sample(c);
+                c.to = to;
+                if (p)
+                    c.p = p;
+                const v = o.velocity?.[name];
+                if (v !== undefined && Number.isFinite(v))
+                    c.v = v;
+                restart(c);
+            }
+            wake();
+        },
+        impulse(vel, s) {
+            if (reduced())
+                return;
+            const p = s === undefined ? undefined : tuned(s);
+            for (const [name, dv] of Object.entries(vel)) {
+                if (!Number.isFinite(dv) || !dv)
+                    continue;
+                const c = chan(name);
+                sample(c);
+                c.v += dv;
+                if (p)
+                    c.p = p;
+                restart(c);
+            }
+            wake();
+        },
+        jump(vals) {
+            for (const [name, x] of Object.entries(vals)) {
+                if (!Number.isFinite(x))
+                    continue;
+                const c = chan(name);
+                c.x = c.to = x;
+                c.v = 0;
+                c.f = null;
+                values[name] = x;
+            }
+            if (![...ch.values()].some((c) => c.f)) {
+                stopLoop?.();
+                stopLoop = null;
+            }
+            opts.onUpdate?.(values, group);
+        },
+        configure(o) {
+            if ('spring' in o)
+                spec = o.spring;
+            if ('feel' in o)
+                feel = o.feel;
+            if (o.speed !== undefined)
+                speed = o.speed;
+            base = microSpring(spec, feel, speed);
+        },
+        stop() {
+            ch.forEach((c) => {
+                sample(c);
+                c.to = c.x;
+                c.v = 0;
+                c.f = null;
+            });
+            stopLoop?.();
+            stopLoop = null;
+        },
+    };
+    return group;
+}
+
+/**
+ * Click-effect helpers (v2.5): `burst()`, `confetti()`, `shake()`, `haptic()`.
+ * Particles live in one fixed, pointer-transparent layer and are removed when
+ * their animation ends. Under reduced motion particles are skipped and
+ * `shake()` only flashes an outline.
+ */
+let layer = null;
+function fxLayer() {
+    if (layer && layer.isConnected)
+        return layer;
+    layer = document.createElement('div');
+    layer.className = 'usa-fx-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
+    document.body.append(layer);
+    return layer;
+}
+const PALETTE = ['#7c5cff', '#22d3ee', '#f472b6', '#facc15', '#34d399', '#fb923c'];
+const GLYPH = { star: '★', heart: '♥' };
+function particle(x, y, size, color, shape) {
+    const p = document.createElement('span');
+    const glyph = GLYPH[shape] || (shape !== 'circle' && shape !== 'square' ? shape : '');
+    p.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;margin:${-size / 2}px 0 0 ${-size / 2}px;will-change:transform,opacity;` +
+        (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
+    if (glyph)
+        p.textContent = glyph;
+    fxLayer().append(p);
+    return p;
+}
+const done = (a, el) => {
+    if (a)
+        a.onfinish = () => el.remove();
+    else
+        el.remove();
+};
+/** Particles radiating from client point (x, y). Returns the number spawned. */
+function burst(x, y, options = {}) {
+    if (typeof document === 'undefined' || prefersReducedMotion())
+        return 0;
+    const { count = 12, colors = PALETTE, distance = 48, size = 6, shape = 'circle', duration = 600 } = options;
+    for (let i = 0; i < count; i++) {
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+        const d = distance * (0.7 + Math.random() * 0.5);
+        const p = particle(x, y, size, colors[i % colors.length], shape);
+        const a = typeof p.animate === 'function'
+            ? p.animate([
+                { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                { transform: `translate(${Math.cos(angle) * d}px, ${Math.sin(angle) * d}px) scale(0.2)`, opacity: 0 },
+            ], { duration: duration * (0.8 + Math.random() * 0.4), easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' })
+            : null;
+        done(a, p);
+    }
+    return count;
+}
+/** A confetti cannon (paper pieces with gravity, drift and spin). */
+function confetti(options = {}) {
+    if (typeof document === 'undefined' || prefersReducedMotion())
+        return 0;
+    const W = window.innerWidth || 800;
+    const H = window.innerHeight || 600;
+    const { x = W / 2, y = H * 0.66, count = 80, spread = 70, velocity = 1, colors = PALETTE, duration = 1600 } = options;
+    for (let i = 0; i < count; i++) {
+        const angle = ((-90 + (Math.random() - 0.5) * spread) * Math.PI) / 180;
+        const speed = (260 + Math.random() * 320) * velocity;
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed;
+        const p = particle(x, y, 6 + Math.random() * 5, colors[i % colors.length], Math.random() > 0.5 ? 'square' : 'circle');
+        p.style.height = `${4 + Math.random() * 3}px`;
+        const frames = [];
+        const steps = 8;
+        const T = duration / 1000;
+        const spin = (Math.random() - 0.5) * 1440;
+        for (let s = 0; s <= steps; s++) {
+            const t = (s / steps) * T;
+            const g = 900;
+            frames.push({
+                transform: `translate(${(vx * t * 0.8).toFixed(1)}px, ${(vy * t + 0.5 * g * t * t).toFixed(1)}px) rotate(${((spin * s) / steps).toFixed(0)}deg) rotateX(${s * 120}deg)`,
+                opacity: s === steps ? 0 : 1,
+            });
+        }
+        const a = typeof p.animate === 'function' ? p.animate(frames, { duration: duration * (0.85 + Math.random() * 0.3), easing: 'linear', fill: 'forwards' }) : null;
+        done(a, p);
+    }
+    return count;
+}
+/** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
+function shake(el, intensity = 8, duration = 480) {
+    const t = el;
+    if (typeof t.animate !== 'function')
+        return null;
+    if (prefersReducedMotion())
+        return t.animate([{ outline: '2px solid #e5484d' }, { outline: '2px solid transparent' }], { duration: 600 });
+    const k = intensity;
+    return t.animate([0, -k, k, -k * 0.75, k * 0.75, -k * 0.4, k * 0.4, 0].map((v) => ({ transform: `translateX(${v}px)` })), { duration, easing: 'ease-in-out' });
+}
+/** `navigator.vibrate()` where supported (Android Chrome, some WebViews). Returns whether it ran. */
+function haptic(pattern = 10) {
+    try {
+        return typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function' ? navigator.vibrate(pattern) : false;
+    }
+    catch {
+        return false;
+    }
+}
+
+const MICRO_BEHAVIORS = ['press', 'hover', 'lift', 'magnetic', 'tilt', 'glow', 'squish', 'drag', 'focus'];
+const MICRO_FEEDBACK = ['shake', 'nod', 'pop', 'wiggle', 'jelly', 'nudge', 'bump', 'attention'];
+/** Impulse (channel velocities), spring and tone of each feedback. */
+const IMPULSES = {
+    shake: [{ fx: 420 }, '170 0.78', 'error'],
+    nod: [{ fy: 200 }, '220 0.6', 'success'],
+    pop: [{ s: 1.8 }, 'pop', 'success'],
+    wiggle: [{ rz: 240 }, '260 0.72', 'info'],
+    jelly: [{ sx: 0.9, sy: -0.9 }, 'jelly', 'info'],
+    nudge: [{ fx: 260 }, '300 0.35', 'info'],
+    bump: [{ fy: -140 }, 'bouncy', 'info'],
+};
+/** Split a behaviour list (`"press hover, glow"`) into known behaviours, in order, without repeats. */
+function parseMicro(spec) {
+    const words = Array.isArray(spec) ? spec : String(spec ?? '').split(/[\s,]+/);
+    const out = [];
+    for (const w of words) {
+        const k = String(w).trim().toLowerCase();
+        if (MICRO_BEHAVIORS.includes(k) && !out.includes(k))
+            out.push(k);
+    }
+    return out;
+}
+/** The feel that applies to `el`: its closest `[data-mo-feel]`, else the `--mo-feel` custom property, else `null`. */
+function readFeel(el) {
+    const host = el.closest?.('[data-mo-feel]');
+    const v = host?.getAttribute('data-mo-feel')?.trim();
+    if (v)
+        return v;
+    if (typeof getComputedStyle !== 'function')
+        return null;
+    return getComputedStyle(el).getPropertyValue('--mo-feel').trim() || null;
+}
+/** A look's `--mo-kit-speed` on `el` (1 when unset). */
+function readSpeed(el) {
+    if (typeof getComputedStyle !== 'function')
+        return 1;
+    const n = parseFloat(getComputedStyle(el).getPropertyValue('--mo-kit-speed'));
+    return Number.isFinite(n) && n > 0 ? n : 1;
+}
+/** Channel values → the composed CSS transform (`''` at rest). */
+function microTransform(v, o = {}) {
+    const g = (k) => v[k] || 0;
+    const scale = 1 + g('hover') * ((o.hoverScale ?? 1.03) - 1) - g('press') * (1 - (o.pressScale ?? 0.96)) + g('s');
+    const sx = scale * (1 + g('sx'));
+    const sy = scale * (1 + g('sy'));
+    const x = g('mx') + g('dx') + g('fx');
+    const y = g('my') + g('dy') + g('fy') - g('lift');
+    const r = (n) => Math.round(n * 1000) / 1000;
+    const parts = [];
+    if (Math.abs(x) > 0.01 || Math.abs(y) > 0.01)
+        parts.push(`translate3d(${r(x)}px, ${r(y)}px, 0)`);
+    if (Math.abs(g('rx')) > 0.01)
+        parts.push(`rotateX(${r(g('rx'))}deg)`);
+    if (Math.abs(g('ry')) > 0.01)
+        parts.push(`rotateY(${r(g('ry'))}deg)`);
+    if (Math.abs(g('rz')) > 0.01)
+        parts.push(`rotate(${r(g('rz'))}deg)`);
+    if (Math.abs(sx - 1) > 0.0005 || Math.abs(sy - 1) > 0.0005)
+        parts.push(Math.abs(sx - sy) < 0.0005 ? `scale(${r(sx)})` : `scale(${r(sx)}, ${r(sy)})`);
+    if (!parts.length)
+        return '';
+    return (o.perspective && parts.some((p) => p.startsWith('rotateX') || p.startsWith('rotateY')) ? 'perspective(700px) ' : '') + parts.join(' ');
+}
+const handles = /*#__PURE__*/ new WeakMap();
+/** The micro handle of `el`, if it has one. */
+const microOf = (el) => handles.get(el);
+const isDisabled = (el, o) => !!o.disabled || el.getAttribute('aria-disabled') === 'true' || el.disabled === true;
+/** Give `el` spring micro-interactions. Calling it again on the same element updates it. */
+function micro(el, fx = 'press hover', opts = {}) {
+    const had = handles.get(el);
+    if (had) {
+        had.update(fx, opts);
+        return had;
+    }
+    adoptStyles('micro-17-16', css);
+    let o = { ...opts };
+    let list = parseMicro(fx);
+    const ownAttr = !el.hasAttribute('data-mo-micro');
+    const savedTransform = el.style.transform;
+    let off = [];
+    let pressed = false;
+    let inside = false;
+    let dragging = null;
+    let swallowClick = false;
+    let pointer = [];
+    let flashTimer;
+    const has = (k) => list.includes(k);
+    const role = (name) => (o.spring !== undefined && o.spring !== null ? o.spring : name);
+    const paint = (v) => {
+        const t = microTransform(v, { pressScale: o.pressScale, hoverScale: o.hoverScale, perspective: has('tilt') });
+        el.style.transform = t || savedTransform;
+        const css = el.style;
+        if (has('lift'))
+            css.setProperty('--mo-micro-lift', String(Math.round((v.lift || 0) * 100) / 100));
+        if (has('glow')) {
+            css.setProperty('--mo-micro-glow', String(Math.max(0, Math.min(1, Math.round((v.glow || 0) * 1000) / 1000))));
+            css.setProperty('--mo-micro-gx', `${Math.round((v.gx ?? 50) * 10) / 10}%`);
+            css.setProperty('--mo-micro-gy', `${Math.round((v.gy ?? 50) * 10) / 10}%`);
+        }
+        if (has('focus'))
+            css.setProperty('--mo-micro-focus', String(Math.max(0, Math.round((v.focus || 0) * 1000) / 1000)));
+        if (has('press'))
+            css.setProperty('--mo-micro-press', String(Math.max(0, Math.min(1, Math.round((v.press || 0) * 1000) / 1000))));
+    };
+    const group = createSpringGroup({ gx: 50, gy: 50 }, { feel: o.feel ?? readFeel(el), speed: readSpeed(el), owner: el, onUpdate: paint });
+    const press = (on) => {
+        if (on === pressed)
+            return;
+        pressed = on;
+        el.toggleAttribute('data-mo-pressed', on);
+        if (on) {
+            if (o.haptics)
+                haptic(8);
+            o.onPress?.();
+            if (has('press'))
+                group.set({ press: 1 }, { spring: role('press') });
+            if (has('squish'))
+                group.set({ sx: 0.06, sy: -0.08 }, { spring: role('press') });
+            if (has('lift'))
+                group.set({ lift: inside ? (o.lift ?? 4) * 0.35 : 0 }, { spring: role('press') });
+        }
+        else {
+            o.onRelease?.();
+            if (has('press'))
+                group.set({ press: 0 }, { spring: role('release') });
+            if (has('squish'))
+                group.set({ sx: 0, sy: 0 }, { spring: role('jelly') });
+            if (has('lift'))
+                group.set({ lift: inside ? o.lift ?? 4 : 0 }, { spring: role('release') });
+        }
+    };
+    const enter = () => {
+        inside = true;
+        if (has('hover'))
+            group.set({ hover: 1 }, { spring: role('hover') });
+        if (has('lift'))
+            group.set({ lift: pressed ? (o.lift ?? 4) * 0.35 : o.lift ?? 4 }, { spring: role('hover') });
+        if (has('glow'))
+            group.set({ glow: 1 }, { spring: role('hover') });
+    };
+    const pointerSpeed = () => {
+        const h = pointer.filter((p) => p[2] > performance.now() - 100);
+        if (h.length < 2)
+            return [0, 0];
+        const a = h[0];
+        const b = h[h.length - 1];
+        const dt = Math.max(1, b[2] - a[2]) / 1000;
+        return [(b[0] - a[0]) / dt, (b[1] - a[1]) / dt];
+    };
+    const leave = () => {
+        inside = false;
+        press(false);
+        if (has('hover'))
+            group.set({ hover: 0 }, { spring: role('settle') });
+        if (has('lift'))
+            group.set({ lift: 0 }, { spring: role('settle') });
+        if (has('glow'))
+            group.set({ glow: 0 }, { spring: role('smooth') });
+        if (has('tilt'))
+            group.set({ rx: 0, ry: 0 }, { spring: role('settle') });
+        if (has('magnetic')) {
+            const [vx, vy] = pointerSpeed();
+            const s = Math.min(1, Math.max(0, o.strength ?? 0.35));
+            const cap = 1600;
+            group.set({ mx: 0, my: 0 }, { spring: role('release'), velocity: { mx: Math.max(-cap, Math.min(cap, vx * s)), my: Math.max(-cap, Math.min(cap, vy * s)) } });
+        }
+        pointer = [];
+    };
+    const move = (e) => {
+        pointer.push([e.clientX, e.clientY, performance.now()]);
+        if (pointer.length > 8)
+            pointer.shift();
+        if (dragging || !(has('magnetic') || has('tilt') || has('glow')))
+            return;
+        const r = el.getBoundingClientRect();
+        if (!r.width || !r.height)
+            return;
+        // the element's own transform moves its box: measure from the untransformed centre
+        const v = group.values;
+        const cx = r.left + r.width / 2 - ((v.mx || 0) + (v.dx || 0) + (v.fx || 0));
+        const cy = r.top + r.height / 2 - ((v.my || 0) + (v.dy || 0) + (v.fy || 0) - (v.lift || 0));
+        const px = (e.clientX - cx) / r.width;
+        const py = (e.clientY - cy) / r.height;
+        if (has('magnetic')) {
+            const s = Math.min(1, Math.max(0, o.strength ?? 0.35));
+            const reach = Math.max(0, o.reach ?? 14);
+            const clampR = (n) => Math.max(-reach, Math.min(reach, n));
+            group.set({ mx: clampR(px * r.width * s), my: clampR(py * r.height * s) }, { spring: role('snappy') });
+        }
+        if (has('tilt')) {
+            const t = Math.min(30, Math.max(0, o.tilt ?? 8));
+            group.set({ ry: Math.max(-1, Math.min(1, px * 2)) * t, rx: -Math.max(-1, Math.min(1, py * 2)) * t }, { spring: role('hover') });
+        }
+        if (has('glow'))
+            group.set({ gx: (px + 0.5) * 100, gy: (py + 0.5) * 100 }, { spring: role('drag') });
+    };
+    /* drag */
+    const bounds = () => {
+        const none = [[-Infinity, -Infinity], [Infinity, Infinity]];
+        const b = o.bounds ?? 'parent';
+        if (b === 'none')
+            return none;
+        const box = b === 'parent' ? el.parentElement : b;
+        if (!box)
+            return none;
+        const pr = box.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
+        const v = group.values;
+        const left = r.left - ((v.mx || 0) + (v.dx || 0) + (v.fx || 0));
+        const top = r.top - ((v.my || 0) + (v.dy || 0) + (v.fy || 0) - (v.lift || 0));
+        const minX = Math.min(0, pr.left - left);
+        const maxX = Math.max(0, pr.right - (left + r.width));
+        const minY = Math.min(0, pr.top - top);
+        const maxY = Math.max(0, pr.bottom - (top + r.height));
+        return [[minX, minY], [maxX, maxY]];
+    };
+    const band = (n, min, max, dim) => (n < min ? min + rubberBand(n - min, dim) : n > max ? max + rubberBand(n - max, dim) : n);
+    const dragDown = (e) => {
+        // catch a moving element where it is (only the drag channels stop; press / hover keep springing)
+        group.jump({ dx: group.get('dx'), dy: group.get('dy') });
+        const [min, max] = bounds();
+        dragging = { id: e.pointerId, sx: e.clientX, sy: e.clientY, bx: group.get('dx'), by: group.get('dy'), min, max, moved: false, hist: [[e.clientX, e.clientY, performance.now()]] };
+        try {
+            el.setPointerCapture?.(e.pointerId);
+        }
+        catch {
+            /* synthetic events */
+        }
+    };
+    const dragMove = (e) => {
+        const d = dragging;
+        if (!d || e.pointerId !== d.id)
+            return;
+        let x = d.bx + (e.clientX - d.sx);
+        let y = d.by + (e.clientY - d.sy);
+        if (!d.moved && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 4) {
+            d.moved = true;
+            el.setAttribute('data-mo-dragging', '');
+        }
+        d.hist.push([e.clientX, e.clientY, performance.now()]);
+        if (d.hist.length > 6)
+            d.hist.shift();
+        const r = el.getBoundingClientRect();
+        if (o.axis === 'y')
+            x = d.bx;
+        if (o.axis === 'x')
+            y = d.by;
+        x = band(x, d.min[0], d.max[0], Math.max(80, r.width));
+        y = band(y, d.min[1], d.max[1], Math.max(80, r.height));
+        group.jump({ dx: x, dy: y });
+    };
+    const settleTo = (x, y, vx = 0, vy = 0, spring = 'settle') => {
+        const [min, max] = bounds();
+        let tx = Math.max(min[0], Math.min(max[0], x));
+        let ty = Math.max(min[1], Math.min(max[1], y));
+        if (o.snap && o.snap > 0) {
+            tx = Math.max(min[0], Math.min(max[0], snapTo(tx, o.snap)));
+            ty = Math.max(min[1], Math.min(max[1], snapTo(ty, o.snap)));
+        }
+        if (o.axis === 'y')
+            tx = group.target('dx');
+        if (o.axis === 'x')
+            ty = group.target('dy');
+        group.set({ dx: tx, dy: ty }, { spring: role(spring), velocity: { dx: vx, dy: vy } });
+        return { x: tx, y: ty };
+    };
+    const dragUp = (e) => {
+        const d = dragging;
+        if (!d || e.pointerId !== d.id)
+            return;
+        dragging = null;
+        el.removeAttribute('data-mo-dragging');
+        const h = d.hist.filter((p) => p[2] > performance.now() - 120);
+        let vx = 0;
+        let vy = 0;
+        if (h.length > 1 && e.type !== 'pointercancel') {
+            const a = h[0];
+            const b = h[h.length - 1];
+            const dt = Math.max(8, b[2] - a[2]) / 1000;
+            vx = (b[0] - a[0]) / dt;
+            vy = (b[1] - a[1]) / dt;
+        }
+        const cap = 4000;
+        vx = Math.max(-cap, Math.min(cap, vx));
+        vy = Math.max(-cap, Math.min(cap, vy));
+        const x = group.get('dx');
+        const y = group.get('dy');
+        const end = settleTo(projectInertia(x, vx, 0.2), projectInertia(y, vy, 0.2), vx, vy);
+        if (d.moved) {
+            swallowClick = true;
+            setTimeout(() => (swallowClick = false), 0);
+            o.onDragEnd?.(end);
+        }
+    };
+    const on = (t, type, fn, opt) => {
+        t.addEventListener(type, fn, opt);
+        off.push(() => t.removeEventListener(type, fn, opt));
+    };
+    const bind = () => {
+        off.forEach((f) => f());
+        off = [];
+        if (!list.length)
+            return;
+        const hoverish = has('hover') || has('lift') || has('magnetic') || has('tilt') || has('glow');
+        on(el, 'pointerenter', (e) => {
+            if (isDisabled(el, o))
+                return;
+            if (e.pointerType !== 'touch' && hoverish)
+                enter();
+        });
+        on(el, 'pointerleave', (e) => {
+            if (dragging)
+                return;
+            if (e.pointerType === 'touch')
+                return press(false);
+            leave();
+        });
+        on(el, 'pointermove', (e) => {
+            if (isDisabled(el, o))
+                return;
+            if (dragging)
+                return dragMove(e);
+            if (e.pointerType !== 'touch')
+                move(e);
+        }, { passive: true });
+        on(el, 'pointerdown', (e) => {
+            if (isDisabled(el, o) || (e.pointerType === 'mouse' && e.button !== 0))
+                return;
+            if (has('glow') && e.pointerType === 'touch') {
+                move(e);
+                group.set({ glow: 1 }, { spring: role('hover') });
+            }
+            if (has('press') || has('squish') || has('lift'))
+                press(true);
+            if (has('drag'))
+                dragDown(e);
+        });
+        const up = (e) => {
+            if (dragging)
+                dragUp(e);
+            press(false);
+            if (has('glow') && e.pointerType === 'touch')
+                group.set({ glow: 0 }, { spring: role('smooth') });
+        };
+        on(el, 'pointerup', up);
+        on(el, 'pointercancel', up);
+        on(el, 'lostpointercapture', (e) => dragging && dragUp(e));
+        on(el, 'click', (e) => {
+            if (swallowClick) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { capture: true });
+        on(el, 'keydown', (e) => {
+            if (isDisabled(el, o))
+                return;
+            if ((e.key === ' ' || e.key === 'Enter') && !e.repeat && (has('press') || has('squish')))
+                press(true);
+            if (has('drag') && e.target === el && e.key.startsWith('Arrow')) {
+                e.preventDefault();
+                // with a snap grid the keys move a whole cell (else 16 px, 64 with Shift)
+                const step = (o.snap && o.snap > 0 ? o.snap : 16) * (e.shiftKey ? 4 : 1);
+                const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+                const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
+                const end = settleTo(group.target('dx') + dx, group.target('dy') + dy, 0, 0, 'snappy');
+                o.onDragEnd?.(end);
+            }
+        });
+        on(el, 'keyup', (e) => (e.key === ' ' || e.key === 'Enter') && press(false));
+        on(el, 'blur', () => press(false), { capture: true });
+        if (has('focus')) {
+            // focusin / focusout so a wrapper reacts to the control inside it too
+            on(el, 'focusin', (e) => {
+                let visible = true;
+                try {
+                    visible = e.target.matches(':focus-visible');
+                }
+                catch {
+                    /* old engines */
+                }
+                if (visible)
+                    group.set({ focus: 1 }, { spring: role('pop') });
+            });
+            on(el, 'focusout', (e) => {
+                if (!el.contains(e.relatedTarget))
+                    group.set({ focus: 0 }, { spring: role('smooth') });
+            });
+        }
+    };
+    const syncAttr = () => {
+        if (ownAttr)
+            el.setAttribute('data-mo-micro', list.join(' '));
+    };
+    syncAttr();
+    bind();
+    const flash = (tone) => {
+        clearTimeout(flashTimer);
+        el.setAttribute('data-mo-micro-flash', tone);
+        flashTimer = setTimeout(() => el.removeAttribute('data-mo-micro-flash'), 700);
+    };
+    const handle = {
+        el,
+        get fx() {
+            return list.slice();
+        },
+        group,
+        get position() {
+            return { x: group.target('dx'), y: group.target('dy') };
+        },
+        feedback(kind) {
+            const k = String(kind);
+            if (!MICRO_FEEDBACK.includes(k))
+                return;
+            const parts = k === 'attention' ? ['pop', 'wiggle'] : [k];
+            const tone = k === 'attention' ? 'info' : IMPULSES[k][2];
+            if (o.haptics)
+                haptic(tone === 'error' ? [10, 50, 10] : 12);
+            if (prefersReducedMotion())
+                return flash(tone);
+            for (const p of parts) {
+                const [vel, spring] = IMPULSES[p];
+                group.impulse(vel, spring);
+            }
+        },
+        update(next, opts2) {
+            if (opts2)
+                o = { ...o, ...opts2 };
+            if (next !== undefined) {
+                const was = list.join(' ');
+                list = parseMicro(next);
+                if (list.join(' ') !== was) {
+                    syncAttr();
+                    bind();
+                }
+            }
+            else
+                bind();
+            group.configure({ feel: o.feel ?? readFeel(el), speed: readSpeed(el) });
+            if (!has('drag'))
+                group.jump({ dx: 0, dy: 0 });
+        },
+        moveTo(x, y, instant) {
+            if (instant)
+                group.jump({ dx: x, dy: y });
+            else
+                settleTo(x, y, 0, 0, 'settle');
+        },
+        destroy() {
+            off.forEach((f) => f());
+            off = [];
+            group.stop();
+            clearTimeout(flashTimer);
+            handles.delete(el);
+            el.style.transform = savedTransform;
+            for (const p of ['--mo-micro-lift', '--mo-micro-glow', '--mo-micro-gx', '--mo-micro-gy', '--mo-micro-focus', '--mo-micro-press'])
+                el.style.removeProperty(p);
+            for (const a of ['data-mo-pressed', 'data-mo-dragging', 'data-mo-micro-flash'])
+                el.removeAttribute(a);
+            if (ownAttr)
+                el.removeAttribute('data-mo-micro');
+        },
+    };
+    handles.set(el, handle);
+    return handle;
+}
+/**
+ * Play a feedback impulse on any element (`shake` for an error, `nod` / `pop` for success, `wiggle`, `jelly`,
+ * `nudge`, `bump`, `attention`). Elements without `micro()` get a temporary handle that goes away when they settle.
+ */
+function feedback(el, kind, opts = {}) {
+    const had = handles.get(el);
+    if (had)
+        return had.feedback(kind);
+    const h = micro(el, [], opts);
+    h.feedback(kind);
+    const done = () => (h.group.animating ? setTimeout(done, 120) : h.destroy());
+    setTimeout(done, prefersReducedMotion() ? 760 : 120);
+}
+const fromData = (el) => {
+    const d = el.dataset;
+    const n = (v) => (v !== undefined && v.trim() !== '' && Number.isFinite(Number(v)) ? Number(v) : undefined);
+    const b = d.moBounds;
+    return {
+        feel: d.moFeel || undefined,
+        spring: d.moSpring || undefined,
+        haptics: d.moHaptics !== undefined && d.moHaptics !== 'false',
+        pressScale: n(d.moPressScale),
+        hoverScale: n(d.moHoverScale),
+        lift: n(d.moLift),
+        strength: n(d.moStrength),
+        reach: n(d.moReach),
+        tilt: n(d.moTilt),
+        snap: n(d.moSnap),
+        axis: d.moAxis === 'x' || d.moAxis === 'y' ? d.moAxis : 'both',
+        bounds: b === 'none' ? 'none' : b && b !== 'parent' ? el.closest(b) || 'parent' : 'parent',
+    };
+};
+/**
+ * Wire every `[data-mo-micro]` element under `root` (default `document`) and keep watching for new, changed and
+ * removed ones. Options come from `data-mo-*` attributes (`data-mo-feel`, `data-mo-spring`, `data-mo-haptics`,
+ * `data-mo-press-scale`, `data-mo-hover-scale`, `data-mo-lift`, `data-mo-strength`, `data-mo-reach`, `data-mo-tilt`,
+ * `data-mo-snap`, `data-mo-axis`, `data-mo-bounds`). Returns a function that stops watching and undoes it all.
+ */
+function applyMicro(root = document) {
+    if (typeof document === 'undefined')
+        return () => { };
+    const mine = new Set();
+    const wire = (el) => {
+        const spec = el.getAttribute('data-mo-micro');
+        if (spec === null)
+            return;
+        const h = handles.get(el);
+        if (h && !mine.has(el))
+            return; // wired by code or by <mo-micro>
+        if (h)
+            h.update(spec, fromData(el));
+        else {
+            micro(el, spec, fromData(el));
+            mine.add(el);
+        }
+    };
+    const scan = (node) => {
+        if (node instanceof HTMLElement && node.hasAttribute('data-mo-micro'))
+            wire(node);
+        node.querySelectorAll?.('[data-mo-micro]').forEach(wire);
+    };
+    scan(root);
+    if (typeof MutationObserver === 'undefined')
+        return () => mine.forEach((el) => handles.get(el)?.destroy());
+    const mo = new MutationObserver((recs) => {
+        for (const r of recs) {
+            if (r.type === 'attributes') {
+                const el = r.target;
+                if (el.hasAttribute('data-mo-micro'))
+                    wire(el);
+                else if (mine.has(el)) {
+                    handles.get(el)?.destroy();
+                    mine.delete(el);
+                }
+                continue;
+            }
+            r.addedNodes.forEach((n) => n.nodeType === 1 && scan(n));
+            r.removedNodes.forEach((n) => {
+                if (n.nodeType !== 1)
+                    return;
+                for (const el of [...mine])
+                    if (!el.isConnected && (n === el || n.contains(el))) {
+                        handles.get(el)?.destroy();
+                        mine.delete(el);
+                    }
+            });
+        }
+    });
+    mo.observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ['data-mo-micro'] });
+    return () => {
+        mo.disconnect();
+        mine.forEach((el) => handles.get(el)?.destroy());
+        mine.clear();
+    };
+}
+
 /**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
+ * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
+ * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
  */
 /** Register every component of this category under its default tag. */
 function defineInteractionComponents() {
@@ -5023,6 +5994,9 @@ function defineOverscroll(tag = 'usa-overscroll') {
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 /** Register every component of this category under its default tag. */
 function definePhysicsComponents() {
@@ -5571,111 +6545,6 @@ function defineCardComponents() {
     defineCardStack();
     defineStickyStack();
     defineCarousel3d();
-}
-
-/**
- * Click-effect helpers (v2.5): `burst()`, `confetti()`, `shake()`, `haptic()`.
- * Particles live in one fixed, pointer-transparent layer and are removed when
- * their animation ends. Under reduced motion particles are skipped and
- * `shake()` only flashes an outline.
- */
-let layer = null;
-function fxLayer() {
-    if (layer && layer.isConnected)
-        return layer;
-    layer = document.createElement('div');
-    layer.className = 'usa-fx-layer';
-    layer.setAttribute('aria-hidden', 'true');
-    layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
-    document.body.append(layer);
-    return layer;
-}
-const PALETTE = ['#7c5cff', '#22d3ee', '#f472b6', '#facc15', '#34d399', '#fb923c'];
-const GLYPH = { star: '★', heart: '♥' };
-function particle(x, y, size, color, shape) {
-    const p = document.createElement('span');
-    const glyph = GLYPH[shape] || (shape !== 'circle' && shape !== 'square' ? shape : '');
-    p.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;margin:${-size / 2}px 0 0 ${-size / 2}px;will-change:transform,opacity;` +
-        (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
-    if (glyph)
-        p.textContent = glyph;
-    fxLayer().append(p);
-    return p;
-}
-const done = (a, el) => {
-    if (a)
-        a.onfinish = () => el.remove();
-    else
-        el.remove();
-};
-/** Particles radiating from client point (x, y). Returns the number spawned. */
-function burst(x, y, options = {}) {
-    if (typeof document === 'undefined' || prefersReducedMotion())
-        return 0;
-    const { count = 12, colors = PALETTE, distance = 48, size = 6, shape = 'circle', duration = 600 } = options;
-    for (let i = 0; i < count; i++) {
-        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
-        const d = distance * (0.7 + Math.random() * 0.5);
-        const p = particle(x, y, size, colors[i % colors.length], shape);
-        const a = typeof p.animate === 'function'
-            ? p.animate([
-                { transform: 'translate(0,0) scale(1)', opacity: 1 },
-                { transform: `translate(${Math.cos(angle) * d}px, ${Math.sin(angle) * d}px) scale(0.2)`, opacity: 0 },
-            ], { duration: duration * (0.8 + Math.random() * 0.4), easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' })
-            : null;
-        done(a, p);
-    }
-    return count;
-}
-/** A confetti cannon (paper pieces with gravity, drift and spin). */
-function confetti(options = {}) {
-    if (typeof document === 'undefined' || prefersReducedMotion())
-        return 0;
-    const W = window.innerWidth || 800;
-    const H = window.innerHeight || 600;
-    const { x = W / 2, y = H * 0.66, count = 80, spread = 70, velocity = 1, colors = PALETTE, duration = 1600 } = options;
-    for (let i = 0; i < count; i++) {
-        const angle = ((-90 + (Math.random() - 0.5) * spread) * Math.PI) / 180;
-        const speed = (260 + Math.random() * 320) * velocity;
-        const vx = Math.cos(angle) * speed;
-        const vy = Math.sin(angle) * speed;
-        const p = particle(x, y, 6 + Math.random() * 5, colors[i % colors.length], Math.random() > 0.5 ? 'square' : 'circle');
-        p.style.height = `${4 + Math.random() * 3}px`;
-        const frames = [];
-        const steps = 8;
-        const T = duration / 1000;
-        const spin = (Math.random() - 0.5) * 1440;
-        for (let s = 0; s <= steps; s++) {
-            const t = (s / steps) * T;
-            const g = 900;
-            frames.push({
-                transform: `translate(${(vx * t * 0.8).toFixed(1)}px, ${(vy * t + 0.5 * g * t * t).toFixed(1)}px) rotate(${((spin * s) / steps).toFixed(0)}deg) rotateX(${s * 120}deg)`,
-                opacity: s === steps ? 0 : 1,
-            });
-        }
-        const a = typeof p.animate === 'function' ? p.animate(frames, { duration: duration * (0.85 + Math.random() * 0.3), easing: 'linear', fill: 'forwards' }) : null;
-        done(a, p);
-    }
-    return count;
-}
-/** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
-function shake(el, intensity = 8, duration = 480) {
-    const t = el;
-    if (typeof t.animate !== 'function')
-        return null;
-    if (prefersReducedMotion())
-        return t.animate([{ outline: '2px solid #e5484d' }, { outline: '2px solid transparent' }], { duration: 600 });
-    const k = intensity;
-    return t.animate([0, -k, k, -k * 0.75, k * 0.75, -k * 0.4, k * 0.4, 0].map((v) => ({ transform: `translateX(${v}px)` })), { duration, easing: 'ease-in-out' });
-}
-/** `navigator.vibrate()` where supported (Android Chrome, some WebViews). Returns whether it ran. */
-function haptic(pattern = 10) {
-    try {
-        return typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function' ? navigator.vibrate(pattern) : false;
-    }
-    catch {
-        return false;
-    }
 }
 
 const CLICK_EFFECTS = ['ripple', 'burst', 'confetti', 'squish', 'press-spring', 'shake'];
@@ -10525,7 +11394,7 @@ const rewriteTagSelectors = (text, replaceTag) => {
 };
 
 // Generated from the component manifest.
-const publicTagNames = 'accordion acrylic activity-wall add-to-cart align-switch ambient analog-stick anim-icon announcement-bar audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bar-race bento bezier-lab bg-generator blobs border-beam bottom-sheet bounce-button breadcrumbs breath-orb bulge-volume bullet-chart button calendar-strip card card-stack carousel carousel-3d cart-badge cart-drawer center-bars chapter-nav chat-composer check checkbox checklist chip-input circular-text click clock-control clothesline code-export code-shake code-tabs coffee-timer color-picker color-swatches combobox command-palette comment-thread compare comparison-table connect-beam consent context-menu contour-relief copy-button countdown counter cta-popup cube cube-gallery cursor cut-reveal data-table date-picker delivery-tracker depth desktop-windows dialog diff-viewer disclosure distort dock donut-chart dot-network dot-plot dotlottie double-tap download-button download-menu draggable draw drawer eclipse-toggle elastic-accordion elastic-frame elastic-mesh elastic-slider emoji-picker empty-state equalizer expand-cards fab fan-carousel festival-banner field file-drop file-tree filter-chips flight-status fluid-type form-stepper fullpage fullscreen-menu funnel-chart fx gantt gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe glucose-sparkline gpu-particles gradient-text grain gravity-well grid-glow groove-toggle gyro-card halo-segmented halo-slider handwriting heatmap helpful-vote hero-video hold hold-action horizontal-scroll hotspots hover-card hover-reveal-list hud-panel hue-orbit hydrate icon icon-morph icon-picker image-trail image-tunnel infinite-scroll infinity-loop ink-flow inline-edit install-button iris-diaphragm jelly-button json-viewer kanban keyframe-editor kpi leaderboard lens-stack letter-swap lightbox like line-chart liquid liquid-glass liquid-metal liquid-nav loading-bar location-card lottie lottie-icon lottie-player luminous-switch lyrics magnet-lines magnetic magnetic-field marquee mask-reveal masonry masonry-flow mega-menu mention-input menu menu-toggle message-list meteors meter-countdown milestones modal morph morph-card motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme multi-select music-player native-preview nav-flyout nav-morph navbar notch-slider notification-bell number-stepper odometer orbit-gallery orbit-pass orbit-progress orbit-rings organic-card otp overscroll pack page-flip pagination panorama parallax-layers particle-button particle-icon particles password path-motion pause-all perf-monitor physics-playground pinch-zoom pixel-transition plan-picker player plugin-card plugin-store popover post-fx presence press pricing prize-wheel product-gallery progress progress-ring progress-tabs prop-panel pull-cord pull-refresh quarter-ring race-telemetry radar radial-bars radial-menu range-slider rating-bars reaction-field reactions red-envelope retro-button retro-grid reveal reveal-footer revision-reveal ride-status ripple ripple-grid rive route-sparkline route-transition scene scramble scratch-card scroll-bg scroll-cue scroll-highlight scroll-progress scroll-ring scroll-scene scroll-velocity scroll-zoom scrollspy scrolly scrub-number search-bar search-field segmented select shader shader-backdrop shape-divider share-button sheet shimmer-text shortcut shuffle-grid sidebar signature-pad six-dot-orbit skeleton skeleton-reveal sketch-chart slider slope-chart smooth-scroll snap-carousel sortable-list sparkline spatial-card spinner splash split-flap split-pane split-text spotlight spring spring-lab squish-indicator squish-key squish-stepper stack-slider stagger star-rating status-pill step-track stepper sticky-cta sticky-stack sticky-wall stories story strength-meter subscribe suggestion-chips sun-timeline sweep-lines swipe-deck swipeable switch tab-bar tabs tada-button tag-cloud terminal text-loupe text-pressure text-reveal text-rotate text-splitter textarea theme-surface theme-switcher three-dot-bounce tile-relay tilt time-picker timeline tip title-sequence toast-stack toaster toggle-group token-editor tour transfer-button transit-progress treemap triple-pulse typewriter upload-progress validation-summary video-card view-switch virtual-list vital-wave voice-button volume-knob waffle-chart water-ripple wave-text weather-card wheel-picker wifi-signal worker-canvas workout-player xp-bar zoom-lens';
+const publicTagNames = 'accordion acrylic activity-wall add-to-cart align-switch ambient analog-stick anim-icon announcement-bar audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bar-race bento bezier-lab bg-generator blobs border-beam bottom-sheet bounce-button breadcrumbs breath-orb bulge-volume bullet-chart button calendar-strip card card-stack carousel carousel-3d cart-badge cart-drawer center-bars chapter-nav chat-composer check checkbox checklist chip-input circular-text click clock-control clothesline code-export code-shake code-tabs coffee-timer color-picker color-swatches combobox command-palette comment-thread compare comparison-table connect-beam consent context-menu contour-relief copy-button countdown counter cta-popup cube cube-gallery cursor cut-reveal data-table date-picker delivery-tracker depth desktop-windows dialog diff-viewer disclosure distort dock donut-chart dot-network dot-plot dotlottie double-tap download-button download-menu draggable draw drawer eclipse-toggle elastic-accordion elastic-frame elastic-mesh elastic-slider emoji-picker empty-state equalizer expand-cards fab fan-carousel festival-banner field file-drop file-tree filter-chips flight-status fluid-type form-stepper fullpage fullscreen-menu funnel-chart fx gantt gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe glucose-sparkline gpu-particles gradient-text grain gravity-well grid-glow groove-toggle gyro-card halo-segmented halo-slider handwriting heatmap helpful-vote hero-video hold hold-action horizontal-scroll hotspots hover-card hover-reveal-list hud-panel hue-orbit hydrate icon icon-morph icon-picker image-trail image-tunnel infinite-scroll infinity-loop ink-flow inline-edit install-button iris-diaphragm jelly-button json-viewer kanban keyframe-editor kpi leaderboard lens-stack letter-swap lightbox like line-chart liquid liquid-glass liquid-metal liquid-nav loading-bar location-card lottie lottie-icon lottie-player luminous-switch lyrics magnet-lines magnetic magnetic-field marquee mask-reveal masonry masonry-flow mega-menu mention-input menu menu-toggle message-list meteors meter-countdown micro micro-button micro-checkbox micro-input micro-segmented micro-slider micro-stepper micro-switch milestones modal morph morph-card motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme multi-select music-player native-preview nav-flyout nav-morph navbar notch-slider notification-bell number-stepper odometer orbit-gallery orbit-pass orbit-progress orbit-rings organic-card otp overscroll pack page-flip pagination panorama parallax-layers particle-button particle-icon particles password path-motion pause-all perf-monitor physics-playground pinch-zoom pixel-transition plan-picker player plugin-card plugin-store popover post-fx presence press pricing prize-wheel product-gallery progress progress-ring progress-tabs prop-panel pull-cord pull-refresh quarter-ring race-telemetry radar radial-bars radial-menu range-slider rating-bars reaction-field reactions red-envelope retro-button retro-grid reveal reveal-footer revision-reveal ride-status ripple ripple-grid rive route-sparkline route-transition scene scramble scratch-card scroll-bg scroll-cue scroll-highlight scroll-progress scroll-ring scroll-scene scroll-velocity scroll-zoom scrollspy scrolly scrub-number search-bar search-field segmented select shader shader-backdrop shape-divider share-button sheet shimmer-text shortcut shuffle-grid sidebar signature-pad six-dot-orbit skeleton skeleton-reveal sketch-chart slider slope-chart smooth-scroll snap-carousel sortable-list sparkline spatial-card spinner splash split-flap split-pane split-text spotlight spring spring-lab squish-indicator squish-key squish-stepper stack-slider stagger star-rating status-pill step-track stepper sticky-cta sticky-stack sticky-wall stories story strength-meter subscribe suggestion-chips sun-timeline sweep-lines swipe-deck swipeable switch tab-bar tabs tada-button tag-cloud terminal text-loupe text-pressure text-reveal text-rotate text-splitter textarea theme-surface theme-switcher three-dot-bounce tile-relay tilt time-picker timeline tip title-sequence toast-stack toaster toggle-group token-editor tour transfer-button transit-progress treemap triple-pulse typewriter upload-progress validation-summary video-card view-switch virtual-list vital-wave voice-button volume-knob waffle-chart water-ripple wave-text weather-card wheel-picker wifi-signal worker-canvas workout-player xp-bar zoom-lens';
 
 /**
  * motionary/components/mo — the 17.0 `<mo-*>` names.
@@ -11126,6 +11995,10 @@ exports.GL_FALLBACKS = GL_FALLBACKS;
 exports.JOINING_SCRIPT = JOINING_SCRIPT;
 exports.LIVE_REGION_IDS = LIVE_REGION_IDS;
 exports.MASK_SHAPES = MASK_SHAPES;
+exports.MICRO_BEHAVIORS = MICRO_BEHAVIORS;
+exports.MICRO_FEEDBACK = MICRO_FEEDBACK;
+exports.MICRO_FEELS = MICRO_FEELS;
+exports.MICRO_SPRINGS = MICRO_SPRINGS;
 exports.MORPH_ICONS = MORPH_ICONS;
 exports.MOTION_SCALE = MOTION_SCALE;
 exports.MOTION_SENSITIVITY = MOTION_SENSITIVITY;
@@ -11152,6 +12025,7 @@ exports.adoptVariants = adoptVariants;
 exports.animateWithMotion = animateWithMotion;
 exports.animationBudget = animationBudget;
 exports.announce = announce;
+exports.applyMicro = applyMicro;
 exports.applyMotionTokens = applyMotionTokens;
 exports.applyNativeSettings = applyNativeSettings;
 exports.applyPack = applyPack;
@@ -11165,6 +12039,7 @@ exports.configureComponents = configureComponents;
 exports.connectNativeShell = connectNativeShell;
 exports.countUp = countUp;
 exports.createSpring = createSpring;
+exports.createSpringGroup = createSpringGroup;
 exports.defineAccordion = defineAccordion;
 exports.defineAcrylic = defineAcrylic;
 exports.defineAmbient = defineAmbient;
@@ -11277,6 +12152,7 @@ exports.drawLines = drawLines;
 exports.easeOutExpo = easeOutExpo;
 exports.enableMpaTransitions = enableMpaTransitions;
 exports.exportDesignTokens = exportDesignTokens;
+exports.feedback = feedback;
 exports.flip = flip;
 exports.flipFrames = flipFrames;
 exports.fluentPreset = fluentPreset;
@@ -11306,6 +12182,11 @@ exports.loadedStyles = loadedStyles;
 exports.loadingBar = loadingBar;
 exports.masonryLayout = masonryLayout;
 exports.mergeMotionTokens = mergeMotionTokens;
+exports.micro = micro;
+exports.microEasing = microEasing;
+exports.microOf = microOf;
+exports.microSpring = microSpring;
+exports.microTransform = microTransform;
 exports.morphPath = morphPath;
 exports.morphTo = morphTo;
 exports.motionAllowed = motionAllowed;
@@ -11321,6 +12202,7 @@ exports.orientationToTilt = orientationToTilt;
 exports.pageTransition = pageTransition;
 exports.parseDuration = parseDuration;
 exports.parseEasing = parseEasing;
+exports.parseMicro = parseMicro;
 exports.parseNativeSettings = parseNativeSettings;
 exports.pathsCompatible = pathsCompatible;
 exports.pinchScale = pinchScale;
@@ -11329,7 +12211,9 @@ exports.postFxShader = postFxShader;
 exports.postToNative = postToNative;
 exports.prefersReducedMotion = prefersReducedMotion;
 exports.projectInertia = projectInertia;
+exports.readFeel = readFeel;
 exports.readScrollProgress = readScrollProgress;
+exports.readSpeed = readSpeed;
 exports.registerBuiltinEffects = registerBuiltinEffects;
 exports.registerEffect = registerEffect;
 exports.registerEffects = registerEffects;
@@ -11352,6 +12236,7 @@ exports.setMotionIntensity = setMotionIntensity;
 exports.setMotionLevel = setMotionLevel;
 exports.setMotionSensitivity = setMotionSensitivity;
 exports.setVariant = setVariant;
+exports.settleTime = settleTime;
 exports.sharedTransition = sharedTransition;
 exports.smoothScroll = smoothScroll;
 exports.snapTo = snapTo;
@@ -11362,7 +12247,10 @@ exports.splitWords = words;
 exports.spring = spring;
 exports.springEasing = springEasing;
 exports.springEffectKeyframes = springEffectKeyframes;
+exports.springFeel = springFeel;
+exports.springFromFeel = springFromFeel;
 exports.springSamples = springSamples;
+exports.springSolution = springSolution;
 exports.staticAlternative = staticAlternative;
 exports.stepSpring = stepSpring;
 exports.supportsLinearEasing = supportsLinearEasing;

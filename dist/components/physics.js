@@ -1,6 +1,7 @@
 import { f as defineElement, d as clamp } from '../chunks/base-SPDwWyB1.js';
 import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-Bu3AwUgu.js';
 export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-Bu3AwUgu.js';
+export { M as MICRO_FEELS, a as MICRO_SPRINGS, c as createSpringGroup, m as microEasing, b as microSpring, s as settleTime, d as springFeel, e as springFromFeel, f as springSolution } from '../chunks/spring-solver-CQNBJPRE.js';
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
@@ -418,6 +419,9 @@ function defineOverscroll(tag = 'usa-overscroll') {
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 /** Register every component of this category under its default tag. */
 function definePhysicsComponents() {

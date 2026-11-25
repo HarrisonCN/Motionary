@@ -48,6 +48,8 @@ export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detec
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-B-JBecYg.js';
 export { B as BUILTIN_EFFECTS } from './chunks/builtins-J8Y5msT6.js';
 export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-DmYdTtl4.js';
+export { M as MICRO_BEHAVIORS, a as MICRO_FEEDBACK, b as applyMicro, f as feedback, m as micro, c as microOf, d as microTransform, p as parseMicro, r as readFeel, e as readSpeed } from './chunks/micro-DxpcOO8J.js';
+export { M as MICRO_FEELS, a as MICRO_SPRINGS, c as createSpringGroup, m as microEasing, b as microSpring, s as settleTime, d as springFeel, e as springFromFeel, f as springSolution } from './chunks/spring-solver-CQNBJPRE.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-Bu3AwUgu.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-Bj5_9QHr.js';
 export { c as categoryOf } from './chunks/category-for-tag-WK7MtB-K.js';

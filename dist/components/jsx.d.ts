@@ -1316,6 +1316,106 @@ interface LegacyAttributes {
         title?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-micro': {
+        axis?: string | boolean | number;
+        bounds?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feedback?: string | boolean | number;
+        feel?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        'hover-scale'?: string | boolean | number;
+        lift?: string | boolean | number;
+        'press-scale'?: string | boolean | number;
+        reach?: string | boolean | number;
+        snap?: string | boolean | number;
+        spring?: string | boolean | number;
+        strength?: string | boolean | number;
+        tilt?: string | boolean | number;
+    };
+    'usa-micro-button': {
+        disabled?: string | boolean | number;
+        'error-label'?: string | boolean | number;
+        feel?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        'loading-label'?: string | boolean | number;
+        reset?: string | boolean | number;
+        state?: string | boolean | number;
+        'success-label'?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    'usa-micro-checkbox': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        indeterminate?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-input': {
+        autocomplete?: string | boolean | number;
+        disabled?: string | boolean | number;
+        error?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        minlength?: string | boolean | number;
+        name?: string | boolean | number;
+        pattern?: string | boolean | number;
+        required?: string | boolean | number;
+        success?: string | boolean | number;
+        type?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-segmented': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    'usa-micro-slider': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-stepper': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-switch': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-milestones': {
         layout?: string | boolean | number;
     };
@@ -3211,6 +3311,36 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
+    };
+    'usa-micro': {
+        'usa:drag-end': CustomEvent<any>;
+        'usa:press': CustomEvent<any>;
+        'usa:release': CustomEvent<any>;
+    };
+    'usa-micro-button': {
+        'usa:action': CustomEvent<any>;
+        'usa:state': CustomEvent<any>;
+    };
+    'usa-micro-checkbox': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-micro-input': {
+        'usa:input': CustomEvent<any>;
+        'usa:invalid': CustomEvent<any>;
+        'usa:valid': CustomEvent<any>;
+    };
+    'usa-micro-segmented': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-micro-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
+    'usa-micro-stepper': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-micro-switch': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-milestones': {
         'usa:reach': CustomEvent<any>;
