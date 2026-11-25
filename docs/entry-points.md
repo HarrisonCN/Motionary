@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (309)
+## Widgets (319)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,16 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-spring-like>` | `motionary/widgets/spring-like` | `defineSpringLike()` |
+| `<usa-spring-rating>` | `motionary/widgets/spring-rating` | `defineSpringRating()` |
+| `<usa-spring-copy>` | `motionary/widgets/spring-copy` | `defineSpringCopy()` |
+| `<usa-spring-tags>` | `motionary/widgets/spring-tags` | `defineSpringTags()` |
+| `<usa-spring-code>` | `motionary/widgets/spring-code` | `defineSpringCode()` |
+| `<usa-spring-list>` | `motionary/widgets/spring-list` | `defineSpringList()` |
+| `<usa-spring-swipe>` | `motionary/widgets/spring-swipe` | `defineSpringSwipe()` |
+| `<usa-spring-toasts>` | `motionary/widgets/spring-toasts` | `defineSpringToasts()` |
+| `<usa-spring-accordion>` | `motionary/widgets/spring-accordion` | `defineSpringAccordion()` |
+| `<usa-spring-counter>` | `motionary/widgets/spring-counter` | `defineSpringCounter()` |
 | `<usa-micro>` | `motionary/widgets/micro` | `defineMicro()` |
 | `<usa-micro-switch>` | `motionary/widgets/micro-switch` | `defineMicroSwitch()` |
 | `<usa-micro-checkbox>` | `motionary/widgets/micro-checkbox` | `defineMicroCheckbox()` |

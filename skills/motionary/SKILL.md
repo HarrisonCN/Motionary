@@ -72,6 +72,7 @@ A few starting points:
 | Everyday UI parts | `<mo-radial-menu>`, `<mo-hover-card>`, `<mo-toggle-group>`, `<mo-time-picker>`, `<mo-color-swatches>`, `<mo-calendar-strip>`, `<mo-comparison-table>` |
 | More charts | `<mo-radial-bars>`, `<mo-bar-race>`, `<mo-bullet-chart>`, `<mo-slope-chart>`, `<mo-dot-plot>` |
 | Spring micro-interactions | `<mo-micro fx="press hover lift">` around any content (also `magnetic`, `tilt`, `glow`, `squish`, `drag`, `focus`; `feedback="shake"` plays an impulse), `<mo-micro-switch>`, `<mo-micro-checkbox>`, `<mo-micro-input>`, `<mo-micro-button>`, `<mo-micro-slider>`, `<mo-micro-segmented>`, `<mo-micro-stepper>`; `feel="crisp|snappy|smooth|bouncy|playful|calm|heavy"` or `data-mo-feel` on a parent |
+| Spring parts | `<mo-spring-like count="12">`, `<mo-spring-rating value="4">`, `<mo-spring-copy text="…">`, `<mo-spring-tags value="a,b">`, `<mo-spring-code length="6">` (`accept()` / `reject()`), `<mo-spring-list items="a|b|c">`, `<mo-spring-swipe actions="Archive|Delete:danger">`, `<mo-spring-toasts>` (`show(text, { tone })`), `<mo-spring-accordion open="0">`, `<mo-spring-counter value="1280" group=",">`; all take `feel` and the looks |
 | Icons | `<mo-icon name="bell" motion="ring">` (503 icons in 24 categories, 12 motions), `<mo-icon-picker>` |
 | Ready-made looks for those widgets | `look="neon-ocean"` (1530 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
 

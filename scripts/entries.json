@@ -1587,6 +1587,136 @@
  },
  {
   "kind": "widget",
+  "name": "spring-like",
+  "entry": "motionary/widgets/spring-like",
+  "src": "src/entries/widgets/spring-like.ts",
+  "tag": "usa-spring-like",
+  "define": "defineSpringLike",
+  "types": [
+   "UsaSpringLikeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-like"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-rating",
+  "entry": "motionary/widgets/spring-rating",
+  "src": "src/entries/widgets/spring-rating.ts",
+  "tag": "usa-spring-rating",
+  "define": "defineSpringRating",
+  "types": [
+   "UsaSpringRatingElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-rating"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-copy",
+  "entry": "motionary/widgets/spring-copy",
+  "src": "src/entries/widgets/spring-copy.ts",
+  "tag": "usa-spring-copy",
+  "define": "defineSpringCopy",
+  "types": [
+   "UsaSpringCopyElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-copy"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-tags",
+  "entry": "motionary/widgets/spring-tags",
+  "src": "src/entries/widgets/spring-tags.ts",
+  "tag": "usa-spring-tags",
+  "define": "defineSpringTags",
+  "types": [
+   "UsaSpringTagsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-tags"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-code",
+  "entry": "motionary/widgets/spring-code",
+  "src": "src/entries/widgets/spring-code.ts",
+  "tag": "usa-spring-code",
+  "define": "defineSpringCode",
+  "types": [
+   "UsaSpringCodeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-code"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-list",
+  "entry": "motionary/widgets/spring-list",
+  "src": "src/entries/widgets/spring-list.ts",
+  "tag": "usa-spring-list",
+  "define": "defineSpringList",
+  "types": [
+   "UsaSpringListElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-list"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-swipe",
+  "entry": "motionary/widgets/spring-swipe",
+  "src": "src/entries/widgets/spring-swipe.ts",
+  "tag": "usa-spring-swipe",
+  "define": "defineSpringSwipe",
+  "types": [
+   "UsaSpringSwipeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-swipe"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-toasts",
+  "entry": "motionary/widgets/spring-toasts",
+  "src": "src/entries/widgets/spring-toasts.ts",
+  "tag": "usa-spring-toasts",
+  "define": "defineSpringToasts",
+  "types": [
+   "UsaSpringToastsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-toasts"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-accordion",
+  "entry": "motionary/widgets/spring-accordion",
+  "src": "src/entries/widgets/spring-accordion.ts",
+  "tag": "usa-spring-accordion",
+  "define": "defineSpringAccordion",
+  "types": [
+   "UsaSpringAccordionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-accordion"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-counter",
+  "entry": "motionary/widgets/spring-counter",
+  "src": "src/entries/widgets/spring-counter.ts",
+  "tag": "usa-spring-counter",
+  "define": "defineSpringCounter",
+  "types": [
+   "UsaSpringCounterElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-counter"
+ },
+ {
+  "kind": "widget",
   "name": "micro",
   "entry": "motionary/widgets/micro",
   "src": "src/entries/widgets/micro.ts",

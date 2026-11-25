@@ -139,6 +139,16 @@ import { defineMicroButton, type UsaMicroButtonElement, type MicroButtonState } 
 import { defineMicroSlider, type UsaMicroSliderElement } from './micro-slider';
 import { defineMicroSegmented, type UsaMicroSegmentedElement } from './micro-segmented';
 import { defineMicroStepper, type UsaMicroStepperElement } from './micro-stepper';
+import { defineSpringLike, type UsaSpringLikeElement } from './spring-like';
+import { defineSpringRating, type UsaSpringRatingElement } from './spring-rating';
+import { defineSpringCopy, type UsaSpringCopyElement } from './spring-copy';
+import { defineSpringTags, type UsaSpringTagsElement } from './spring-tags';
+import { defineSpringCode, type UsaSpringCodeElement } from './spring-code';
+import { defineSpringList, type UsaSpringListElement } from './spring-list';
+import { defineSpringSwipe, type UsaSpringSwipeElement } from './spring-swipe';
+import { defineSpringToasts, type UsaSpringToastsElement, type SpringToastOptions } from './spring-toasts';
+import { defineSpringAccordion, type UsaSpringAccordionElement } from './spring-accordion';
+import { defineSpringCounter, type UsaSpringCounterElement } from './spring-counter';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -456,6 +466,17 @@ export { defineMicroButton, type UsaMicroButtonElement, type MicroButtonState };
 export { defineMicroSlider, type UsaMicroSliderElement };
 export { defineMicroSegmented, type UsaMicroSegmentedElement };
 export { defineMicroStepper, type UsaMicroStepperElement };
+export { defineSpringLike, type UsaSpringLikeElement };
+export { defineSpringRating, type UsaSpringRatingElement };
+export { defineSpringCopy, type UsaSpringCopyElement };
+export { defineSpringTags, type UsaSpringTagsElement };
+export { defineSpringCode, type UsaSpringCodeElement };
+export { defineSpringList, type UsaSpringListElement };
+export { defineSpringSwipe, type UsaSpringSwipeElement };
+export { defineSpringToasts, type UsaSpringToastsElement, type SpringToastOptions };
+export { defineSpringAccordion, type UsaSpringAccordionElement };
+export { defineSpringCounter, type UsaSpringCounterElement };
+export { burstPoints, compactCount, ratingAt, starFill, parseTags, addTags, codeChars, slotAt, shiftFor, swipeOpen, stackLayout, counterText, alignDigits, openSet } from './spring-kit-17';
 export { rovingIndex, copyText, seeded, moveItem, numbers } from './kit-12';
 export { shareUrl, SHARE_TARGETS, type ShareTarget } from './share-button';
 export { tagSize } from './tag-cloud';
@@ -738,6 +759,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.17': { 'usa-spring-like': defineSpringLike, 'usa-spring-rating': defineSpringRating, 'usa-spring-copy': defineSpringCopy, 'usa-spring-tags': defineSpringTags, 'usa-spring-code': defineSpringCode, 'usa-spring-list': defineSpringList, 'usa-spring-swipe': defineSpringSwipe, 'usa-spring-toasts': defineSpringToasts, 'usa-spring-accordion': defineSpringAccordion, 'usa-spring-counter': defineSpringCounter },
   '17.16': { 'usa-micro': defineMicro, 'usa-micro-switch': defineMicroSwitch, 'usa-micro-checkbox': defineMicroCheckbox, 'usa-micro-input': defineMicroInput, 'usa-micro-button': defineMicroButton, 'usa-micro-slider': defineMicroSlider, 'usa-micro-segmented': defineMicroSegmented, 'usa-micro-stepper': defineMicroStepper },
   '17.15': { 'usa-radial-menu': defineRadialMenu, 'usa-hover-card': defineHoverCard, 'usa-toggle-group': defineToggleGroup, 'usa-time-picker': defineTimePicker, 'usa-color-swatches': defineColorSwatches, 'usa-calendar-strip': defineCalendarStrip, 'usa-comparison-table': defineComparisonTable, 'usa-radial-bars': defineRadialBars, 'usa-bar-race': defineBarRace, 'usa-bullet-chart': defineBulletChart, 'usa-slope-chart': defineSlopeChart, 'usa-dot-plot': defineDotPlot },
   '17.14': { 'usa-icon': defineIcon, 'usa-icon-picker': defineIconPicker },
@@ -1037,6 +1059,26 @@ declare global {
     'mo-micro-segmented': UsaMicroSegmentedElement;
     'usa-micro-stepper': UsaMicroStepperElement;
     'mo-micro-stepper': UsaMicroStepperElement;
+    'usa-spring-like': UsaSpringLikeElement;
+    'mo-spring-like': UsaSpringLikeElement;
+    'usa-spring-rating': UsaSpringRatingElement;
+    'mo-spring-rating': UsaSpringRatingElement;
+    'usa-spring-copy': UsaSpringCopyElement;
+    'mo-spring-copy': UsaSpringCopyElement;
+    'usa-spring-tags': UsaSpringTagsElement;
+    'mo-spring-tags': UsaSpringTagsElement;
+    'usa-spring-code': UsaSpringCodeElement;
+    'mo-spring-code': UsaSpringCodeElement;
+    'usa-spring-list': UsaSpringListElement;
+    'mo-spring-list': UsaSpringListElement;
+    'usa-spring-swipe': UsaSpringSwipeElement;
+    'mo-spring-swipe': UsaSpringSwipeElement;
+    'usa-spring-toasts': UsaSpringToastsElement;
+    'mo-spring-toasts': UsaSpringToastsElement;
+    'usa-spring-accordion': UsaSpringAccordionElement;
+    'mo-spring-accordion': UsaSpringAccordionElement;
+    'usa-spring-counter': UsaSpringCounterElement;
+    'mo-spring-counter': UsaSpringCounterElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

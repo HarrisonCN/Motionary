@@ -3292,6 +3292,56 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/spring-like' (per-entry, fixed)",
+    "import": "import { defineSpringLike } from 'pkg/widgets/spring-like'; console.log(defineSpringLike);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-rating' (per-entry, fixed)",
+    "import": "import { defineSpringRating } from 'pkg/widgets/spring-rating'; console.log(defineSpringRating);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-copy' (per-entry, fixed)",
+    "import": "import { defineSpringCopy } from 'pkg/widgets/spring-copy'; console.log(defineSpringCopy);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-tags' (per-entry, fixed)",
+    "import": "import { defineSpringTags } from 'pkg/widgets/spring-tags'; console.log(defineSpringTags);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-code' (per-entry, fixed)",
+    "import": "import { defineSpringCode } from 'pkg/widgets/spring-code'; console.log(defineSpringCode);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-list' (per-entry, fixed)",
+    "import": "import { defineSpringList } from 'pkg/widgets/spring-list'; console.log(defineSpringList);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-swipe' (per-entry, fixed)",
+    "import": "import { defineSpringSwipe } from 'pkg/widgets/spring-swipe'; console.log(defineSpringSwipe);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-toasts' (per-entry, fixed)",
+    "import": "import { defineSpringToasts } from 'pkg/widgets/spring-toasts'; console.log(defineSpringToasts);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-accordion' (per-entry, fixed)",
+    "import": "import { defineSpringAccordion } from 'pkg/widgets/spring-accordion'; console.log(defineSpringAccordion);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-counter' (per-entry, fixed)",
+    "import": "import { defineSpringCounter } from 'pkg/widgets/spring-counter'; console.log(defineSpringCounter);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

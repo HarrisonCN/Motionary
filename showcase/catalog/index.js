@@ -28,8 +28,9 @@ import * as studio from './studio.js';
 import * as icons from './icons.js';
 import * as toolkit from './toolkit.js';
 import * as micro from './micro.js';
+import * as springs from './springs.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit, blocks, parts, studio, icons, toolkit, micro];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit, blocks, parts, studio, icons, toolkit, micro, springs];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));

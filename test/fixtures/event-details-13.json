@@ -2157,6 +2157,68 @@
       "usa:change": [
         "{checked}"
       ]
+    },
+    "usa-spring-accordion": {
+      "usa:toggle": [
+        "{index, open}"
+      ]
+    },
+    "usa-spring-code": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:complete": [
+        "{value}"
+      ]
+    },
+    "usa-spring-copy": {
+      "usa:copy": [
+        "{ok, text}"
+      ]
+    },
+    "usa-spring-counter": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-spring-like": {
+      "usa:change": [
+        "{count, liked}"
+      ]
+    },
+    "usa-spring-list": {
+      "usa:reorder": [
+        "{from, order, to}"
+      ]
+    },
+    "usa-spring-rating": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-spring-swipe": {
+      "usa:action": [
+        "{index, label}"
+      ],
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-spring-tags": {
+      "usa:change": [
+        "{added, removed, tags}"
+      ],
+      "usa:reject": [
+        "{reason, text}"
+      ]
+    },
+    "usa-spring-toasts": {
+      "usa:dismiss": [
+        "{id, reason}"
+      ],
+      "usa:show": [
+        "{id, text, tone}"
+      ]
     }
   }
 }

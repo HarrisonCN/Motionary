@@ -1,4 +1,4 @@
-# Motionary components (400)
+# Motionary components (410)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -193,6 +193,16 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-snap-carousel>`](usa-snap-carousel.md) — Snap carousel (drag · inertia · snap) · Requires: motionary/runtime/drag-snap
 - [`<mo-sparkline>`](usa-sparkline.md) — Sparkline
 - [`<mo-spatial-card>`](usa-spatial-card.md) — Spatial card
+- [`<mo-spring-accordion>`](usa-spring-accordion.md) — Spring accordion
+- [`<mo-spring-code>`](usa-spring-code.md) — Spring code
+- [`<mo-spring-copy>`](usa-spring-copy.md) — Spring copy
+- [`<mo-spring-counter>`](usa-spring-counter.md) — Spring counter
+- [`<mo-spring-like>`](usa-spring-like.md) — Spring like
+- [`<mo-spring-list>`](usa-spring-list.md) — Spring list
+- [`<mo-spring-rating>`](usa-spring-rating.md) — Spring rating
+- [`<mo-spring-swipe>`](usa-spring-swipe.md) — Spring swipe
+- [`<mo-spring-tags>`](usa-spring-tags.md) — Spring tags
+- [`<mo-spring-toasts>`](usa-spring-toasts.md) — Spring toasts
 - [`<mo-status-pill>`](usa-status-pill.md) — Status pill
 - [`<mo-step-track>`](usa-step-track.md) — Step track
 - [`<mo-stepper>`](usa-stepper.md) — Stepper / wizard
