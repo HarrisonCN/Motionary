@@ -367,6 +367,18 @@ function hueOf(hex) {
     const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
     return Math.round((h * 60 + 360) % 360);
 }
+/** WCAG contrast ratio of two hex colors. */
+function contrastRatio(a, b) {
+    const lum = (hex) => {
+        const [r, g, b2] = rgbOf(hex).map((v) => {
+            const c = v / 255;
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b2;
+    };
+    const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+}
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 const NONE = '0 0 0 transparent';
 /** A dark surface tinted by `tint`, with light ink and the bright accent: shared by neon, terminal, cyber, console. */
@@ -376,7 +388,10 @@ const darkSet = (p, base, tint, amount, ink) => {
 };
 /** A light surface even for the dark palettes: deep ink and a deep accent. */
 const lightSet = (p, paper) => {
-    const accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    let accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    // a very bright accent (obsidian's lime) is still too light for white text after that mix: deepen it until it reads
+    for (let t = 0.56; p.dark && t > 0.2 && contrastRatio('#ffffff', accent) < 4.5; t -= 0.06)
+        accent = mixHex(p.accent, t, '#111111');
     return { dark: false, paper, bg: paper, ink: p.dark ? mixHex(p.accent, 0.22, '#14121a') : p.ink, accent, onAccent: '#ffffff' };
 };
 const LOOK_TREATMENTS = {
