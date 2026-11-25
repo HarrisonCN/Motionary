@@ -5955,6 +5955,16 @@ declare const LOOK_PALETTES: {
     readonly teal: readonly ["#042f2e", "#effcfa", "#0e7490", "#5eead4"];
     readonly aurora: readonly ["#e0f2fe", "#06121f", "#a78bfa", "#34d399"];
     readonly velvet: readonly ["#fce7f3", "#1a0b16", "#f472b6", "#fbbf24"];
+    readonly lavender: readonly ["#1e1b3a", "#f7f5ff", "#6d28d9", "#c4b5fd"];
+    readonly moss: readonly ["#18230f", "#f6f8ef", "#3f6212", "#d9f99d"];
+    readonly copper: readonly ["#2a160c", "#fdf6f0", "#9a3412", "#fdba74"];
+    readonly lagoon: readonly ["#062430", "#f0fbfc", "#155e75", "#67e8f9"];
+    readonly berry: readonly ["#2a0a1f", "#fdf2f8", "#9d174d", "#f9a8d4"];
+    readonly sage: readonly ["#1a2620", "#f4f7f4", "#3f6b56", "#a7c4b5"];
+    readonly espresso: readonly ["#2b1d16", "#faf6f2", "#6f4e37", "#d6b48c"];
+    readonly navy: readonly ["#0a1433", "#f5f7fc", "#1e3a8a", "#fbbf24"];
+    readonly obsidian: readonly ["#e5e7eb", "#0a0a0c", "#a3e635", "#38bdf8"];
+    readonly abyss: readonly ["#ccfbf1", "#03141a", "#2dd4bf", "#818cf8"];
 };
 type LookPalette = keyof typeof LOOK_PALETTES;
 /** What a look sets. Colors that a reader has to read against (`ink`, `paper`, `bg`, `cta`) are plain hex where they can be. */

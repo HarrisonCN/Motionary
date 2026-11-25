@@ -29,5 +29,11 @@ test('17.14 looks: the new palettes filter and the new treatments restyle the re
   await page.getByRole('button', { name: '全部配色' }).click();
   await page.getByRole('button', { name: '试用 nightvision-indigo' }).click();
   await expect.poll(() => stage.locator('mo-clothesline img').first().evaluate((el) => getComputedStyle(el).filter)).toContain('hue-rotate');
+
+  // 17.15: a new dark palette filters to one look per treatment and restyles the stage
+  await page.getByRole('button', { name: '深渊' }).click();
+  await expect(tiles).toHaveCount(17);
+  await page.getByRole('button', { name: '试用 glow-abyss' }).click();
+  await expect(stage).toHaveAttribute('data-mo-look', 'glow-abyss');
   expect(errors).toEqual([]);
 });

@@ -294,8 +294,9 @@ var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over twenty palettes,
- * give 340 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
+ * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
+ * ten palettes):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -331,9 +332,20 @@ const LOOK_PALETTES = {
     teal: ['#042f2e', '#effcfa', '#0e7490', '#5eead4'],
     aurora: ['#e0f2fe', '#06121f', '#a78bfa', '#34d399'],
     velvet: ['#fce7f3', '#1a0b16', '#f472b6', '#fbbf24'],
+    // 17.15
+    lavender: ['#1e1b3a', '#f7f5ff', '#6d28d9', '#c4b5fd'],
+    moss: ['#18230f', '#f6f8ef', '#3f6212', '#d9f99d'],
+    copper: ['#2a160c', '#fdf6f0', '#9a3412', '#fdba74'],
+    lagoon: ['#062430', '#f0fbfc', '#155e75', '#67e8f9'],
+    berry: ['#2a0a1f', '#fdf2f8', '#9d174d', '#f9a8d4'],
+    sage: ['#1a2620', '#f4f7f4', '#3f6b56', '#a7c4b5'],
+    espresso: ['#2b1d16', '#faf6f2', '#6f4e37', '#d6b48c'],
+    navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
+    obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
+    abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
 };
 /** The palettes with a dark paper. */
-const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet'];
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
@@ -355,6 +367,18 @@ function hueOf(hex) {
     const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
     return Math.round((h * 60 + 360) % 360);
 }
+/** WCAG contrast ratio of two hex colors. */
+function contrastRatio(a, b) {
+    const lum = (hex) => {
+        const [r, g, b2] = rgbOf(hex).map((v) => {
+            const c = v / 255;
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b2;
+    };
+    const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+}
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 const NONE = '0 0 0 transparent';
 /** A dark surface tinted by `tint`, with light ink and the bright accent: shared by neon, terminal, cyber, console. */
@@ -364,7 +388,10 @@ const darkSet = (p, base, tint, amount, ink) => {
 };
 /** A light surface even for the dark palettes: deep ink and a deep accent. */
 const lightSet = (p, paper) => {
-    const accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    let accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+    // a very bright accent (obsidian's lime) is still too light for white text after that mix: deepen it until it reads
+    for (let t = 0.56; p.dark && t > 0.2 && contrastRatio('#ffffff', accent) < 4.5; t -= 0.06)
+        accent = mixHex(p.accent, t, '#111111');
     return { dark: false, paper, bg: paper, ink: p.dark ? mixHex(p.accent, 0.22, '#14121a') : p.ink, accent, onAccent: '#ffffff' };
 };
 const LOOK_TREATMENTS = {
