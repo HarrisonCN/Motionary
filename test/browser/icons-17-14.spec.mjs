@@ -6,8 +6,8 @@ test('17.14 icon picker searches, filters, walks by keyboard and picks', async (
   await page.goto('/showcase/icons.html');
 
   const picker = page.locator('mo-icon-picker');
-  await expect(picker.locator('.usa-ipick-count')).toHaveText('253 个图标');
-  await expect(picker.locator('.usa-ipick-btn:visible')).toHaveCount(253);
+  await expect(picker.locator('.usa-ipick-count')).toHaveText('503 个图标');
+  await expect(picker.locator('.usa-ipick-btn:visible')).toHaveCount(503);
 
   // search by English name, then by Chinese category name
   const search = picker.getByRole('searchbox', { name: '搜索图标' });
@@ -58,9 +58,14 @@ test('17.14 icons play their motion on hover and focus, and every category is li
   await expect(page.locator('[data-log="play"]')).toHaveText('play draw');
   await expect(page.locator('[data-motion-grid] mo-icon')).toHaveCount(12);
 
-  await expect(page.locator('[data-cats] .cat')).toHaveCount(14);
-  await expect(page.locator('[data-cats] mo-icon svg')).toHaveCount(253);
+  await expect(page.locator('[data-cats] .cat')).toHaveCount(24);
+  await expect(page.locator('[data-cats] mo-icon svg')).toHaveCount(503);
   await expect(page.locator('[data-cats] [data-category="weather"] mo-icon')).toHaveCount(18);
+  // 17.15: ten more categories of 25, with Chinese chip labels in the picker
+  for (const id of ['development', 'security', 'health', 'food', 'household', 'sports', 'education', 'finance', 'charts', 'tools']) {
+    await expect(page.locator(`[data-cats] [data-category="${id}"] mo-icon`)).toHaveCount(25);
+  }
+  await expect(page.locator('mo-icon-picker .usa-ipick-cat[data-category="tools"]')).toHaveText('工具');
   await expect(page.locator('[data-cats] svg[aria-label="sun"]')).toHaveAttribute('role', 'img');
 
   await page.screenshot({ path: info.outputPath('icons-17-14.png'), fullPage: true });

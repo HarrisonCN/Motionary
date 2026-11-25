@@ -129,7 +129,7 @@ test('the home page shows the release pages as live collections', async ({ page 
   await expect(section.locator('.col-panel:not([hidden]) .col-look')).toHaveCount(16, { timeout: 15000 });
 
   await page.locator('#lang-toggle').click();
-  await expect(tabs.first()).toContainText('253 个图标');
+  await expect(tabs.first()).toContainText('503 个图标');
 
   await page.goto('/showcase/index.html#collections-luminous');
   await expect(page.locator('#collections .col-tabs').getByRole('tab', { name: /Luminous|发光控件/ })).toHaveAttribute('aria-selected', 'true');

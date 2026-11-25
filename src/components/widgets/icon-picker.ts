@@ -55,9 +55,9 @@ export function defineIconPicker(tag = 'usa-icon-picker'): CustomElementConstruc
     get value(): string { return this._value; }
     search(query: string): void { this._search?.(query); }
     mount(): void {
-      const offered = list(this.str('categories'), 20);
+      const offered = list(this.str('categories'), 64);
       const cats = ICON_CATEGORIES.filter((c) => !offered.length || offered.includes(c.id));
-      const labels = list(this.str('category-labels'), 20);
+      const labels = list(this.str('category-labels'), 64);
       const copy = this.str('copy');
       // a new value attribute replaces the pick; other remounts keep what was picked
       const start = this.str('value');

@@ -4,7 +4,7 @@
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-Search 253 line icons by name or category, filter with chips, walk the grid with arrow keys and pick one; it can copy the name, an <mo-icon> tag or the svg.
+Search 503 line icons by name or category, filter with chips, walk the grid with arrow keys and pick one; it can copy the name, an <mo-icon> tag or the svg.
 
 - **Category:** ui · **since** 17.14
 - **Import:** `import { defineIconPicker } from 'motionary/components/widgets'` then `defineIconPicker();`
