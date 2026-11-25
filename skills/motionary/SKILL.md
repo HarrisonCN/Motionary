@@ -69,6 +69,8 @@ A few starting points:
 | Collaboration and input | `<mo-tour>`, `<mo-signature-pad>`, `<mo-wheel-picker>`, `<mo-mention-input>`, `<mo-emoji-picker>`, `<mo-comment-thread>`, `<mo-diff-viewer>` |
 | Charts | `<mo-line-chart>`, `<mo-funnel-chart>`, `<mo-treemap>`, `<mo-gantt>`, `<mo-waffle-chart>` |
 | Playful motion | `<mo-split-flap>`, `<mo-scratch-card>`, `<mo-page-flip>`, `<mo-circular-text>`, `<mo-pixel-transition>`, `<mo-magnet-lines>`, `<mo-text-pressure>`, `<mo-shuffle-grid>` |
+| Everyday UI parts | `<mo-radial-menu>`, `<mo-hover-card>`, `<mo-toggle-group>`, `<mo-time-picker>`, `<mo-color-swatches>`, `<mo-calendar-strip>`, `<mo-comparison-table>` |
+| More charts | `<mo-radial-bars>`, `<mo-bar-race>`, `<mo-bullet-chart>`, `<mo-slope-chart>`, `<mo-dot-plot>` |
 | Icons | `<mo-icon name="bell" motion="ring">` (503 icons in 24 categories, 12 motions), `<mo-icon-picker>` |
 | Ready-made looks for those widgets | `look="neon-ocean"` (1530 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
 

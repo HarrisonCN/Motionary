@@ -321,7 +321,7 @@ describe('17.14 icons: showcase and docs', () => {
     expect(page).toContain('503');
     expect(read('showcase/index.html')).toContain('./icons.html');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
-    const tab = (COLLECTIONS as any[])[0];
+    const tab = (COLLECTIONS as any[]).find((c) => c.id === 'icons');
     expect(tab.id).toBe('icons');
     expect(tab.since).toBe('17.14');
     expect(tab.items.map((i: any) => i.id)).toEqual(['icon-picker', 'icon']);

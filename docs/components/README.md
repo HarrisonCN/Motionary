@@ -1,4 +1,4 @@
-# Motionary components (380)
+# Motionary components (392)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -44,6 +44,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-breadcrumbs>`](usa-breadcrumbs.md) — Breadcrumbs (animated, collapsing)
 - [`<mo-breath-orb>`](usa-breath-orb.md) — Breath orb
 - [`<mo-bulge-volume>`](usa-bulge-volume.md) — Bulge volume
+- [`<mo-calendar-strip>`](usa-calendar-strip.md) — Calendar strip
 - [`<mo-carousel>`](usa-carousel.md) — Carousel / slider
 - [`<mo-cart-badge>`](usa-cart-badge.md) — Cart badge
 - [`<mo-cart-drawer>`](usa-cart-drawer.md) — Cart drawer
@@ -58,6 +59,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-code-tabs>`](usa-code-tabs.md) — Code tabs with copy
 - [`<mo-coffee-timer>`](usa-coffee-timer.md) — Coffee timer
 - [`<mo-color-picker>`](usa-color-picker.md) — Color picker
+- [`<mo-color-swatches>`](usa-color-swatches.md) — Colour swatches
 - [`<mo-combobox>`](usa-combobox.md) — Search combobox
 - [`<mo-command-palette>`](usa-command-palette.md) — Command palette (⌘K)
 - [`<mo-comment-thread>`](usa-comment-thread.md) — Comment thread
@@ -99,6 +101,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
 - [`<mo-hold-action>`](usa-hold-action.md) — Hold action
 - [`<mo-hotspots>`](usa-hotspots.md) — Image hotspots
+- [`<mo-hover-card>`](usa-hover-card.md) — Hover card
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
@@ -203,8 +206,10 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<mo-three-dot-bounce>`](usa-three-dot-bounce.md) — Three dot bounce
 - [`<mo-tile-relay>`](usa-tile-relay.md) — Tile relay
+- [`<mo-time-picker>`](usa-time-picker.md) — Time picker
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
 - [`<mo-title-sequence>`](usa-title-sequence.md) — Title sequence
+- [`<mo-toggle-group>`](usa-toggle-group.md) — Toggle group
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<mo-tour>`](usa-tour.md) — Product tour
 - [`<mo-transit-progress>`](usa-transit-progress.md) — Transit progress
@@ -265,7 +270,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-mask-reveal>`](usa-mask-reveal.md) — Mask reveal
 - [`<mo-morph>`](usa-morph.md) — Path morph
 - [`<mo-path-motion>`](usa-path-motion.md) — Path motion
+- [`<mo-radial-bars>`](usa-radial-bars.md) — Radial bars
 - [`<mo-shape-divider>`](usa-shape-divider.md) — Shape divider
+- [`<mo-slope-chart>`](usa-slope-chart.md) — Slope chart
 
 ## fx
 
@@ -279,9 +286,13 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## layout
 
 - [`<mo-auto-animate>`](usa-auto-animate.md) — Auto-animate
+- [`<mo-bar-race>`](usa-bar-race.md) — Bar chart race
 - [`<mo-bento>`](usa-bento.md) — Bento grid
+- [`<mo-bullet-chart>`](usa-bullet-chart.md) — Bullet chart
+- [`<mo-comparison-table>`](usa-comparison-table.md) — Comparison table
 - [`<mo-data-table>`](usa-data-table.md) — Sortable data table
 - [`<mo-diff-viewer>`](usa-diff-viewer.md) — Diff viewer
+- [`<mo-dot-plot>`](usa-dot-plot.md) — Dot plot
 - [`<mo-filter-chips>`](usa-filter-chips.md) — Filter chips
 - [`<mo-funnel-chart>`](usa-funnel-chart.md) — Funnel chart
 - [`<mo-heatmap>`](usa-heatmap.md) — Activity heatmap
@@ -333,6 +344,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-menu-toggle>`](usa-menu-toggle.md) — Hamburger → close
 - [`<mo-pixel-transition>`](usa-pixel-transition.md) — Pixel transition
 - [`<mo-pull-cord>`](usa-pull-cord.md) — Lamp pull-cord switch
+- [`<mo-radial-menu>`](usa-radial-menu.md) — Radial menu
 - [`<mo-share-button>`](usa-share-button.md) — Share button
 - [`<mo-squish-indicator>`](usa-squish-indicator.md) — Squish indicator
 - [`<mo-squish-key>`](usa-squish-key.md) — Squish key

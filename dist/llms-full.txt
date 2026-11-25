@@ -837,6 +837,20 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 <script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
 ```
 
+### <mo-bar-race> (legacy <usa-bar-race>) — Bar chart race
+
+Bars glide past each other frame by frame as the ranking changes; it plays in view and can be scrubbed.
+
+- Import: `import { defineBarRace } from 'motionary/components/widgets'; defineBarRace();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `labels`, `frames`, `values`, `colors`, `top`, `interval`, `unit`, `label`, `play-label`, `pause-label`, `frame-label`
+- Events: `usa:frame`
+- Methods: `go()`
+
+```html
+<mo-bar-race labels="Alpha,Beta,Gamma,Delta" frames="2023|2024|2025" values="10,14,8,6; 18,15,16,9; 22,17,26,15"></mo-bar-race>
+```
+
 ### <mo-bento> (legacy <usa-bento>) — Bento grid
 
 A tiled grid whose cells take spans from data-span / data-rows; tiles rise in turn and a soft spotlight follows the pointer.
@@ -975,6 +989,20 @@ A vertical pill that swells around the finger while you drag the level.
 <mo-bulge-volume label="Volume" value="60"></mo-bulge-volume>
 ```
 
+### <mo-bullet-chart> (legacy <usa-bullet-chart>) — Bullet chart
+
+Each measure as a bar against a target line over poor / fair / good bands; met targets get a check.
+
+- Import: `import { defineBulletChart } from 'motionary/components/widgets'; defineBulletChart();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `values`, `targets`, `labels`, `ranges`, `max`, `colors`, `unit`, `label`, `target-label`, `met-label`, `missed-label`
+- Events: `usa:select`
+- Methods: `mount()`, `defineMoName()`
+
+```html
+<mo-bullet-chart values="82,54,96" targets="75,70,90" labels="Revenue,Profit,Satisfaction" max="100"></mo-bullet-chart>
+```
+
 ### <mo-button> (legacy <usa-button>) — Button deformation
 
 Spring-driven button click deformation: squash & stretch, elastic border-radius wobble, gooey liquid droplets, and a dent toward the pressed point. Combine them with deform="squash wobble".
@@ -991,6 +1019,19 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 </usa-button>
 <usa-button deform="gooey"><button>Gooey</button></usa-button>
 <usa-button deform="dent"><button>Dent</button></usa-button>
+```
+
+### <mo-calendar-strip> (legacy <usa-calendar-strip>) — Calendar strip
+
+A week of day buttons with paging, today marked and dots on busy days; arrow keys page past the ends.
+
+- Import: `import { defineCalendarStrip } from 'motionary/components/widgets'; defineCalendarStrip();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `start`, `days`, `week-start`, `marks`, `min`, `max`, `locale`, `label`, `prev-label`, `next-label`, `name`
+- Events: `usa:page`, `usa:change`
+
+```html
+<mo-calendar-strip value="2026-03-11" marks="2026-03-10,2026-03-13"></mo-calendar-strip>
 ```
 
 ### <mo-card> (legacy <usa-card>) — Card
@@ -1333,6 +1374,19 @@ An orange segmented scale and an explicit start/stop elapsed-time clock.
 <usa-color-picker value="#7c5cff" swatches="#f43f5e,#f59e0b,#22c55e,#0ea5e9"></usa-color-picker>
 ```
 
+### <mo-color-swatches> (legacy <usa-color-swatches>) — Colour swatches
+
+Pick a colour from round or square swatches; the check turns black or white to stay readable.
+
+- Import: `import { defineColorSwatches } from 'motionary/components/widgets'; defineColorSwatches();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `colors`, `names`, `value`, `name`, `label`, `shape`, `size`
+- Events: `usa:change`
+
+```html
+<mo-color-swatches colors="#1f2937,#e11d48,#2563eb,#16a34a,#f5f5f4" names="Graphite,Rose,Ocean,Forest,Chalk" value="#2563eb"></mo-color-swatches>
+```
+
 ### <mo-combobox> (legacy <usa-combobox>) — Search combobox
 
 Filter choices, navigate enabled results with arrows and keep input focus.
@@ -1393,6 +1447,19 @@ Nested articles become a thread with avatars, likes that pop, reply forms and fo
   <img src="before.jpg" alt="Before">
   <img src="after.jpg" alt="After">
 </usa-compare>
+```
+
+### <mo-comparison-table> (legacy <usa-comparison-table>) — Comparison table
+
+A plain table gets check marks, a highlighted column with a badge, a sticky first column and an only-differences switch.
+
+- Import: `import { defineComparisonTable } from 'motionary/components/widgets'; defineComparisonTable();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `highlight`, `badge-label`, `diff-label`, `differences`, `label`
+- Events: `usa:filter`
+
+```html
+<mo-comparison-table highlight="2"><table><thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>Projects</td><td>3</td><td>Unlimited</td></tr><tr><td>Export</td><td>yes</td><td>yes</td></tr><tr><td>Team seats</td><td>no</td><td>yes</td></tr></tbody></table></mo-comparison-table>
 ```
 
 ### <mo-connect-beam> (legacy <usa-connect-beam>) — Connection beams
@@ -1766,6 +1833,20 @@ A dot grid that swells and links up with lines around the pointer.
 
 ```html
 <usa-dot-network gap="28">…</usa-dot-network>
+```
+
+### <mo-dot-plot> (legacy <usa-dot-plot>) — Dot plot
+
+A dot per item on a shared scale, or a dumbbell joining two series to show the gap.
+
+- Import: `import { defineDotPlot } from 'motionary/components/widgets'; defineDotPlot();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `values`, `compare`, `labels`, `series`, `min`, `max`, `unit`, `label`
+- Events: `usa:select`
+- Methods: `mount()`, `defineMoName()`
+
+```html
+<mo-dot-plot values="52,61,47,70" compare="58,66,59,72" labels="North,South,East,West" series="2024,2025"></mo-dot-plot>
 ```
 
 ### <mo-dotlottie> (legacy <usa-dotlottie>) — Interactive dotLottie (themes + state machine)
@@ -2654,6 +2735,20 @@ Pulsing points on a picture; each opens a note, closes with Escape or a click ou
 
 ```html
 <mo-hotspots><img src="assets/demo-photo.jpg" alt="Desk"><div data-x="30" data-y="40" data-title="Lamp">Warm light.</div><div data-x="70" data-y="65" data-title="Notebook">Dotted paper.</div></mo-hotspots>
+```
+
+### <mo-hover-card> (legacy <usa-hover-card>) — Hover card
+
+A preview card opens when the pointer rests on a trigger or it takes focus, and stays while the pointer moves onto it.
+
+- Import: `import { defineHoverCard } from 'motionary/components/widgets'; defineHoverCard();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `open-delay`, `close-delay`, `placement`, `open`
+- Events: `usa:toggle`
+- Methods: `show()`, `hide()`
+
+```html
+<mo-hover-card><a data-trigger href="#">@mei</a><div data-card><strong>Mei Chen</strong><p>Designs motion for the web. 1.2k followers.</p></div></mo-hover-card>
 ```
 
 ### <mo-hover-reveal-list> (legacy <usa-hover-reveal-list>) — Hover reveal list
@@ -4442,6 +4537,34 @@ A vector track, position marker and supplied lap records.
 <usa-radar targets="Alpha:40,0.6; Bravo:200,0.35; Echo:300,0.8" speed="4"></usa-radar>
 ```
 
+### <mo-radial-bars> (legacy <usa-radial-bars>) — Radial bars
+
+Concentric three-quarter rings draw in like an activity tracker; the legend picks a ring.
+
+- Import: `import { defineRadialBars } from 'motionary/components/widgets'; defineRadialBars();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `values`, `max`, `labels`, `colors`, `unit`, `label`, `size`
+- Events: `usa:select`
+- Methods: `mount()`, `defineMoName()`
+
+```html
+<mo-radial-bars values="72,48,90" labels="Move,Exercise,Stand" unit="%"></mo-radial-bars>
+```
+
+### <mo-radial-menu> (legacy <usa-radial-menu>) — Radial menu
+
+A round button fans its own child buttons out on a circle; arrow keys go round, Escape closes.
+
+- Import: `import { defineRadialMenu } from 'motionary/components/widgets'; defineRadialMenu();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `open`, `label`, `radius`, `start`, `spread`, `icon`
+- Events: `usa:toggle`, `usa:select`
+- Methods: `toggle()`
+
+```html
+<mo-radial-menu label="Share" spread="180" start="-180" radius="76"><button aria-label="Copy link">🔗</button><button aria-label="Email">✉️</button><button aria-label="Message">💬</button><button aria-label="Save">⭐</button></mo-radial-menu>
+```
+
 ### <mo-range-slider> (legacy <usa-range-slider>) — Interval slider
 
 Two native ranges enforce a non-crossing interval and a minimum gap.
@@ -5182,6 +5305,20 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 
 ```html
 <usa-slider name="volume" value="40" bubble label="Volume"></usa-slider>
+```
+
+### <mo-slope-chart> (legacy <usa-slope-chart>) — Slope chart
+
+Lines from before to after show rises and falls; end labels never overlap and each item reports its change.
+
+- Import: `import { defineSlopeChart } from 'motionary/components/widgets'; defineSlopeChart();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `before`, `after`, `labels`, `from-label`, `to-label`, `unit`, `label`
+- Events: `usa:select`
+- Methods: `mount()`, `el()`, `el()`, `el()`, `el()`, `el()`, `el()`, `el()`, `el()`, `el()`, `focus()`, `defineMoName()`
+
+```html
+<mo-slope-chart before="42,35,28,20" after="38,44,25,31" labels="Chrome,Safari,Firefox,Edge" from-label="2024" to-label="2025"></mo-slope-chart>
 ```
 
 ### <mo-smooth-scroll> (legacy <usa-smooth-scroll>) — Smooth scroll
@@ -5998,6 +6135,19 @@ Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y fo
 </usa-tilt>
 ```
 
+### <mo-time-picker> (legacy <usa-time-picker>) — Time picker
+
+Hour and minute spin buttons with step snapping, typed digits and an optional AM / PM switch.
+
+- Import: `import { defineTimePicker } from 'motionary/components/widgets'; defineTimePicker();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `step`, `hour12`, `name`, `label`, `hour-label`, `minute-label`, `am-label`, `pm-label`
+- Events: `usa:change`
+
+```html
+<mo-time-picker value="09:30" step="15"></mo-time-picker>
+```
+
 ### <mo-timeline> (legacy <usa-timeline>) — Timeline
 
 Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view / click / manual.
@@ -6079,6 +6229,19 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
   import { toast } from 'motionary/components/feedback';
   toast('Saved', { type: 'success' });
 </script>
+```
+
+### <mo-toggle-group> (legacy <usa-toggle-group>) — Toggle group
+
+A row of toggle buttons, one at a time or several, with arrow-key focus and an optional hidden input.
+
+- Import: `import { defineToggleGroup } from 'motionary/components/widgets'; defineToggleGroup();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `options`, `values`, `value`, `multiple`, `required`, `name`, `label`, `size`
+- Events: `usa:change`
+
+```html
+<mo-toggle-group options="Day,Week,Month" value="Week" required></mo-toggle-group>
 ```
 
 ### <mo-token-editor> (legacy <usa-token-editor>) — Motion token editor (W3C DTCG)

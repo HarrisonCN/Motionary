@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>界面部件与数据图表 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px; min-width:0}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .dark {min-height:240px; padding:40px; display:grid; place-items:center; text-align:center; color:#fff; background:#0b1020; border-radius:16px}
+    .dark h3 {margin:0; font:500 clamp(24px,4vw,40px)/1.1 Georgia,serif}
+    .nodes {display:flex; justify-content:space-between; align-items:center; gap:24px; padding:30px 10px}
+    .nodes b {display:grid; place-items:center; min-width:72px; min-height:52px; padding:8px 12px; border-radius:14px; background:#fff; border:1px solid #d6d4cc}
+    .pill {display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#fff; border:1px solid #d6d4cc; font-size:12px; font-weight:600}
+    .core {display:grid; place-items:center; width:72px; height:72px; border-radius:50%; background:#2c3a6b; color:#fff; font-weight:700}
+    .big-link {font:500 clamp(26px,4vw,40px)/1.2 Georgia,serif; text-decoration:none}
+    pre {margin:0; padding:14px 16px; font:13px/1.5 ui-monospace,monospace; overflow:auto}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+    .card-trigger {font-weight:600}
+    .hc {display:grid; gap:4px}
+    .hc p {font-size:.85rem; color:#55544e}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="studio.html">协作部件与数据图表</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>界面部件与数据图表</h1><p>十二个新部件：七个常用界面部件、五个数据图表。都能用键盘操作，读屏软件能读出完整内容；开启“减少动态效果”后直接停在结果上。一千五百多种外观同样适用于它们。</p></header>
+
+    <h2 id="ui">界面部件</h2>
+    <section class="grid" aria-label="界面部件">
+      <article><div class="stage" style="min-height:190px; align-items:flex-end"><mo-radial-menu label="分享" spread="180" start="-180" radius="80"><button aria-label="复制链接">🔗</button><button aria-label="邮件">✉️</button><button aria-label="消息">💬</button><button aria-label="收藏">⭐</button><button aria-label="下载">⬇️</button></mo-radial-menu></div><p>圆形按钮把子按钮沿半圆展开；方向键环绕切换，Esc 关闭并回到按钮。</p><output class="log" data-log="rmenu"></output></article>
+      <article><div class="stage"><mo-hover-card open-delay="200"><a data-trigger class="card-trigger" href="#ui">@林小雨</a><div data-card class="hc"><strong>林小雨</strong><p>做网页动效的设计师，关注者 1.2 万。</p><a href="#data">查看作品</a></div></mo-hover-card></div><p>指针停留或键盘聚焦时弹出预览，移到卡片上也不会消失；Esc 关闭。</p><output class="log" data-log="hcard"></output></article>
+      <article><div class="stage"><mo-toggle-group label="时间范围" options="日,周,月,年" values="day,week,month,year" value="week" required></mo-toggle-group><mo-toggle-group label="文字样式" options="粗体,斜体,下划线" values="bold,italic,underline" multiple size="sm"></mo-toggle-group></div><p>单选（必须选一个）或多选；方向键移动焦点，空格或回车切换。</p><output class="log" data-log="tgroup"></output></article>
+      <article><div class="stage"><mo-time-picker label="提醒时间" value="09:30" step="15" hour-label="小时" minute-label="分钟"></mo-time-picker><mo-time-picker label="会议时间" value="14:05" hour12 am-label="上午" pm-label="下午" hour-label="小时" minute-label="分钟"></mo-time-picker></div><p>上下方向键按步长调整，Page Up / Down 调整小时，也可以直接输入数字。</p><output class="log" data-log="time"></output></article>
+      <article><div class="stage"><mo-color-swatches label="颜色" colors="#1f2937,#e11d48,#2563eb,#16a34a,#f59e0b,#f5f5f4" names="石墨,玫瑰,海蓝,森林,琥珀,粉笔" value="#2563eb"></mo-color-swatches></div><p>单选色块；勾号自动用黑色或白色，浅色上也看得清。</p><output class="log" data-log="swatch"></output></article>
+      <article class="wide"><div class="stage block"><mo-calendar-strip label="选择日期" value="2026-03-11" marks="2026-03-10,2026-03-13,2026-03-18" locale="zh-CN" prev-label="上一周" next-label="下一周"></mo-calendar-strip></div><p>一周的日期按钮，有安排的日子带圆点；方向键走到头会自动翻到下一周。</p><output class="log" data-log="cstrip"></output></article>
+      <article class="wide"><div class="stage block"><mo-comparison-table highlight="2" badge-label="最受欢迎" diff-label="只看差异"><table><caption class="usa-kit-sr">套餐对比</caption><thead><tr><th>功能</th><th>免费版</th><th>专业版</th><th>团队版</th></tr></thead><tbody><tr><td>项目数</td><td>3</td><td>不限</td><td>不限</td></tr><tr><td>导出视频</td><td>是</td><td>是</td><td>是</td></tr><tr><td>自定义外观</td><td>否</td><td>是</td><td>是</td></tr><tr><td>团队成员</td><td>否</td><td>否</td><td>是</td></tr><tr><td>离线使用</td><td>是</td><td>是</td><td>是</td></tr></tbody></table></mo-comparison-table></div><p>是 / 否变成勾叉，高亮推荐的一列；打开“只看差异”隐藏各列都一样的行。</p><output class="log" data-log="ctable"></output></article>
+    </section>
+
+    <h2 id="data">数据图表</h2>
+    <section class="grid" aria-label="数据图表">
+      <article><div class="stage block"><mo-radial-bars label="今日活动" values="420,38,10" max="600,30,12" labels="活动,锻炼,站立"></mo-radial-bars></div><p>同心圆环依次画入；点图例突出某一环。</p><output class="log" data-log="rbars"></output></article>
+      <article><div class="stage block"><mo-bullet-chart label="季度目标" values="82,54,96,68" targets="75,70,90,80" labels="收入,利润,满意度,留存" max="100" unit="%" target-label="目标 {t}" met-label="已达成" missed-label="未达成"></mo-bullet-chart></div><p>深色条是实际值，竖线是目标，背景三档是差 / 中 / 好；达标的打勾。</p><output class="log" data-log="bullet"></output></article>
+      <article class="wide"><div class="stage block"><mo-bar-race label="城市人口（万）" labels="上海,北京,深圳,广州,成都,重庆,杭州" frames="2000|2005|2010|2015|2020|2025" values="1609,1364,701,995,1110,2849,688; 1778,1538,828,949,1103,2798,751; 2302,1962,1037,1271,1405,2885,870; 2415,2171,1138,1350,1466,3017,902; 2488,2189,1756,1868,2094,3205,1197; 2480,2185,1798,1898,2148,3190,1263" top="7" play-label="播放" pause-label="暂停" frame-label="年份"></mo-bar-race></div><p>进入视野自动播放，横条随排名滑动换位；可暂停、拖动进度条。</p><output class="log" data-log="race"></output></article>
+      <article><div class="stage block"><mo-slope-chart label="浏览器份额（%）" before="42,35,18,5" after="38,44,15,3" labels="Chrome,Safari,Edge,Firefox" from-label="2024" to-label="2025"></mo-slope-chart></div><p>上升的线是绿色，下降的是红色；悬停或点选某项会把它提到前面。</p><output class="log" data-log="slope"></output></article>
+      <article><div class="stage block"><mo-dot-plot label="各区满意度" values="72,65,58,80" compare="78,70,69,82" labels="华东,华南,华北,西南" series="去年,今年"></mo-dot-plot></div><p>哑铃连起两年的分数，差距一目了然；每行都能读出两个值。</p><output class="log" data-log="dots"></output></article>
+    </section>
+  </main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineRadialMenu } from '../dist/widgets/radial-menu.js';
+    import { defineHoverCard } from '../dist/widgets/hover-card.js';
+    import { defineToggleGroup } from '../dist/widgets/toggle-group.js';
+    import { defineTimePicker } from '../dist/widgets/time-picker.js';
+    import { defineColorSwatches } from '../dist/widgets/color-swatches.js';
+    import { defineCalendarStrip } from '../dist/widgets/calendar-strip.js';
+    import { defineComparisonTable } from '../dist/widgets/comparison-table.js';
+    import { defineRadialBars } from '../dist/widgets/radial-bars.js';
+    import { defineBarRace } from '../dist/widgets/bar-race.js';
+    import { defineBulletChart } from '../dist/widgets/bullet-chart.js';
+    import { defineSlopeChart } from '../dist/widgets/slope-chart.js';
+    import { defineDotPlot } from '../dist/widgets/dot-plot.js';
+    defineMoAliases();
+    for (const define of [defineRadialMenu, defineHoverCard, defineToggleGroup, defineTimePicker, defineColorSwatches, defineCalendarStrip, defineComparisonTable, defineRadialBars, defineBarRace, defineBulletChart, defineSlopeChart, defineDotPlot]) define();
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const onAll = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail)));
+    onAll('mo-radial-menu', 'toggle', (d) => log('rmenu', d.open ? 'open' : 'closed'));
+    onAll('mo-radial-menu', 'select', (d) => log('rmenu', `pick ${d.index + 1}: ${d.label}`));
+    onAll('mo-hover-card', 'toggle', (d) => log('hcard', d.open ? 'open' : 'closed'));
+    onAll('mo-toggle-group', 'change', (d) => log('tgroup', `[${d.value.join(', ')}]`));
+    onAll('mo-time-picker', 'change', (d) => log('time', d.value));
+    onAll('mo-color-swatches', 'change', (d) => log('swatch', `${d.name} ${d.value}`));
+    onAll('mo-calendar-strip', 'change', (d) => log('cstrip', d.value));
+    onAll('mo-calendar-strip', 'page', (d) => log('cstrip', `from ${d.start}`));
+    onAll('mo-comparison-table', 'filter', (d) => log('ctable', d.differences ? `hid ${d.hidden} rows` : 'all rows'));
+    onAll('mo-radial-bars', 'select', (d) => log('rbars', `ring ${d.index + 1}: ${d.value} / ${d.max}`));
+    onAll('mo-bullet-chart', 'select', (d) => log('bullet', `${d.index + 1}: ${d.value} vs ${d.target} ${d.met ? '✓' : '✗'}`));
+    onAll('mo-bar-race', 'frame', (d) => log('race', `${d.name}: ${d.leader}`));
+    onAll('mo-slope-chart', 'select', (d) => log('slope', `${d.index + 1}: ${(d.change * 100).toFixed(1)}%`));
+    onAll('mo-dot-plot', 'select', (d) => log('dots', `${d.index + 1}: ${d.value} → ${d.compare}`));
+  </script>
+</body>
+</html>

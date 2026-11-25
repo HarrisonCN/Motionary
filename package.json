@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 380 animated Web Components (91 core, 289 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 392 animated Web Components (91 core, 301 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,126 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/radial-menu": {
+      "import": {
+        "types": "./dist/widgets/radial-menu.d.ts",
+        "default": "./dist/widgets/radial-menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/radial-menu.d.cts",
+        "default": "./dist/widgets/radial-menu.cjs"
+      }
+    },
+    "./widgets/hover-card": {
+      "import": {
+        "types": "./dist/widgets/hover-card.d.ts",
+        "default": "./dist/widgets/hover-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hover-card.d.cts",
+        "default": "./dist/widgets/hover-card.cjs"
+      }
+    },
+    "./widgets/toggle-group": {
+      "import": {
+        "types": "./dist/widgets/toggle-group.d.ts",
+        "default": "./dist/widgets/toggle-group.js"
+      },
+      "require": {
+        "types": "./dist/widgets/toggle-group.d.cts",
+        "default": "./dist/widgets/toggle-group.cjs"
+      }
+    },
+    "./widgets/time-picker": {
+      "import": {
+        "types": "./dist/widgets/time-picker.d.ts",
+        "default": "./dist/widgets/time-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/time-picker.d.cts",
+        "default": "./dist/widgets/time-picker.cjs"
+      }
+    },
+    "./widgets/color-swatches": {
+      "import": {
+        "types": "./dist/widgets/color-swatches.d.ts",
+        "default": "./dist/widgets/color-swatches.js"
+      },
+      "require": {
+        "types": "./dist/widgets/color-swatches.d.cts",
+        "default": "./dist/widgets/color-swatches.cjs"
+      }
+    },
+    "./widgets/calendar-strip": {
+      "import": {
+        "types": "./dist/widgets/calendar-strip.d.ts",
+        "default": "./dist/widgets/calendar-strip.js"
+      },
+      "require": {
+        "types": "./dist/widgets/calendar-strip.d.cts",
+        "default": "./dist/widgets/calendar-strip.cjs"
+      }
+    },
+    "./widgets/comparison-table": {
+      "import": {
+        "types": "./dist/widgets/comparison-table.d.ts",
+        "default": "./dist/widgets/comparison-table.js"
+      },
+      "require": {
+        "types": "./dist/widgets/comparison-table.d.cts",
+        "default": "./dist/widgets/comparison-table.cjs"
+      }
+    },
+    "./widgets/radial-bars": {
+      "import": {
+        "types": "./dist/widgets/radial-bars.d.ts",
+        "default": "./dist/widgets/radial-bars.js"
+      },
+      "require": {
+        "types": "./dist/widgets/radial-bars.d.cts",
+        "default": "./dist/widgets/radial-bars.cjs"
+      }
+    },
+    "./widgets/bar-race": {
+      "import": {
+        "types": "./dist/widgets/bar-race.d.ts",
+        "default": "./dist/widgets/bar-race.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bar-race.d.cts",
+        "default": "./dist/widgets/bar-race.cjs"
+      }
+    },
+    "./widgets/bullet-chart": {
+      "import": {
+        "types": "./dist/widgets/bullet-chart.d.ts",
+        "default": "./dist/widgets/bullet-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bullet-chart.d.cts",
+        "default": "./dist/widgets/bullet-chart.cjs"
+      }
+    },
+    "./widgets/slope-chart": {
+      "import": {
+        "types": "./dist/widgets/slope-chart.d.ts",
+        "default": "./dist/widgets/slope-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/slope-chart.d.cts",
+        "default": "./dist/widgets/slope-chart.cjs"
+      }
+    },
+    "./widgets/dot-plot": {
+      "import": {
+        "types": "./dist/widgets/dot-plot.d.ts",
+        "default": "./dist/widgets/dot-plot.js"
+      },
+      "require": {
+        "types": "./dist/widgets/dot-plot.d.cts",
+        "default": "./dist/widgets/dot-plot.cjs"
       }
     },
     "./widgets/icon": {
