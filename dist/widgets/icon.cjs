@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_icon = require('../chunks/icon-DnkkjTwO.cjs');
+var widgets_icon = require('../chunks/icon-B5mClvXb.cjs');
 
 
 

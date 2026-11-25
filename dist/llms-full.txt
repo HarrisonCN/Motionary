@@ -2720,7 +2720,7 @@ Pick a hue from dots on a ring; the ring turns the short way to bring the pick t
 
 ### <mo-icon> (legacy <usa-icon>) — Icon
 
-One of 253 original line icons in the text colour, with twelve motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view.
+One of 503 original line icons in the text colour, with twelve motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view.
 
 - Import: `import { defineIcon } from 'motionary/components/widgets'; defineIcon();`
 - CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
@@ -2749,7 +2749,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 
 ### <mo-icon-picker> (legacy <usa-icon-picker>) — Icon picker
 
-Search 253 line icons by name or category, filter with chips, walk the grid with arrow keys and pick one; it can copy the name, an <mo-icon> tag or the svg.
+Search 503 line icons by name or category, filter with chips, walk the grid with arrow keys and pick one; it can copy the name, an <mo-icon> tag or the svg.
 
 - Import: `import { defineIconPicker } from 'motionary/components/widgets'; defineIconPicker();`
 - CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
