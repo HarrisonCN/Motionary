@@ -144,7 +144,7 @@ test('the home page shows the release pages as live collections', async ({ page 
   await expect(tabs.first()).toContainText('弹簧部件');
   await expect(tabs.nth(1)).toContainText('微交互');
   await expect(tabs.nth(2)).toContainText('17.15 新品');
-  await expect(tabs.nth(3)).toContainText('503 个图标');
+  await expect(tabs.nth(3)).toContainText('753 个图标');
 
   await page.goto('/showcase/index.html#collections-luminous');
   await expect(page.locator('#collections .col-tabs').getByRole('tab', { name: /Luminous|发光控件/ })).toHaveAttribute('aria-selected', 'true');

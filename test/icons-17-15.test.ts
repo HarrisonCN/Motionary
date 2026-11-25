@@ -11,8 +11,8 @@ afterEach(() => document.body.replaceChildren());
 describe('17.15 icons', () => {
   it('adds ten categories of 25 icons after the first fourteen', () => {
     const ids = ICON_CATEGORIES.map((c) => c.id);
-    expect(ids.slice(14)).toEqual(NEW);
-    expect(ICON_CATEGORIES.slice(14).map((c) => c.zh)).toEqual(['开发', '安全', '健康', '餐饮', '家居', '运动', '教育', '金融', '图表', '工具']);
+    expect(ids.slice(14, 24)).toEqual(NEW);
+    expect(ICON_CATEGORIES.slice(14, 24).map((c) => c.zh)).toEqual(['开发', '安全', '健康', '餐饮', '家居', '运动', '教育', '金融', '图表', '工具']);
     for (const id of NEW) expect(iconNames(id), id).toHaveLength(25);
     expect(NEW.flatMap((id) => iconNames(id))).toHaveLength(250);
     expect(iconCategory('coffee')).toBe('food');
@@ -57,10 +57,10 @@ describe('17.15 icons', () => {
 
   it('is counted in the docs, the icons page, the READMEs and the changelog', () => {
     const doc = read('docs/icons-17-14.md');
-    expect(doc).toContain('## All 503 icons');
+    expect(doc).toContain('## All 753 icons');
     for (const id of NEW) expect(doc, id).toContain(`(\`${id}\``);
     expect(read('showcase/icons.html')).toContain('开发,安全,健康,餐饮,家居,运动,教育,金融,图表,工具');
-    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('17.14–17.15');
+    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('17.14–17.17');
     expect(read('CHANGELOG.md')).toContain('17.15 icons: the icon section grows from 253 to 503 icons');
   });
 });

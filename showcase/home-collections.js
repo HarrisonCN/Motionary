@@ -53,8 +53,8 @@ export const COLLECTIONS = [
   },
   {
     id: 'icons', since: '17.14', page: './icons.html',
-    title: { en: '503 icons', zh: '503 个图标' },
-    blurb: { en: 'Original line icons in 24 categories, with a searchable picker and twelve motions.', zh: '24 类原创线条图标，带可搜索的选择器和 12 种动效。' },
+    title: { en: '753 icons', zh: '753 个图标' },
+    blurb: { en: 'Original line icons in 34 categories, with a searchable picker and twelve motions.', zh: '34 类原创线条图标，带可搜索的选择器和 12 种动效。' },
     items: pick(icons, 'icon-picker icon'),
     total: icons.length,
   },

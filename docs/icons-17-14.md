@@ -1,6 +1,6 @@
 # Icons (17.14)
 
-Motionary 17.14 adds an icon section: **503 original line icons** in 24 categories (17.15 added ten categories and
+Motionary 17.14 adds an icon section: **753 original line icons** in 34 categories (17.15 and 17.17 each added ten categories and
 250 icons to the first 253), an `<mo-icon>` element that draws
 one of them and can play one of twelve small motions, and an `<mo-icon-picker>` to search and pick them. Every icon was
 drawn for Motionary on a 24 × 24 grid with a 2px round stroke and no fill, so a set of them reads as one family. The
@@ -92,9 +92,10 @@ iconNames('weather');                                    // the 18 weather icons
 category. Each entry of `ICONS` is a short list of shapes separated by `;`: `c cx cy r` is a circle, `r x y w h [radius]`
 a rectangle, and anything else SVG path data.
 
-## All 503 icons
+## All 753 icons
 
-17.15 added the last ten categories (250 icons), from Development to Tools.
+17.15 added ten categories (250 icons), from Development to Tools; 17.17 added the last ten (250 more), from Animals to
+Gestures.
 
 | Category | Count | Icons |
 |---|---|---|
@@ -122,3 +123,13 @@ a rectangle, and anything else SVG path data.
 | Finance (`finance`, 金融) | 25 | `bank` `piggy-bank` `coin` `euro` `pound` `yen` `bitcoin` `rupee` `invoice` `hand-coins` `atm` `cheque` `balance` `briefcase` `handshake` `tax-receipt` `gem` `gold-bars` `currency-exchange` `mortgage` `insurance` `ledger` `transfer` `cash` `safe` |
 | Charts & data (`charts`, 图表) | 25 | `chart-line` `chart-area` `chart-column` `chart-bars` `chart-pie` `chart-donut` `chart-scatter` `chart-candles` `chart-radar` `funnel` `gauge` `sparkline` `histogram` `chart-stacked` `waterfall` `heatmap` `gantt` `table` `kanban` `dashboard` `graph-nodes` `flowchart` `progress-bar` `progress-ring` `sum` |
 | Tools (`tools`, 工具) | 25 | `hammer` `wrench` `screwdriver` `saw` `drill` `paintbrush` `paint-roller` `palette` `eyedropper` `magnet` `toolbox` `nut` `screw` `pliers` `shovel` `axe` `ladder` `tape-measure` `spirit-level` `flashlight` `gears` `anvil` `needle` `clamp` `trowel` |
+| Animals (`animals`, 动物) | 25 | `cat` `dog` `bird` `rabbit` `turtle` `snail` `owl` `whale` `butterfly` `bee` `frog` `horse` `cow` `pig` `duck` `penguin` `elephant` `giraffe` `octopus` `crab` `squirrel` `fox` `bear` `deer` `dolphin` |
+| Music (`music`, 音乐) | 25 | `guitar` `piano` `drum` `violin` `trumpet` `saxophone` `flute` `harp` `xylophone` `maraca` `tambourine` `cymbal` `metronome` `vinyl` `cassette` `equalizer` `waveform` `tuning-fork` `clef` `eighth-note` `sheet-music` `mic-stand` `amplifier` `playlist` `accordion` |
+| Games (`gaming`, 游戏) | 25 | `dice` `dice-pair` `chess-knight` `chess-pawn` `chess-rook` `chess-king` `playing-card` `card-deck` `joystick` `dpad` `arcade-machine` `handheld-console` `vr-headset` `sword` `longbow` `potion` `treasure-chest` `pixel-heart` `ghost` `level-up` `health-bar` `map-scroll` `power-mushroom` `domino` `card-suits` |
+| Transport (`transport`, 交通) | 25 | `scooter` `motorcycle` `tram` `metro` `ship` `sailboat` `helicopter` `taxi` `van` `tractor` `fire-truck` `police-car` `cable-car` `hot-air-balloon` `parachute` `canoe` `submarine` `tire` `fuel-pump` `ev-charger` `parking` `traffic-light` `steering-wheel` `forklift` `airship` |
+| Office (`office`, 办公) | 25 | `stapler` `pushpin` `binder` `scanner` `shredder` `projector` `desk-lamp` `office-chair` `filing-cabinet` `business-card` `name-tag` `desk-calendar` `notepad` `checklist` `stamp` `inkwell` `fountain-pen` `pencil-cup` `tape-dispenser` `hole-punch` `paper-stack` `mailbox` `headset` `lanyard` `sealed-letter` |
+| Science (`science`, 科学) | 25 | `beaker` `petri-dish` `molecule` `bunsen-burner` `pipette` `radiation` `satellite` `orbit` `comet` `galaxy` `meteor` `prism` `circuit` `resistor` `trilobite` `crystal` `cell` `bacteria` `formula` `sine-wave` `pendulum` `robot-arm` `solar-panel` `wind-turbine` `periodic-table` |
+| Buildings (`buildings`, 建筑) | 25 | `castle` `skyscraper` `cottage` `apartment` `factory` `warehouse` `lighthouse` `windmill` `bridge` `tower` `pagoda` `igloo` `barn` `stadium` `museum` `hotel` `cabin` `pyramid` `monument` `gate` `fence` `brick-wall` `crane` `city` `dome` |
+| Celebration (`celebration`, 节庆) | 25 | `balloon` `balloons` `confetti` `party-popper` `fireworks` `party-hat` `candle` `champagne` `toast-glasses` `lantern` `wreath` `ribbon` `wedding-ring` `invitation` `carnival-mask` `christmas-tree` `snowman` `pumpkin` `firecracker` `red-envelope` `lucky-knot` `disco-ball` `sparkler` `wedding-bells` `bunting` |
+| Clothing (`clothing`, 服饰) | 25 | `dress` `skirt` `pants` `shorts` `jacket` `hoodie` `sock` `sneaker` `boot` `high-heel` `sandal` `top-hat` `cap` `beanie` `scarf` `glove` `necktie` `bow-tie` `glasses` `sunglasses` `handbag` `belt` `necklace` `apron` `vest` |
+| Gestures (`gestures`, 手势) | 25 | `hand-wave` `peace` `ok-hand` `point-up` `point-right` `point-left` `fist` `clap` `pinch` `tap` `double-tap` `swipe-left` `swipe-right` `swipe-up` `swipe-down` `drag` `spread` `rotate-gesture` `long-press` `raise-hand` `high-five` `call-me` `rock-on` `crossed-fingers` `heart-hands` |
