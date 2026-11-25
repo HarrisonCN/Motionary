@@ -70,7 +70,7 @@ A few starting points:
 | Charts | `<mo-line-chart>`, `<mo-funnel-chart>`, `<mo-treemap>`, `<mo-gantt>`, `<mo-waffle-chart>` |
 | Playful motion | `<mo-split-flap>`, `<mo-scratch-card>`, `<mo-page-flip>`, `<mo-circular-text>`, `<mo-pixel-transition>`, `<mo-magnet-lines>`, `<mo-text-pressure>`, `<mo-shuffle-grid>` |
 | Icons | `<mo-icon name="bell" motion="ring">` (503 icons in 24 categories, 12 motions), `<mo-icon-picker>` |
-| Ready-made looks for those widgets | `look="neon-ocean"` (1020 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
+| Ready-made looks for those widgets | `look="neon-ocean"` (1530 names) after `adoptLooks()`, or `applyLook(el, name)` from `motionary/components/widgets` |
 
 ## 3. Rules
 

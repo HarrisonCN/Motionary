@@ -13,13 +13,13 @@ const OLD_PALETTES = ['indigo', 'ocean', 'forest', 'sunset', 'rose', 'grape', 'a
 
 describe('17.14 looks: over two hundred more per family', () => {
   it('adds eight treatments to each family and eight palettes, keeping every 17.11 name', () => {
-    expect(Object.keys(LOOK_PALETTES)).toEqual([...OLD_PALETTES, ...NEW_PALETTES]);
+    expect(Object.keys(LOOK_PALETTES).slice(0, 20)).toEqual([...OLD_PALETTES, ...NEW_PALETTES]);
     for (const family of LOOK_FAMILIES) {
       const treatments = Object.keys(LOOK_TREATMENTS[family]);
       expect(treatments).toHaveLength(17);
       expect(treatments.slice(9)).toEqual([...NEW_TREATMENTS[family]]);
       const names = lookNames(family);
-      expect(names).toHaveLength(340);
+      expect(names).toHaveLength(510); // 17.15 added ten palettes
       // 17.11 had 9 × 12 = 108 per family: 232 more
       expect(names.length - 108).toBeGreaterThanOrEqual(200);
     }
@@ -36,7 +36,7 @@ describe('17.14 looks: over two hundred more per family', () => {
   });
 
   it('marks the four dark palettes as dark under a treatment that keeps the palette colors', () => {
-    expect(DARK_PALETTES).toEqual(['midnight', 'ember', 'aurora', 'velvet']);
+    expect(DARK_PALETTES.slice(0, 4)).toEqual(['midnight', 'ember', 'aurora', 'velvet']);
     for (const p of Object.keys(LOOK_PALETTES)) expect(lookInfo(`solid-${p}`)?.dark, p).toBe(DARK_PALETTES.includes(p));
   });
 
@@ -79,8 +79,8 @@ describe('17.14 looks: over two hundred more per family', () => {
     const doc = readFileSync('docs/looks-17-11.md', 'utf8');
     for (const family of LOOK_FAMILIES) for (const t of NEW_TREATMENTS[family]) expect(doc, t).toContain(`\`${t}\``);
     for (const p of NEW_PALETTES) expect(doc, p).toContain(`\`${p}\``);
-    expect(readFileSync('showcase/looks.html', 'utf8')).toContain('1020');
-    expect(readFileSync('showcase/home-collections.js', 'utf8')).toContain('total: 1020');
+    expect(readFileSync('showcase/looks.html', 'utf8')).toContain('1530');
+    expect(readFileSync('showcase/home-collections.js', 'utf8')).toContain('total: 1530');
     expect(readFileSync('CHANGELOG.md', 'utf8')).toContain('17.14');
   });
 });

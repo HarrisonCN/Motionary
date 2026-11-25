@@ -28,7 +28,7 @@ describe('17.11 looks: counts and names', () => {
     }
     const every = lookNames();
     expect(new Set(every).size).toBe(every.length);
-    expect(every.length).toBe(1020); // 17.14: 17 treatments × 20 palettes × 3 families
+    expect(every.length).toBe(1530); // 17.15: 17 treatments × 30 palettes × 3 families
   });
 
   it('keeps treatment names unique across families, so a name says which family it is from', () => {
