@@ -29,7 +29,7 @@ export function iconElement(name: string): SVGSVGElement {
 }
 
 /**
- * One icon from the built-in set of 503 line icons (`ICONS`, see docs/icons-17-14.md), drawn with `currentColor` so it
+ * One icon from the built-in set of 753 line icons (`ICONS`, see docs/icons-17-14.md), drawn with `currentColor` so it
  * takes the colour of the text around it. It can play one of twelve small motions: `spin`, `pulse`, `beat`, `bounce`,
  * `wiggle`, `shake`, `ring`, `float`, `flip`, `draw` (the lines trace themselves), `pop` and `blink`, either on a loop,
  * on hover or focus of the nearest button or link (or the icon itself), on click, or once when it scrolls into view.

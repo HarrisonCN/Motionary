@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_iconPicker = require('../chunks/icon-picker-DU1LBm-R.cjs');
+var widgets_iconPicker = require('../chunks/icon-picker-BH1MftbE.cjs');
 
 
 
