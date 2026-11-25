@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 400 animated Web Components (91 core, 309 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 410 animated Web Components (91 core, 319 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,106 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/spring-like": {
+      "import": {
+        "types": "./dist/widgets/spring-like.d.ts",
+        "default": "./dist/widgets/spring-like.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-like.d.cts",
+        "default": "./dist/widgets/spring-like.cjs"
+      }
+    },
+    "./widgets/spring-rating": {
+      "import": {
+        "types": "./dist/widgets/spring-rating.d.ts",
+        "default": "./dist/widgets/spring-rating.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-rating.d.cts",
+        "default": "./dist/widgets/spring-rating.cjs"
+      }
+    },
+    "./widgets/spring-copy": {
+      "import": {
+        "types": "./dist/widgets/spring-copy.d.ts",
+        "default": "./dist/widgets/spring-copy.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-copy.d.cts",
+        "default": "./dist/widgets/spring-copy.cjs"
+      }
+    },
+    "./widgets/spring-tags": {
+      "import": {
+        "types": "./dist/widgets/spring-tags.d.ts",
+        "default": "./dist/widgets/spring-tags.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-tags.d.cts",
+        "default": "./dist/widgets/spring-tags.cjs"
+      }
+    },
+    "./widgets/spring-code": {
+      "import": {
+        "types": "./dist/widgets/spring-code.d.ts",
+        "default": "./dist/widgets/spring-code.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-code.d.cts",
+        "default": "./dist/widgets/spring-code.cjs"
+      }
+    },
+    "./widgets/spring-list": {
+      "import": {
+        "types": "./dist/widgets/spring-list.d.ts",
+        "default": "./dist/widgets/spring-list.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-list.d.cts",
+        "default": "./dist/widgets/spring-list.cjs"
+      }
+    },
+    "./widgets/spring-swipe": {
+      "import": {
+        "types": "./dist/widgets/spring-swipe.d.ts",
+        "default": "./dist/widgets/spring-swipe.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-swipe.d.cts",
+        "default": "./dist/widgets/spring-swipe.cjs"
+      }
+    },
+    "./widgets/spring-toasts": {
+      "import": {
+        "types": "./dist/widgets/spring-toasts.d.ts",
+        "default": "./dist/widgets/spring-toasts.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-toasts.d.cts",
+        "default": "./dist/widgets/spring-toasts.cjs"
+      }
+    },
+    "./widgets/spring-accordion": {
+      "import": {
+        "types": "./dist/widgets/spring-accordion.d.ts",
+        "default": "./dist/widgets/spring-accordion.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-accordion.d.cts",
+        "default": "./dist/widgets/spring-accordion.cjs"
+      }
+    },
+    "./widgets/spring-counter": {
+      "import": {
+        "types": "./dist/widgets/spring-counter.d.ts",
+        "default": "./dist/widgets/spring-counter.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-counter.d.cts",
+        "default": "./dist/widgets/spring-counter.cjs"
       }
     },
     "./widgets/micro": {

@@ -1,5 +1,5 @@
 /**
- * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab).
+ * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab, 17.17 the spring parts tab).
  *
  * Every release page (17.14 icons, 17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
  * 17.4 luminous) gets a tab with a handful of its widgets running live, so most of them can be tried without leaving
@@ -7,6 +7,7 @@
  * the open tab's widget entries are imported from ../dist (or the CDN build as a fallback), one module per widget, and
  * the other tabs load when they are opened.
  */
+import { components as springs } from './catalog/springs.js';
 import { components as micro } from './catalog/micro.js';
 import { components as toolkit } from './catalog/toolkit.js';
 import { components as icons } from './catalog/icons.js';
@@ -29,6 +30,13 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 
 /** The tabs, newest first. `page` is the full demo page each one links to. */
 export const COLLECTIONS = [
+  {
+    id: 'springs', since: '17.17', page: './springs.html',
+    title: { en: 'Spring parts', zh: '弹簧部件' },
+    blurb: { en: 'Ten everyday parts on the spring core: likes that burst, stars that pop, lists that make room, toasts that pile up.', zh: '十个常用部件跑在弹簧核心上：点赞会炸开、星星会弹起、列表会让位、通知会叠成一摞。' },
+    items: pick(springs, 'spring-like spring-rating spring-copy spring-counter spring-tags spring-code spring-list spring-swipe spring-accordion'),
+    total: springs.length,
+  },
   {
     id: 'micro', since: '17.16', page: './micro.html',
     title: { en: 'Micro-interactions', zh: '微交互' },
@@ -150,7 +158,7 @@ const STR = {
 };
 
 /** Demos that need more room than one grid column. */
-const WIDE = new Set(['bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
+const WIDE = new Set(['spring-list', 'spring-accordion', 'bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
 
 const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose', 'clay-cherry', 'neumorph-cobalt', 'retro-teal', 'synth-velvet', 'luxe-sand', 'editorial-olive', 'sketch-plum', 'pill-aurora'];
 

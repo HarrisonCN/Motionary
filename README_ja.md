@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->400<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->410<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。ボタン、カード、フォーム、ローダー、ページブロック、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでもそのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズが計測されます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンの変更点：[CHANGELOG.md](./CHANGELOG.md) · サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
 
@@ -38,7 +38,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 |---|---|---|
 | **スクロール表示** | 14 系統・214 個のプリセット：コアに 33 個、`motionary/presets/extended` にさらに 181 個（フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、グリッチ、スクロール連動の `scrub-*`）。ほかに `timeline()`、`staggerChildren()`、`parallax()` | [プリセット](./docs/presets.md) · [API](./docs/API.md) |
 | **コアコンポーネント** | `motionary/components` の <!--fact:core-->91<!--/fact--> 個の要素。テキスト、ボタン、カード、背景、トランジション、ジェスチャー、SVG、WebGL などのカテゴリ単位でインポート | [コンポーネント](#コンポーネント) |
-| **ウィジェット** | <!--fact:widgets-->309<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、インターフェース部品、フォーム、データとメディア、奥行きのモーション、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
+| **ウィジェット** | <!--fact:widgets-->319<!--/fact--> 個の要素。それぞれ独立したエントリ `motionary/widgets/<name>` を持つ：ページブロック、インターフェース部品、フォーム、データとメディア、奥行きのモーション、ローダー、触感コントロール、ライブアクティビティカード、3D インストゥルメント | [コレクション](#コレクション) |
 | **エフェクト** | <!--fact:effects-->159<!--/fact--> 個のエフェクト。それぞれ独立したエントリ `motionary/effects/<name>` を持ち、`<mo-fx>` で任意の要素にも付けられる | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) |
 | **スタイルバリアントとスタイルプリセット** | 6 つの組み込みスタイルバリアント（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`）。共通のデザイントークンで切り替え。さらにウィジェット向けの 1530 種のスタイルプリセット：30 パレット × 17 トリートメント × 3 ファミリー | [スタイルバリアント](#スタイルバリアント) · [スタイルプリセット](#スタイルプリセット) |
 | **Motion Core とランタイム** | `motionary/core` の `createMotion()`（約 2.5 KB gzip）と、`motionary/runtime` および 3 階層の <!--fact:runtimeModules-->21<!--/fact--> モジュール：スクロールシーン、スムーズスクロール、テキスト分割、SVG、スプライト、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [ランタイム](#ランタイムと階層) |
@@ -250,6 +250,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 | コレクション | 内容 | ラボ · ドキュメント |
 |---|---|---|
+| ばねパーツ（17.17） | ばねコア上の 10 ウィジェット：はじけるいいねボタン、星評価、コピーボタン、タグ入力、ワンタイムコード入力、ドラッグとキーボードで並べ替えるリスト、スワイプで操作を出す行、トーストの山、アコーディオン、回転するカウンター。中断でき、キーボードとスクリーンリーダーに対応し、視差効果を減らす設定では静止。1530 種のルックに対応 | [デモ](https://harrisoncn.github.io/Motionary/showcase/springs.html) · [ドキュメント](./docs/spring-parts-17-17.md) |
 | マイクロインタラクション（17.16） | 8 ウィジェットと新しいばねコア：正確なばねソルバー、調整済みの 16 種のばねと 7 種の手触り。`micro()` で任意の要素に押下、ホバー、浮き上がり、マグネット、傾き、グロー、つぶれ、慣性付きドラッグ、フォーカスを付与。フィードバック（首振り、うなずき、ポップなど）とばねコントロール（スイッチ、チェックボックス、入力、状態ボタン、スライダー、セグメント、ステッパー）。中断でき速度を保ち、視差効果を減らす設定では静止。1530 種のルックに対応 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/micro.html) · [ドキュメント](./docs/micro-17-16.md) |
 | ツールキット：UI パーツとチャート（17.15） | 12 ウィジェット：日常の UI パーツ（ラジアルメニュー、ホバーカード、トグルグループ、時刻ピッカー、カラースウォッチ、カレンダーストリップ、比較表）とデータチャート（ラジアルバー、バーチャートレース、ブレットチャート、スロープチャート、ドットプロット）。1530 種のスタイルプリセットに対応 | [ラボ](https://harrisoncn.github.io/Motionary/showcase/toolkit.html) · [ドキュメント](./docs/toolkit-17-15.md) |
 | アイコン（17.14–17.15） | 503 アイコン：24 カテゴリのオリジナル線画アイコン（矢印、インターフェース、メディア、ファイル、コミュニケーション、デバイス、天気、コマース、エディタ、地図と旅行、人物、自然、図形、時間、さらに 17.15 で追加した開発、セキュリティ、健康、飲食、家庭、スポーツ、教育、金融、グラフとデータ、ツール）。24px グリッドで統一し、文字色で描画。`mo-icon` はループ、ホバー、クリック、表示時に 12 種のモーション（回転、パルス、鼓動、バウンス、揺れ、シェイク、ベル、浮遊、フリップ、線描き、ポップ、点滅）を再生し、`mo-icon-picker` は英語・中国語で検索して名前、タグ、SVG をコピーできます | [ラボ](https://harrisoncn.github.io/Motionary/showcase/icons.html) · [ドキュメント](./docs/icons-17-14.md) |

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>弹簧部件 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 24px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:52px 0 16px}
+    p {max-width:46em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .feelbar {position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; background:color-mix(in srgb,#f1f0ec 88%,transparent); backdrop-filter:blur(8px)}
+    .feelbar span {font-size:.85rem; color:#55544e}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:16px; min-height:210px; padding:22px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:110px; min-width:0}
+    article .stage.block {display:block}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .wide {grid-column:1/-1}
+    .row {display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+    .row button {padding:8px 14px; border-radius:999px; border:1px solid #d6d4cc; background:#fff; font:inherit; font-size:.85rem; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .big {font-size:clamp(36px,6vw,56px)}
+    .stack {display:grid; gap:12px; width:100%}
+    .looks {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px}
+    .look {display:grid; gap:16px; justify-items:start; padding:22px; border-radius:22px; background:var(--mo-kit-paper,#fff); color:var(--mo-kit-ink,#18181b)}
+    .look small {font:12px ui-monospace,monospace; opacity:.7}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="micro.html">微交互系统</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>弹簧部件</h1><p>十个常用部件，全部跑在 17.16 的弹簧核心和 <code>micro()</code> 上：点赞会炸开、评分一颗颗弹起、标签重复时那一枚会摇头、验证码错了整排晃一下、拖动排序时其他项弹开让位、侧滑可以甩开、通知叠成一摞、手风琴高度跟着弹簧走、数字一位位滚动。每个动作都可打断并保留速度，键盘和读屏都能用；开启“减少动态效果”后直接切换。</p></header>
+
+    <div class="feelbar"><span>整页手感</span><mo-micro-segmented id="feel" label="整页手感" options="默认,利落,干脆,顺滑,弹性,俏皮,沉稳,厚重" values="default,crisp,snappy,smooth,bouncy,playful,calm,heavy" value="default"></mo-micro-segmented></div>
+
+    <h2 id="actions">点按反馈</h2>
+    <section class="grid" aria-label="点按反馈">
+      <article><div class="stage"><mo-spring-like count="128" label="点赞"></mo-spring-like><mo-spring-like count="12800" compact liked label="收藏"></mo-spring-like></div><p>心形按下被压扁，点亮时冲过头再弹回，同时甩出一圈光环和彩点；数字向上或向下滚动到新值。</p><output class="log" data-log="like"></output></article>
+      <article><div class="stage"><div class="stack" style="justify-items:center"><mo-spring-rating value="3" label="评分" show-value></mo-spring-rating><mo-spring-rating value="3.5" half label="半星评分" size="24"></mo-spring-rating><mo-spring-rating value="4" readonly label="平均评分" size="20"></mo-spring-rating></div></div><p>悬停时预览并抬起星星，选中后星星从左到右依次弹起；方向键、Home、End 调整，顶到头会撞一下。</p><output class="log" data-log="rating"></output></article>
+      <article><div class="stage"><mo-spring-copy text="npm i motionary" show-text label="复制安装命令" copied-label="已复制" failed-label="复制失败"></mo-spring-copy><mo-spring-copy text="" label="空内容" copied-label="已复制" failed-label="没有可复制的内容"></mo-spring-copy></div><p>复制成功时图标弹走、勾弹出来；浏览器拒绝或没有内容时摇一摇并显示叉，结果会被读屏读出。</p><output class="log" data-log="copy"></output></article>
+      <article><div class="stage"><span class="big"><mo-spring-counter id="count" value="1280" group="," prefix="¥" from-zero label="销售额"></mo-spring-counter></span></div>
+        <div class="row" id="countBtns"><button type="button" data-d="1">+1</button><button type="button" data-d="37">+37</button><button type="button" data-d="-250">−250</button><button type="button" data-d="9999">+9999</button></div><p>每一位数字沿着弹簧滚到新值，个位弹得最欢；新增的位数从零宽长出来。读屏只读完整数字。</p></article>
+    </section>
+
+    <h2 id="inputs">输入</h2>
+    <section class="grid" aria-label="输入">
+      <article><div class="stage block"><mo-spring-tags value="设计,动效,无障碍" label="标签" placeholder="输入后回车，或用逗号分隔…" max="8"></mo-spring-tags></div><p>新标签弹进来，删掉的缩小消失；输入已有的标签，原来那一枚会摇头。空输入框里按一次退格先标记最后一枚，再按一次删除。</p><output class="log" data-log="tags"></output></article>
+      <article><div class="stage"><mo-spring-code id="code" length="6" group="3" label="验证码"></mo-spring-code></div>
+        <div class="row"><button type="button" id="codeFill">粘贴 246810</button><button type="button" id="codeClear">清空</button></div><p>每个字符弹进格子，焦点自动跳到下一格，粘贴时整排依次弹入。示例里输入 246810 会被接受（点头变绿），其他会被拒绝（整排晃动并清空）。</p><output class="log" data-log="code"></output></article>
+    </section>
+
+    <h2 id="lists">列表</h2>
+    <section class="grid" aria-label="列表">
+      <article><div class="stage block"><mo-spring-list id="list" label="今日任务排序"><div>回复设计评审意见</div><div>整理发布说明</div><div>和产品对齐下周计划</div><div>修复登录页抖动</div><div>更新图标库</div></mo-spring-list></div><p>按住把手拖动：被拿起的项抬高并随速度倾斜，其他项弹开让位，松手落进空位。键盘：在把手上按空格拿起，方向键移动，空格放下，Esc 放回原处。</p><output class="log" data-log="list"></output></article>
+      <article><div class="stage block"><div class="stack"><mo-spring-swipe actions="归档|删除:danger"><strong>周报已生成</strong><br><small>左滑查看操作</small></mo-spring-swipe><mo-spring-swipe actions="标为已读:ok|稍后:neutral|删除:danger"><strong>3 条新评论</strong><br><small>也可以点右侧 ⋯</small></mo-spring-swipe></div></div><p>整行跟手，拉过头像橡皮一样有阻力，按松手速度甩开或合上。⋯ 按钮给键盘和读屏用，Esc 关闭。</p><output class="log" data-log="swipe"></output></article>
+      <article class="wide"><div class="stage block"><mo-spring-accordion open="0"><section data-title="弹簧和缓动有什么区别？"><p>缓动曲线有固定时长，被打断时只能从头再来；弹簧只有目标和速度，中途改目标会带着当前速度转向，所以连点、来回切换都很自然。</p></section><section data-title="减少动态效果时会怎样？"><p>所有弹簧直接跳到终点，冲量不再生效；状态变化照样被读屏读出。</p></section><section data-title="能和外观预设一起用吗？"><p>可以。颜色、圆角、描边都来自外观令牌，手感可以由 feel 属性、父元素的 data-mo-feel 或 --mo-feel 决定。</p></section></mo-spring-accordion></div><p>面板高度跟着弹簧走，快速连点会从当前位置平滑反向；箭头图标带一点过冲翻转。标题是真按钮，上下方向键、Home、End 在标题间移动。</p><output class="log" data-log="acc"></output></article>
+    </section>
+
+    <h2 id="toasts">通知</h2>
+    <section class="grid" aria-label="通知">
+      <article class="wide"><div class="stage"><div class="row" id="toastBtns"><button type="button" data-tone="info">普通通知</button><button type="button" data-tone="success">成功</button><button type="button" data-tone="warning">提醒</button><button type="button" data-tone="error">出错</button><button type="button" data-clear>全部清除</button></div></div><p>新通知带一点过冲落下，旧的被压到后面叠成一摞；指针移上去或键盘聚焦时整摞展开、计时暂停。可以点 ×、按 Esc，或横向甩出去关闭。</p><output class="log" data-log="toast"></output></article>
+    </section>
+
+    <h2 id="looks">外观</h2>
+    <section class="looks" aria-label="外观示例" id="looksRow"></section>
+  </main>
+  <mo-spring-toasts id="toaster" position="bottom-end"></mo-spring-toasts>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineWidgets, adoptLooks, applyLook, lookNames } from '../dist/components/widgets.js';
+    defineMoAliases();
+    defineWidgets('17.16');
+    defineWidgets('17.17');
+    adoptLooks('ui');
+
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail, el)));
+
+    document.getElementById('feel').addEventListener('usa:change', (e) => {
+      const f = e.detail.value === 'default' ? null : e.detail.value;
+      document.querySelectorAll('mo-spring-like, mo-spring-rating, mo-spring-copy, mo-spring-tags, mo-spring-code, mo-spring-list, mo-spring-swipe, mo-spring-toasts, mo-spring-accordion, mo-spring-counter').forEach((el) => {
+        f ? el.setAttribute('feel', f) : el.removeAttribute('feel');
+      });
+    });
+
+    on('mo-spring-like', 'change', (d, el) => log('like', `${el.getAttribute('label')}: ${d.liked ? '已点亮' : '已取消'} · ${d.count}`));
+    on('mo-spring-rating', 'change', (d, el) => log('rating', `${el.getAttribute('label')}: ${d.value}`));
+    on('mo-spring-copy', 'copy', (d) => log('copy', d.ok ? `已复制：${d.text}` : '复制失败'));
+    const count = document.getElementById('count');
+    document.getElementById('countBtns').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-d]');
+      if (b) count.value = Math.max(0, count.value + Number(b.dataset.d));
+    });
+    on('mo-spring-tags', 'change', (d) => log('tags', d.tags.join(' · ')));
+    on('mo-spring-tags', 'reject', (d) => log('tags', d.reason === 'duplicate' ? `重复：${d.text}` : '已达上限'));
+    const code = document.getElementById('code');
+    code.addEventListener('usa:complete', (e) => {
+      log('code', `提交 ${e.detail.value}`);
+      setTimeout(() => (e.detail.value === '246810' ? code.accept() : code.reject()), 400);
+    });
+    document.getElementById('codeFill').addEventListener('click', () => {
+      code.clear();
+      const first = code.querySelector('input');
+      if (!first) return;
+      first.focus();
+      first.value = '246810';
+      first.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    document.getElementById('codeClear').addEventListener('click', () => code.clear());
+    on('mo-spring-list', 'reorder', (d) => log('list', `第 ${d.from + 1} 项 → 第 ${d.to + 1} 位`));
+    on('mo-spring-swipe', 'action', (d) => log('swipe', `点了：${d.label}`));
+    on('mo-spring-accordion', 'toggle', (d) => log('acc', `第 ${d.index + 1} 项${d.open ? '展开' : '收起'}`));
+    const toaster = document.getElementById('toaster');
+    const words = { info: '已同步到云端', success: '保存成功', warning: '存储空间快满了', error: '网络连接失败，请重试' };
+    document.getElementById('toastBtns').addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      if (b.hasAttribute('data-clear')) return toaster.clear();
+      toaster.show(words[b.dataset.tone], { tone: b.dataset.tone });
+    });
+    toaster.addEventListener('usa:dismiss', (e) => log('toast', `关闭 #${e.detail.id}（${e.detail.reason}）`));
+
+    const names = lookNames('ui');
+    const picks = [names[0], names[Math.floor(names.length / 3)], names[Math.floor((names.length * 2) / 3)]].filter(Boolean);
+    const row = document.getElementById('looksRow');
+    for (const name of picks) {
+      const box = document.createElement('div');
+      box.className = 'look';
+      box.innerHTML = `<small>look="${name}"</small><mo-spring-like count="42" label="点赞"></mo-spring-like><mo-spring-rating value="4" label="评分"></mo-spring-rating><mo-spring-copy text="motionary" label="复制" copied-label="已复制"></mo-spring-copy>`;
+      applyLook(box, name);
+      row.append(box);
+    }
+  </script>
+</body>
+</html>
