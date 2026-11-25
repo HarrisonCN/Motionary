@@ -218,7 +218,7 @@ describe('17.16 micro engine', () => {
 
   it('microTransform composes every channel into one transform', () => {
     expect(microTransform({})).toBe('');
-    const t = microTransform({ press: 1, hover: 1, lift: 4, dx: 10, rz: 3 }, { pressScale: 0.9, hoverScale: 1.1 });
+    const t = microTransform({ press: 1, hover: 0.5, lift: 4, dx: 10, rz: 3 }, { pressScale: 0.9, hoverScale: 1.1 });
     expect(t).toContain('translate');
     expect(t).toContain('scale');
     expect(t).toContain('rotate');
