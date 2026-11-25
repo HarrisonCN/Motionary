@@ -5646,6 +5646,61 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 </usa-spring>
 ```
 
+### <mo-spring-accordion> (legacy <usa-spring-accordion>) — Spring accordion
+
+Panels open on a spring that reverses smoothly mid-way, the content drifts in after it and the chevron flips with an overshoot.
+
+- Import: `import { defineSpringAccordion } from 'motionary/components/widgets'; defineSpringAccordion();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `open`, `multiple`, `feel`, `haptics`
+- Events: `usa:toggle`
+- Methods: `toggle()`
+
+```html
+<mo-spring-accordion open="0"><section data-title="What is a spring?"><p>A target and a velocity, nothing else.</p></section><section data-title="Reduced motion"><p>Values jump to their targets.</p></section></mo-spring-accordion>
+```
+
+### <mo-spring-code> (legacy <usa-spring-code>) — Spring code
+
+One-time-code boxes: characters pop in, focus hops along, paste fills in a ripple; reject() shakes the row, accept() nods.
+
+- Import: `import { defineSpringCode } from 'motionary/components/widgets'; defineSpringCode();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `length`, `mode`, `group`, `label`, `value`, `name`, `mask`, `disabled`, `feel`, `haptics`
+- Events: `usa:change`, `usa:complete`
+- Methods: `accept()`, `reject()`, `clear()`
+
+```html
+<mo-spring-code length="6" group="3"></mo-spring-code>
+```
+
+### <mo-spring-copy> (legacy <usa-spring-copy>) — Spring copy
+
+Copies text to the clipboard: the icon springs away and a tick pops in, or the button shakes with a cross when it cannot.
+
+- Import: `import { defineSpringCopy } from 'motionary/components/widgets'; defineSpringCopy();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `text`, `for`, `label`, `copied-label`, `failed-label`, `show-text`, `reset`, `fx`, `disabled`, `feel`, `haptics`
+- Events: `usa:copy`
+- Methods: `copy()`
+
+```html
+<mo-spring-copy text="npm i motionary" show-text></mo-spring-copy>
+```
+
+### <mo-spring-counter> (legacy <usa-spring-counter>) — Spring counter
+
+Digits roll on springs to each new value, new columns grow in, and screen readers get the plain number.
+
+- Import: `import { defineSpringCounter } from 'motionary/components/widgets'; defineSpringCounter();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `decimals`, `group`, `prefix`, `suffix`, `from-zero`, `label`, `feel`
+- Events: `usa:change`
+
+```html
+<mo-spring-counter value="1280" group="," from-zero></mo-spring-counter>
+```
+
 ### <mo-spring-lab> (legacy <usa-spring-lab>) — Spring laboratory
 
 Tune mass, damping and stiffness; inspect the real step response and replay it.
@@ -5658,6 +5713,88 @@ Tune mass, damping and stiffness; inspect the real step response and replay it.
 
 ```html
 <mo-spring-lab></mo-spring-lab>
+```
+
+### <mo-spring-like> (legacy <usa-spring-like>) — Spring like
+
+A like toggle whose heart squashes, pops past full size with a ring and a burst of dots, while the count rolls to its new number.
+
+- Import: `import { defineSpringLike } from 'motionary/components/widgets'; defineSpringLike();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `liked`, `count`, `compact`, `label`, `dots`, `fx`, `disabled`, `feel`, `haptics`
+- Events: `usa:change`
+- Methods: `toggle()`
+
+```html
+<mo-spring-like count="128"></mo-spring-like>
+```
+
+### <mo-spring-list> (legacy <usa-spring-list>) — Spring list
+
+Drag the handles to reorder: the picked item lifts and tilts, the others spring out of the way; full keyboard reordering.
+
+- Import: `import { defineSpringList } from 'motionary/components/widgets'; defineSpringList();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `items`, `label`, `gap`, `disabled`, `feel`, `haptics`
+- Events: `usa:reorder`
+- Methods: `move()`
+
+```html
+<mo-spring-list items="Inbox|Today|Upcoming|Someday"></mo-spring-list>
+```
+
+### <mo-spring-rating> (legacy <usa-spring-rating>) — Spring rating
+
+Stars that lift on hover and pop up one after another when chosen; halves, read-only and full keyboard support.
+
+- Import: `import { defineSpringRating } from 'motionary/components/widgets'; defineSpringRating();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `max`, `half`, `label`, `readonly`, `clearable`, `show-value`, `size`, `disabled`, `feel`, `haptics`
+- Events: `usa:change`
+
+```html
+<mo-spring-rating value="4" show-value></mo-spring-rating>
+```
+
+### <mo-spring-swipe> (legacy <usa-spring-swipe>) — Spring swipe
+
+A row that swipes open to reveal actions, with rubber-band ends and a flick to open or shut; a ⋯ button does the same for the keyboard.
+
+- Import: `import { defineSpringSwipe } from 'motionary/components/widgets'; defineSpringSwipe();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `actions`, `open`, `label`, `disabled`, `feel`, `haptics`
+- Events: `usa:toggle`, `usa:action`
+
+```html
+<mo-spring-swipe actions="Archive|Delete:danger">Weekly report is ready</mo-spring-swipe>
+```
+
+### <mo-spring-tags> (legacy <usa-spring-tags>) — Spring tags
+
+Tags pop in and shrink away; a duplicate makes the chip that already has it shake. Enter, comma or paste adds tags.
+
+- Import: `import { defineSpringTags } from 'motionary/components/widgets'; defineSpringTags();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `label`, `placeholder`, `max`, `max-length`, `name`, `disabled`, `feel`, `haptics`
+- Events: `usa:reject`, `usa:change`
+- Methods: `addTag()`, `removeTag()`
+
+```html
+<mo-spring-tags value="design,motion"></mo-spring-tags>
+```
+
+### <mo-spring-toasts> (legacy <usa-spring-toasts>) — Spring toasts
+
+Toasts drop in with an overshoot and pile up neatly; the pile fans out on hover or focus, and a toast can be swiped away.
+
+- Import: `import { defineSpringToasts } from 'motionary/components/widgets'; defineSpringToasts();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `position`, `duration`, `max`, `label`, `feel`, `haptics`
+- Events: `usa:dismiss`, `usa:show`
+- Methods: `show()`, `dismiss()`, `clear()`
+
+```html
+<mo-spring-toasts></mo-spring-toasts>
 ```
 
 ### <mo-squish-indicator> (legacy <usa-squish-indicator>) — Squish indicator

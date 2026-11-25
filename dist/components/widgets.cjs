@@ -138,6 +138,16 @@ var widgets_microButton = require('../widgets/micro-button.cjs');
 var widgets_microSlider = require('../widgets/micro-slider.cjs');
 var widgets_microSegmented = require('../widgets/micro-segmented.cjs');
 var widgets_microStepper = require('../widgets/micro-stepper.cjs');
+var widgets_springLike = require('../widgets/spring-like.cjs');
+var widgets_springRating = require('../widgets/spring-rating.cjs');
+var widgets_springCopy = require('../widgets/spring-copy.cjs');
+var widgets_springTags = require('../widgets/spring-tags.cjs');
+var widgets_springCode = require('../widgets/spring-code.cjs');
+var widgets_springList = require('../widgets/spring-list.cjs');
+var widgets_springSwipe = require('../widgets/spring-swipe.cjs');
+var widgets_springToasts = require('../widgets/spring-toasts.cjs');
+var widgets_springAccordion = require('../widgets/spring-accordion.cjs');
+var widgets_springCounter = require('../widgets/spring-counter.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -304,6 +314,7 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var springKit17 = require('../chunks/spring-kit-17-Y1urAq72.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
 var kit15 = require('../chunks/kit-15-D1Ovwhys.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
@@ -315,9 +326,9 @@ var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
- * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
- * ten palettes):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over forty palettes,
+ * give 680 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 and
+ * 17.17 added ten palettes each; 17.17 gives every look a micro-interaction feel):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -364,9 +375,20 @@ const LOOK_PALETTES = {
     navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
     obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
     abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
+    // 17.17
+    jade: ['#052e1f', '#effdf6', '#047857', '#6ee7b7'],
+    saffron: ['#2e1a02', '#fffaeb', '#a16207', '#fde047'],
+    denim: ['#0f1b2d', '#f4f7fb', '#2f5d8a', '#93c5fd'],
+    orchid: ['#2e0b33', '#fcf4ff', '#86198f', '#e9a8f5'],
+    rust: ['#2b1206', '#fdf5f0', '#9a3b12', '#fbbf24'],
+    spruce: ['#06211f', '#f0f8f7', '#115e59', '#5eead4'],
+    flamingo: ['#3a0d1c', '#fff3f6', '#be185d', '#f9a8c9'],
+    periwinkle: ['#16183a', '#f5f6ff', '#3f4bb8', '#b4bcfb'],
+    onyx: ['#f4f4f5', '#0c0c0e', '#fda4af', '#fcd34d'],
+    nebula: ['#ede9fe', '#0d0a1f', '#c084fc', '#67e8f9'],
 };
 /** The palettes with a dark paper. */
-const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss', 'onyx', 'nebula'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
@@ -611,6 +633,24 @@ const LOOK_TREATMENTS = {
         comic: (p) => ({ mediaFilter: 'contrast(1.45) saturate(1.7) brightness(1.03)', bw: '3px', line: p.ink, radius: '4px', mediaRadius: '0px', shadow: `5px 5px 0 ${p.ink}`, frame: '#ffffff', speed: '1.2', font: '"Bangers", "Comic Neue", "Comic Sans MS", cursive' }),
     },
 };
+/**
+ * 17.17: how each treatment moves. Every look sets `--mo-feel`, which the spring core (`micro()`, the spring widgets)
+ * reads, so a brutal look lands heavy, a clay look plays, a terminal look snaps: the motion matches the surface.
+ */
+const LOOK_FEELS = {
+    ui: {
+        solid: 'default', outline: 'crisp', soft: 'calm', glass: 'smooth', neon: 'snappy', brutal: 'heavy', paper: 'calm', gradient: 'bouncy', terminal: 'crisp',
+        clay: 'playful', neumorph: 'smooth', retro: 'snappy', pill: 'bouncy', editorial: 'calm', sketch: 'playful', luxe: 'heavy', synth: 'bouncy',
+    },
+    parts: {
+        flat: 'default', elevated: 'smooth', outlined: 'crisp', frosted: 'smooth', cyber: 'snappy', blocky: 'heavy', pastel: 'playful', window: 'snappy', console: 'crisp',
+        tonal: 'calm', acrylic: 'smooth', cupertino: 'bouncy', compact: 'crisp', skeuo: 'heavy', inset: 'calm', hairline: 'crisp', dusk: 'calm',
+    },
+    motion: {
+        vivid: 'bouncy', noir: 'calm', sepia: 'calm', duotone: 'smooth', glow: 'smooth', polaroid: 'playful', film: 'heavy', blueprint: 'crisp', holo: 'playful',
+        charcoal: 'heavy', infrared: 'snappy', blockbuster: 'heavy', dreamy: 'calm', matte: 'smooth', thermal: 'snappy', nightvision: 'crisp', comic: 'playful',
+    },
+};
 const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS);
 /* ---------- lookup ---------- */
 let index = null;
@@ -644,6 +684,7 @@ function build() {
                     mediaRadius: '14px',
                     frame: '#ffffff',
                     speed: '1',
+                    feel: LOOK_FEELS[family][treatment] ?? 'default',
                     ...t,
                 };
                 m.set(name, { name, family, treatment, palette, ...spec });
@@ -687,6 +728,8 @@ function lookRule(name) {
     decl.push('color:var(--mo-kit-ink)');
     if (l.font)
         decl.push(`font-family:${l.font}`);
+    if (l.feel)
+        decl.push(`--mo-feel:${l.feel}`);
     return `:where([look="${name}"],[data-mo-look="${name}"]){${decl.join(';')}}`;
 }
 /** The stylesheet for every look, or one family's. */
@@ -757,6 +800,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.17': { 'usa-spring-like': widgets_springLike.defineSpringLike, 'usa-spring-rating': widgets_springRating.defineSpringRating, 'usa-spring-copy': widgets_springCopy.defineSpringCopy, 'usa-spring-tags': widgets_springTags.defineSpringTags, 'usa-spring-code': widgets_springCode.defineSpringCode, 'usa-spring-list': widgets_springList.defineSpringList, 'usa-spring-swipe': widgets_springSwipe.defineSpringSwipe, 'usa-spring-toasts': widgets_springToasts.defineSpringToasts, 'usa-spring-accordion': widgets_springAccordion.defineSpringAccordion, 'usa-spring-counter': widgets_springCounter.defineSpringCounter },
     '17.16': { 'usa-micro': widgets_micro.defineMicro, 'usa-micro-switch': widgets_microSwitch.defineMicroSwitch, 'usa-micro-checkbox': widgets_microCheckbox.defineMicroCheckbox, 'usa-micro-input': widgets_microInput.defineMicroInput, 'usa-micro-button': widgets_microButton.defineMicroButton, 'usa-micro-slider': widgets_microSlider.defineMicroSlider, 'usa-micro-segmented': widgets_microSegmented.defineMicroSegmented, 'usa-micro-stepper': widgets_microStepper.defineMicroStepper },
     '17.15': { 'usa-radial-menu': widgets_radialMenu.defineRadialMenu, 'usa-hover-card': widgets_hoverCard.defineHoverCard, 'usa-toggle-group': widgets_toggleGroup.defineToggleGroup, 'usa-time-picker': widgets_timePicker.defineTimePicker, 'usa-color-swatches': widgets_colorSwatches.defineColorSwatches, 'usa-calendar-strip': widgets_calendarStrip.defineCalendarStrip, 'usa-comparison-table': widgets_comparisonTable.defineComparisonTable, 'usa-radial-bars': widgets_radialBars.defineRadialBars, 'usa-bar-race': widgets_barRace.defineBarRace, 'usa-bullet-chart': widgets_bulletChart.defineBulletChart, 'usa-slope-chart': widgets_slopeChart.defineSlopeChart, 'usa-dot-plot': widgets_dotPlot.defineDotPlot },
     '17.14': { 'usa-icon': widgets_icon.defineIcon, 'usa-icon-picker': widgets_iconPicker.defineIconPicker },
@@ -998,6 +1042,16 @@ exports.defineMicroButton = widgets_microButton.defineMicroButton;
 exports.defineMicroSlider = widgets_microSlider.defineMicroSlider;
 exports.defineMicroSegmented = widgets_microSegmented.defineMicroSegmented;
 exports.defineMicroStepper = widgets_microStepper.defineMicroStepper;
+exports.defineSpringLike = widgets_springLike.defineSpringLike;
+exports.defineSpringRating = widgets_springRating.defineSpringRating;
+exports.defineSpringCopy = widgets_springCopy.defineSpringCopy;
+exports.defineSpringTags = widgets_springTags.defineSpringTags;
+exports.defineSpringCode = widgets_springCode.defineSpringCode;
+exports.defineSpringList = widgets_springList.defineSpringList;
+exports.defineSpringSwipe = widgets_springSwipe.defineSpringSwipe;
+exports.defineSpringToasts = widgets_springToasts.defineSpringToasts;
+exports.defineSpringAccordion = widgets_springAccordion.defineSpringAccordion;
+exports.defineSpringCounter = widgets_springCounter.defineSpringCounter;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1233,6 +1287,20 @@ exports.defineParticleButton = widgets_particleButton.defineParticleButton;
 exports.defineHaloSegmented = widgets_haloSegmented.defineHaloSegmented;
 exports.defineHaloSlider = widgets_haloSlider.defineHaloSlider;
 exports.defineOrbitProgress = widgets_orbitProgress.defineOrbitProgress;
+exports.addTags = springKit17.addTags;
+exports.alignDigits = springKit17.alignDigits;
+exports.burstPoints = springKit17.burstPoints;
+exports.codeChars = springKit17.codeChars;
+exports.compactCount = springKit17.compactCount;
+exports.counterText = springKit17.counterText;
+exports.openSet = springKit17.openSet;
+exports.parseTags = springKit17.parseTags;
+exports.ratingAt = springKit17.ratingAt;
+exports.shiftFor = springKit17.shiftFor;
+exports.slotAt = springKit17.slotAt;
+exports.stackLayout = springKit17.stackLayout;
+exports.starFill = springKit17.starFill;
+exports.swipeOpen = springKit17.swipeOpen;
 exports.copyText = kit12.copyText;
 exports.moveItem = kit12.moveItem;
 exports.numbers = kit12.numbers;
@@ -1284,6 +1352,7 @@ exports.tween = kit.tween;
 exports.viewportHeight = viewport.viewportHeight;
 exports.watchViewport = viewport.watchViewport;
 exports.LOOK_FAMILIES = LOOK_FAMILIES;
+exports.LOOK_FEELS = LOOK_FEELS;
 exports.LOOK_PALETTES = LOOK_PALETTES;
 exports.LOOK_TREATMENTS = LOOK_TREATMENTS;
 exports.WIDGETS = WIDGETS;

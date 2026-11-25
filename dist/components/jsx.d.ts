@@ -2271,12 +2271,112 @@ interface LegacyAttributes {
         stiffness?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    'usa-spring-accordion': {
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        multiple?: string | boolean | number;
+        open?: string | boolean | number;
+    };
+    'usa-spring-code': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        group?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        length?: string | boolean | number;
+        mask?: string | boolean | number;
+        mode?: string | boolean | number;
+        name?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-spring-copy': {
+        'copied-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        'failed-label'?: string | boolean | number;
+        feel?: string | boolean | number;
+        for?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        reset?: string | boolean | number;
+        'show-text'?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    'usa-spring-counter': {
+        decimals?: string | boolean | number;
+        feel?: string | boolean | number;
+        'from-zero'?: string | boolean | number;
+        group?: string | boolean | number;
+        label?: string | boolean | number;
+        prefix?: string | boolean | number;
+        suffix?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-spring-lab': {
         damping?: string | boolean | number;
         disabled?: string | boolean | number;
         label?: string | boolean | number;
         mass?: string | boolean | number;
         stiffness?: string | boolean | number;
+    };
+    'usa-spring-like': {
+        compact?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        dots?: string | boolean | number;
+        feel?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        liked?: string | boolean | number;
+    };
+    'usa-spring-list': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        gap?: string | boolean | number;
+        haptics?: string | boolean | number;
+        items?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    'usa-spring-rating': {
+        clearable?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        half?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        readonly?: string | boolean | number;
+        'show-value'?: string | boolean | number;
+        size?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-spring-swipe': {
+        actions?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        open?: string | boolean | number;
+    };
+    'usa-spring-tags': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        'max-length'?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-spring-toasts': {
+        duration?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        position?: string | boolean | number;
     };
     'usa-squish-indicator': {
         disabled?: string | boolean | number;
@@ -3728,9 +3828,43 @@ interface LegacyEvents {
     'usa-spring': {
         'usa:complete': CustomEvent<any>;
     };
+    'usa-spring-accordion': {
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-spring-code': {
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-spring-copy': {
+        'usa:copy': CustomEvent<any>;
+    };
+    'usa-spring-counter': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-spring-lab': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-like': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-list': {
+        'usa:reorder': CustomEvent<any>;
+    };
+    'usa-spring-rating': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-swipe': {
+        'usa:action': CustomEvent<any>;
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-spring-tags': {
+        'usa:change': CustomEvent<any>;
+        'usa:reject': CustomEvent<any>;
+    };
+    'usa-spring-toasts': {
+        'usa:dismiss': CustomEvent<any>;
+        'usa:show': CustomEvent<any>;
     };
     'usa-squish-indicator': {
         'usa:change': CustomEvent<any>;
