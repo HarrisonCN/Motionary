@@ -1,4 +1,4 @@
-# Motionary components (392)
+# Motionary components (400)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -124,6 +124,13 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-menu>`](usa-menu.md) — Dropdown menu
 - [`<mo-message-list>`](usa-message-list.md) — Chat thread
 - [`<mo-meter-countdown>`](usa-meter-countdown.md) — Meter countdown
+- [`<mo-micro-button>`](usa-micro-button.md) — Micro button
+- [`<mo-micro-checkbox>`](usa-micro-checkbox.md) — Micro checkbox
+- [`<mo-micro-input>`](usa-micro-input.md) — Micro input
+- [`<mo-micro-segmented>`](usa-micro-segmented.md) — Micro segmented
+- [`<mo-micro-slider>`](usa-micro-slider.md) — Micro slider
+- [`<mo-micro-stepper>`](usa-micro-stepper.md) — Micro stepper
+- [`<mo-micro-switch>`](usa-micro-switch.md) — Micro switch
 - [`<mo-motion>`](usa-motion.md) — Motion DSL
 - [`<mo-motion-inspector>`](usa-motion-inspector.md) — Motion inspector
 - [`<mo-motion-prefs>`](usa-motion-prefs.md) — Motion preference panel
@@ -423,6 +430,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-compare>`](usa-compare.md) — Before / after compare
 - [`<mo-equalizer>`](usa-equalizer.md) — Graphic equalizer
 - [`<mo-magnetic>`](usa-magnetic.md) — Magnetic button
+- [`<mo-micro>`](usa-micro.md) — Micro
 - [`<mo-press>`](usa-press.md) — Press feedback
 - [`<mo-ripple>`](usa-ripple.md) — Ripple
 - [`<mo-smooth-scroll>`](usa-smooth-scroll.md) — Smooth scroll · Requires: motionary/runtime/smooth

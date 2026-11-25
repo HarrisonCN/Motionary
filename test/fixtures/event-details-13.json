@@ -2099,6 +2099,64 @@
       "usa:change": [
         "{index, value}"
       ]
+    },
+    "usa-micro": {
+      "usa:drag-end": [
+        "{x, y}"
+      ],
+      "usa:press": [
+        "(none)"
+      ],
+      "usa:release": [
+        "(none)"
+      ]
+    },
+    "usa-micro-button": {
+      "usa:action": [
+        "{run}"
+      ],
+      "usa:state": [
+        "{state}"
+      ]
+    },
+    "usa-micro-checkbox": {
+      "usa:change": [
+        "{checked}"
+      ]
+    },
+    "usa-micro-input": {
+      "usa:input": [
+        "{value}"
+      ],
+      "usa:invalid": [
+        "{message}"
+      ],
+      "usa:valid": [
+        "{value}"
+      ]
+    },
+    "usa-micro-segmented": {
+      "usa:change": [
+        "{index, value}"
+      ]
+    },
+    "usa-micro-slider": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-micro-stepper": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-micro-switch": {
+      "usa:change": [
+        "{checked}"
+      ]
     }
   }
 }

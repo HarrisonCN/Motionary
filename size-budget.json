@@ -3252,6 +3252,46 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/micro' (per-entry, fixed)",
+    "import": "import { defineMicro } from 'pkg/widgets/micro'; console.log(defineMicro);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-switch' (per-entry, fixed)",
+    "import": "import { defineMicroSwitch } from 'pkg/widgets/micro-switch'; console.log(defineMicroSwitch);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-checkbox' (per-entry, fixed)",
+    "import": "import { defineMicroCheckbox } from 'pkg/widgets/micro-checkbox'; console.log(defineMicroCheckbox);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-input' (per-entry, fixed)",
+    "import": "import { defineMicroInput } from 'pkg/widgets/micro-input'; console.log(defineMicroInput);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-button' (per-entry, fixed)",
+    "import": "import { defineMicroButton } from 'pkg/widgets/micro-button'; console.log(defineMicroButton);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-slider' (per-entry, fixed)",
+    "import": "import { defineMicroSlider } from 'pkg/widgets/micro-slider'; console.log(defineMicroSlider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-segmented' (per-entry, fixed)",
+    "import": "import { defineMicroSegmented } from 'pkg/widgets/micro-segmented'; console.log(defineMicroSegmented);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/micro-stepper' (per-entry, fixed)",
+    "import": "import { defineMicroStepper } from 'pkg/widgets/micro-stepper'; console.log(defineMicroStepper);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

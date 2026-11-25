@@ -3569,6 +3569,114 @@ A determinate ring and optional visible-only remaining-time clock.
 <mo-meter-countdown value="81" max="120"></mo-meter-countdown>
 ```
 
+### <mo-micro> (legacy <usa-micro>) — Micro
+
+Wraps anything with spring micro-interactions: press, hover, lift, magnetic, tilt, glow, squish, drag and focus, in any mix, plus feedback impulses.
+
+- Import: `import { defineMicro } from 'motionary/components/widgets'; defineMicro();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `fx`, `feel`, `spring`, `haptics`, `disabled`, `press-scale`, `hover-scale`, `lift`, `strength`, `reach`, `tilt`, `bounds`, `snap`, `axis`, `feedback`
+- Events: `usa:press`, `usa:release`, `usa:drag-end`
+- Methods: `feedback()`, `moveTo()`
+
+```html
+<mo-micro fx="press lift glow" feel="bouncy"><button type="button" style="padding:14px 22px;border:0;border-radius:14px;background:#4f46e5;color:#fff;font:inherit">Press me</button></mo-micro>
+```
+
+### <mo-micro-button> (legacy <usa-micro-button>) — Micro button
+
+An action button that folds into a spinner while working, pops a tick on success or shakes on failure, then springs back.
+
+- Import: `import { defineMicroButton } from 'motionary/components/widgets'; defineMicroButton();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `loading-label`, `success-label`, `error-label`, `state`, `reset`, `variant`, `fx`, `disabled`, `feel`, `haptics`
+- Events: `usa:state`, `usa:action`
+- Methods: `run()`, `setState()`
+
+```html
+<mo-micro-button label="Save" success-label="Saved" error-label="Retry"></mo-micro-button>
+```
+
+### <mo-micro-checkbox> (legacy <usa-micro-checkbox>) — Micro checkbox
+
+The box squashes under the finger, fills with a springy pop and then draws its tick; supports indeterminate.
+
+- Import: `import { defineMicroCheckbox } from 'motionary/components/widgets'; defineMicroCheckbox();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `checked`, `indeterminate`, `disabled`, `label`, `name`, `value`, `feel`, `haptics`
+- Events: `usa:change`
+
+```html
+<mo-micro-checkbox label="Remember me" checked></mo-micro-checkbox>
+```
+
+### <mo-micro-input> (legacy <usa-micro-input>) — Micro input
+
+The label floats on a spring, the focus line grows from where you clicked, and an invalid value shakes once with an announced message.
+
+- Import: `import { defineMicroInput } from 'motionary/components/widgets'; defineMicroInput();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `type`, `value`, `name`, `required`, `pattern`, `minlength`, `maxlength`, `autocomplete`, `hint`, `error`, `success`, `disabled`, `feel`, `haptics`
+- Events: `usa:invalid`, `usa:valid`, `usa:input`
+- Methods: `validate()`
+
+```html
+<mo-micro-input label="Email" type="email" required success hint="We never share it."></mo-micro-input>
+```
+
+### <mo-micro-segmented> (legacy <usa-micro-segmented>) — Micro segmented
+
+The pill slides on two springs: the leading edge is quick, the trailing edge slow, so it stretches toward the new choice.
+
+- Import: `import { defineMicroSegmented } from 'motionary/components/widgets'; defineMicroSegmented();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `options`, `values`, `value`, `label`, `name`, `disabled`, `feel`, `haptics`
+- Events: `usa:change`
+
+```html
+<mo-micro-segmented label="View" options="List,Board,Calendar" value="Board"></mo-micro-segmented>
+```
+
+### <mo-micro-slider> (legacy <usa-micro-slider>) — Micro slider
+
+The thumb settles onto the nearest step, squashes with its speed and shows a value bubble; dragging past an end stretches the track like rubber.
+
+- Import: `import { defineMicroSlider } from 'motionary/components/widgets'; defineMicroSlider();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `min`, `max`, `step`, `value`, `label`, `unit`, `name`, `disabled`, `feel`, `haptics`
+- Events: `usa:input`, `usa:change`
+
+```html
+<mo-micro-slider label="Volume" value="40" step="5" unit="%"></mo-micro-slider>
+```
+
+### <mo-micro-stepper> (legacy <usa-micro-stepper>) — Micro stepper
+
+Digits roll on a spring, held buttons speed up, and at a limit the number leans against it and springs back.
+
+- Import: `import { defineMicroStepper } from 'motionary/components/widgets'; defineMicroStepper();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `min`, `max`, `step`, `value`, `label`, `name`, `disabled`, `feel`, `haptics`
+- Events: `usa:change`
+
+```html
+<mo-micro-stepper label="Guests" value="2" min="1" max="12"></mo-micro-stepper>
+```
+
+### <mo-micro-switch> (legacy <usa-micro-switch>) — Micro switch
+
+A switch whose knob carries its speed: it stretches as it travels, can be dragged with rubber-band ends and flicked.
+
+- Import: `import { defineMicroSwitch } from 'motionary/components/widgets'; defineMicroSwitch();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `checked`, `disabled`, `label`, `name`, `value`, `size`, `feel`, `haptics`
+- Events: `usa:change`
+- Methods: `toggle()`
+
+```html
+<mo-micro-switch label="Wi-Fi" checked></mo-micro-switch>
+```
+
 ### <mo-milestones> (legacy <usa-milestones>) — Scroll-drawn milestones
 
 6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide screens, one column on phones; data-date labels.

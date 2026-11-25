@@ -2,6 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var spring = require('../chunks/spring-DoapHVAk.cjs');
+var micro = require('../chunks/micro-3qfNbgwt.cjs');
 
 var css$4 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
@@ -367,6 +368,8 @@ function definePress(tag = 'usa-press') {
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
+ * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
+ * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
  */
 /** Register every component of this category under its default tag. */
 function defineInteractionComponents() {
@@ -377,6 +380,16 @@ function defineInteractionComponents() {
     definePress();
 }
 
+exports.MICRO_BEHAVIORS = micro.MICRO_BEHAVIORS;
+exports.MICRO_FEEDBACK = micro.MICRO_FEEDBACK;
+exports.applyMicro = micro.applyMicro;
+exports.feedback = micro.feedback;
+exports.micro = micro.micro;
+exports.microOf = micro.microOf;
+exports.microTransform = micro.microTransform;
+exports.parseMicro = micro.parseMicro;
+exports.readFeel = micro.readFeel;
+exports.readSpeed = micro.readSpeed;
 exports.defineInteractionComponents = defineInteractionComponents;
 exports.defineMagnetic = defineMagnetic;
 exports.definePress = definePress;

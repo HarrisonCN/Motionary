@@ -168,11 +168,125 @@ declare function snapTo(value: number, to: number | number[] | null | undefined)
 declare function rubberBand(distance: number, dimension: number, constant?: number): number;
 
 /**
+ * 17.16 — the spring core of the micro-interaction system.
+ *
+ * - **Exact:** springs are solved in closed form (under-, critically and over-damped), so a value is the same at
+ *   30, 60 or 144 Hz and never drifts or explodes on a long frame. The older `createSpring()` (v2.3, numeric steps)
+ *   stays as it was.
+ * - **Perceptual:** a spring can be given as `{ duration, bounce }` (response time in ms and how much it overshoots,
+ *   -1…1) instead of stiffness / damping / mass; `springFromFeel()` and `springFeel()` convert both ways.
+ * - **Tuned:** `MICRO_SPRINGS` holds sixteen springs for the roles of a micro-interaction (press, release, hover,
+ *   toggle, drag, settle, pop, jelly …), and `MICRO_FEELS` seven feels that retune all of them at once
+ *   (`crisp`, `snappy`, `smooth`, `bouncy`, `playful`, `calm`, `heavy`).
+ * - **Interruptible:** `createSpringGroup()` animates several named values on one frame loop. Retargeting keeps the
+ *   current velocity, `impulse()` adds velocity (a flick, a shake, a pop), and every channel can use its own spring.
+ *   Under reduced motion values jump to their targets and impulses do nothing.
+ */
+/** A spring as response time and bounce. `duration` in ms (default 400); `bounce` from -1 (overdamped) to 1 (default 0). */
+interface SpringFeel {
+    duration?: number;
+    bounce?: number;
+}
+/** Stiffness (N/m), damping (N·s/m) and mass (kg). */
+interface SpringPhysics {
+    stiffness: number;
+    damping: number;
+    mass: number;
+}
+type MicroSpring = 'instant' | 'snappy' | 'smooth' | 'gentle' | 'bouncy' | 'elastic' | 'press' | 'release' | 'hover' | 'toggle' | 'drag' | 'settle' | 'pop' | 'jelly' | 'heavy' | 'feather';
+/** Sixteen springs tuned for the parts of a micro-interaction. */
+declare const MICRO_SPRINGS: Record<MicroSpring, Required<SpringFeel>>;
+type MicroFeel = 'crisp' | 'snappy' | 'smooth' | 'bouncy' | 'playful' | 'calm' | 'heavy';
+/** A feel retunes every role spring: durations are divided by `speed` and `bounce` is added to their bounce. */
+declare const MICRO_FEELS: Record<MicroFeel, {
+    speed: number;
+    bounce: number;
+}>;
+/** `{ duration, bounce }` → stiffness / damping / mass (mass 1 unless given). */
+declare function springFromFeel(feel?: SpringFeel, mass?: number): SpringPhysics;
+/** Stiffness / damping / mass → `{ duration, bounce, dampingRatio }`. */
+declare function springFeel(p: SpringPhysics): {
+    duration: number;
+    bounce: number;
+    dampingRatio: number;
+};
+type MicroSpringInput = MicroSpring | SpringPreset | SpringFeel | SpringPhysics | string | undefined | null;
+/**
+ * Any spring description → physics: a `MICRO_SPRINGS` name, a v2.3 `SPRING_PRESETS` name, `"<duration>[ms] <bounce>"`
+ * (e.g. `"380ms 0.3"`), `{ duration, bounce }` or `{ stiffness, damping, mass }`. `feel` retunes it and `speed`
+ * (e.g. a look's `--mo-kit-speed`) shortens or stretches it. Unknown input is the `smooth` spring.
+ */
+declare function microSpring(input?: MicroSpringInput, feel?: MicroFeel | string | null, speed?: number): SpringPhysics;
+/**
+ * The closed-form motion from `from` towards `to` starting at `velocity` (units/s). Returns a function of elapsed
+ * time in ms that gives `[value, velocity]`.
+ */
+declare function springSolution(p: SpringPhysics, from: number, to: number, velocity?: number): (ms: number) => [number, number];
+/** When a motion from `from` to `to` comes to rest within `precision` (a fraction of the distance; default 0.001), in ms (max 10 s). */
+declare function settleTime(p: SpringPhysics, from?: number, to?: number, velocity?: number, precision?: number): number;
+/** The spring from 0 to 1 as a CSS `linear()` easing and its duration in ms, for `el.animate()` / transitions. */
+declare function microEasing(input?: MicroSpringInput, feel?: MicroFeel | string | null, points?: number): {
+    easing: string;
+    duration: number;
+};
+interface SpringGroupOptions {
+    /** Default spring for every channel (default `smooth`). */
+    spring?: MicroSpringInput;
+    /** Feel that retunes every spring of the group. */
+    feel?: MicroFeel | string | null;
+    /** Speed factor (e.g. a look's `--mo-kit-speed`; default 1). */
+    speed?: number;
+    /** Owner element: the loop stops when it is detached. */
+    owner?: Element;
+    /** Called once per frame (and after `jump()`) with every value. */
+    onUpdate?: (values: Record<string, number>, group: SpringGroup) => void;
+    /** Called when every channel has come to rest. */
+    onRest?: (values: Record<string, number>) => void;
+    /** Rest precision in value units (default 0.001). */
+    precision?: number;
+    /** Ignore reduced motion (for values that are not motion, e.g. a colour mix). */
+    always?: boolean;
+}
+interface SpringGroup {
+    readonly values: Record<string, number>;
+    readonly animating: boolean;
+    get(name: string): number;
+    /** Velocity of a channel, in units per second. */
+    velocity(name: string): number;
+    target(name: string): number;
+    /** Animate channels to new targets. `velocity` replaces their velocity; `spring` sets their spring from now on. */
+    set(targets: Record<string, number>, opts?: {
+        velocity?: Record<string, number>;
+        spring?: MicroSpringInput;
+    }): void;
+    /** Add velocity (units/s) to channels; they spring back to their targets. Optionally with a one-off spring. */
+    impulse(velocities: Record<string, number>, spring?: MicroSpringInput): void;
+    /** Move channels at once, with no motion. */
+    jump(values: Record<string, number>): void;
+    /** Change the default spring, feel or speed (running channels keep theirs until set again). */
+    configure(opts: {
+        spring?: MicroSpringInput;
+        feel?: MicroFeel | string | null;
+        speed?: number;
+    }): void;
+    /** Stop every channel where it is. */
+    stop(): void;
+}
+/**
+ * Several spring-animated numbers that share one frame loop (on the motion clock, so `setClock()` slows or pauses
+ * them too). Retargeting keeps velocity; each channel keeps the spring it was last set with.
+ */
+declare function createSpringGroup(initial: Record<string, number>, opts?: SpringGroupOptions): SpringGroup;
+
+/**
  * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 
 /** Register every component of this category under its default tag. */
@@ -185,5 +299,5 @@ declare global {
     }
 }
 
-export { SPRING_EFFECTS, SPRING_PRESETS, createSpring, defineDraggable, defineOverscroll, definePhysicsComponents, defineSpring, linearEasing, projectInertia, resolveSpring, rubberBand, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing };
-export type { SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, UsaDraggableElement, UsaOverscrollElement, UsaSpringElement };
+export { MICRO_FEELS, MICRO_SPRINGS, SPRING_EFFECTS, SPRING_PRESETS, createSpring, createSpringGroup, defineDraggable, defineOverscroll, definePhysicsComponents, defineSpring, linearEasing, microEasing, microSpring, projectInertia, resolveSpring, rubberBand, settleTime, snapTo, spring, springEasing, springEffectKeyframes, springFeel, springFromFeel, springSamples, springSolution, stepSpring, supportsLinearEasing };
+export type { MicroFeel, MicroSpring, MicroSpringInput, SpringConfig, SpringEffect, SpringFeel, SpringGroup, SpringGroupOptions, SpringInput, SpringPhysics, SpringPreset, SpringValue, SpringValueOptions, UsaDraggableElement, UsaOverscrollElement, UsaSpringElement };

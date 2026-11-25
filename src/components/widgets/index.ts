@@ -131,6 +131,14 @@ import { defineBarRace, type UsaBarRaceElement } from './bar-race';
 import { defineBulletChart, type UsaBulletChartElement } from './bullet-chart';
 import { defineSlopeChart, type UsaSlopeChartElement } from './slope-chart';
 import { defineDotPlot, type UsaDotPlotElement } from './dot-plot';
+import { defineMicro, type UsaMicroElement } from './micro-wrap';
+import { defineMicroSwitch, type UsaMicroSwitchElement } from './micro-switch';
+import { defineMicroCheckbox, type UsaMicroCheckboxElement } from './micro-checkbox';
+import { defineMicroInput, type UsaMicroInputElement } from './micro-input';
+import { defineMicroButton, type UsaMicroButtonElement, type MicroButtonState } from './micro-button';
+import { defineMicroSlider, type UsaMicroSliderElement } from './micro-slider';
+import { defineMicroSegmented, type UsaMicroSegmentedElement } from './micro-segmented';
+import { defineMicroStepper, type UsaMicroStepperElement } from './micro-stepper';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -440,6 +448,14 @@ export { defineBarRace, type UsaBarRaceElement };
 export { defineBulletChart, type UsaBulletChartElement };
 export { defineSlopeChart, type UsaSlopeChartElement };
 export { defineDotPlot, type UsaDotPlotElement };
+export { defineMicro, type UsaMicroElement };
+export { defineMicroSwitch, type UsaMicroSwitchElement };
+export { defineMicroCheckbox, type UsaMicroCheckboxElement };
+export { defineMicroInput, type UsaMicroInputElement };
+export { defineMicroButton, type UsaMicroButtonElement, type MicroButtonState };
+export { defineMicroSlider, type UsaMicroSliderElement };
+export { defineMicroSegmented, type UsaMicroSegmentedElement };
+export { defineMicroStepper, type UsaMicroStepperElement };
 export { rovingIndex, copyText, seeded, moveItem, numbers } from './kit-12';
 export { shareUrl, SHARE_TARGETS, type ShareTarget } from './share-button';
 export { tagSize } from './tag-cloud';
@@ -722,6 +738,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.16': { 'usa-micro': defineMicro, 'usa-micro-switch': defineMicroSwitch, 'usa-micro-checkbox': defineMicroCheckbox, 'usa-micro-input': defineMicroInput, 'usa-micro-button': defineMicroButton, 'usa-micro-slider': defineMicroSlider, 'usa-micro-segmented': defineMicroSegmented, 'usa-micro-stepper': defineMicroStepper },
   '17.15': { 'usa-radial-menu': defineRadialMenu, 'usa-hover-card': defineHoverCard, 'usa-toggle-group': defineToggleGroup, 'usa-time-picker': defineTimePicker, 'usa-color-swatches': defineColorSwatches, 'usa-calendar-strip': defineCalendarStrip, 'usa-comparison-table': defineComparisonTable, 'usa-radial-bars': defineRadialBars, 'usa-bar-race': defineBarRace, 'usa-bullet-chart': defineBulletChart, 'usa-slope-chart': defineSlopeChart, 'usa-dot-plot': defineDotPlot },
   '17.14': { 'usa-icon': defineIcon, 'usa-icon-picker': defineIconPicker },
   '17.13': { 'usa-tour': defineTour, 'usa-signature-pad': defineSignaturePad, 'usa-wheel-picker': defineWheelPicker, 'usa-mention-input': defineMentionInput, 'usa-emoji-picker': defineEmojiPicker, 'usa-comment-thread': defineCommentThread, 'usa-diff-viewer': defineDiffViewer, 'usa-line-chart': defineLineChart, 'usa-funnel-chart': defineFunnelChart, 'usa-treemap': defineTreemap, 'usa-gantt': defineGantt, 'usa-waffle-chart': defineWaffleChart, 'usa-split-flap': defineSplitFlap, 'usa-scratch-card': defineScratchCard, 'usa-page-flip': definePageFlip, 'usa-circular-text': defineCircularText, 'usa-pixel-transition': definePixelTransition, 'usa-magnet-lines': defineMagnetLines, 'usa-text-pressure': defineTextPressure, 'usa-shuffle-grid': defineShuffleGrid },
@@ -1004,6 +1021,22 @@ declare global {
     'mo-slope-chart': UsaSlopeChartElement;
     'usa-dot-plot': UsaDotPlotElement;
     'mo-dot-plot': UsaDotPlotElement;
+    'usa-micro': UsaMicroElement;
+    'mo-micro': UsaMicroElement;
+    'usa-micro-switch': UsaMicroSwitchElement;
+    'mo-micro-switch': UsaMicroSwitchElement;
+    'usa-micro-checkbox': UsaMicroCheckboxElement;
+    'mo-micro-checkbox': UsaMicroCheckboxElement;
+    'usa-micro-input': UsaMicroInputElement;
+    'mo-micro-input': UsaMicroInputElement;
+    'usa-micro-button': UsaMicroButtonElement;
+    'mo-micro-button': UsaMicroButtonElement;
+    'usa-micro-slider': UsaMicroSliderElement;
+    'mo-micro-slider': UsaMicroSliderElement;
+    'usa-micro-segmented': UsaMicroSegmentedElement;
+    'mo-micro-segmented': UsaMicroSegmentedElement;
+    'usa-micro-stepper': UsaMicroStepperElement;
+    'mo-micro-stepper': UsaMicroStepperElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

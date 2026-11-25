@@ -2,6 +2,8 @@
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
+ * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
+ * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
  */
 import { defineRipple, type UsaRippleElement } from './ripple';
 import { defineMagnetic, type UsaMagneticElement } from './magnetic';
@@ -11,6 +13,8 @@ import { definePress, type UsaPressElement } from './press';
 
 export { defineRipple, defineMagnetic, defineTilt, defineSpotlight, definePress };
 export type { UsaRippleElement, UsaMagneticElement, UsaTiltElement, UsaSpotlightElement, UsaPressElement };
+export { micro, applyMicro, feedback, microOf, parseMicro, microTransform, readFeel, readSpeed, MICRO_BEHAVIORS, MICRO_FEEDBACK } from './micro';
+export type { MicroBehavior, MicroFeedback, MicroOptions, MicroHandle } from './micro';
 
 /** Register every component of this category under its default tag. */
 export function defineInteractionComponents(): void {

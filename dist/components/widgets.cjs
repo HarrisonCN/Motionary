@@ -130,6 +130,14 @@ var widgets_barRace = require('../widgets/bar-race.cjs');
 var widgets_bulletChart = require('../widgets/bullet-chart.cjs');
 var widgets_slopeChart = require('../widgets/slope-chart.cjs');
 var widgets_dotPlot = require('../widgets/dot-plot.cjs');
+var widgets_micro = require('../widgets/micro.cjs');
+var widgets_microSwitch = require('../widgets/micro-switch.cjs');
+var widgets_microCheckbox = require('../widgets/micro-checkbox.cjs');
+var widgets_microInput = require('../widgets/micro-input.cjs');
+var widgets_microButton = require('../widgets/micro-button.cjs');
+var widgets_microSlider = require('../widgets/micro-slider.cjs');
+var widgets_microSegmented = require('../widgets/micro-segmented.cjs');
+var widgets_microStepper = require('../widgets/micro-stepper.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -749,6 +757,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.16': { 'usa-micro': widgets_micro.defineMicro, 'usa-micro-switch': widgets_microSwitch.defineMicroSwitch, 'usa-micro-checkbox': widgets_microCheckbox.defineMicroCheckbox, 'usa-micro-input': widgets_microInput.defineMicroInput, 'usa-micro-button': widgets_microButton.defineMicroButton, 'usa-micro-slider': widgets_microSlider.defineMicroSlider, 'usa-micro-segmented': widgets_microSegmented.defineMicroSegmented, 'usa-micro-stepper': widgets_microStepper.defineMicroStepper },
     '17.15': { 'usa-radial-menu': widgets_radialMenu.defineRadialMenu, 'usa-hover-card': widgets_hoverCard.defineHoverCard, 'usa-toggle-group': widgets_toggleGroup.defineToggleGroup, 'usa-time-picker': widgets_timePicker.defineTimePicker, 'usa-color-swatches': widgets_colorSwatches.defineColorSwatches, 'usa-calendar-strip': widgets_calendarStrip.defineCalendarStrip, 'usa-comparison-table': widgets_comparisonTable.defineComparisonTable, 'usa-radial-bars': widgets_radialBars.defineRadialBars, 'usa-bar-race': widgets_barRace.defineBarRace, 'usa-bullet-chart': widgets_bulletChart.defineBulletChart, 'usa-slope-chart': widgets_slopeChart.defineSlopeChart, 'usa-dot-plot': widgets_dotPlot.defineDotPlot },
     '17.14': { 'usa-icon': widgets_icon.defineIcon, 'usa-icon-picker': widgets_iconPicker.defineIconPicker },
     '17.13': { 'usa-tour': widgets_tour.defineTour, 'usa-signature-pad': widgets_signaturePad.defineSignaturePad, 'usa-wheel-picker': widgets_wheelPicker.defineWheelPicker, 'usa-mention-input': widgets_mentionInput.defineMentionInput, 'usa-emoji-picker': widgets_emojiPicker.defineEmojiPicker, 'usa-comment-thread': widgets_commentThread.defineCommentThread, 'usa-diff-viewer': widgets_diffViewer.defineDiffViewer, 'usa-line-chart': widgets_lineChart.defineLineChart, 'usa-funnel-chart': widgets_funnelChart.defineFunnelChart, 'usa-treemap': widgets_treemap.defineTreemap, 'usa-gantt': widgets_gantt.defineGantt, 'usa-waffle-chart': widgets_waffleChart.defineWaffleChart, 'usa-split-flap': widgets_splitFlap.defineSplitFlap, 'usa-scratch-card': widgets_scratchCard.defineScratchCard, 'usa-page-flip': widgets_pageFlip.definePageFlip, 'usa-circular-text': widgets_circularText.defineCircularText, 'usa-pixel-transition': widgets_pixelTransition.definePixelTransition, 'usa-magnet-lines': widgets_magnetLines.defineMagnetLines, 'usa-text-pressure': widgets_textPressure.defineTextPressure, 'usa-shuffle-grid': widgets_shuffleGrid.defineShuffleGrid },
@@ -981,6 +990,14 @@ exports.defineBarRace = widgets_barRace.defineBarRace;
 exports.defineBulletChart = widgets_bulletChart.defineBulletChart;
 exports.defineSlopeChart = widgets_slopeChart.defineSlopeChart;
 exports.defineDotPlot = widgets_dotPlot.defineDotPlot;
+exports.defineMicro = widgets_micro.defineMicro;
+exports.defineMicroSwitch = widgets_microSwitch.defineMicroSwitch;
+exports.defineMicroCheckbox = widgets_microCheckbox.defineMicroCheckbox;
+exports.defineMicroInput = widgets_microInput.defineMicroInput;
+exports.defineMicroButton = widgets_microButton.defineMicroButton;
+exports.defineMicroSlider = widgets_microSlider.defineMicroSlider;
+exports.defineMicroSegmented = widgets_microSegmented.defineMicroSegmented;
+exports.defineMicroStepper = widgets_microStepper.defineMicroStepper;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;

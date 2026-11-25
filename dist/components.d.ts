@@ -626,9 +626,325 @@ interface UsaPressElement extends UsaElement {
 declare function definePress(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * Spring physics core (v2.3). A damped harmonic oscillator integrated in
+ * 1 ms steps: `stiffness` (k, N/m), `damping` (c) and `mass` (m). Used by
+ * the `<usa-spring>`, `<usa-draggable>` and `<usa-overscroll>` elements and
+ * exported for your own animations:
+ *
+ * - `springEasing()` turns a spring into a CSS `linear()` easing + duration
+ *   for WAAPI / CSS (falls back to a cubic-bezier overshoot where `linear()`
+ *   is unsupported);
+ * - `spring(el, keyframes, cfg)` animates with it;
+ * - `createSpring()` is an interruptible, velocity-preserving value for
+ *   gestures (drag, inertia, snap).
+ */
+interface SpringConfig {
+    /** Spring stiffness (default 170). Higher = faster, snappier. */
+    stiffness?: number;
+    /** Damping / friction (default 26). Lower = more bounces. */
+    damping?: number;
+    /** Mass (default 1). Higher = slower, heavier. */
+    mass?: number;
+    /** Initial velocity in progress units per second (default 0). */
+    velocity?: number;
+    /** Rest threshold (default 0.001). */
+    precision?: number;
+}
+type SpringPreset = 'default' | 'gentle' | 'wobbly' | 'stiff' | 'bouncy' | 'slow' | 'molasses';
+declare const SPRING_PRESETS: Record<SpringPreset, Required<Pick<SpringConfig, 'stiffness' | 'damping' | 'mass'>>>;
+type SpringInput = SpringPreset | SpringConfig | string | undefined;
+/** Resolve a preset name or a partial config to a full config. */
+declare function resolveSpring(input?: SpringInput): Required<SpringConfig>;
+/** One integration step (semi-implicit Euler) towards `to`. Returns [x, v]. */
+declare function stepSpring(cfg: Required<SpringConfig>, x: number, v: number, to: number, dt: number): [number, number];
+/**
+ * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1
+ * (overshoot); `duration` is the time to rest, in ms (max 10 s).
+ */
+declare function springSamples(input?: SpringInput, fps?: number): {
+    values: number[];
+    duration: number;
+};
+/** `true` when CSS `linear()` easing is supported. */
+declare function supportsLinearEasing(): boolean;
+/**
+ * The spring as `{ easing, duration }` for `el.animate()` / CSS. `easing` is
+ * a `linear(…)` function with at most `points` stops (default 48), or a
+ * cubic-bezier overshoot where `linear()` is unsupported.
+ */
+declare function springEasing(input?: SpringInput, points?: number): {
+    easing: string;
+    duration: number;
+};
+/** Build a CSS `linear()` easing from samples (down-sampled to `points`). */
+declare function linearEasing(values: number[], points?: number): string;
+/**
+ * Animate `el` between keyframes with spring timing (WAAPI). Under reduced
+ * motion the final frame is applied immediately. Returns the Animation (or
+ * `null` without WAAPI / under reduced motion).
+ */
+declare function spring(el: Element, keyframes: Keyframe[], input?: SpringInput, options?: KeyframeAnimationOptions): Animation | null;
+interface SpringValueOptions {
+    /** Start value (default 0). */
+    value?: number;
+    /** Spring config or preset (default `'default'`). */
+    spring?: SpringInput;
+    /** Called with the value every frame (and on `jump()`). */
+    onUpdate?: (value: number, velocity: number) => void;
+    /** Called when the value comes to rest at its target. */
+    onRest?: (value: number) => void;
+}
+interface SpringValue {
+    readonly value: number;
+    /** Units per second. */
+    readonly velocity: number;
+    readonly target: number;
+    readonly animating: boolean;
+    /** Animate to `target`, optionally with a new initial velocity (units/s). */
+    set(target: number, velocity?: number): void;
+    /** Jump to `value` with no animation. */
+    jump(value: number): void;
+    /** Stop where it is. */
+    stop(): void;
+    /** Change the spring config. */
+    configure(spring: SpringInput): void;
+}
+/**
+ * An interruptible spring-animated number: call `set()` as often as you like,
+ * the motion keeps its velocity (like iOS / Framer springs). Reduced motion
+ * jumps straight to the target.
+ */
+declare function createSpring(opts?: SpringValueOptions): SpringValue;
+/**
+ * Where a flick at `velocity` (units/s) comes to rest with exponential
+ * decay: `value + velocity · timeConstant` (default 0.325 s, iOS-like).
+ */
+declare function projectInertia(value: number, velocity: number, timeConstant?: number): number;
+/** Snap to a grid (`number`) or the nearest of a list of points. */
+declare function snapTo(value: number, to: number | number[] | null | undefined): number;
+/** iOS-style rubber-band resistance: how far content moves when pulled `distance` past an edge. */
+declare function rubberBand(distance: number, dimension: number, constant?: number): number;
+
+/**
+ * 17.16 — the spring core of the micro-interaction system.
+ *
+ * - **Exact:** springs are solved in closed form (under-, critically and over-damped), so a value is the same at
+ *   30, 60 or 144 Hz and never drifts or explodes on a long frame. The older `createSpring()` (v2.3, numeric steps)
+ *   stays as it was.
+ * - **Perceptual:** a spring can be given as `{ duration, bounce }` (response time in ms and how much it overshoots,
+ *   -1…1) instead of stiffness / damping / mass; `springFromFeel()` and `springFeel()` convert both ways.
+ * - **Tuned:** `MICRO_SPRINGS` holds sixteen springs for the roles of a micro-interaction (press, release, hover,
+ *   toggle, drag, settle, pop, jelly …), and `MICRO_FEELS` seven feels that retune all of them at once
+ *   (`crisp`, `snappy`, `smooth`, `bouncy`, `playful`, `calm`, `heavy`).
+ * - **Interruptible:** `createSpringGroup()` animates several named values on one frame loop. Retargeting keeps the
+ *   current velocity, `impulse()` adds velocity (a flick, a shake, a pop), and every channel can use its own spring.
+ *   Under reduced motion values jump to their targets and impulses do nothing.
+ */
+/** A spring as response time and bounce. `duration` in ms (default 400); `bounce` from -1 (overdamped) to 1 (default 0). */
+interface SpringFeel {
+    duration?: number;
+    bounce?: number;
+}
+/** Stiffness (N/m), damping (N·s/m) and mass (kg). */
+interface SpringPhysics {
+    stiffness: number;
+    damping: number;
+    mass: number;
+}
+type MicroSpring = 'instant' | 'snappy' | 'smooth' | 'gentle' | 'bouncy' | 'elastic' | 'press' | 'release' | 'hover' | 'toggle' | 'drag' | 'settle' | 'pop' | 'jelly' | 'heavy' | 'feather';
+/** Sixteen springs tuned for the parts of a micro-interaction. */
+declare const MICRO_SPRINGS: Record<MicroSpring, Required<SpringFeel>>;
+type MicroFeel = 'crisp' | 'snappy' | 'smooth' | 'bouncy' | 'playful' | 'calm' | 'heavy';
+/** A feel retunes every role spring: durations are divided by `speed` and `bounce` is added to their bounce. */
+declare const MICRO_FEELS: Record<MicroFeel, {
+    speed: number;
+    bounce: number;
+}>;
+/** `{ duration, bounce }` → stiffness / damping / mass (mass 1 unless given). */
+declare function springFromFeel(feel?: SpringFeel, mass?: number): SpringPhysics;
+/** Stiffness / damping / mass → `{ duration, bounce, dampingRatio }`. */
+declare function springFeel(p: SpringPhysics): {
+    duration: number;
+    bounce: number;
+    dampingRatio: number;
+};
+type MicroSpringInput = MicroSpring | SpringPreset | SpringFeel | SpringPhysics | string | undefined | null;
+/**
+ * Any spring description → physics: a `MICRO_SPRINGS` name, a v2.3 `SPRING_PRESETS` name, `"<duration>[ms] <bounce>"`
+ * (e.g. `"380ms 0.3"`), `{ duration, bounce }` or `{ stiffness, damping, mass }`. `feel` retunes it and `speed`
+ * (e.g. a look's `--mo-kit-speed`) shortens or stretches it. Unknown input is the `smooth` spring.
+ */
+declare function microSpring(input?: MicroSpringInput, feel?: MicroFeel | string | null, speed?: number): SpringPhysics;
+/**
+ * The closed-form motion from `from` towards `to` starting at `velocity` (units/s). Returns a function of elapsed
+ * time in ms that gives `[value, velocity]`.
+ */
+declare function springSolution(p: SpringPhysics, from: number, to: number, velocity?: number): (ms: number) => [number, number];
+/** When a motion from `from` to `to` comes to rest within `precision` (a fraction of the distance; default 0.001), in ms (max 10 s). */
+declare function settleTime(p: SpringPhysics, from?: number, to?: number, velocity?: number, precision?: number): number;
+/** The spring from 0 to 1 as a CSS `linear()` easing and its duration in ms, for `el.animate()` / transitions. */
+declare function microEasing(input?: MicroSpringInput, feel?: MicroFeel | string | null, points?: number): {
+    easing: string;
+    duration: number;
+};
+interface SpringGroupOptions {
+    /** Default spring for every channel (default `smooth`). */
+    spring?: MicroSpringInput;
+    /** Feel that retunes every spring of the group. */
+    feel?: MicroFeel | string | null;
+    /** Speed factor (e.g. a look's `--mo-kit-speed`; default 1). */
+    speed?: number;
+    /** Owner element: the loop stops when it is detached. */
+    owner?: Element;
+    /** Called once per frame (and after `jump()`) with every value. */
+    onUpdate?: (values: Record<string, number>, group: SpringGroup) => void;
+    /** Called when every channel has come to rest. */
+    onRest?: (values: Record<string, number>) => void;
+    /** Rest precision in value units (default 0.001). */
+    precision?: number;
+    /** Ignore reduced motion (for values that are not motion, e.g. a colour mix). */
+    always?: boolean;
+}
+interface SpringGroup {
+    readonly values: Record<string, number>;
+    readonly animating: boolean;
+    get(name: string): number;
+    /** Velocity of a channel, in units per second. */
+    velocity(name: string): number;
+    target(name: string): number;
+    /** Animate channels to new targets. `velocity` replaces their velocity; `spring` sets their spring from now on. */
+    set(targets: Record<string, number>, opts?: {
+        velocity?: Record<string, number>;
+        spring?: MicroSpringInput;
+    }): void;
+    /** Add velocity (units/s) to channels; they spring back to their targets. Optionally with a one-off spring. */
+    impulse(velocities: Record<string, number>, spring?: MicroSpringInput): void;
+    /** Move channels at once, with no motion. */
+    jump(values: Record<string, number>): void;
+    /** Change the default spring, feel or speed (running channels keep theirs until set again). */
+    configure(opts: {
+        spring?: MicroSpringInput;
+        feel?: MicroFeel | string | null;
+        speed?: number;
+    }): void;
+    /** Stop every channel where it is. */
+    stop(): void;
+}
+/**
+ * Several spring-animated numbers that share one frame loop (on the motion clock, so `setClock()` slows or pauses
+ * them too). Retargeting keeps velocity; each channel keeps the spring it was last set with.
+ */
+declare function createSpringGroup(initial: Record<string, number>, opts?: SpringGroupOptions): SpringGroup;
+
+/**
+ * 17.16 micro-interaction engine. `micro(el, 'press hover glow')` gives any element spring-driven feedback; every
+ * behaviour writes into one spring group per element and one `transform` per frame, so press, hover, tilt, a magnet
+ * pull and a shake all add up instead of fighting over the same property. `data-mo-micro="…"` + `applyMicro()` does
+ * the same from markup, and `<mo-micro>` wraps any content.
+ *
+ * Behaviours: `press` (dips and springs back with a little overshoot), `hover` (grows a touch), `lift` (rises with a
+ * deepening shadow), `magnetic` (leans toward the pointer and snaps back keeping the pointer's speed), `tilt`
+ * (3D tilt toward the pointer), `glow` (a light that follows the pointer, in the look's accent), `squish`
+ * (squashes while pressed and wobbles back), `drag` (1:1 drag with rubber-band bounds, a flick that keeps its
+ * speed, and grid snapping; arrow keys move it when focused) and `focus` (a focus ring that springs in).
+ *
+ * Feedback impulses (`feedback(el, kind)`): `shake`, `nod`, `pop`, `wiggle`, `jelly`, `nudge`, `bump`,
+ * `attention`. They add velocity to the same springs, so they mix with whatever the element is already doing.
+ *
+ * The feel comes from `opts.feel`, the closest `[data-mo-feel]` or the `--mo-feel` custom property; a look's
+ * `--mo-kit-speed` speeds it up or slows it down. Reduced motion: nothing moves; feedback shows a short outline in
+ * the look's ok / bad / accent colour instead.
+ */
+type MicroBehavior = 'press' | 'hover' | 'lift' | 'magnetic' | 'tilt' | 'glow' | 'squish' | 'drag' | 'focus';
+declare const MICRO_BEHAVIORS: readonly MicroBehavior[];
+type MicroFeedback = 'shake' | 'nod' | 'pop' | 'wiggle' | 'jelly' | 'nudge' | 'bump' | 'attention';
+declare const MICRO_FEEDBACK: readonly MicroFeedback[];
+interface MicroOptions {
+    /** Feel for every spring (`crisp`, `snappy`, `smooth`, `bouncy`, `playful`, `calm`, `heavy`). */
+    feel?: MicroFeel | string | null;
+    /** Replace every role spring with one spring (preset name, `"380ms 0.3"`, `{ duration, bounce }` …). */
+    spring?: MicroSpringInput;
+    /** Short vibrations on press and feedback where the device supports them (off by default). */
+    haptics?: boolean;
+    /** Pressed scale (default 0.96). */
+    pressScale?: number;
+    /** Hover scale (default 1.03). */
+    hoverScale?: number;
+    /** Lift in px (default 4). */
+    lift?: number;
+    /** Magnet pull, 0–1 of the pointer offset (default 0.35). */
+    strength?: number;
+    /** Farthest magnet pull in px (default 14). */
+    reach?: number;
+    /** Largest tilt in degrees (default 8). */
+    tilt?: number;
+    /** Drag bounds: `'parent'` (default), `'none'` or an element. */
+    bounds?: 'parent' | 'none' | Element;
+    /** Drag snapping grid in px (default none). */
+    snap?: number;
+    /** Drag axis (default `'both'`). */
+    axis?: 'x' | 'y' | 'both';
+    /** Ignore pointer and keys (feedback still plays). */
+    disabled?: boolean;
+    onPress?: () => void;
+    onRelease?: () => void;
+    onDragEnd?: (pos: {
+        x: number;
+        y: number;
+    }) => void;
+}
+interface MicroHandle {
+    readonly el: HTMLElement;
+    readonly fx: readonly MicroBehavior[];
+    readonly group: SpringGroup;
+    /** Play a feedback impulse. */
+    feedback(kind: MicroFeedback | string): void;
+    /** Change behaviours and / or options. */
+    update(fx?: string | readonly string[], opts?: MicroOptions): void;
+    /** Drag offset in px. */
+    readonly position: {
+        x: number;
+        y: number;
+    };
+    /** Move a draggable element (springs there unless `instant`). */
+    moveTo(x: number, y: number, instant?: boolean): void;
+    destroy(): void;
+}
+/** Split a behaviour list (`"press hover, glow"`) into known behaviours, in order, without repeats. */
+declare function parseMicro(spec: string | readonly string[] | null | undefined): MicroBehavior[];
+/** The feel that applies to `el`: its closest `[data-mo-feel]`, else the `--mo-feel` custom property, else `null`. */
+declare function readFeel(el: Element): string | null;
+/** A look's `--mo-kit-speed` on `el` (1 when unset). */
+declare function readSpeed(el: Element): number;
+/** Channel values → the composed CSS transform (`''` at rest). */
+declare function microTransform(v: Record<string, number>, o?: {
+    pressScale?: number;
+    hoverScale?: number;
+    perspective?: boolean;
+}): string;
+/** The micro handle of `el`, if it has one. */
+declare const microOf: (el: Element) => MicroHandle | undefined;
+/** Give `el` spring micro-interactions. Calling it again on the same element updates it. */
+declare function micro(el: HTMLElement, fx?: string | readonly string[], opts?: MicroOptions): MicroHandle;
+/**
+ * Play a feedback impulse on any element (`shake` for an error, `nod` / `pop` for success, `wiggle`, `jelly`,
+ * `nudge`, `bump`, `attention`). Elements without `micro()` get a temporary handle that goes away when they settle.
+ */
+declare function feedback(el: HTMLElement, kind: MicroFeedback | string, opts?: Pick<MicroOptions, 'feel' | 'haptics'>): void;
+/**
+ * Wire every `[data-mo-micro]` element under `root` (default `document`) and keep watching for new, changed and
+ * removed ones. Options come from `data-mo-*` attributes (`data-mo-feel`, `data-mo-spring`, `data-mo-haptics`,
+ * `data-mo-press-scale`, `data-mo-hover-scale`, `data-mo-lift`, `data-mo-strength`, `data-mo-reach`, `data-mo-tilt`,
+ * `data-mo-snap`, `data-mo-axis`, `data-mo-bounds`). Returns a function that stops watching and undoes it all.
+ */
+declare function applyMicro(root?: ParentNode): () => void;
+
+/**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
+ * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
+ * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
  */
 
 /** Register every component of this category under its default tag. */
@@ -1103,111 +1419,14 @@ interface UsaOverscrollElement extends UsaElement {
 declare function defineOverscroll(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * Spring physics core (v2.3). A damped harmonic oscillator integrated in
- * 1 ms steps: `stiffness` (k, N/m), `damping` (c) and `mass` (m). Used by
- * the `<usa-spring>`, `<usa-draggable>` and `<usa-overscroll>` elements and
- * exported for your own animations:
- *
- * - `springEasing()` turns a spring into a CSS `linear()` easing + duration
- *   for WAAPI / CSS (falls back to a cubic-bezier overshoot where `linear()`
- *   is unsupported);
- * - `spring(el, keyframes, cfg)` animates with it;
- * - `createSpring()` is an interruptible, velocity-preserving value for
- *   gestures (drag, inertia, snap).
- */
-interface SpringConfig {
-    /** Spring stiffness (default 170). Higher = faster, snappier. */
-    stiffness?: number;
-    /** Damping / friction (default 26). Lower = more bounces. */
-    damping?: number;
-    /** Mass (default 1). Higher = slower, heavier. */
-    mass?: number;
-    /** Initial velocity in progress units per second (default 0). */
-    velocity?: number;
-    /** Rest threshold (default 0.001). */
-    precision?: number;
-}
-type SpringPreset = 'default' | 'gentle' | 'wobbly' | 'stiff' | 'bouncy' | 'slow' | 'molasses';
-declare const SPRING_PRESETS: Record<SpringPreset, Required<Pick<SpringConfig, 'stiffness' | 'damping' | 'mass'>>>;
-type SpringInput = SpringPreset | SpringConfig | string | undefined;
-/** Resolve a preset name or a partial config to a full config. */
-declare function resolveSpring(input?: SpringInput): Required<SpringConfig>;
-/** One integration step (semi-implicit Euler) towards `to`. Returns [x, v]. */
-declare function stepSpring(cfg: Required<SpringConfig>, x: number, v: number, to: number, dt: number): [number, number];
-/**
- * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1
- * (overshoot); `duration` is the time to rest, in ms (max 10 s).
- */
-declare function springSamples(input?: SpringInput, fps?: number): {
-    values: number[];
-    duration: number;
-};
-/** `true` when CSS `linear()` easing is supported. */
-declare function supportsLinearEasing(): boolean;
-/**
- * The spring as `{ easing, duration }` for `el.animate()` / CSS. `easing` is
- * a `linear(…)` function with at most `points` stops (default 48), or a
- * cubic-bezier overshoot where `linear()` is unsupported.
- */
-declare function springEasing(input?: SpringInput, points?: number): {
-    easing: string;
-    duration: number;
-};
-/** Build a CSS `linear()` easing from samples (down-sampled to `points`). */
-declare function linearEasing(values: number[], points?: number): string;
-/**
- * Animate `el` between keyframes with spring timing (WAAPI). Under reduced
- * motion the final frame is applied immediately. Returns the Animation (or
- * `null` without WAAPI / under reduced motion).
- */
-declare function spring(el: Element, keyframes: Keyframe[], input?: SpringInput, options?: KeyframeAnimationOptions): Animation | null;
-interface SpringValueOptions {
-    /** Start value (default 0). */
-    value?: number;
-    /** Spring config or preset (default `'default'`). */
-    spring?: SpringInput;
-    /** Called with the value every frame (and on `jump()`). */
-    onUpdate?: (value: number, velocity: number) => void;
-    /** Called when the value comes to rest at its target. */
-    onRest?: (value: number) => void;
-}
-interface SpringValue {
-    readonly value: number;
-    /** Units per second. */
-    readonly velocity: number;
-    readonly target: number;
-    readonly animating: boolean;
-    /** Animate to `target`, optionally with a new initial velocity (units/s). */
-    set(target: number, velocity?: number): void;
-    /** Jump to `value` with no animation. */
-    jump(value: number): void;
-    /** Stop where it is. */
-    stop(): void;
-    /** Change the spring config. */
-    configure(spring: SpringInput): void;
-}
-/**
- * An interruptible spring-animated number: call `set()` as often as you like,
- * the motion keeps its velocity (like iOS / Framer springs). Reduced motion
- * jumps straight to the target.
- */
-declare function createSpring(opts?: SpringValueOptions): SpringValue;
-/**
- * Where a flick at `velocity` (units/s) comes to rest with exponential
- * decay: `value + velocity · timeConstant` (default 0.325 s, iOS-like).
- */
-declare function projectInertia(value: number, velocity: number, timeConstant?: number): number;
-/** Snap to a grid (`number`) or the nearest of a list of points. */
-declare function snapTo(value: number, to: number | number[] | null | undefined): number;
-/** iOS-style rubber-band resistance: how far content moves when pulled `distance` past an edge. */
-declare function rubberBand(distance: number, dimension: number, constant?: number): number;
-
-/**
  * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 
 /** Register every component of this category under its default tag. */
@@ -3015,5 +3234,5 @@ declare global {
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BaselineFeature, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, EffectContext, EffectDefinition, EffectKind, EffectTrigger, FlipOptions, FluentPresetOptions, GLGovernor, GLGovernorOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionSwitchLevel, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, ParticlePreset, PinchState, Placement, Politeness, PostEffect, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaFxElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MICRO_BEHAVIORS, MICRO_FEEDBACK, MICRO_FEELS, MICRO_SPRINGS, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMicro, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, createSpringGroup, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, feedback, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, micro, microEasing, microOf, microSpring, microTransform, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseMicro, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readFeel, readScrollProgress, readSpeed, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, settleTime, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springFeel, springFromFeel, springSamples, springSolution, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
+export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BaselineFeature, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, EffectContext, EffectDefinition, EffectKind, EffectTrigger, FlipOptions, FluentPresetOptions, GLGovernor, GLGovernorOptions, GLQuad, GestureHandlers, GestureOptions, MicroBehavior, MicroFeedback, MicroFeel, MicroHandle, MicroOptions, MicroSpring, MicroSpringInput, MorphOptions, MotionIntensity, MotionSensitivity, MotionSwitchLevel, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, ParticlePreset, PinchState, Placement, Politeness, PostEffect, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringFeel, SpringGroup, SpringGroupOptions, SpringInput, SpringPhysics, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaFxElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

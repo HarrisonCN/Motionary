@@ -53,8 +53,8 @@ describe('17.15 registration', () => {
     for (const name of TAGS) expect(lab).toContain(`<mo-${name}`);
     expect(read('showcase/index.html')).toContain('./toolkit.html');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
-    const tab = (COLLECTIONS as any[])[0];
-    expect(tab.id).toBe('toolkit');
+    const tab = (COLLECTIONS as any[]).find((c) => c.id === 'toolkit');
+    expect(tab).toBeTruthy();
     expect(tab.since).toBe('17.15');
     expect(tab.items.map((i: any) => i.id).sort()).toEqual([...TAGS].sort());
     expect(tab.total).toBe(TAGS.length);

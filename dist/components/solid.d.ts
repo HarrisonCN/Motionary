@@ -401,6 +401,8 @@ interface UsaPressElement extends UsaElement {
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
+ * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
+ * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
  */
 
 declare global {
@@ -778,6 +780,9 @@ interface UsaOverscrollElement extends UsaElement {
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
  * `SPRING_PRESETS`, `projectInertia()`, `snapTo()`, `rubberBand()`.
+ * 17.16 adds the exact spring solver of the micro-interaction system: `springSolution()`, `springFromFeel()` /
+ * `springFeel()` (duration + bounce), `microSpring()`, `MICRO_SPRINGS`, `MICRO_FEELS`, `settleTime()`,
+ * `microEasing()` and `createSpringGroup()`.
  */
 
 declare global {
@@ -2957,6 +2962,106 @@ interface LegacyAttributes {
         max?: string | boolean | number;
         running?: string | boolean | number;
         title?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro': {
+        axis?: string | boolean | number;
+        bounds?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feedback?: string | boolean | number;
+        feel?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        'hover-scale'?: string | boolean | number;
+        lift?: string | boolean | number;
+        'press-scale'?: string | boolean | number;
+        reach?: string | boolean | number;
+        snap?: string | boolean | number;
+        spring?: string | boolean | number;
+        strength?: string | boolean | number;
+        tilt?: string | boolean | number;
+    };
+    'usa-micro-button': {
+        disabled?: string | boolean | number;
+        'error-label'?: string | boolean | number;
+        feel?: string | boolean | number;
+        fx?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        'loading-label'?: string | boolean | number;
+        reset?: string | boolean | number;
+        state?: string | boolean | number;
+        'success-label'?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    'usa-micro-checkbox': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        indeterminate?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-input': {
+        autocomplete?: string | boolean | number;
+        disabled?: string | boolean | number;
+        error?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        minlength?: string | boolean | number;
+        name?: string | boolean | number;
+        pattern?: string | boolean | number;
+        required?: string | boolean | number;
+        success?: string | boolean | number;
+        type?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-segmented': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    'usa-micro-slider': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-stepper': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-micro-switch': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
         value?: string | boolean | number;
     };
     'usa-milestones': {

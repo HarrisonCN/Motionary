@@ -1,0 +1,12 @@
+/* 17.16 micro-interaction engine: the parts of micro() that live in CSS (glow light, lift shadow, spring focus ring, drag cursor, reduced-motion flash) */
+[data-mo-micro] {-webkit-tap-highlight-color:transparent}
+[data-mo-micro~="glow"] {position:relative; isolation:isolate}
+[data-mo-micro~="glow"]::after {content:""; position:absolute; inset:0; z-index:1; border-radius:inherit; pointer-events:none; opacity:var(--mo-micro-glow, 0); background:radial-gradient(circle at var(--mo-micro-gx, 50%) var(--mo-micro-gy, 50%), color-mix(in srgb, var(--mo-micro-glow-color, var(--mo-kit-accent, #6366f1)) 42%, transparent), transparent 62%)}
+[data-mo-micro~="lift"] {box-shadow:0 calc(var(--mo-micro-lift, 0) * 1.6px) calc(4px + var(--mo-micro-lift, 0) * 4px) color-mix(in srgb, var(--mo-micro-shadow-color, #000) calc(8% + var(--mo-micro-lift, 0) * 2.5%), transparent)}
+[data-mo-micro~="focus"]:is(:focus-visible, :has(:focus-visible)) {outline:2px solid var(--mo-micro-ring, var(--mo-kit-accent, #6366f1)); outline-offset:calc(2px + (1 - var(--mo-micro-focus, 1)) * 6px)}
+[data-mo-micro~="drag"] {touch-action:none; cursor:grab; -webkit-user-select:none; user-select:none}
+[data-mo-micro~="drag"][data-mo-dragging] {cursor:grabbing}
+[data-mo-micro-flash] {outline:2px solid var(--mo-kit-accent, #6366f1); outline-offset:2px}
+[data-mo-micro-flash="error"] {outline-color:var(--mo-kit-bad, #dc2626)}
+[data-mo-micro-flash="success"] {outline-color:var(--mo-kit-ok, #16a34a)}
+@media (prefers-reduced-motion: reduce) { [data-mo-micro~="focus"]:is(:focus-visible, :has(:focus-visible)) {outline-offset:2px} }

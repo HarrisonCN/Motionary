@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 392 animated Web Components (91 core, 301 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 400 animated Web Components (91 core, 309 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,86 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/micro": {
+      "import": {
+        "types": "./dist/widgets/micro.d.ts",
+        "default": "./dist/widgets/micro.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro.d.cts",
+        "default": "./dist/widgets/micro.cjs"
+      }
+    },
+    "./widgets/micro-switch": {
+      "import": {
+        "types": "./dist/widgets/micro-switch.d.ts",
+        "default": "./dist/widgets/micro-switch.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-switch.d.cts",
+        "default": "./dist/widgets/micro-switch.cjs"
+      }
+    },
+    "./widgets/micro-checkbox": {
+      "import": {
+        "types": "./dist/widgets/micro-checkbox.d.ts",
+        "default": "./dist/widgets/micro-checkbox.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-checkbox.d.cts",
+        "default": "./dist/widgets/micro-checkbox.cjs"
+      }
+    },
+    "./widgets/micro-input": {
+      "import": {
+        "types": "./dist/widgets/micro-input.d.ts",
+        "default": "./dist/widgets/micro-input.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-input.d.cts",
+        "default": "./dist/widgets/micro-input.cjs"
+      }
+    },
+    "./widgets/micro-button": {
+      "import": {
+        "types": "./dist/widgets/micro-button.d.ts",
+        "default": "./dist/widgets/micro-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-button.d.cts",
+        "default": "./dist/widgets/micro-button.cjs"
+      }
+    },
+    "./widgets/micro-slider": {
+      "import": {
+        "types": "./dist/widgets/micro-slider.d.ts",
+        "default": "./dist/widgets/micro-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-slider.d.cts",
+        "default": "./dist/widgets/micro-slider.cjs"
+      }
+    },
+    "./widgets/micro-segmented": {
+      "import": {
+        "types": "./dist/widgets/micro-segmented.d.ts",
+        "default": "./dist/widgets/micro-segmented.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-segmented.d.cts",
+        "default": "./dist/widgets/micro-segmented.cjs"
+      }
+    },
+    "./widgets/micro-stepper": {
+      "import": {
+        "types": "./dist/widgets/micro-stepper.d.ts",
+        "default": "./dist/widgets/micro-stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/micro-stepper.d.cts",
+        "default": "./dist/widgets/micro-stepper.cjs"
       }
     },
     "./widgets/radial-menu": {

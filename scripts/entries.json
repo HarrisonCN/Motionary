@@ -1587,6 +1587,110 @@
  },
  {
   "kind": "widget",
+  "name": "micro",
+  "entry": "motionary/widgets/micro",
+  "src": "src/entries/widgets/micro.ts",
+  "tag": "usa-micro",
+  "define": "defineMicro",
+  "types": [
+   "UsaMicroElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-wrap"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-switch",
+  "entry": "motionary/widgets/micro-switch",
+  "src": "src/entries/widgets/micro-switch.ts",
+  "tag": "usa-micro-switch",
+  "define": "defineMicroSwitch",
+  "types": [
+   "UsaMicroSwitchElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-switch"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-checkbox",
+  "entry": "motionary/widgets/micro-checkbox",
+  "src": "src/entries/widgets/micro-checkbox.ts",
+  "tag": "usa-micro-checkbox",
+  "define": "defineMicroCheckbox",
+  "types": [
+   "UsaMicroCheckboxElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-checkbox"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-input",
+  "entry": "motionary/widgets/micro-input",
+  "src": "src/entries/widgets/micro-input.ts",
+  "tag": "usa-micro-input",
+  "define": "defineMicroInput",
+  "types": [
+   "UsaMicroInputElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-input"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-button",
+  "entry": "motionary/widgets/micro-button",
+  "src": "src/entries/widgets/micro-button.ts",
+  "tag": "usa-micro-button",
+  "define": "defineMicroButton",
+  "types": [
+   "UsaMicroButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-button"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-slider",
+  "entry": "motionary/widgets/micro-slider",
+  "src": "src/entries/widgets/micro-slider.ts",
+  "tag": "usa-micro-slider",
+  "define": "defineMicroSlider",
+  "types": [
+   "UsaMicroSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-segmented",
+  "entry": "motionary/widgets/micro-segmented",
+  "src": "src/entries/widgets/micro-segmented.ts",
+  "tag": "usa-micro-segmented",
+  "define": "defineMicroSegmented",
+  "types": [
+   "UsaMicroSegmentedElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-segmented"
+ },
+ {
+  "kind": "widget",
+  "name": "micro-stepper",
+  "entry": "motionary/widgets/micro-stepper",
+  "src": "src/entries/widgets/micro-stepper.ts",
+  "tag": "usa-micro-stepper",
+  "define": "defineMicroStepper",
+  "types": [
+   "UsaMicroStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/micro-stepper"
+ },
+ {
+  "kind": "widget",
   "name": "radial-menu",
   "entry": "motionary/widgets/radial-menu",
   "src": "src/entries/widgets/radial-menu.ts",
