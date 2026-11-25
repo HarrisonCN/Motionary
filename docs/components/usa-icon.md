@@ -4,7 +4,7 @@
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-One of 253 original line icons in the text colour, with twelve motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view.
+One of 503 original line icons in the text colour, with twelve motions (spin, pulse, beat, bounce, wiggle, shake, ring, float, flip, draw, pop, blink) on loop, hover, click or view.
 
 - **Category:** svg · **since** 17.14
 - **Import:** `import { defineIcon } from 'motionary/components/widgets'` then `defineIcon();`

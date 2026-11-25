@@ -29,8 +29,8 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 export const COLLECTIONS = [
   {
     id: 'icons', since: '17.14', page: './icons.html',
-    title: { en: '253 icons', zh: '253 个图标' },
-    blurb: { en: 'Original line icons in 14 categories, with a searchable picker and twelve motions.', zh: '14 类原创线条图标，带可搜索的选择器和 12 种动效。' },
+    title: { en: '503 icons', zh: '503 个图标' },
+    blurb: { en: 'Original line icons in 24 categories, with a searchable picker and twelve motions.', zh: '24 类原创线条图标，带可搜索的选择器和 12 种动效。' },
     items: pick(icons, 'icon-picker icon'),
     total: icons.length,
   },

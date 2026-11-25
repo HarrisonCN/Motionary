@@ -28,15 +28,15 @@ const events = (el: Element, type: string) => {
 const key = (el: Element, k: string) => el.dispatchEvent(new KeyboardEvent('keydown', { key: k, bubbles: true, cancelable: true }));
 
 describe('17.14 icon set', () => {
-  it('has 253 icons in 14 categories, each name unique and every drawing different', () => {
+  it('has 503 icons in 24 categories (253 from 17.14, 250 from 17.15), each name unique and every drawing different', () => {
     expect(ICON_CATEGORIES.map((c) => c.id)).toEqual(Object.keys(ICON_GROUPS));
-    expect(ICON_CATEGORIES).toHaveLength(14);
+    expect(ICON_CATEGORIES).toHaveLength(24);
     const names = Object.values(ICON_GROUPS).flatMap((g) => Object.keys(g));
-    expect(names).toHaveLength(253);
-    expect(new Set(names).size).toBe(253);
+    expect(names).toHaveLength(503);
+    expect(new Set(names).size).toBe(503);
     expect(Object.keys(ICONS)).toEqual(names);
     expect(iconNames()).toEqual(names);
-    expect(new Set(Object.values(ICONS)).size).toBe(253);
+    expect(new Set(Object.values(ICONS)).size).toBe(503);
     for (const c of ICON_CATEGORIES) {
       expect(c.en && c.zh, c.id).toBeTruthy();
       expect(iconNames(c.id).length, c.id).toBeGreaterThanOrEqual(8);
@@ -95,7 +95,7 @@ describe('17.14 icon set', () => {
   });
 
   it('searchIcons matches every word against names and category names, in either language', () => {
-    expect(searchIcons('')).toHaveLength(253);
+    expect(searchIcons('')).toHaveLength(503);
     // a category name counts as a word of every icon in it, so 'arrow' keeps the chevrons
     expect(searchIcons('arrow up')).toEqual(['arrow-up', 'arrow-up-right', 'arrow-up-left', 'chevron-up', 'chevrons-up']);
     expect(searchIcons('cloud')).toEqual(['cloud', 'cloud-rain', 'cloud-snow', 'cloud-lightning', 'cloud-drizzle', 'cloud-sun']);
@@ -234,9 +234,9 @@ describe('17.14 <mo-icon-picker>', () => {
   it('shows every icon with a count, filters by search and category, and says when nothing matches', () => {
     const el = mount<any>('<mo-icon-picker></mo-icon-picker>');
     const btns = () => Array.from(el.querySelectorAll('.usa-ipick-btn')).filter((b: any) => !b.hidden) as HTMLButtonElement[];
-    expect(btns()).toHaveLength(253);
-    expect(el.querySelector('.usa-ipick-count').textContent).toBe('253 icons');
-    expect(el.querySelectorAll('.usa-ipick-cat')).toHaveLength(15);
+    expect(btns()).toHaveLength(503);
+    expect(el.querySelector('.usa-ipick-count').textContent).toBe('503 icons');
+    expect(el.querySelectorAll('.usa-ipick-cat')).toHaveLength(25);
     const input = el.querySelector('input[type="search"]') as HTMLInputElement;
     expect(input.getAttribute('aria-label')).toBe('Search icons');
     input.value = 'arrow';
@@ -318,7 +318,7 @@ describe('17.14 icons: showcase and docs', () => {
     const page = read('showcase/icons.html');
     expect(page).toContain('<mo-icon-picker');
     expect(page).toContain("defineWidgets('17.14')");
-    expect(page).toContain('253');
+    expect(page).toContain('503');
     expect(read('showcase/index.html')).toContain('./icons.html');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
     const tab = (COLLECTIONS as any[])[0];
@@ -331,7 +331,7 @@ describe('17.14 icons: showcase and docs', () => {
     const doc = read('docs/icons-17-14.md');
     for (const n of iconNames()) expect(doc, n).toContain(`\`${n}\``);
     for (const m of ICON_MOTIONS) expect(doc, m).toContain(`\`${m}\``);
-    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('253');
-    expect(read('CHANGELOG.md')).toContain('253 icons');
+    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('503');
+    expect(read('CHANGELOG.md')).toContain('503 icons');
   });
 });

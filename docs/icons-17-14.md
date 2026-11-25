@@ -1,6 +1,7 @@
 # Icons (17.14)
 
-Motionary 17.14 adds an icon section: **253 original line icons** in 14 categories, an `<mo-icon>` element that draws
+Motionary 17.14 adds an icon section: **503 original line icons** in 24 categories (17.15 added ten categories and
+250 icons to the first 253), an `<mo-icon>` element that draws
 one of them and can play one of twelve small motions, and an `<mo-icon-picker>` to search and pick them. Every icon was
 drawn for Motionary on a 24 × 24 grid with a 2px round stroke and no fill, so a set of them reads as one family. The
 lines are stroked with `currentColor`, so an icon takes the colour of the text around it, in light and dark themes alike.
@@ -91,7 +92,9 @@ iconNames('weather');                                    // the 18 weather icons
 category. Each entry of `ICONS` is a short list of shapes separated by `;`: `c cx cy r` is a circle, `r x y w h [radius]`
 a rectangle, and anything else SVG path data.
 
-## All 253 icons
+## All 503 icons
+
+17.15 added the last ten categories (250 icons), from Development to Tools.
 
 | Category | Count | Icons |
 |---|---|---|
@@ -109,3 +112,13 @@ a rectangle, and anything else SVG path data.
 | Nature (`nature`, 自然) | 12 | `leaf` `tree` `flower` `mountain` `sprout` `paw` `fish` `bug` `feather` `flame` `planet` `sparkles` |
 | Shapes (`shapes`, 形状) | 16 | `circle` `square` `triangle` `diamond` `pentagon` `hexagon` `octagon` `cross` `shield` `crown` `infinity` `target` `layers` `cube` `spiral` `pie` |
 | Time (`time`, 时间) | 8 | `clock` `alarm` `calendar` `calendar-check` `calendar-days` `hourglass` `timer` `history` |
+| Development (`development`, 开发) | 25 | `git-branch` `git-commit` `git-merge` `git-pull-request` `git-fork` `git-compare` `braces` `brackets` `function` `variable` `api` `webhook` `regex` `binary` `command` `component` `rocket` `bot` `workflow` `diff` `sitemap` `app-window` `layout` `blocks` `puzzle` |
+| Security (`security`, 安全) | 25 | `shield-check` `shield-alert` `shield-off` `shield-plus` `shield-x` `key` `passkey` `fingerprint` `scan-face` `scan` `lock-keyhole` `password` `id-badge` `id-card` `siren` `virus` `firewall` `incognito` `vault` `cctv` `hazard` `verified` `user-lock` `ban` `radar` |
+| Health (`health`, 健康) | 25 | `heart-pulse` `activity` `stethoscope` `pill` `capsule` `syringe` `bandage` `first-aid` `hospital` `ambulance` `dna` `microscope` `brain` `bone` `tooth` `weight` `wheelchair` `accessibility` `medical-record` `face-mask` `blood-type` `baby` `yoga` `lungs` `heart-plus` |
+| Food & drink (`food`, 餐饮) | 25 | `coffee` `cup` `wine` `beer` `cocktail` `utensils` `chef-hat` `pizza` `apple` `cherry` `carrot` `egg` `bread` `cake` `cookie` `ice-cream` `lollipop` `soup` `popcorn` `salad` `milk` `bottle` `citrus` `grapes` `burger` |
+| Household (`household`, 家居) | 25 | `sofa` `bed` `lamp` `lightbulb` `door` `window` `armchair` `bath` `shower` `washing-machine` `fridge` `microwave` `fan` `potted-plant` `broom` `bucket` `hanger` `shirt` `outlet` `thermostat` `garage` `curtains` `mirror` `stairs` `iron` |
+| Sports (`sports`, 运动) | 25 | `dumbbell` `trophy` `medal` `soccer` `basketball` `tennis` `volleyball` `rugby` `golf` `bowling` `swim` `running` `skateboard` `skiing` `whistle` `stopwatch` `darts` `boxing-glove` `racket` `tent` `podium` `race-flag` `helmet` `kettlebell` `jump-rope` |
+| Education (`education`, 教育) | 25 | `book` `book-open` `notebook` `graduation-cap` `school` `backpack` `pencil` `ruler` `calculator` `abacus` `desk-globe` `atom` `flask` `test-tube` `library` `presentation` `blackboard` `certificate` `exam` `books` `telescope` `math-compass` `highlighter` `alphabet` `sticky-note` |
+| Finance (`finance`, 金融) | 25 | `bank` `piggy-bank` `coin` `euro` `pound` `yen` `bitcoin` `rupee` `invoice` `hand-coins` `atm` `cheque` `balance` `briefcase` `handshake` `tax-receipt` `gem` `gold-bars` `currency-exchange` `mortgage` `insurance` `ledger` `transfer` `cash` `safe` |
+| Charts & data (`charts`, 图表) | 25 | `chart-line` `chart-area` `chart-column` `chart-bars` `chart-pie` `chart-donut` `chart-scatter` `chart-candles` `chart-radar` `funnel` `gauge` `sparkline` `histogram` `chart-stacked` `waterfall` `heatmap` `gantt` `table` `kanban` `dashboard` `graph-nodes` `flowchart` `progress-bar` `progress-ring` `sum` |
+| Tools (`tools`, 工具) | 25 | `hammer` `wrench` `screwdriver` `saw` `drill` `paintbrush` `paint-roller` `palette` `eyedropper` `magnet` `toolbox` `nut` `screw` `pliers` `shovel` `axe` `ladder` `tape-measure` `spirit-level` `flashlight` `gears` `anvil` `needle` `clamp` `trowel` |

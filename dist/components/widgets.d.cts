@@ -2007,7 +2007,7 @@ type IconTrigger = (typeof ICON_TRIGGERS)[number];
 /** An icon's `<svg>` element, built with DOM calls (no markup parsing). Unknown names give an empty svg. */
 declare function iconElement(name: string): SVGSVGElement;
 /**
- * One icon from the built-in set of 253 line icons (`ICONS`, see docs/icons-17-14.md), drawn with `currentColor` so it
+ * One icon from the built-in set of 503 line icons (`ICONS`, see docs/icons-17-14.md), drawn with `currentColor` so it
  * takes the colour of the text around it. It can play one of twelve small motions: `spin`, `pulse`, `beat`, `bounce`,
  * `wiggle`, `shake`, `ring`, `float`, `flip`, `draw` (the lines trace themselves), `pop` and `blink`, either on a loop,
  * on hover or focus of the nearest button or link (or the icon itself), on click, or once when it scrolls into view.
@@ -5884,8 +5884,8 @@ declare function moveItem<T>(list: readonly T[], from: number, to: number): T[];
 declare function numbers(text: string, max?: number): number[];
 
 /**
- * The built-in icon set (17.14): 253 original line icons drawn on a 24 × 24 grid with a 2px round stroke, grouped in
- * 14 categories. Each icon is a short list of shapes separated by `;`:
+ * The built-in icon set: 503 original line icons drawn on a 24 × 24 grid with a 2px round stroke, grouped in
+ * 24 categories (17.14 drew the first 253 in 14 categories; 17.15 added 250 more in 10 new ones). Each icon is a short list of shapes separated by `;`:
  *
  * - `c cx cy r` is a circle,
  * - `r x y width height [radius]` is a rectangle,
@@ -5894,7 +5894,7 @@ declare function numbers(text: string, max?: number): number[];
  * `iconParts()` turns one into element descriptions, `iconSvg()` into markup, and `searchIcons()` filters the set.
  * The shapes carry no colour: they are stroked with `currentColor`, so an icon takes the colour of its text.
  */
-type IconCategory = 'arrows' | 'interface' | 'media' | 'files' | 'communication' | 'devices' | 'weather' | 'commerce' | 'editor' | 'travel' | 'people' | 'nature' | 'shapes' | 'time';
+type IconCategory = 'arrows' | 'interface' | 'media' | 'files' | 'communication' | 'devices' | 'weather' | 'commerce' | 'editor' | 'travel' | 'people' | 'nature' | 'shapes' | 'time' | 'development' | 'security' | 'health' | 'food' | 'household' | 'sports' | 'education' | 'finance' | 'charts' | 'tools';
 /** Categories in display order, with English and Chinese names. */
 declare const ICON_CATEGORIES: readonly {
     id: IconCategory;
