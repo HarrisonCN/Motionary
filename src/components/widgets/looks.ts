@@ -163,7 +163,9 @@ const darkSet = (p: Pal, base: string, tint: string, amount: number, ink: string
 
 /** A light surface even for the dark palettes: deep ink and a deep accent. */
 const lightSet = (p: Pal, paper: string): Partial<LookSpec> => {
-  const accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+  let accent = p.dark ? mixHex(p.accent, 0.62, '#111111') : p.accent;
+  // a very bright accent (obsidian's lime) is still too light for white text after that mix: deepen it until it reads
+  for (let t = 0.56; p.dark && t > 0.2 && contrastRatio('#ffffff', accent) < 4.5; t -= 0.06) accent = mixHex(p.accent, t, '#111111');
   return { dark: false, paper, bg: paper, ink: p.dark ? mixHex(p.accent, 0.22, '#14121a') : p.ink, accent, onAccent: '#ffffff' };
 };
 
