@@ -9,7 +9,7 @@ import css from './ui-kit-15.css?raw';
  * A round button that fans its own children out on a circle around it. The children (buttons or links) are moved into
  * the menu and put back when the element is removed. The toggle says whether the menu is open (`aria-expanded`); the
  * arrow keys move round the items, Home and End jump to the ends, Escape closes the menu and focus goes back to the
- * toggle. Picking an item closes the menu.
+ * toggle. Picking an item closes the menu, then fires `usa:select`.
  *
  * Attributes: `open`, `label` (Menu), `radius` (px; 84), `start` (degrees, 0 = east, -90 = north; -90),
  * `spread` (degrees; 360), `icon` (the toggle's text; ＋).
@@ -74,8 +74,9 @@ export function defineRadialMenu(tag = 'usa-radial-menu'): CustomElementConstruc
       this.listen(ring, 'click', (e: MouseEvent) => {
         const i = focusables.findIndex((f, k) => f.contains(e.target as Node) || items[k].contains(e.target as Node));
         if (i < 0) return;
-        this.emit('select', { index: i, label: (items[i].getAttribute('aria-label') || items[i].textContent || '').trim() });
+        // close first, so a listener that reacts to the pick sees the menu already shut
         set(false);
+        this.emit('select', { index: i, label: (items[i].getAttribute('aria-label') || items[i].textContent || '').trim() });
       });
       this.listen(root, 'keydown', (e: KeyboardEvent) => {
         if (e.key === 'Escape' && this._open) { e.preventDefault(); set(false); return; }
