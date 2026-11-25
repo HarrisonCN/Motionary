@@ -116,8 +116,8 @@ var widgets_pixelTransition = require('../widgets/pixel-transition.cjs');
 var widgets_magnetLines = require('../widgets/magnet-lines.cjs');
 var widgets_textPressure = require('../widgets/text-pressure.cjs');
 var widgets_shuffleGrid = require('../widgets/shuffle-grid.cjs');
-var widgets_icon = require('../chunks/icon-DnkkjTwO.cjs');
-var widgets_iconPicker = require('../chunks/icon-picker-nyqD6gOw.cjs');
+var widgets_icon = require('../chunks/icon-B5mClvXb.cjs');
+var widgets_iconPicker = require('../chunks/icon-picker-DU1LBm-R.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -294,8 +294,9 @@ var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over twenty palettes,
- * give 340 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
+ * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
+ * ten palettes):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -331,9 +332,20 @@ const LOOK_PALETTES = {
     teal: ['#042f2e', '#effcfa', '#0e7490', '#5eead4'],
     aurora: ['#e0f2fe', '#06121f', '#a78bfa', '#34d399'],
     velvet: ['#fce7f3', '#1a0b16', '#f472b6', '#fbbf24'],
+    // 17.15
+    lavender: ['#1e1b3a', '#f7f5ff', '#6d28d9', '#c4b5fd'],
+    moss: ['#18230f', '#f6f8ef', '#3f6212', '#d9f99d'],
+    copper: ['#2a160c', '#fdf6f0', '#9a3412', '#fdba74'],
+    lagoon: ['#062430', '#f0fbfc', '#155e75', '#67e8f9'],
+    berry: ['#2a0a1f', '#fdf2f8', '#9d174d', '#f9a8d4'],
+    sage: ['#1a2620', '#f4f7f4', '#3f6b56', '#a7c4b5'],
+    espresso: ['#2b1d16', '#faf6f2', '#6f4e37', '#d6b48c'],
+    navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
+    obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
+    abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
 };
 /** The palettes with a dark paper. */
-const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet'];
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');

@@ -168,10 +168,10 @@ import { definePixelTransition } from '../widgets/pixel-transition.js';
 import { defineMagnetLines } from '../widgets/magnet-lines.js';
 import { defineTextPressure } from '../widgets/text-pressure.js';
 import { defineShuffleGrid } from '../widgets/shuffle-grid.js';
-import { d as defineIcon } from '../chunks/icon-DbBWnzf3.js';
-export { I as ICONS, a as ICON_CATEGORIES, b as ICON_GROUPS, c as ICON_MOTIONS, e as ICON_SVG_ATTRS, f as ICON_TRIGGERS, i as iconCategory, g as iconElement, h as iconNames, j as iconParts, k as iconSvg, s as searchIcons } from '../chunks/icon-DbBWnzf3.js';
-import { d as defineIconPicker } from '../chunks/icon-picker-DlZ5Gbx-.js';
-export { g as gridStep, i as iconCopyText } from '../chunks/icon-picker-DlZ5Gbx-.js';
+import { d as defineIcon } from '../chunks/icon-Za8WMwLC.js';
+export { I as ICONS, a as ICON_CATEGORIES, b as ICON_GROUPS, c as ICON_MOTIONS, e as ICON_SVG_ATTRS, f as ICON_TRIGGERS, i as iconCategory, g as iconElement, h as iconNames, j as iconParts, k as iconSvg, s as searchIcons } from '../chunks/icon-Za8WMwLC.js';
+import { d as defineIconPicker } from '../chunks/icon-picker-Cbu79YYV.js';
+export { g as gridStep, i as iconCopyText } from '../chunks/icon-picker-Cbu79YYV.js';
 import { defineSquishStepper } from '../widgets/squish-stepper.js';
 import { d as defineAnalogStick } from '../chunks/analog-stick-5SEt1E92.js';
 export { a as deadZone } from '../chunks/analog-stick-5SEt1E92.js';
@@ -398,8 +398,9 @@ export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXH
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over twenty palettes,
- * give 340 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
+ * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
+ * ten palettes):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -435,9 +436,20 @@ const LOOK_PALETTES = {
     teal: ['#042f2e', '#effcfa', '#0e7490', '#5eead4'],
     aurora: ['#e0f2fe', '#06121f', '#a78bfa', '#34d399'],
     velvet: ['#fce7f3', '#1a0b16', '#f472b6', '#fbbf24'],
+    // 17.15
+    lavender: ['#1e1b3a', '#f7f5ff', '#6d28d9', '#c4b5fd'],
+    moss: ['#18230f', '#f6f8ef', '#3f6212', '#d9f99d'],
+    copper: ['#2a160c', '#fdf6f0', '#9a3412', '#fdba74'],
+    lagoon: ['#062430', '#f0fbfc', '#155e75', '#67e8f9'],
+    berry: ['#2a0a1f', '#fdf2f8', '#9d174d', '#f9a8d4'],
+    sage: ['#1a2620', '#f4f7f4', '#3f6b56', '#a7c4b5'],
+    espresso: ['#2b1d16', '#faf6f2', '#6f4e37', '#d6b48c'],
+    navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
+    obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
+    abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
 };
 /** The palettes with a dark paper. */
-const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet'];
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
