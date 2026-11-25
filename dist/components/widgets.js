@@ -192,6 +192,16 @@ import { defineMicroButton } from '../widgets/micro-button.js';
 import { defineMicroSlider } from '../widgets/micro-slider.js';
 import { defineMicroSegmented } from '../widgets/micro-segmented.js';
 import { defineMicroStepper } from '../widgets/micro-stepper.js';
+import { defineSpringLike } from '../widgets/spring-like.js';
+import { defineSpringRating } from '../widgets/spring-rating.js';
+import { defineSpringCopy } from '../widgets/spring-copy.js';
+import { defineSpringTags } from '../widgets/spring-tags.js';
+import { defineSpringCode } from '../widgets/spring-code.js';
+import { defineSpringList } from '../widgets/spring-list.js';
+import { defineSpringSwipe } from '../widgets/spring-swipe.js';
+import { defineSpringToasts } from '../widgets/spring-toasts.js';
+import { defineSpringAccordion } from '../widgets/spring-accordion.js';
+import { defineSpringCounter } from '../widgets/spring-counter.js';
 import { defineSquishStepper } from '../widgets/squish-stepper.js';
 import { d as defineAnalogStick } from '../chunks/analog-stick-5SEt1E92.js';
 export { a as deadZone } from '../chunks/analog-stick-5SEt1E92.js';
@@ -408,6 +418,7 @@ import { defineParticleButton } from '../widgets/particle-button.js';
 import { defineHaloSegmented } from '../widgets/halo-segmented.js';
 import { defineHaloSlider } from '../widgets/halo-slider.js';
 import { defineOrbitProgress } from '../widgets/orbit-progress.js';
+export { a as addTags, b as alignDigits, c as burstPoints, d as codeChars, e as compactCount, f as counterText, o as openSet, p as parseTags, r as ratingAt, s as shiftFor, g as slotAt, h as stackLayout, i as starFill, j as swipeOpen } from '../chunks/spring-kit-17-B1KexqJR.js';
 export { c as copyText, m as moveItem, n as numbers, r as rovingIndex, s as seeded } from '../chunks/kit-12-C5AMRg3h.js';
 export { a as arcDash, c as cellMark, d as dayText, f as formatTime, b as frameValues, h as hour12, i as inkOn, l as luminance, p as parseDay, r as raceRanks, e as radialSpots, g as relativeChange, j as rowDiffers, s as signedNumbers, k as spreadLabels, m as stepTime, t as timeParts, w as weekStartOf } from '../chunks/kit-15-gywnm88n.js';
 export { a as angleTo, c as changedSpan, b as clampTo, d as dayNumber, e as diffLines, f as flapSteps, g as funnelRows, h as ganttSpan, l as linePath, m as matchNames, i as mentionQuery, n as niceTicks, p as pressureAt, s as shuffleOrder, j as squarify, k as strokeWidth, t as tourPlace, w as waffleCells, o as wheelIndex, q as wheelTilt } from '../chunks/kit-13-hC4WCTBH.js';
@@ -419,9 +430,9 @@ export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXH
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
- * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
- * ten palettes):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over forty palettes,
+ * give 680 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 and
+ * 17.17 added ten palettes each; 17.17 gives every look a micro-interaction feel):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -468,9 +479,20 @@ const LOOK_PALETTES = {
     navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
     obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
     abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
+    // 17.17
+    jade: ['#052e1f', '#effdf6', '#047857', '#6ee7b7'],
+    saffron: ['#2e1a02', '#fffaeb', '#a16207', '#fde047'],
+    denim: ['#0f1b2d', '#f4f7fb', '#2f5d8a', '#93c5fd'],
+    orchid: ['#2e0b33', '#fcf4ff', '#86198f', '#e9a8f5'],
+    rust: ['#2b1206', '#fdf5f0', '#9a3b12', '#fbbf24'],
+    spruce: ['#06211f', '#f0f8f7', '#115e59', '#5eead4'],
+    flamingo: ['#3a0d1c', '#fff3f6', '#be185d', '#f9a8c9'],
+    periwinkle: ['#16183a', '#f5f6ff', '#3f4bb8', '#b4bcfb'],
+    onyx: ['#f4f4f5', '#0c0c0e', '#fda4af', '#fcd34d'],
+    nebula: ['#ede9fe', '#0d0a1f', '#c084fc', '#67e8f9'],
 };
 /** The palettes with a dark paper. */
-const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss', 'onyx', 'nebula'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
@@ -715,6 +737,24 @@ const LOOK_TREATMENTS = {
         comic: (p) => ({ mediaFilter: 'contrast(1.45) saturate(1.7) brightness(1.03)', bw: '3px', line: p.ink, radius: '4px', mediaRadius: '0px', shadow: `5px 5px 0 ${p.ink}`, frame: '#ffffff', speed: '1.2', font: '"Bangers", "Comic Neue", "Comic Sans MS", cursive' }),
     },
 };
+/**
+ * 17.17: how each treatment moves. Every look sets `--mo-feel`, which the spring core (`micro()`, the spring widgets)
+ * reads, so a brutal look lands heavy, a clay look plays, a terminal look snaps: the motion matches the surface.
+ */
+const LOOK_FEELS = {
+    ui: {
+        solid: 'default', outline: 'crisp', soft: 'calm', glass: 'smooth', neon: 'snappy', brutal: 'heavy', paper: 'calm', gradient: 'bouncy', terminal: 'crisp',
+        clay: 'playful', neumorph: 'smooth', retro: 'snappy', pill: 'bouncy', editorial: 'calm', sketch: 'playful', luxe: 'heavy', synth: 'bouncy',
+    },
+    parts: {
+        flat: 'default', elevated: 'smooth', outlined: 'crisp', frosted: 'smooth', cyber: 'snappy', blocky: 'heavy', pastel: 'playful', window: 'snappy', console: 'crisp',
+        tonal: 'calm', acrylic: 'smooth', cupertino: 'bouncy', compact: 'crisp', skeuo: 'heavy', inset: 'calm', hairline: 'crisp', dusk: 'calm',
+    },
+    motion: {
+        vivid: 'bouncy', noir: 'calm', sepia: 'calm', duotone: 'smooth', glow: 'smooth', polaroid: 'playful', film: 'heavy', blueprint: 'crisp', holo: 'playful',
+        charcoal: 'heavy', infrared: 'snappy', blockbuster: 'heavy', dreamy: 'calm', matte: 'smooth', thermal: 'snappy', nightvision: 'crisp', comic: 'playful',
+    },
+};
 const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS);
 /* ---------- lookup ---------- */
 let index = null;
@@ -748,6 +788,7 @@ function build() {
                     mediaRadius: '14px',
                     frame: '#ffffff',
                     speed: '1',
+                    feel: LOOK_FEELS[family][treatment] ?? 'default',
                     ...t,
                 };
                 m.set(name, { name, family, treatment, palette, ...spec });
@@ -791,6 +832,8 @@ function lookRule(name) {
     decl.push('color:var(--mo-kit-ink)');
     if (l.font)
         decl.push(`font-family:${l.font}`);
+    if (l.feel)
+        decl.push(`--mo-feel:${l.feel}`);
     return `:where([look="${name}"],[data-mo-look="${name}"]){${decl.join(';')}}`;
 }
 /** The stylesheet for every look, or one family's. */
@@ -861,6 +904,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
     '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
     '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+    '17.17': { 'usa-spring-like': defineSpringLike, 'usa-spring-rating': defineSpringRating, 'usa-spring-copy': defineSpringCopy, 'usa-spring-tags': defineSpringTags, 'usa-spring-code': defineSpringCode, 'usa-spring-list': defineSpringList, 'usa-spring-swipe': defineSpringSwipe, 'usa-spring-toasts': defineSpringToasts, 'usa-spring-accordion': defineSpringAccordion, 'usa-spring-counter': defineSpringCounter },
     '17.16': { 'usa-micro': defineMicro, 'usa-micro-switch': defineMicroSwitch, 'usa-micro-checkbox': defineMicroCheckbox, 'usa-micro-input': defineMicroInput, 'usa-micro-button': defineMicroButton, 'usa-micro-slider': defineMicroSlider, 'usa-micro-segmented': defineMicroSegmented, 'usa-micro-stepper': defineMicroStepper },
     '17.15': { 'usa-radial-menu': defineRadialMenu, 'usa-hover-card': defineHoverCard, 'usa-toggle-group': defineToggleGroup, 'usa-time-picker': defineTimePicker, 'usa-color-swatches': defineColorSwatches, 'usa-calendar-strip': defineCalendarStrip, 'usa-comparison-table': defineComparisonTable, 'usa-radial-bars': defineRadialBars, 'usa-bar-race': defineBarRace, 'usa-bullet-chart': defineBulletChart, 'usa-slope-chart': defineSlopeChart, 'usa-dot-plot': defineDotPlot },
     '17.14': { 'usa-icon': defineIcon, 'usa-icon-picker': defineIconPicker },
@@ -889,5 +933,5 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
-export { LOOK_FAMILIES, LOOK_PALETTES, LOOK_TREATMENTS, WIDGETS, WIDGET_TAGS, adoptLooks, applyLook, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBarRace, defineBento, defineBezierLab, defineBgGenerator, defineBorderBeam, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineBulletChart, defineCalendarStrip, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChecklist, defineChipInput, defineCircularText, defineClockControl, defineClothesline, defineCodeExport, defineCodeShake, defineCodeTabs, defineCoffeeTimer, defineColorPicker, defineColorSwatches, defineCombobox, defineCommandPalette, defineCommentThread, defineCompare, defineComparisonTable, defineConnectBeam, defineConsent, defineContextMenu, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDesktopWindows, defineDiffViewer, defineDisclosure, defineDock, defineDonutChart, defineDotPlot, defineDownloadButton, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticFrame, defineElasticMesh, defineElasticSlider, defineEmojiPicker, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineFunnelChart, defineGantt, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeatmap, defineHelpfulVote, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverCard, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineIcon, defineIconPicker, defineImageTrail, defineImageTunnel, defineInfiniteScroll, defineInfinityLoop, defineInkFlow, defineInlineEdit, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLetterSwap, defineLightbox, defineLineChart, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagnetLines, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMentionInput, defineMenu, defineMenuToggle, defineMessageList, defineMeteors, defineMeterCountdown, defineMicro, defineMicroButton, defineMicroCheckbox, defineMicroInput, defineMicroSegmented, defineMicroSlider, defineMicroStepper, defineMicroSwitch, defineMilestones, defineModal, defineMorphCard, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitGallery, defineOrbitPass, defineOrbitProgress, defineOrbitRings, defineOrganicCard, defineOtp, definePageFlip, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePixelTransition, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, defineProgressTabs, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRadialBars, defineRadialMenu, defineRangeSlider, defineRatingBars, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRetroGrid, defineRevealFooter, defineRevisionReveal, defineRideStatus, defineRippleGrid, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScratchCard, defineScrollBg, defineScrollCue, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollZoom, defineScrollspy, defineScrubNumber, defineSearchBar, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineShapeDivider, defineShareButton, defineSheet, defineShortcut, defineShuffleGrid, defineSidebar, defineSignaturePad, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSlopeChart, defineSmoothScroll, defineSortableList, defineSparkline, defineSpatialCard, defineSplitFlap, defineSplitPane, defineSpringLab, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStackSlider, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSubscribe, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTagCloud, defineTerminal, defineTextLoupe, defineTextPressure, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTimePicker, defineTip, defineTitleSequence, defineToastStack, defineToggleGroup, defineTokenEditor, defineTour, defineTransferButton, defineTransitProgress, defineTreemap, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVirtualList, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWaffleChart, defineWeatherCard, defineWheelPicker, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar, defineZoomLens, lookInfo, lookNames, lookRule, lookTokens, looksCss };
+export { LOOK_FAMILIES, LOOK_FEELS, LOOK_PALETTES, LOOK_TREATMENTS, WIDGETS, WIDGET_TAGS, adoptLooks, applyLook, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBarRace, defineBento, defineBezierLab, defineBgGenerator, defineBorderBeam, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineBulletChart, defineCalendarStrip, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChecklist, defineChipInput, defineCircularText, defineClockControl, defineClothesline, defineCodeExport, defineCodeShake, defineCodeTabs, defineCoffeeTimer, defineColorPicker, defineColorSwatches, defineCombobox, defineCommandPalette, defineCommentThread, defineCompare, defineComparisonTable, defineConnectBeam, defineConsent, defineContextMenu, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDesktopWindows, defineDiffViewer, defineDisclosure, defineDock, defineDonutChart, defineDotPlot, defineDownloadButton, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticFrame, defineElasticMesh, defineElasticSlider, defineEmojiPicker, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineFunnelChart, defineGantt, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeatmap, defineHelpfulVote, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverCard, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineIcon, defineIconPicker, defineImageTrail, defineImageTunnel, defineInfiniteScroll, defineInfinityLoop, defineInkFlow, defineInlineEdit, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLetterSwap, defineLightbox, defineLineChart, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagnetLines, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMentionInput, defineMenu, defineMenuToggle, defineMessageList, defineMeteors, defineMeterCountdown, defineMicro, defineMicroButton, defineMicroCheckbox, defineMicroInput, defineMicroSegmented, defineMicroSlider, defineMicroStepper, defineMicroSwitch, defineMilestones, defineModal, defineMorphCard, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitGallery, defineOrbitPass, defineOrbitProgress, defineOrbitRings, defineOrganicCard, defineOtp, definePageFlip, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePixelTransition, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, defineProgressTabs, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRadialBars, defineRadialMenu, defineRangeSlider, defineRatingBars, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRetroGrid, defineRevealFooter, defineRevisionReveal, defineRideStatus, defineRippleGrid, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScratchCard, defineScrollBg, defineScrollCue, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollZoom, defineScrollspy, defineScrubNumber, defineSearchBar, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineShapeDivider, defineShareButton, defineSheet, defineShortcut, defineShuffleGrid, defineSidebar, defineSignaturePad, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSlopeChart, defineSmoothScroll, defineSortableList, defineSparkline, defineSpatialCard, defineSplitFlap, defineSplitPane, defineSpringAccordion, defineSpringCode, defineSpringCopy, defineSpringCounter, defineSpringLab, defineSpringLike, defineSpringList, defineSpringRating, defineSpringSwipe, defineSpringTags, defineSpringToasts, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStackSlider, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSubscribe, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTagCloud, defineTerminal, defineTextLoupe, defineTextPressure, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTimePicker, defineTip, defineTitleSequence, defineToastStack, defineToggleGroup, defineTokenEditor, defineTour, defineTransferButton, defineTransitProgress, defineTreemap, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVirtualList, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWaffleChart, defineWeatherCard, defineWheelPicker, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar, defineZoomLens, lookInfo, lookNames, lookRule, lookTokens, looksCss };
 //# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/widgets.js.map
