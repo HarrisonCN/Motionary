@@ -7,19 +7,19 @@ const NEW_PALETTES = ['lavender', 'moss', 'copper', 'lagoon', 'berry', 'sage', '
 const read = (f: string) => readFileSync(f, 'utf8');
 
 describe('17.15 looks: ten more palettes', () => {
-  it('adds ten palettes after the first twenty, 170 more looks per family, 1530 in all', () => {
-    expect(Object.keys(LOOK_PALETTES)).toHaveLength(30);
-    expect(Object.keys(LOOK_PALETTES).slice(20)).toEqual(NEW_PALETTES);
+  it('adds ten palettes after the first twenty, 170 more looks per family', () => {
+    expect(Object.keys(LOOK_PALETTES)).toHaveLength(40); // 17.17 added ten more
+    expect(Object.keys(LOOK_PALETTES).slice(20, 30)).toEqual(NEW_PALETTES);
     for (const family of LOOK_FAMILIES) {
-      expect(lookNames(family)).toHaveLength(510);
+      expect(lookNames(family)).toHaveLength(680);
       expect(lookNames(family).filter((n) => NEW_PALETTES.some((p) => n.endsWith(`-${p}`)))).toHaveLength(170);
     }
-    expect(lookNames()).toHaveLength(1530);
-    expect(new Set(lookNames()).size).toBe(1530);
+    expect(lookNames()).toHaveLength(2040);
+    expect(new Set(lookNames()).size).toBe(2040);
   });
 
   it('reads each new name back, with obsidian and abyss as the new dark palettes', () => {
-    expect(DARK_PALETTES).toEqual(['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss']);
+    expect(DARK_PALETTES.slice(0, 6)).toEqual(['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss']);
     expect(lookInfo('solid-lavender')).toMatchObject({ family: 'ui', treatment: 'solid', palette: 'lavender', dark: false });
     expect(lookInfo('frosted-lagoon')).toMatchObject({ family: 'parts', palette: 'lagoon' });
     expect(lookInfo('duotone-copper')).toMatchObject({ family: 'motion', palette: 'copper' });
@@ -49,8 +49,8 @@ describe('17.15 looks: ten more palettes', () => {
     for (const p of NEW_PALETTES) expect(doc, p).toContain(`| \`${p}\` |`);
     expect(doc).toContain('`solid-abyss`');
     expect(read('showcase/looks.html')).toContain("abyss: '深渊'");
-    expect(read('showcase/home-collections.js')).toContain('total: 1530');
-    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('1530');
+    expect(read('showcase/home-collections.js')).toContain('total: 2040');
+    for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('2040');
     expect(read('CHANGELOG.md')).toContain('17.15 looks');
   });
 });

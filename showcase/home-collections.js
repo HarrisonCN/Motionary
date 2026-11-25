@@ -81,10 +81,10 @@ export const COLLECTIONS = [
   },
   {
     id: 'looks', since: '17.11', page: './looks.html',
-    title: { en: '1530 looks', zh: '1530 种外观' },
-    blurb: { en: 'Thirty palettes × seventeen treatments in each of three families (17.15 added 510). Click one to try it.', zh: '三十种配色 × 每类十七种处理，共三类（17.15 新增 510 种）。点一个试试。' },
+    title: { en: '2040 looks', zh: '2040 种外观' },
+    blurb: { en: 'Forty palettes × seventeen treatments in each of three families (17.17 added 510, and a feel for each). Click one to try it.', zh: '四十种配色 × 每类十七种处理，共三类（17.17 新增 510 种，每种还带手感）。点一个试试。' },
     items: [],
-    total: 1530,
+    total: 2040,
   },
   {
     id: 'kit', since: '17.10', page: './kit.html',

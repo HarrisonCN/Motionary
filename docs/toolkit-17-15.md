@@ -3,7 +3,7 @@
 Twelve independently importable widgets in two groups (everyday UI parts and data charts). Every element registers its
 `mo-*` name directly; the `usa-*` names stay available. No runtime dependency, network request, third-party code,
 font or image is bundled. They read the same `--mo-kit-*` tokens as the 17.10–17.13 kits, so the
-[1530 looks](./looks-17-11.md) restyle them too.
+[2040 looks](./looks-17-11.md) restyle them too.
 
 ## Scope
 

@@ -2,9 +2,9 @@
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over thirty palettes,
- * give 510 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 added
- * ten palettes):
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over forty palettes,
+ * give 680 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each; 17.15 and
+ * 17.17 added ten palettes each; 17.17 gives every look a micro-interaction feel):
  *
  * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
  *   pill, editorial, sketch, luxe, synth
@@ -55,10 +55,21 @@ export const LOOK_PALETTES = {
   navy: ['#0a1433', '#f5f7fc', '#1e3a8a', '#fbbf24'],
   obsidian: ['#e5e7eb', '#0a0a0c', '#a3e635', '#38bdf8'],
   abyss: ['#ccfbf1', '#03141a', '#2dd4bf', '#818cf8'],
+  // 17.17
+  jade: ['#052e1f', '#effdf6', '#047857', '#6ee7b7'],
+  saffron: ['#2e1a02', '#fffaeb', '#a16207', '#fde047'],
+  denim: ['#0f1b2d', '#f4f7fb', '#2f5d8a', '#93c5fd'],
+  orchid: ['#2e0b33', '#fcf4ff', '#86198f', '#e9a8f5'],
+  rust: ['#2b1206', '#fdf5f0', '#9a3b12', '#fbbf24'],
+  spruce: ['#06211f', '#f0f8f7', '#115e59', '#5eead4'],
+  flamingo: ['#3a0d1c', '#fff3f6', '#be185d', '#f9a8c9'],
+  periwinkle: ['#16183a', '#f5f6ff', '#3f4bb8', '#b4bcfb'],
+  onyx: ['#f4f4f5', '#0c0c0e', '#fda4af', '#fcd34d'],
+  nebula: ['#ede9fe', '#0d0a1f', '#c084fc', '#67e8f9'],
 } as const;
 
 /** The palettes with a dark paper. */
-export const DARK_PALETTES: readonly string[] = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss'];
+export const DARK_PALETTES: readonly string[] = ['midnight', 'ember', 'aurora', 'velvet', 'obsidian', 'abyss', 'onyx', 'nebula'];
 
 export type LookPalette = keyof typeof LOOK_PALETTES;
 
@@ -92,6 +103,8 @@ export interface LookSpec {
   beamA?: string;
   beamB?: string;
   font?: string;
+  /** 17.17: the micro-interaction feel (a `MICRO_FEELS` name, or `default` for the springs as tuned), set as `--mo-feel`. */
+  feel?: string;
 }
 
 export interface LookInfo extends LookSpec {
@@ -366,6 +379,25 @@ export const LOOK_TREATMENTS: Record<LookFamily, Record<string, Treatment>> = {
   },
 };
 
+/**
+ * 17.17: how each treatment moves. Every look sets `--mo-feel`, which the spring core (`micro()`, the spring widgets)
+ * reads, so a brutal look lands heavy, a clay look plays, a terminal look snaps: the motion matches the surface.
+ */
+export const LOOK_FEELS: Record<LookFamily, Record<string, string>> = {
+  ui: {
+    solid: 'default', outline: 'crisp', soft: 'calm', glass: 'smooth', neon: 'snappy', brutal: 'heavy', paper: 'calm', gradient: 'bouncy', terminal: 'crisp',
+    clay: 'playful', neumorph: 'smooth', retro: 'snappy', pill: 'bouncy', editorial: 'calm', sketch: 'playful', luxe: 'heavy', synth: 'bouncy',
+  },
+  parts: {
+    flat: 'default', elevated: 'smooth', outlined: 'crisp', frosted: 'smooth', cyber: 'snappy', blocky: 'heavy', pastel: 'playful', window: 'snappy', console: 'crisp',
+    tonal: 'calm', acrylic: 'smooth', cupertino: 'bouncy', compact: 'crisp', skeuo: 'heavy', inset: 'calm', hairline: 'crisp', dusk: 'calm',
+  },
+  motion: {
+    vivid: 'bouncy', noir: 'calm', sepia: 'calm', duotone: 'smooth', glow: 'smooth', polaroid: 'playful', film: 'heavy', blueprint: 'crisp', holo: 'playful',
+    charcoal: 'heavy', infrared: 'snappy', blockbuster: 'heavy', dreamy: 'calm', matte: 'smooth', thermal: 'snappy', nightvision: 'crisp', comic: 'playful',
+  },
+};
+
 export const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS) as LookFamily[];
 
 /* ---------- lookup ---------- */
@@ -402,6 +434,7 @@ function build(): Map<string, LookInfo> {
           mediaRadius: '14px',
           frame: '#ffffff',
           speed: '1',
+          feel: LOOK_FEELS[family][treatment] ?? 'default',
           ...t,
         };
         m.set(name, { name, family, treatment, palette, ...spec });
@@ -446,6 +479,7 @@ export function lookRule(name: string): string {
   const decl = Object.entries(lookTokens(name)).map(([k, v]) => `${k}:${v}`);
   decl.push('color:var(--mo-kit-ink)');
   if (l.font) decl.push(`font-family:${l.font}`);
+  if (l.feel) decl.push(`--mo-feel:${l.feel}`);
   return `:where([look="${name}"],[data-mo-look="${name}"]){${decl.join(';')}}`;
 }
 

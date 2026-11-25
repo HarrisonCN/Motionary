@@ -522,6 +522,7 @@ export { elasticPath } from './elastic-frame';
 export {
   LOOK_PALETTES,
   LOOK_TREATMENTS,
+  LOOK_FEELS,
   LOOK_FAMILIES,
   lookNames,
   lookInfo,
