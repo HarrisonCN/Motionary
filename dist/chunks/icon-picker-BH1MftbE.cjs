@@ -1,8 +1,10 @@
-import { f as defineElement } from './base-SPDwWyB1.js';
-import { d as defineMoName } from './mo-name-DT5wwaGR.js';
-import { m as make } from './moments-Cg_NlOYG.js';
-import { l as list } from './kit-DugHPVcq.js';
-import { k as iconSvg, l as css, a as ICON_CATEGORIES, i as iconCategory, g as iconElement, s as searchIcons } from './icon-Za8WMwLC.js';
+'use strict';
+
+var base = require('./base-DzZEJhQB.cjs');
+var moName = require('./mo-name-DR9ysd5S.cjs');
+var moments = require('./moments-eoZA2npZ.cjs');
+var kit = require('./kit-CujTUbPK.cjs');
+var widgets_icon = require('./icon-DrmwqnI9.cjs');
 
 /** What a pick copies to the clipboard with `copy`: the name, an `<mo-icon>` tag, or the svg markup. */
 function iconCopyText(name, kind) {
@@ -11,7 +13,7 @@ function iconCopyText(name, kind) {
     if (kind === 'tag')
         return `<mo-icon name="${name}"></mo-icon>`;
     if (kind === 'svg')
-        return iconSvg(name);
+        return widgets_icon.iconSvg(name);
     return '';
 }
 /**
@@ -26,7 +28,7 @@ function gridStep(index, key, count, columns) {
     return Math.max(0, Math.min(count - 1, to));
 }
 function defineIconPicker(tag = 'usa-icon-picker') {
-    const ctor = defineElement(tag, Base => class IconPicker extends Base {
+    const ctor = base.defineElement(tag, Base => class IconPicker extends Base {
         constructor() {
             super(...arguments);
             this._value = '';
@@ -37,45 +39,45 @@ function defineIconPicker(tag = 'usa-icon-picker') {
         get value() { return this._value; }
         search(query) { this._search?.(query); }
         mount() {
-            const offered = list(this.str('categories'), 64);
-            const cats = ICON_CATEGORIES.filter((c) => !offered.length || offered.includes(c.id));
-            const labels = list(this.str('category-labels'), 64);
+            const offered = kit.list(this.str('categories'), 64);
+            const cats = widgets_icon.ICON_CATEGORIES.filter((c) => !offered.length || offered.includes(c.id));
+            const labels = kit.list(this.str('category-labels'), 64);
             const copy = this.str('copy');
             // a new value attribute replaces the pick; other remounts keep what was picked
             const start = this.str('value');
             if (start !== this._seen) {
                 this._seen = start;
-                this._value = iconCategory(start) ? start : '';
+                this._value = widgets_icon.iconCategory(start) ? start : '';
             }
-            const root = make('div', 'usa-kit usa-ipick');
+            const root = moments.make('div', 'usa-kit usa-ipick');
             root.setAttribute('role', 'group');
             root.setAttribute('aria-label', this.str('label', 'Icons'));
             root.toggleAttribute('data-compact', this.flag('compact'));
             root.toggleAttribute('data-static', this.reduced);
             root.style.setProperty('--usa-ipick-size', `${Math.max(12, Math.min(64, this.num('size', 24)))}px`);
             root.style.setProperty('--usa-ipick-height', `${Math.max(120, Math.min(2000, this.num('height', 360)))}px`);
-            const top = make('div', 'usa-ipick-top');
-            const box = make('label', 'usa-ipick-search');
-            const glass = iconElement('search');
+            const top = moments.make('div', 'usa-ipick-top');
+            const box = moments.make('label', 'usa-ipick-search');
+            const glass = widgets_icon.iconElement('search');
             glass.setAttribute('aria-hidden', 'true');
             glass.setAttribute('width', '18');
             glass.setAttribute('height', '18');
-            const input = make('input');
+            const input = moments.make('input');
             input.type = 'search';
             input.autocomplete = 'off';
             input.spellcheck = false;
             input.setAttribute('aria-label', this.str('search-label', 'Search icons'));
             input.placeholder = this.str('placeholder', 'Search icons…');
             box.append(glass, input);
-            const count = make('span', 'usa-ipick-count');
+            const count = moments.make('span', 'usa-ipick-count');
             count.setAttribute('aria-live', 'polite');
             top.append(box, count);
-            const chips = make('div', 'usa-ipick-cats');
+            const chips = moments.make('div', 'usa-ipick-cats');
             chips.setAttribute('role', 'group');
             chips.setAttribute('aria-label', this.str('label', 'Icons'));
             let category = '';
             const chipFor = (id, text) => {
-                const b = make('button', 'usa-ipick-cat', text);
+                const b = moments.make('button', 'usa-ipick-cat', text);
                 b.type = 'button';
                 b.dataset.category = id;
                 b.setAttribute('aria-pressed', String(id === category));
@@ -84,13 +86,13 @@ function defineIconPicker(tag = 'usa-icon-picker') {
             };
             chipFor('', this.str('all-label', 'All'));
             for (const c of cats)
-                chipFor(c.id, labels[ICON_CATEGORIES.indexOf(c)] || c.en);
-            const grid = make('div', 'usa-ipick-grid');
+                chipFor(c.id, labels[widgets_icon.ICON_CATEGORIES.indexOf(c)] || c.en);
+            const grid = moments.make('div', 'usa-ipick-grid');
             grid.setAttribute('role', 'group');
             grid.setAttribute('aria-label', this.str('label', 'Icons'));
-            const empty = make('p', 'usa-ipick-empty', this.str('empty', 'No icons match.'));
+            const empty = moments.make('p', 'usa-ipick-empty', this.str('empty', 'No icons match.'));
             empty.hidden = true;
-            const hidden = this.str('name') ? make('input') : null;
+            const hidden = this.str('name') ? moments.make('input') : null;
             if (hidden) {
                 hidden.type = 'hidden';
                 hidden.name = this.str('name');
@@ -103,27 +105,27 @@ function defineIconPicker(tag = 'usa-icon-picker') {
             // one button per icon, built once; searching only hides and shows them
             const allowed = new Set(cats.map((c) => c.id));
             const buttons = new Map();
-            for (const name of searchIcons()) {
-                if (!allowed.has(iconCategory(name)))
+            for (const name of widgets_icon.searchIcons()) {
+                if (!allowed.has(widgets_icon.iconCategory(name)))
                     continue;
-                const b = make('button', 'usa-ipick-btn');
+                const b = moments.make('button', 'usa-ipick-btn');
                 b.type = 'button';
                 b.dataset.icon = name;
                 b.title = name;
                 b.setAttribute('aria-label', name);
                 b.setAttribute('aria-pressed', String(name === this._value));
                 b.tabIndex = -1;
-                const svg = iconElement(name);
+                const svg = widgets_icon.iconElement(name);
                 svg.classList.add('usa-icon');
                 svg.setAttribute('aria-hidden', 'true');
-                b.append(svg, make('span', 'usa-ipick-name', name));
+                b.append(svg, moments.make('span', 'usa-ipick-name', name));
                 grid.append(b);
                 buttons.set(name, b);
             }
             let shown = [];
             const countText = (n) => this.str('count-label', '{n} icons').replace('{n}', String(n));
             const filter = () => {
-                const names = new Set(searchIcons(input.value, category));
+                const names = new Set(widgets_icon.searchIcons(input.value, category));
                 shown = [];
                 for (const [name, b] of buttons) {
                     const on = names.has(name);
@@ -154,7 +156,7 @@ function defineIconPicker(tag = 'usa-icon-picker') {
                     copied = true;
                     navigator.clipboard.writeText(text).catch(() => { });
                 }
-                this.emit('pick', { name, category: iconCategory(name), copied });
+                this.emit('pick', { name, category: widgets_icon.iconCategory(name), copied });
             };
             this.listen(input, 'input', filter);
             this.listen(chips, 'click', (e) => {
@@ -202,10 +204,12 @@ function defineIconPicker(tag = 'usa-icon-picker') {
                 this._search = undefined;
             });
         }
-    }, { id: 'icons', text: css });
-    defineMoName(tag, ctor);
+    }, { id: 'icons', text: widgets_icon.css });
+    moName.defineMoName(tag, ctor);
     return ctor;
 }
 
-export { defineIconPicker as d, gridStep as g, iconCopyText as i };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/icon-picker-Cbu79YYV.js.map
+exports.defineIconPicker = defineIconPicker;
+exports.gridStep = gridStep;
+exports.iconCopyText = iconCopyText;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/icon-picker-BH1MftbE.cjs.map
