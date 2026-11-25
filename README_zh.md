@@ -385,9 +385,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 78.26 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 95.17 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 118.81 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 78.30 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 95.21 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 118.85 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 默认不注册滚动监听（改用 IntersectionObserver），动画只走合成层属性（`transform`、`opacity`、`filter`、`clip-path`）。

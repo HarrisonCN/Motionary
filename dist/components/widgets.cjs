@@ -138,6 +138,16 @@ var widgets_microButton = require('../widgets/micro-button.cjs');
 var widgets_microSlider = require('../widgets/micro-slider.cjs');
 var widgets_microSegmented = require('../widgets/micro-segmented.cjs');
 var widgets_microStepper = require('../widgets/micro-stepper.cjs');
+var widgets_springLike = require('../widgets/spring-like.cjs');
+var widgets_springRating = require('../widgets/spring-rating.cjs');
+var widgets_springCopy = require('../widgets/spring-copy.cjs');
+var widgets_springTags = require('../widgets/spring-tags.cjs');
+var widgets_springCode = require('../widgets/spring-code.cjs');
+var widgets_springList = require('../widgets/spring-list.cjs');
+var widgets_springSwipe = require('../widgets/spring-swipe.cjs');
+var widgets_springToasts = require('../widgets/spring-toasts.cjs');
+var widgets_springAccordion = require('../widgets/spring-accordion.cjs');
+var widgets_springCounter = require('../widgets/spring-counter.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -304,6 +314,7 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var springKit17 = require('../chunks/spring-kit-17-Y1urAq72.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
 var kit15 = require('../chunks/kit-15-D1Ovwhys.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
@@ -757,6 +768,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.17': { 'usa-spring-like': widgets_springLike.defineSpringLike, 'usa-spring-rating': widgets_springRating.defineSpringRating, 'usa-spring-copy': widgets_springCopy.defineSpringCopy, 'usa-spring-tags': widgets_springTags.defineSpringTags, 'usa-spring-code': widgets_springCode.defineSpringCode, 'usa-spring-list': widgets_springList.defineSpringList, 'usa-spring-swipe': widgets_springSwipe.defineSpringSwipe, 'usa-spring-toasts': widgets_springToasts.defineSpringToasts, 'usa-spring-accordion': widgets_springAccordion.defineSpringAccordion, 'usa-spring-counter': widgets_springCounter.defineSpringCounter },
     '17.16': { 'usa-micro': widgets_micro.defineMicro, 'usa-micro-switch': widgets_microSwitch.defineMicroSwitch, 'usa-micro-checkbox': widgets_microCheckbox.defineMicroCheckbox, 'usa-micro-input': widgets_microInput.defineMicroInput, 'usa-micro-button': widgets_microButton.defineMicroButton, 'usa-micro-slider': widgets_microSlider.defineMicroSlider, 'usa-micro-segmented': widgets_microSegmented.defineMicroSegmented, 'usa-micro-stepper': widgets_microStepper.defineMicroStepper },
     '17.15': { 'usa-radial-menu': widgets_radialMenu.defineRadialMenu, 'usa-hover-card': widgets_hoverCard.defineHoverCard, 'usa-toggle-group': widgets_toggleGroup.defineToggleGroup, 'usa-time-picker': widgets_timePicker.defineTimePicker, 'usa-color-swatches': widgets_colorSwatches.defineColorSwatches, 'usa-calendar-strip': widgets_calendarStrip.defineCalendarStrip, 'usa-comparison-table': widgets_comparisonTable.defineComparisonTable, 'usa-radial-bars': widgets_radialBars.defineRadialBars, 'usa-bar-race': widgets_barRace.defineBarRace, 'usa-bullet-chart': widgets_bulletChart.defineBulletChart, 'usa-slope-chart': widgets_slopeChart.defineSlopeChart, 'usa-dot-plot': widgets_dotPlot.defineDotPlot },
     '17.14': { 'usa-icon': widgets_icon.defineIcon, 'usa-icon-picker': widgets_iconPicker.defineIconPicker },
@@ -998,6 +1010,16 @@ exports.defineMicroButton = widgets_microButton.defineMicroButton;
 exports.defineMicroSlider = widgets_microSlider.defineMicroSlider;
 exports.defineMicroSegmented = widgets_microSegmented.defineMicroSegmented;
 exports.defineMicroStepper = widgets_microStepper.defineMicroStepper;
+exports.defineSpringLike = widgets_springLike.defineSpringLike;
+exports.defineSpringRating = widgets_springRating.defineSpringRating;
+exports.defineSpringCopy = widgets_springCopy.defineSpringCopy;
+exports.defineSpringTags = widgets_springTags.defineSpringTags;
+exports.defineSpringCode = widgets_springCode.defineSpringCode;
+exports.defineSpringList = widgets_springList.defineSpringList;
+exports.defineSpringSwipe = widgets_springSwipe.defineSpringSwipe;
+exports.defineSpringToasts = widgets_springToasts.defineSpringToasts;
+exports.defineSpringAccordion = widgets_springAccordion.defineSpringAccordion;
+exports.defineSpringCounter = widgets_springCounter.defineSpringCounter;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1233,6 +1255,20 @@ exports.defineParticleButton = widgets_particleButton.defineParticleButton;
 exports.defineHaloSegmented = widgets_haloSegmented.defineHaloSegmented;
 exports.defineHaloSlider = widgets_haloSlider.defineHaloSlider;
 exports.defineOrbitProgress = widgets_orbitProgress.defineOrbitProgress;
+exports.addTags = springKit17.addTags;
+exports.alignDigits = springKit17.alignDigits;
+exports.burstPoints = springKit17.burstPoints;
+exports.codeChars = springKit17.codeChars;
+exports.compactCount = springKit17.compactCount;
+exports.counterText = springKit17.counterText;
+exports.openSet = springKit17.openSet;
+exports.parseTags = springKit17.parseTags;
+exports.ratingAt = springKit17.ratingAt;
+exports.shiftFor = springKit17.shiftFor;
+exports.slotAt = springKit17.slotAt;
+exports.stackLayout = springKit17.stackLayout;
+exports.starFill = springKit17.starFill;
+exports.swipeOpen = springKit17.swipeOpen;
 exports.copyText = kit12.copyText;
 exports.moveItem = kit12.moveItem;
 exports.numbers = kit12.numbers;
