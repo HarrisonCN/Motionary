@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- 17.18 damped motion: expanding panels and the showcase move with damping. `motionary/components/interaction` adds `springExpand()` (open / close any box or `<details>` on a spring: the height settles with a short overshoot, the content drifts in after it child by child, a second toggle mid-way reverses with its velocity, `<details>` keeps `open` until the close has settled), `springDetails()` and `springAllDetails()` (every `<details>` on a page, skipping those inside components). The showcase uses it for every "</> Code" drawer and the gallery's code box, grows the Store's detail sheet out of its card on a spring and lets it be pulled down to close (rubber band, springs back), raises cards on a spring as they scroll in, and glides wheel scrolling with damping (`motionary/runtime/smooth`). `motionary/runtime/smooth` now skips a wheel a component already took, and `smoothScroll()` from `motionary/components/page` leaves nested scrollers alone. All off under reduced motion. Details in docs/damped-motion-17-18.md.
+
 ## [17.17.0] - 2026-11-26 — Springs, micro-interactions, looks and icons
 
 - Publishing: `.github/workflows/publish.yml` now uses npm trusted publishing (GitHub OIDC). No npm token is stored; npm checks the workflow's identity and attaches provenance to `motionary` and `use-scroll-animate`. The earlier runs failed because the token was missing, then lacked publish rights.

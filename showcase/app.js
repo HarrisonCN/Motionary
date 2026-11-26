@@ -7,6 +7,7 @@ import { ITEMS, CATEGORIES, findItem, matches } from './catalog.js';
 import { TABS, INSTALL, EASINGS, defaultState, generate, defaultTab, highlight, presetDistance, revealOptions, animationValue, easingValue } from './codegen.js';
 import { t as tr } from './i18n.js';
 import { paramPrompt } from './param-prompt.js';
+import { springEase, dragToDismiss } from './damped.js';
 
 /* ------------------------------------------------------------------ */
 /* Environment                                                         */
@@ -1226,8 +1227,11 @@ function flipIn(card) {
     const r = card.el.getBoundingClientRect();
     first = `translate(${r.left - to.left}px, ${r.top - to.top}px) scale(${r.width / to.width}, ${r.height / to.height})`;
   } else first = 'translateY(24px) scale(0.98)';
-  sheet.animate([{ transform: first, opacity: card ? 0.6 : 0 }, { transform: 'none', opacity: 1 }], { duration: 440, easing: 'cubic-bezier(.2,.8,.2,1)' });
-  Array.from(sheet.children).forEach((c) => c.animate([{ opacity: 0 }, { opacity: 0, offset: 0.35 }, { opacity: 1 }], { duration: 460, easing: 'ease-out' }));
+  // 17.18: the sheet grows out of the card on a damped spring and its parts drift in after it, one by one
+  const spring = springEase({ duration: 560, bounce: 0.2 });
+  sheet.animate([{ transform: first, opacity: card ? 0.6 : 0 }, { transform: 'none', opacity: 1 }], { duration: spring.duration, easing: spring.easing });
+  const drift = springEase({ duration: 620, bounce: 0.18 });
+  Array.from(sheet.children).forEach((c, i) => c.animate([{ opacity: 0, translate: '0 14px' }, { opacity: 1, translate: '0 0' }], { duration: drift.duration, easing: drift.easing, delay: 120 + i * 60, fill: 'backwards' }));
 }
 
 function flipOut(card) {
@@ -1241,7 +1245,8 @@ function flipOut(card) {
   }
   backdrop.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-in', fill: 'forwards' });
   Array.from(sheet.children).forEach((c) => c.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: 'forwards' }));
-  return sheet.animate([{ transform: 'none', opacity: 1 }, { transform: last, opacity: card ? 0.5 : 0 }], { duration: 360, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }).finished;
+  const settle = springEase({ duration: 380, bounce: 0 });
+  return sheet.animate([{ transform: 'none', opacity: 1 }, { transform: last, opacity: card ? 0.5 : 0 }], { duration: settle.duration, easing: settle.easing, fill: 'forwards' }).finished;
 }
 
 function closeDetail() {
@@ -1261,6 +1266,7 @@ function closeDetail() {
     if (!detail.id) detail.item = null;
     root.hidden = true;
     sheet.textContent = '';
+    sheet.style.translate = ''; // dropped there by a pull-to-close
     sheet.getAnimations().forEach((a) => a.cancel());
     $$('.detail-backdrop, #detail-sheet > *').forEach((el) => el.getAnimations().forEach((a) => a.cancel()));
     document.documentElement.classList.remove('locked');
@@ -1518,6 +1524,8 @@ function wireEvents() {
     const k = e.target.dataset && e.target.dataset.key;
     if (k && e.target.tagName === 'SELECT') onControl(k, e.target.value);
   });
+  // 17.18: pull the sheet down by its header to close it (rubber band upward, springs back if let go early)
+  dragToDismiss($('#detail-sheet'), '.detail-head', requestClose);
   root.addEventListener('keydown', (e) => {
     const tab = e.target.closest && e.target.closest('.tab');
     if (tab && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {

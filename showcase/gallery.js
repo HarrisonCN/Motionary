@@ -9,6 +9,7 @@ import { highlight } from './codegen.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
 import { moName, encodeSelection, decodeSelection, selectionPrompt } from './select-tray.js';
+import { expandBox } from './damped.js';
 
 const COMPONENTS_COUNT = document.getElementById('component-count').textContent.trim();
 const LOCAL = new URL('../dist/', import.meta.url).href;
@@ -211,18 +212,24 @@ function renderCode(item, box) {
 async function toggleCode(item, el) {
   const box = $('.ccard-code', el);
   const btn = $('.code-btn', el);
-  const open = box.hidden;
+  const open = btn.getAttribute('aria-expanded') !== 'true';
+  btn.setAttribute('aria-expanded', String(open));
   const grid = el.parentElement;
-  const mutate = () => {
-    if (open) renderCode(item, box);
-    box.hidden = !open;
-    el.classList.toggle('is-open', open);
-    btn.setAttribute('aria-expanded', String(open));
+  // Dogfood flip(): the grid re-flows smoothly when a card widens; 17.18: the code box itself opens and closes
+  // on a damped spring (showcase/damped.js → springExpand), so a second click mid-way reverses it.
+  const widen = (on) => {
+    const mutate = () => el.classList.toggle('is-open', on);
+    return lib?.flip ? lib.flip(grid, mutate, { duration: 380 }) : mutate();
   };
-  // Dogfood flip(): the grid re-flows smoothly when a card widens
-  if (lib?.flip) await lib.flip(grid, mutate, { duration: 380 });
-  else mutate();
-  if (open) el.scrollIntoView({ block: 'nearest', behavior: rmq.matches ? 'auto' : 'smooth' });
+  if (open) {
+    renderCode(item, box);
+    const reflow = widen(true);
+    await Promise.all([reflow, expandBox(box, true)]);
+    if (btn.getAttribute('aria-expanded') === 'true') el.scrollIntoView({ block: 'nearest', behavior: rmq.matches ? 'auto' : 'smooth' });
+  } else {
+    await expandBox(box, false);
+    if (btn.getAttribute('aria-expanded') === 'false') await widen(false);
+  }
 }
 
 /* ------------------------------------------------------------------ */

@@ -142,7 +142,7 @@ export class SmoothScroll {
   }
 
   private wheel(e: WheelEvent): void {
-    if (!this.active || e.ctrlKey) return; // ctrl+wheel = zoom
+    if (!this.active || e.ctrlKey || e.defaultPrevented) return; // ctrl+wheel = zoom; a component (a knob, a picker, a map) already took the wheel
     // leave nested scrollables / opted-out regions alone
     for (let n = e.target as HTMLElement | null; n && n !== this.el; n = n.parentElement) {
       if (n.hasAttribute?.('data-smooth-ignore')) return;

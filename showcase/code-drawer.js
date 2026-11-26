@@ -5,7 +5,7 @@
  * flavours (HTML with no build, ES module, React, Vue, desktop shells). The release pages from 17.16 on
  * (micro-interactions, spring parts, the icon preview, the looks) and the home page Collections did not.
  * This module brings the same drawer to them: a native <details> that expands into one code box per
- * flavour, with a copy button.
+ * flavour, with a copy button. From 17.18 it opens and closes on a damped spring (showcase/damped.js).
  *
  *   createDrawer({ id, markup })      the drawer for one gallery component, for this exact markup
  *   createDrawer({ tabs, snippets })  a drawer with your own tabs (the looks use this)
@@ -16,6 +16,8 @@
  */
 import { componentSnippets, CODE_TABS, findComponent } from './components-catalog.js';
 import { highlight } from './codegen.js';
+// 17.18: the drawer opens and closes on a damped spring (and the page gets the rest of the damped motion)
+import './damped.js';
 
 const STR = {
   en: { code: 'Code', copy: 'Copy code', copied: 'Copied', failed: 'Copy failed: select the code and copy it', flavours: 'Code flavour' },
@@ -31,8 +33,12 @@ const CSS = `
 .mo-code{margin-top:12px;border:1px solid rgb(127 127 127 / .28);border-radius:14px;background:rgb(127 127 127 / .06);min-width:0;text-align:start}
 .mo-code>summary{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font:600 13px/1.4 system-ui,sans-serif;list-style:none;border-radius:14px}
 .mo-code>summary::-webkit-details-marker{display:none}
-.mo-code>summary::after{content:'';margin-inline-start:auto;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s ease;opacity:.6}
-.mo-code[open]>summary::after{transform:rotate(-135deg)}
+.mo-code>summary::after{content:'';margin-inline-start:auto;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(calc(45deg - var(--mo-expand-turn,0) * 180deg));transition:transform .2s ease;opacity:.6}
+.mo-code[open]{--mo-expand-turn:1}
+.mo-code[data-mo-expanding]>summary::after{transition:none}
+.mo-code>summary{transition:background-color .2s ease}
+.mo-code>summary:hover{background:rgb(127 127 127 / .08)}
+.mo-code[data-mo-expanding] .mo-code-box pre{overflow:hidden}
 .mo-code>summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .mo-code-glyph{font:12px ui-monospace,monospace;opacity:.7}
 .mo-code-body{display:grid;gap:8px;padding:0 10px 10px;min-width:0}
