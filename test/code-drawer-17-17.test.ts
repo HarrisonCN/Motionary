@@ -27,10 +27,13 @@ describe('17.17 code drawers', () => {
     for (const id of ['spring-like', 'spring-toasts', 'micro', 'micro-switch', 'icon-picker', 'icon', 'bar-race', 'luminous-switch']) expect(ids.has(id), id).toBe(true);
     expect(RELEASE_COMPONENTS.length).toBeGreaterThanOrEqual(200);
     expect(new Set(ITEMS.map((i: any) => i.id)).size).toBe(ITEMS.length);
-    for (const it of COMPONENT_ITEMS.filter((i: any) => RELEASE_COMPONENTS.some((c: any) => c.id === i.gallery)) as any[]) {
+    for (const c of RELEASE_COMPONENTS as any[]) {
+      const it: any = COMPONENT_ITEMS.find((i: any) => i.gallery === c.id);
       const tabs = generate(it, {}, {});
       for (const k of ['vanilla', 'react', 'vue', 'svelte', 'solid', 'element', 'cdn']) expect(tabs[k], `${it.id}:${k}`).toBeTruthy();
-      expect(tabs.vanilla, it.id).toContain('motionary/components/widgets');
+      // widgets, or the fx elements' own entry
+      expect(tabs.vanilla, it.id).toContain(`motionary/components/${c.entry || c.category}`);
+      expect(tabs.vanilla, it.id).toContain(`${c.define}()`);
     }
   });
 
