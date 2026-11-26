@@ -69,7 +69,7 @@
 
     <h2 id="toasts">通知</h2>
     <section class="grid" aria-label="通知">
-      <article class="wide"><div class="stage"><div class="row" id="toastBtns"><button type="button" data-tone="info">普通通知</button><button type="button" data-tone="success">成功</button><button type="button" data-tone="warning">提醒</button><button type="button" data-tone="error">出错</button><button type="button" data-clear>全部清除</button></div></div><p>新通知带一点过冲落下，旧的被压到后面叠成一摞；指针移上去或键盘聚焦时整摞展开、计时暂停。可以点 ×、按 Esc，或横向甩出去关闭。</p><output class="log" data-log="toast"></output></article>
+      <article class="wide" data-mo-code="spring-toasts"><div class="stage"><div class="row" id="toastBtns"><button type="button" data-tone="info">普通通知</button><button type="button" data-tone="success">成功</button><button type="button" data-tone="warning">提醒</button><button type="button" data-tone="error">出错</button><button type="button" data-clear>全部清除</button></div></div><p>新通知带一点过冲落下，旧的被压到后面叠成一摞；指针移上去或键盘聚焦时整摞展开、计时暂停。可以点 ×、按 Esc，或横向甩出去关闭。</p><output class="log" data-log="toast"></output></article>
     </section>
 
     <h2 id="looks">外观与手感</h2>
@@ -77,6 +77,8 @@
     <section class="looks" aria-label="外观示例" id="looksRow"></section>
   </main>
   <mo-spring-toasts id="toaster" position="bottom-end"></mo-spring-toasts>
+  <!-- 17.17: every card gets the code drawer (HTML, ES module, React, Vue, desktop) with a copy button; it reads the markup before the elements are defined -->
+  <script type="module" src="./code-drawer.js" data-auto></script>
   <script type="module">
     import { defineMoAliases } from '../dist/components/mo.js';
     import { defineWidgets, adoptLooks, applyLook, lookNames, lookInfo } from '../dist/components/widgets.js';

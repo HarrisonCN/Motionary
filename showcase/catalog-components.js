@@ -5,6 +5,22 @@
  */
 import { components as widgets } from './catalog/widgets.js';
 import { components as instruments } from './catalog/instruments.js';
+// 17.17: the release pages from 17.4 on had a live demo in the gallery but no Store card, so they could not be
+// opened into the Store's code tabs. Every one of them is a Store card now, newest release first.
+import { components as springs } from './catalog/springs.js';
+import { components as micro } from './catalog/micro.js';
+import { components as toolkit } from './catalog/toolkit.js';
+import { components as icons } from './catalog/icons.js';
+import { components as studio } from './catalog/studio.js';
+import { components as parts } from './catalog/parts.js';
+import { components as blocks } from './catalog/blocks.js';
+import { components as kit } from './catalog/kit.js';
+import { components as moments } from './catalog/moments.js';
+import { components as tactile } from './catalog/tactile.js';
+import { components as forms } from './catalog/forms.js';
+import { components as matter } from './catalog/matter.js';
+import { components as activity } from './catalog/activity.js';
+import { components as luminous } from './catalog/luminous.js';
 import { componentSnippets } from './components-catalog.js';
 import { prereqFor, requiresLabel, tierFor } from './catalog/prereqs.js';
 
@@ -14,7 +30,10 @@ const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories:
 
 const svelte = (esm, html) => `<script>\n  ${esm.split('\n/*')[0].trim().replace(/\n/g, '\n  ')}\n</script>\n\n${html}`;
 
-export const COMPONENT_ITEMS = [...widgets, ...instruments].map((c) => {
+/** The 17.4–17.17 release catalogs, newest first (each is also a tab of the home page Collections). */
+export const RELEASE_COMPONENTS = [...springs, ...micro, ...toolkit, ...icons, ...studio, ...parts, ...blocks, ...kit, ...moments, ...tactile, ...forms, ...matter, ...activity, ...luminous].filter((c) => c.kind === 'element');
+
+export const COMPONENT_ITEMS = [...widgets, ...instruments, ...RELEASE_COMPONENTS].map((c) => {
   const s = componentSnippets(c);
   const html = c.usage;
   return {

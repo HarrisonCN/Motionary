@@ -116,6 +116,8 @@ applyMicro(); // 之后新增、修改、移除的 data-mo-micro 元素也会自
     <h2 id="looks">外观</h2>
     <section class="looks" aria-label="外观示例" id="looksRow"></section>
   </main>
+  <!-- 17.17: every card gets the code drawer (HTML, ES module, React, Vue, desktop) with a copy button; it reads the markup before the elements are defined -->
+  <script type="module" src="./code-drawer.js" data-auto></script>
   <script type="module">
     import { defineMoAliases } from '../dist/components/mo.js';
     import { defineWidgets, adoptLooks, applyLook, lookNames } from '../dist/components/widgets.js';
