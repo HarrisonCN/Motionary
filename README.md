@@ -461,7 +461,7 @@ where it does not. `baselineReport()` checks a given browser.
 
 ## Versions and upgrading
 
-- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.9.0<!--/ver-->; minors move it since 14.1). Each minor also
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.17.0<!--/ver-->; minors move it since 14.1). Each minor also
   gets its own tag `v<major>-<minor>` (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x.
   `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@<!--ver:major-->17<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.

@@ -400,7 +400,7 @@ el.animate(intent.keyframes, intent.options);
 
 ## 版本与升级
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.9.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.17.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本中，并配有迁移指南和 codemod。弃用的接口会保留到下一个大版本，带 `@deprecated` 类型，运行时不发警告。
 - **稳定与实验性：** 滚动 API、`motionary/core`、预设、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` 组件与小部件、框架适配层和 CLI 属于稳定部分。Motion Studio（`motionary/studio/*`）、AI 助手与 provider、MCP 服务器、Figma 插件和跨平台导出属于实验性功能，可能在次版本中变化（[docs/stability.md](./docs/stability.md)）。
