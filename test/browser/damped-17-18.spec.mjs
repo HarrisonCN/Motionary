@@ -1,9 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('17.18 damped motion: drawers spring open and closed, the code box reverses, the detail sheet pulls down', async ({ page, browserName }) => {
+// Three pages, one test each: the components gallery is heavy, and in WebKit one test for all three ran past the timeout.
+const watchErrors = (page) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
+  return errors;
+};
 
+test('17.18 damped motion: code drawers spring open and closed and a quick double toggle ends where the last click asked', async ({ page }) => {
+  const errors = watchErrors(page);
   await page.goto('/showcase/springs.html');
   await expect(page.locator('html[data-mo-damped]')).toHaveCount(1);
   const like = page.locator('details.mo-code[data-mo-code="spring-like"]');
@@ -24,7 +29,11 @@ test('17.18 damped motion: drawers spring open and closed, the code box reverses
   await summary.click();
   await expect(like).not.toHaveAttribute('data-mo-expanding', '', { timeout: 4000 });
   await expect(like).toHaveAttribute('open', '');
+  expect(errors).toEqual([]);
+});
 
+test('17.18 damped motion: the gallery code box opens and closes on the spring', async ({ page }) => {
+  const errors = watchErrors(page);
   await page.goto('/showcase/components.html');
   const card = page.locator('article.ccard').first();
   await card.scrollIntoViewIfNeeded();
@@ -37,7 +46,12 @@ test('17.18 damped motion: drawers spring open and closed, the code box reverses
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'false');
   await expect(box).toBeHidden({ timeout: 4000 });
+  expect(errors).toEqual([]);
+});
 
+test('17.18 damped motion: the detail sheet springs back from a short pull and closes on a long one', async ({ page, browserName }) => {
+  const errors = watchErrors(page);
+  // pointer drags on the sheet are checked in Chromium, as before
   if (browserName === 'chromium') {
     await page.goto('/showcase/index.html#stagger');
     const sheet = page.locator('#detail-sheet');
