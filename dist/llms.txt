@@ -1,6 +1,6 @@
 # Motionary 17.17.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 410 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 416 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@17/dist/components.umd.js (+ https://unpkg.com/motionary@17/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -132,6 +132,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-elastic-accordion>` (legacy `<usa-elastic-accordion>`; motionary/components/widgets): A disclosure whose body opens on a spring, overshooting a little before it settles.
 - `<mo-elastic-frame>` (legacy `<usa-elastic-frame>`; motionary/components/widgets): A rubber frame whose edges bow toward the pointer and wobble back.
 - `<mo-elastic-mesh>` (legacy `<usa-elastic-mesh>`; motionary/components/widgets): Pull a spring mesh and release it to settle back to its rest positions.
+- `<mo-elastic-scroll>` (legacy `<usa-elastic-scroll>`; motionary/components/widgets): A native scroll area whose ends stretch like rubber on wheel and touch and spring back with a damped settle; fires an edge event for pull-to-refresh.
 - `<mo-elastic-slider>` (legacy `<usa-elastic-slider>`; motionary/components/widgets): The value bubble trails the thumb on a spring and leans with its speed.
 - `<mo-emoji-picker>` (legacy `<usa-emoji-picker>`; motionary/components/widgets): Search, group tabs and a grid walked with arrow keys; a pick pops and can type into a field.
 - `<mo-empty-state>` (legacy `<usa-empty-state>`; motionary/components/widgets): An illustration that draws itself, then the heading, text and actions rise in turn.
@@ -307,6 +308,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-rating-bars>` (legacy `<usa-rating-bars>`; motionary/components/widgets): The average counts up beside filling stars while one bar per star level grows to its share.
 - `<mo-reaction-field>` (legacy `<usa-reaction-field>`; motionary/components/widgets): Real Gray–Scott chemistry, with dot and contour rendering and shape masks.
 - `<mo-reactions>` (legacy `<usa-reactions>`; motionary/components/widgets): 7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle
+- `<mo-read-more>` (legacy `<usa-read-more>`; motionary/components/widgets): Long text clamped to a few lines that unfolds on a damped spring while the fade melts away; no button when the text already fits.
 - `<mo-red-envelope>` (legacy `<usa-red-envelope>`; motionary/components/widgets): 8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.
 - `<mo-retro-button>` (legacy `<usa-retro-button>`; motionary/components/widgets): 8.2: buttons in four eras with matching press motion — 8-bit pixel (stepped press), CRT phosphor (flicker), Y2K chrome pill (bounce) and Windows 95 bevel (sink)
 - `<mo-retro-grid>` (legacy `<usa-retro-grid>`; motionary/components/widgets): A synthwave floor grid that rolls toward you, with an optional striped sun.
@@ -367,12 +369,16 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-spring>` (legacy `<usa-spring>`; motionary/components/physics): bounce-in, pop and drop entrances with true spring timing (CSS linear() easing), plus jelly and rubber-band attention effects on view, hover or click.
 - `<mo-spring-accordion>` (legacy `<usa-spring-accordion>`; motionary/components/widgets): Panels open on a spring that reverses smoothly mid-way, the content drifts in after it and the chevron flips with an overshoot.
 - `<mo-spring-code>` (legacy `<usa-spring-code>`; motionary/components/widgets): One-time-code boxes: characters pop in, focus hops along, paste fills in a ripple; reject() shakes the row, accept() nods.
+- `<mo-spring-collapse>` (legacy `<usa-spring-collapse>`; motionary/components/widgets): One collapsible panel whose height opens on a damped spring with a short settle; the content drifts in and a second click reverses from where it is.
 - `<mo-spring-copy>` (legacy `<usa-spring-copy>`; motionary/components/widgets): Copies text to the clipboard: the icon springs away and a tick pops in, or the button shakes with a cross when it cannot.
 - `<mo-spring-counter>` (legacy `<usa-spring-counter>`; motionary/components/widgets): Digits roll on springs to each new value, new columns grow in, and screen readers get the plain number.
 - `<mo-spring-lab>` (legacy `<usa-spring-lab>`; motionary/components/widgets): Tune mass, damping and stiffness; inspect the real step response and replay it.
 - `<mo-spring-like>` (legacy `<usa-spring-like>`; motionary/components/widgets): A like toggle whose heart squashes, pops past full size with a ring and a burst of dots, while the count rolls to its new number.
 - `<mo-spring-list>` (legacy `<usa-spring-list>`; motionary/components/widgets): Drag the handles to reorder: the picked item lifts and tilts, the others spring out of the way; full keyboard reordering.
+- `<mo-spring-pager>` (legacy `<usa-spring-pager>`; motionary/components/widgets): Pages that slide on a damped spring: rubber-band ends, one page per flick, dots that stretch toward the page they head for.
 - `<mo-spring-rating>` (legacy `<usa-spring-rating>`; motionary/components/widgets): Stars that lift on hover and pop up one after another when chosen; halves, read-only and full keyboard support.
+- `<mo-spring-sheet>` (legacy `<usa-spring-sheet>`; motionary/components/widgets): A bottom sheet with snap points: it follows the finger, stretches past its top, and a release is carried by its speed to a snap or closed.
+- `<mo-spring-stack>` (legacy `<usa-spring-stack>`; motionary/components/widgets): A pile of cards that unrolls into a list in a soft cascade, each card on its own slightly later spring, and gathers back behind the first.
 - `<mo-spring-swipe>` (legacy `<usa-spring-swipe>`; motionary/components/widgets): A row that swipes open to reveal actions, with rubber-band ends and a flick to open or shut; a ⋯ button does the same for the keyboard.
 - `<mo-spring-tags>` (legacy `<usa-spring-tags>`; motionary/components/widgets): Tags pop in and shrink away; a duplicate makes the chip that already has it shake. Enter, comma or paste adds tags.
 - `<mo-spring-toasts>` (legacy `<usa-spring-toasts>`; motionary/components/widgets): Toasts drop in with an overshoot and pile up neatly; the pile fans out on hover or focus, and a toast can be swiped away.
