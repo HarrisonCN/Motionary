@@ -46,7 +46,11 @@ interface State {
   settle: ((v: boolean) => void)[];
   opts: SpringExpandOptions;
   ro?: ResizeObserver;
+  guard?: ReturnType<typeof setTimeout>;
 }
+
+/** Longest a motion may run: on a frame-starved page the spring may crawl, but the box still reaches its end state. */
+const SETTLE_LIMIT = 2000;
 
 const states = /*#__PURE__*/ new WeakMap<HTMLElement, State>();
 const isDetails = (el: HTMLElement): el is HTMLDetailsElement => el.localName === 'details';
@@ -96,6 +100,7 @@ function finish(el: HTMLElement, st: State): void {
   el.style.removeProperty('--mo-expand-turn');
   states.delete(el);
   st.ro?.disconnect();
+  clearTimeout(st.guard);
   st.group.stop();
   const done = st.settle.splice(0);
   for (const fn of done) fn(st.open);
@@ -187,6 +192,10 @@ export function springExpand(el: HTMLElement, open?: boolean, opts: SpringExpand
   st.group.set({ p: want ? 1 : 0 }, { spring });
   st.group.set({ turn: want ? 1 : 0 }, { spring: want ? 'bouncy' : 'snappy' });
   const s = st;
+  clearTimeout(s.guard);
+  s.guard = setTimeout(() => {
+    if (states.get(el) === s) finish(el, s);
+  }, SETTLE_LIMIT);
   return new Promise((resolve) => s.settle.push(resolve));
 }
 
