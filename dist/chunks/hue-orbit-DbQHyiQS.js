@@ -85,4 +85,4 @@ function defineHueOrbit(tag = 'usa-hue-orbit') {
 }
 
 export { defineHueOrbit as d, hueColor as h };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/hue-orbit-DbQHyiQS.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/hue-orbit-DbQHyiQS.js.map

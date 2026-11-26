@@ -258,4 +258,4 @@ function defineSpringList(tag = 'usa-spring-list') {
 }
 
 export { defineSpringList };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/spring-list.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-list.js.map

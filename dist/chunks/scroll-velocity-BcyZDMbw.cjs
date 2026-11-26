@@ -76,4 +76,4 @@ function defineScrollVelocity(tag = 'usa-scroll-velocity') {
 
 exports.defineScrollVelocity = defineScrollVelocity;
 exports.velocityAmount = velocityAmount;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/scroll-velocity-BcyZDMbw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/scroll-velocity-BcyZDMbw.cjs.map

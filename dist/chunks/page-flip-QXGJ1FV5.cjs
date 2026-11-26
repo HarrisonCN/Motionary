@@ -147,4 +147,4 @@ function definePageFlip(tag = 'usa-page-flip') {
 
 exports.definePageFlip = definePageFlip;
 exports.turnAngle = turnAngle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/page-flip-QXGJ1FV5.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/page-flip-QXGJ1FV5.cjs.map

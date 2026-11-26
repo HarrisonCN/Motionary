@@ -174,4 +174,4 @@ function openSet(text, count, multiple = false) {
 }
 
 export { addTags as a, alignDigits as b, burstPoints as c, codeChars as d, compactCount as e, counterText as f, slotAt as g, stackLayout as h, starFill as i, swipeOpen as j, moveItem as m, openSet as o, parseTags as p, ratingAt as r, shiftFor as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/spring-kit-17-B1KexqJR.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/spring-kit-17-B1KexqJR.js.map

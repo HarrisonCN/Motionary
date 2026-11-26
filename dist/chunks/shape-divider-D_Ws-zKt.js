@@ -96,4 +96,4 @@ function defineShapeDivider(tag = 'usa-shape-divider') {
 }
 
 export { DIVIDER_SHAPES as D, dividerPath as a, defineShapeDivider as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/shape-divider-D_Ws-zKt.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/shape-divider-D_Ws-zKt.js.map

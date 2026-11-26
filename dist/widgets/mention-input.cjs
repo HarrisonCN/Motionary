@@ -160,4 +160,4 @@ function defineMentionInput(tag = 'usa-mention-input') {
 }
 
 exports.defineMentionInput = defineMentionInput;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/mention-input.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/mention-input.cjs.map

@@ -108,4 +108,4 @@ function defineGantt(tag = 'usa-gantt') {
 }
 
 exports.defineGantt = defineGantt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/gantt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/gantt.cjs.map

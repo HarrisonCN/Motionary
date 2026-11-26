@@ -45,4 +45,4 @@ function defineLetterSwap(tag = 'usa-letter-swap') {
 }
 
 exports.defineLetterSwap = defineLetterSwap;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/letter-swap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/letter-swap.cjs.map

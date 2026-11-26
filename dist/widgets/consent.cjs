@@ -48,4 +48,4 @@ function defineConsent(tag = 'usa-consent') {
 }
 
 exports.defineConsent = defineConsent;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/consent.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/consent.cjs.map

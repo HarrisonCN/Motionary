@@ -134,4 +134,4 @@ function defineFanCarousel(tag = 'usa-fan-carousel') {
 
 exports.defineFanCarousel = defineFanCarousel;
 exports.fanPose = fanPose;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/fan-carousel-zpoSnwJE.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fan-carousel-zpoSnwJE.cjs.map

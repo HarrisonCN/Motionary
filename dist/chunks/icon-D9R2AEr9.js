@@ -1058,4 +1058,4 @@ function defineIcon(tag = 'usa-icon') {
 }
 
 export { ICONS as I, ICON_CATEGORIES as a, ICON_GROUPS as b, ICON_MOTIONS as c, defineIcon as d, ICON_SVG_ATTRS as e, ICON_TRIGGERS as f, iconElement as g, iconNames as h, iconCategory as i, iconParts as j, iconSvg as k, css as l, searchIcons as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/icon-D9R2AEr9.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/icon-D9R2AEr9.js.map

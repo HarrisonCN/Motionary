@@ -5,4 +5,4 @@ var widgets_pathMotion = require('../chunks/path-motion-BJ5jD7yj.cjs');
 
 
 exports.definePathMotion = widgets_pathMotion.definePathMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/path-motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/path-motion.cjs.map

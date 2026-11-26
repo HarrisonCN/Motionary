@@ -81,4 +81,4 @@ function defineRatingBars(tag = 'usa-rating-bars') {
 
 exports.defineRatingBars = defineRatingBars;
 exports.ratingSummary = ratingSummary;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/rating-bars-DawbbIeq.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/rating-bars-DawbbIeq.cjs.map

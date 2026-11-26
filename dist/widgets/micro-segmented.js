@@ -151,4 +151,4 @@ function defineMicroSegmented(tag = 'usa-micro-segmented') {
 }
 
 export { defineMicroSegmented };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/micro-segmented.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/micro-segmented.js.map

@@ -15,4 +15,4 @@ function registerLanternRise() {
 exports.effect = effect;
 exports.register = registerLanternRise;
 exports.registerLanternRise = registerLanternRise;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/lantern-rise.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/lantern-rise.cjs.map

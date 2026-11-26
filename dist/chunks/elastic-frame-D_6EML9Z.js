@@ -126,4 +126,4 @@ function defineElasticFrame(tag = 'usa-elastic-frame') {
 }
 
 export { defineElasticFrame as d, elasticPath as e };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/elastic-frame-D_6EML9Z.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/elastic-frame-D_6EML9Z.js.map

@@ -187,4 +187,4 @@ function defineSearchBar(tag = 'usa-search-bar') {
 
 exports.defineSearchBar = defineSearchBar;
 exports.matchSuggestions = matchSuggestions;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/search-bar-prhV037u.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/search-bar-prhV037u.cjs.map

@@ -98,4 +98,4 @@ function defineHoverCard(tag = 'usa-hover-card') {
 }
 
 exports.defineHoverCard = defineHoverCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/hover-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/hover-card.cjs.map

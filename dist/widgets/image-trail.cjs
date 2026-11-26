@@ -89,4 +89,4 @@ function defineImageTrail(tag = 'usa-image-trail') {
 }
 
 exports.defineImageTrail = defineImageTrail;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/image-trail.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/image-trail.cjs.map

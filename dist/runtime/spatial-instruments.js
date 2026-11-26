@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-BvENHGcs.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Cbo6qw2B.js';
 
 /**
  * @license
@@ -47304,4 +47304,4 @@ const spatialInstruments = {
 };
 
 export { createInstrument, spatialInstruments };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/runtime/spatial-instruments.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/runtime/spatial-instruments.js.map

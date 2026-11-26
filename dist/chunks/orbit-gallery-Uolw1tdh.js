@@ -195,4 +195,4 @@ function defineOrbitGallery(tag = 'usa-orbit-gallery') {
 }
 
 export { defineOrbitGallery as d, frontIndex as f, ringRadius as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/orbit-gallery-Uolw1tdh.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/orbit-gallery-Uolw1tdh.js.map

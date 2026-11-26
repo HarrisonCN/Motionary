@@ -115,4 +115,4 @@ function defineInlineEdit(tag = 'usa-inline-edit') {
 }
 
 exports.defineInlineEdit = defineInlineEdit;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/inline-edit.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/inline-edit.cjs.map

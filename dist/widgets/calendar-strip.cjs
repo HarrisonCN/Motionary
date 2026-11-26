@@ -169,4 +169,4 @@ function defineCalendarStrip(tag = 'usa-calendar-strip') {
 }
 
 exports.defineCalendarStrip = defineCalendarStrip;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/calendar-strip.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/calendar-strip.cjs.map

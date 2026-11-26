@@ -74,4 +74,4 @@ function defineTextPressure(tag = 'usa-text-pressure') {
 }
 
 export { defineTextPressure };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/text-pressure.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/text-pressure.js.map

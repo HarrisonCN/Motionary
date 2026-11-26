@@ -209,4 +209,4 @@ exports.swipeDirection = core.swipeDirection;
 exports.defineGestureComponents = defineGestureComponents;
 exports.definePinchZoom = definePinchZoom;
 exports.defineSwipeable = defineSwipeable;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/components/gesture.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/components/gesture.cjs.map

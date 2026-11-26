@@ -314,4 +314,4 @@ exports.settleTime = settleTime;
 exports.springFeel = springFeel;
 exports.springFromFeel = springFromFeel;
 exports.springSolution = springSolution;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/spring-solver-CS4saXm-.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/spring-solver-CS4saXm-.cjs.map

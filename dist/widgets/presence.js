@@ -1,2 +1,2 @@
 export { d as definePresence } from '../chunks/presence-qE-_AKeD.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/presence.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/presence.js.map

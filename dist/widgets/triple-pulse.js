@@ -18,4 +18,4 @@ function defineTriplePulse(tag = 'usa-triple-pulse') {
 }
 
 export { defineTriplePulse };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/triple-pulse.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/triple-pulse.js.map

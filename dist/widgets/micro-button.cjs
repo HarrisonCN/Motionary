@@ -173,4 +173,4 @@ function defineMicroButton(tag = 'usa-micro-button') {
 }
 
 exports.defineMicroButton = defineMicroButton;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/micro-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/micro-button.cjs.map

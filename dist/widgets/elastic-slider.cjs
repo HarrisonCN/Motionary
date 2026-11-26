@@ -80,4 +80,4 @@ function defineElasticSlider(tag = 'usa-elastic-slider') {
 }
 
 exports.defineElasticSlider = defineElasticSlider;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/elastic-slider.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/elastic-slider.cjs.map

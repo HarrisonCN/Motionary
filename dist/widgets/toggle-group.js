@@ -98,4 +98,4 @@ function defineToggleGroup(tag = 'usa-toggle-group') {
 }
 
 export { defineToggleGroup };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/toggle-group.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/toggle-group.js.map

@@ -149,4 +149,4 @@ function defineScrollspy(tag = 'usa-scrollspy') {
 }
 
 exports.defineScrollspy = defineScrollspy;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/scrollspy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/scrollspy.cjs.map
