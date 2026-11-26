@@ -69,12 +69,16 @@ export async function expandBox(box, open) {
 /* ------------------------------------------------------------------ */
 
 const CARDS = '.card, .ccard, .col-card, .col-look, main article';
+// browse cards rise into place; a demo section (main article) only fades in, so the live widgets inside it never
+// move under the pointer and never sit inside a transform (which would trap their fixed-position menus)
+const BROWSE = '.card, .ccard, .col-card, .col-look';
 const RISE = [{ opacity: 0, translate: '0 26px', scale: '0.97' }, { opacity: 1, translate: '0 0', scale: '1' }];
+const FADE = [{ opacity: 0 }, { opacity: 1 }];
 
 function rise(list) {
   const { easing, duration } = springEase({ duration: 620, bounce: 0.18 });
   list.slice(0, 24).forEach((node, i) => {
-    node.animate(RISE, { id: 'mo-rise', duration, easing, delay: Math.min(i, 8) * 55, fill: 'backwards' });
+    node.animate(node.matches(BROWSE) ? RISE : FADE, { id: 'mo-rise', duration, easing, delay: Math.min(i, 8) * 55, fill: 'backwards' });
   });
 }
 
