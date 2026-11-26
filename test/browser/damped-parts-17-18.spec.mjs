@@ -65,6 +65,9 @@ test('17.18 damped parts work by pointer and keyboard without page errors', asyn
     await expect(page.locator('[data-log="pager"]')).toHaveText('第 2 页');
     // pulling the first page right only stretches, then springs back to page 1 of the drag
     await page.locator('mo-spring-pager').evaluate((el) => (el.index = 0));
+    // the track slides back to page 1 first: a grab mid-slide would carry on from where it is
+    const trackX = () => pager.locator('.usa-dpager-track').evaluate((el) => Math.round(new DOMMatrix(getComputedStyle(el).transform).m41));
+    await expect.poll(trackX, { timeout: 4000 }).toBe(0);
     await page.mouse.move(b.x + b.width * 0.2, b.y + b.height / 2);
     await page.mouse.down();
     await page.mouse.move(b.x + b.width * 0.9, b.y + b.height / 2, { steps: 8 });
