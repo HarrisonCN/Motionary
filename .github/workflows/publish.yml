@@ -1,6 +1,8 @@
 name: Publish to npm (provenance)
 
-# Authenticate package uploads with the npm environment's NPM secret. OIDC signs build provenance.
+# npm trusted publishing: npm authenticates this workflow through GitHub OIDC, so no npm token is stored anywhere.
+# Each package (motionary and use-scroll-animate) needs a trusted publisher on npmjs.com with repository
+# HarrisonCN/Motionary, workflow publish.yml and environment npm. Provenance is attached automatically.
 on:
   workflow_dispatch:
     inputs:
@@ -21,14 +23,6 @@ jobs:
     environment: npm
     runs-on: ubuntu-latest
     steps:
-      - name: Require the npm publishing token
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
-        run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::Configure the NPM secret in the npm environment with publish access to both packages."
-            exit 1
-          fi
       - uses: actions/checkout@v7
         with:
           ref: refs/tags/${{ inputs.tag }}
@@ -41,7 +35,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ inputs.tag }}
         run: node -e "if (process.env.RELEASE_TAG !== 'v' + require('./package.json').version) throw Error('tag/version mismatch')"
-      - run: npm install -g npm@11.9.0
+      - run: npm install -g npm@11.9.0 # trusted publishing needs npm >= 11.5.1 and Node >= 22.14
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
@@ -50,7 +44,6 @@ jobs:
       - run: npm run check:exports
       - name: Publish missing packages from the verified build
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
           DIST_TAG: ${{ inputs.dist_tag }}
         run: |
           set -euo pipefail
@@ -68,3 +61,8 @@ jobs:
             npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP" --silent
             npm publish "$RUNNER_TEMP/$name-$version.tgz" --provenance --access public --tag "$DIST_TAG"
           done
+      - name: Explain an npm authentication failure
+        if: failure()
+        run: |
+          echo "::error::If npm said ENEEDAUTH or E404 on PUT, the trusted publisher on npmjs.com does not match this run."
+          echo "::error::Check both packages: user HarrisonCN, repository Motionary, workflow publish.yml, environment npm, publish allowed."
