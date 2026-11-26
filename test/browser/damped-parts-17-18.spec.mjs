@@ -78,6 +78,8 @@ test('17.18 damped parts work by pointer and keyboard without page errors', asyn
     await expect.poll(() => pager.locator('.usa-dpager-track').evaluate((el) => Math.round(new DOMMatrix(getComputedStyle(el).transform).m41)), { timeout: 4000 }).toBe(0);
 
     // the sheet follows a drag up to its top snap, and a flick down closes it
+    // (centred first, so the 160 px pull stays inside the viewport: the pager check left the page scrolled below it)
+    await slide.locator('mo-spring-sheet').evaluate((el) => el.scrollIntoView({ block: 'center' }));
     await trigger.click();
     await expect(page.locator('[data-log="sheet"]')).toHaveText('停在第 1 个吸附点');
     await page.waitForTimeout(700);
