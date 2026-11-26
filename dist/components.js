@@ -53,7 +53,7 @@ export { M as MICRO_FEELS, a as MICRO_SPRINGS, c as createSpringGroup, m as micr
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-Bu3AwUgu.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-Bj5_9QHr.js';
 export { c as categoryOf } from './chunks/category-for-tag-WK7MtB-K.js';
-export { e as expandContentAt, i as isExpanded, s as springAllDetails, a as springDetails, b as springExpand } from './chunks/expand-CQ5fvE-S.js';
+export { e as expandContentAt, i as isExpanded, s as springAllDetails, a as springDetails, b as springExpand } from './chunks/expand-DR_ipRf6.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-C0-LxgXr.js';
 export { h as haptic } from './chunks/fx-sAOJVpyC.js';
 
