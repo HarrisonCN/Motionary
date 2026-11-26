@@ -3342,6 +3342,36 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/spring-collapse' (per-entry, fixed)",
+    "import": "import { defineSpringCollapse } from 'pkg/widgets/spring-collapse'; console.log(defineSpringCollapse);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/read-more' (per-entry, fixed)",
+    "import": "import { defineReadMore } from 'pkg/widgets/read-more'; console.log(defineReadMore);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-sheet' (per-entry, fixed)",
+    "import": "import { defineSpringSheet } from 'pkg/widgets/spring-sheet'; console.log(defineSpringSheet);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-pager' (per-entry, fixed)",
+    "import": "import { defineSpringPager } from 'pkg/widgets/spring-pager'; console.log(defineSpringPager);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/elastic-scroll' (per-entry, fixed)",
+    "import": "import { defineElasticScroll } from 'pkg/widgets/elastic-scroll'; console.log(defineElasticScroll);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-stack' (per-entry, fixed)",
+    "import": "import { defineSpringStack } from 'pkg/widgets/spring-stack'; console.log(defineSpringStack);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

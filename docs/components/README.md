@@ -1,4 +1,4 @@
-# Motionary components (410)
+# Motionary components (416)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -76,6 +76,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-drawer>`](usa-drawer.md) — Drawer
 - [`<mo-eclipse-toggle>`](usa-eclipse-toggle.md) — Eclipse toggle
 - [`<mo-elastic-accordion>`](usa-elastic-accordion.md) — Elastic accordion
+- [`<mo-elastic-scroll>`](usa-elastic-scroll.md) — Elastic scroll
 - [`<mo-elastic-slider>`](usa-elastic-slider.md) — Elastic slider
 - [`<mo-emoji-picker>`](usa-emoji-picker.md) — Emoji picker
 - [`<mo-fab>`](usa-fab.md) — FAB speed dial
@@ -173,6 +174,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-radar>`](usa-radar.md) — Radar scope
 - [`<mo-range-slider>`](usa-range-slider.md) — Interval slider
 - [`<mo-reactions>`](usa-reactions.md) — Emoji reactions
+- [`<mo-read-more>`](usa-read-more.md) — Read more
 - [`<mo-red-envelope>`](usa-red-envelope.md) — Red envelope (红包)
 - [`<mo-retro-button>`](usa-retro-button.md) — Retro buttons
 - [`<mo-ride-status>`](usa-ride-status.md) — Ride status
@@ -195,11 +197,15 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-spatial-card>`](usa-spatial-card.md) — Spatial card
 - [`<mo-spring-accordion>`](usa-spring-accordion.md) — Spring accordion
 - [`<mo-spring-code>`](usa-spring-code.md) — Spring code
+- [`<mo-spring-collapse>`](usa-spring-collapse.md) — Spring collapse
 - [`<mo-spring-copy>`](usa-spring-copy.md) — Spring copy
 - [`<mo-spring-counter>`](usa-spring-counter.md) — Spring counter
 - [`<mo-spring-like>`](usa-spring-like.md) — Spring like
 - [`<mo-spring-list>`](usa-spring-list.md) — Spring list
+- [`<mo-spring-pager>`](usa-spring-pager.md) — Spring pager
 - [`<mo-spring-rating>`](usa-spring-rating.md) — Spring rating
+- [`<mo-spring-sheet>`](usa-spring-sheet.md) — Spring sheet
+- [`<mo-spring-stack>`](usa-spring-stack.md) — Spring stack
 - [`<mo-spring-swipe>`](usa-spring-swipe.md) — Spring swipe
 - [`<mo-spring-tags>`](usa-spring-tags.md) — Spring tags
 - [`<mo-spring-toasts>`](usa-spring-toasts.md) — Spring toasts

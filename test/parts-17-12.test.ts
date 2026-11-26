@@ -427,11 +427,11 @@ describe('home page collections', () => {
   it('puts the release pages on the home page as tabs and keeps every page as a deep link', async () => {
     expect(html).toContain('id="collections"');
     expect(html).toContain('<script type="module" src="./home-collections.js"></script>');
-    for (const page of ['springs', 'micro', 'toolkit', 'icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'instruments', 'forms', 'matter', 'activity', 'luminous', 'styles'])
+    for (const page of ['damped', 'springs', 'micro', 'toolkit', 'icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'instruments', 'forms', 'matter', 'activity', 'luminous', 'styles'])
       expect(html, page).toContain(`href="./${page}.html"`);
     expect(html).not.toContain('position:fixed');
     const { COLLECTIONS } = await import('../showcase/home-collections.js');
-    expect(COLLECTIONS.map((c: any) => c.id)).toEqual(['springs', 'micro', 'toolkit', 'icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'forms', 'matter', 'activity', 'luminous']);
+    expect(COLLECTIONS.map((c: any) => c.id)).toEqual(['damped', 'springs', 'micro', 'toolkit', 'icons', 'studio', 'parts', 'blocks', 'looks', 'kit', 'moments', 'forms', 'matter', 'activity', 'luminous']);
     for (const c of COLLECTIONS as any[]) {
       expect(html, c.page).toContain(`href="${c.page}"`);
       expect(c.title.en && c.title.zh, c.id).toBeTruthy();

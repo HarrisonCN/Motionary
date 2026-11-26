@@ -1,5 +1,5 @@
 /**
- * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab, 17.17 the spring parts tab).
+ * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab, 17.17 the spring parts tab, 17.18 the damped parts tab).
  *
  * Every release page (17.14 icons, 17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
  * 17.4 luminous) gets a tab with a handful of its widgets running live, so most of them can be tried without leaving
@@ -11,6 +11,7 @@
  * into HTML / ES module / React / Vue / desktop code with a copy button.
  */
 import { components as springs } from './catalog/springs.js';
+import { components as damped } from './catalog/damped.js';
 import { components as micro } from './catalog/micro.js';
 import { components as toolkit } from './catalog/toolkit.js';
 import { components as icons } from './catalog/icons.js';
@@ -34,6 +35,13 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 
 /** The tabs, newest first. `page` is the full demo page each one links to. */
 export const COLLECTIONS = [
+  {
+    id: 'damped', since: '17.18', page: './damped.html',
+    title: { en: 'Damped parts', zh: '阻尼部件' },
+    blurb: { en: 'Panels, sheets, pages and piles that open with a damped, physical slide: they follow the finger, stretch at the ends and settle instead of stopping dead.', zh: '面板、抽屉、分页和卡片堆都带阻尼滑动：跟手、两端有橡皮筋阻力，停下时轻轻回稳而不是戛然而止。' },
+    items: pick(damped, 'spring-collapse spring-sheet spring-pager spring-stack read-more elastic-scroll'),
+    total: damped.length,
+  },
   {
     id: 'springs', since: '17.17', page: './springs.html',
     title: { en: 'Spring parts', zh: '弹簧部件' },
@@ -162,7 +170,7 @@ const STR = {
 };
 
 /** Demos that need more room than one grid column. */
-const WIDE = new Set(['spring-list', 'spring-accordion', 'bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
+const WIDE = new Set(['spring-sheet', 'spring-pager', 'spring-list', 'spring-accordion', 'bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
 
 const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose', 'clay-cherry', 'neumorph-cobalt', 'retro-teal', 'synth-velvet', 'luxe-sand', 'editorial-olive', 'sketch-plum', 'pill-aurora'];
 

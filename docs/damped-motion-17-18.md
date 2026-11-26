@@ -39,3 +39,27 @@ springAllDetails(document);         // every <details> on the page, now and late
 - wheel scrolling glides with damping (`smoothScroll({ lerp: 0.11 })` from the runtime); touch, keyboard, scrollbar, find-in-page and nested scrollers stay native, and the Store sheet is left out.
 
 All of it is off under `prefers-reduced-motion`, and `localStorage['motionary:damped'] = 'off'` turns it off for a visitor. If the library cannot be loaded the pages behave as before.
+
+## Damped parts
+
+Six widgets with the same damped, physical slide, registered with `defineWidgets('17.18')` (or one at a time from `motionary/widgets/<name>`). All motion runs on the spring core; each reads the look tokens (`--mo-kit-*`) and `feel`, works by keyboard and screen reader, and jumps to its end state under reduced motion.
+
+| Element | What it does | Attributes | Events |
+|---|---|---|---|
+| `mo-spring-collapse` | One collapsible panel on `springExpand()`; the chevron flips on its own bouncier spring | `label`, `open`, `disabled`, `feel`, `haptics` | `usa:toggle` `{ open }` |
+| `mo-read-more` | Text clamped to `lines` that unfolds on a spring while the fade melts away; no button when it fits | `lines`, `more`, `less`, `open`, `feel` | `usa:toggle` `{ open }` |
+| `mo-spring-sheet` | A bottom sheet in its own frame: follows the finger, rubber band past its top snap, a release is carried by its speed to a snap or closed; the backdrop dims with it. Children with `data-sheet` go in the sheet. Frame height: `--usa-dsheet-height` | `snaps`, `open`, `label`, `trigger`, `feel`, `haptics` | `usa:snap` `{ index }` (-1 closed) |
+| `mo-spring-pager` | Pages with rubber-band ends and one page per flick; the dots stretch toward the page they head for | `index`, `label`, `feel`, `haptics` | `usa:change` `{ index }` |
+| `mo-elastic-scroll` | A native scroll area whose ends stretch on wheel and touch and spring back (iOS keeps its own bounce) | `height`, `label`, `feel`, `haptics` | `usa:edge` `{ edge }` past 56 px |
+| `mo-spring-stack` | A pile of cards that unrolls into a list in a cascade of springs and gathers back | `open`, `more`, `less`, `peek`, `gap`, `feel`, `haptics` | `usa:toggle` `{ open }` |
+
+```html
+<mo-spring-sheet snaps="0.45, 0.9">
+  <p>Page content</p>
+  <div data-sheet><h3>Filters</h3>…</div>
+</mo-spring-sheet>
+```
+
+Keyboard: the collapse, read-more and stack toggles are buttons with `aria-expanded`; the sheet's grabber steps through the snaps on Enter and moves with the arrow keys, Escape closes the sheet (focus returns to its trigger) and the stack; the pager's arrows, dots, the arrow keys, Home and End turn pages, and pages out of view are inert.
+
+The pure helpers behind them are exported from `motionary/components/widgets`: `parseSnaps(text)`, `sheetRest(shown, velocity, snaps)`, `pageAfter(offset, velocity, width, count, from)`, `dampedAt(position, min, max, dimension)`, `pilePose(i, heights, t, peek, gap)` and `linesHeight(lines, lineHeight)`. Demo page: `showcase/damped.html`, also the first tab of the home Collections section.

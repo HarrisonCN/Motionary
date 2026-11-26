@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.17.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 410 animated Web Components (91 core, 319 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 416 animated Web Components (91 core, 325 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,66 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/spring-collapse": {
+      "import": {
+        "types": "./dist/widgets/spring-collapse.d.ts",
+        "default": "./dist/widgets/spring-collapse.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-collapse.d.cts",
+        "default": "./dist/widgets/spring-collapse.cjs"
+      }
+    },
+    "./widgets/read-more": {
+      "import": {
+        "types": "./dist/widgets/read-more.d.ts",
+        "default": "./dist/widgets/read-more.js"
+      },
+      "require": {
+        "types": "./dist/widgets/read-more.d.cts",
+        "default": "./dist/widgets/read-more.cjs"
+      }
+    },
+    "./widgets/spring-sheet": {
+      "import": {
+        "types": "./dist/widgets/spring-sheet.d.ts",
+        "default": "./dist/widgets/spring-sheet.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-sheet.d.cts",
+        "default": "./dist/widgets/spring-sheet.cjs"
+      }
+    },
+    "./widgets/spring-pager": {
+      "import": {
+        "types": "./dist/widgets/spring-pager.d.ts",
+        "default": "./dist/widgets/spring-pager.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-pager.d.cts",
+        "default": "./dist/widgets/spring-pager.cjs"
+      }
+    },
+    "./widgets/elastic-scroll": {
+      "import": {
+        "types": "./dist/widgets/elastic-scroll.d.ts",
+        "default": "./dist/widgets/elastic-scroll.js"
+      },
+      "require": {
+        "types": "./dist/widgets/elastic-scroll.d.cts",
+        "default": "./dist/widgets/elastic-scroll.cjs"
+      }
+    },
+    "./widgets/spring-stack": {
+      "import": {
+        "types": "./dist/widgets/spring-stack.d.ts",
+        "default": "./dist/widgets/spring-stack.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-stack.d.cts",
+        "default": "./dist/widgets/spring-stack.cjs"
       }
     },
     "./widgets/spring-like": {

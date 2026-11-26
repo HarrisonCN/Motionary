@@ -144,8 +144,8 @@ describe('17.17 spring parts', () => {
     for (const name of TAGS) expect(page).toContain(`<mo-${name}`);
     expect(page).toContain("defineWidgets('17.17')");
     expect(read('showcase/index.html')).toContain('./springs.html');
-    expect((COLLECTIONS as any[])[0].id).toBe('springs');
-    expect((COLLECTIONS as any[])[0].items.length).toBeGreaterThanOrEqual(6);
+    // 17.18: a newer tab comes first now
+    expect((COLLECTIONS as any[]).find((c) => c.id === 'springs').items.length).toBeGreaterThanOrEqual(6);
     const doc = read('docs/spring-parts-17-17.md');
     for (const name of TAGS) expect(doc).toContain(`mo-${name}`);
     for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) expect(read(f), f).toContain('spring-parts-17-17.md');

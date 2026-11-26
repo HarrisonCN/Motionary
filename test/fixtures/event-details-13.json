@@ -2219,6 +2219,36 @@
       "usa:show": [
         "{id, text, tone}"
       ]
+    },
+    "usa-elastic-scroll": {
+      "usa:edge": [
+        "{edge}"
+      ]
+    },
+    "usa-read-more": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-spring-collapse": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-spring-pager": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-spring-sheet": {
+      "usa:snap": [
+        "{index}"
+      ]
+    },
+    "usa-spring-stack": {
+      "usa:toggle": [
+        "{open}"
+      ]
     }
   }
 }
