@@ -403,6 +403,8 @@ interface UsaPressElement extends UsaElement {
  * `<usa-press>`.
  * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
  * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
+ * 17.18: `springExpand()` / `springDetails()` / `springAllDetails()` — damped expand and collapse for boxes and
+ * native `<details>`.
  */
 
 declare global {

@@ -123,6 +123,13 @@ function smoothScroll(options = {}) {
     const onWheel = (e) => {
         if (e.ctrlKey || e.defaultPrevented)
             return;
+        // 17.18: nested scrollers (code boxes, side panels) and [data-smooth-ignore] keep their native wheel
+        for (let n = e.target; n && n !== el && n !== document.body; n = n.parentElement) {
+            if (n.hasAttribute?.('data-smooth-ignore'))
+                return;
+            if (n.scrollHeight > n.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(n).overflowY))
+                return;
+        }
         if (!id)
             target = current = get();
         e.preventDefault();
