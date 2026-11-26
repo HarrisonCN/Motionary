@@ -292,6 +292,11 @@ code, kbd, pre { font-family: var(--mono); }
   box-shadow: 0 40px 120px -30px rgb(0 0 0 / 0.6); outline: none; transform-origin: top left;
 }
 .detail-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--bg-2); }
+/* 17.18: the header is the pull-to-close handle (showcase/damped.js) */
+html[data-mo-damped] .detail-head { cursor: grab; touch-action: none; }
+#detail-sheet[data-mo-pulling] .detail-head { cursor: grabbing; }
+#detail-sheet[data-mo-pulling] { transition: none; }
+.detail-backdrop { opacity: calc(1 - var(--mo-pull, 0) * 0.6); }
 .detail-head h2 { margin: 0; font-size: 1.1rem; letter-spacing: -0.01em; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .back-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px 0 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; font-size: 0.9rem; transition: transform 0.18s var(--ease-out); }
 .back-btn:active { transform: scale(0.95); }
@@ -359,7 +364,7 @@ code, kbd, pre { font-family: var(--mono); }
 [data-theme="dark"] .detail-links a { color: #a993ff; }
 
 /* View Transitions (shared element from card to detail) */
-::view-transition-group(*) { animation-duration: 0.45s; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+::view-transition-group(*) { animation-duration: var(--mo-spring-dur, 0.45s); animation-timing-function: var(--mo-spring-ease, cubic-bezier(0.2, 0.8, 0.2, 1)); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
 ::view-transition-old(sa-sheet), ::view-transition-new(sa-sheet) { height: 100%; object-fit: cover; }
 

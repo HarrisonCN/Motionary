@@ -240,11 +240,60 @@ declare function feedback(el: HTMLElement, kind: MicroFeedback | string, opts?: 
 declare function applyMicro(root?: ParentNode): () => void;
 
 /**
+ * 17.18 — damped expand / collapse for any box or native `<details>`.
+ *
+ * - The height follows a spring from the 17.16 spring core, so opening has a short, damped overshoot and a
+ *   second toggle mid-way reverses from where the box is, with its current velocity.
+ * - The content drifts in after the height (fade + a few px of slide, staggered child by child) and drifts out
+ *   ahead of it on close.
+ * - The box carries `--mo-expand` (0…1, the height progress) and `--mo-expand-turn` (a bouncier channel, for a
+ *   chevron) while it moves, and `data-mo-expanding` until it rests; at rest both are removed, so give the open
+ *   state its own value in CSS (`details[open] { --mo-expand-turn: 1 }`).
+ * - `<details>` keeps its native semantics: it is `open` for the whole opening and only loses `open` once the
+ *   closing motion has ended, so the toggle event, find-in-page and screen readers behave as usual.
+ * - Under reduced motion it toggles at once.
+ */
+interface SpringExpandOptions {
+    /** Spring for opening (default a damped settle: 520 ms, bounce 0.16). */
+    spring?: MicroSpringInput;
+    /** Spring for closing (default 360 ms, no bounce). */
+    closeSpring?: MicroSpringInput;
+    /** Feel that retunes both springs. */
+    feel?: MicroFeel | string | null;
+    /** How far the content slides while it fades, in px (default 10; 0 for a plain fade). */
+    drift?: number;
+    /** Delay between the content's children, as a fraction of the motion (default 0.08). */
+    stagger?: number;
+}
+/** Height progress → each child's [opacity, offset factor], child `i` of `n`, starting `stagger` later per child. */
+declare function expandContentAt(p: number, i: number, n: number, stagger?: number): [number, number];
+/** Whether `el` is shown: `open` for `<details>`, not `hidden` otherwise. */
+declare function isExpanded(el: HTMLElement): boolean;
+/**
+ * Open or close `el` (a `<details>` or any box toggled with `hidden`) on a damped spring. `open` defaults to the
+ * opposite of its current state. Resolves with the final state once it rests, or with the new state at once when
+ * motion is reduced. A call during the motion retargets it and keeps its velocity.
+ */
+declare function springExpand(el: HTMLElement, open?: boolean, opts?: SpringExpandOptions): Promise<boolean>;
+/**
+ * Give a native `<details>` the damped open / close: its summary's click (mouse, Enter, Space) runs
+ * `springExpand()` instead of the instant toggle. Returns a function that removes it.
+ */
+declare function springDetails(details: HTMLDetailsElement, opts?: SpringExpandOptions): () => void;
+/**
+ * Every `<details>` under `root` (now and added later) opens and closes on a damped spring, except those inside
+ * a component, inside `[data-mo-expand="off"]`, or whose summary click is already handled. One listener, on `root`.
+ */
+declare function springAllDetails(root?: Document | HTMLElement, opts?: SpringExpandOptions): () => void;
+
+/**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`.
  * 17.16: the micro-interaction engine — `micro(el, 'press hover glow …')`, `applyMicro()` for `data-mo-micro`
  * markup and `feedback(el, 'shake' | 'pop' | …)` spring impulses.
+ * 17.18: `springExpand()` / `springDetails()` / `springAllDetails()` — damped expand and collapse for boxes and
+ * native `<details>`.
  */
 
 /** Register every component of this category under its default tag. */
@@ -259,5 +308,5 @@ declare global {
     }
 }
 
-export { MICRO_BEHAVIORS, MICRO_FEEDBACK, applyMicro, defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, feedback, micro, microOf, microTransform, parseMicro, readFeel, readSpeed };
-export type { MicroBehavior, MicroFeedback, MicroHandle, MicroOptions, UsaMagneticElement, UsaPressElement, UsaRippleElement, UsaSpotlightElement, UsaTiltElement };
+export { MICRO_BEHAVIORS, MICRO_FEEDBACK, applyMicro, defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, expandContentAt, feedback, isExpanded, micro, microOf, microTransform, parseMicro, readFeel, readSpeed, springAllDetails, springDetails, springExpand };
+export type { MicroBehavior, MicroFeedback, MicroHandle, MicroOptions, SpringExpandOptions, UsaMagneticElement, UsaPressElement, UsaRippleElement, UsaSpotlightElement, UsaTiltElement };

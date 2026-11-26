@@ -35,6 +35,11 @@ export function smoothScroll(options: SmoothScrollOptions = {}): () => void {
   };
   const onWheel = (e: WheelEvent) => {
     if (e.ctrlKey || e.defaultPrevented) return;
+    // 17.18: nested scrollers (code boxes, side panels) and [data-smooth-ignore] keep their native wheel
+    for (let n = e.target as HTMLElement | null; n && n !== el && n !== document.body; n = n.parentElement) {
+      if (n.hasAttribute?.('data-smooth-ignore')) return;
+      if (n.scrollHeight > n.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(n).overflowY)) return;
+    }
     if (!id) target = current = get();
     e.preventDefault();
     const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * (window.innerHeight || 800) : e.deltaY;
