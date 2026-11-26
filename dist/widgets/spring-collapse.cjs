@@ -3,7 +3,7 @@
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
-var expand = require('../chunks/expand-Dpglkig_.cjs');
+var expand = require('../chunks/expand-3nhPCACv.cjs');
 var microKit16 = require('../chunks/micro-kit-16-QpCvprq4.cjs');
 var dampedKit18 = require('../chunks/damped-kit-18-CIpj0Cyz.cjs');
 

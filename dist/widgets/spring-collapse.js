@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
-import { b as springExpand } from '../chunks/expand-D5rZXTHQ.js';
+import { b as springExpand } from '../chunks/expand-CQ5fvE-S.js';
 import { u as uid, h as hostSprings, t as tick } from '../chunks/micro-kit-16-DrJflWG2.js';
 import { c as css } from '../chunks/damped-kit-18-C7vHGyLt.js';
 

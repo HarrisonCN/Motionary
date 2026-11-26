@@ -3,7 +3,7 @@
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var spring = require('../chunks/spring-DoapHVAk.cjs');
 var micro = require('../chunks/micro-3qfNbgwt.cjs');
-var expand = require('../chunks/expand-Dpglkig_.cjs');
+var expand = require('../chunks/expand-3nhPCACv.cjs');
 
 var css$4 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
