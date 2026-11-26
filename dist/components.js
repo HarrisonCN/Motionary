@@ -3,7 +3,7 @@ export { REVEAL_EFFECTS, defineReveal, defineScrollProgress, defineScrolly, defi
 import { defineTextComponents } from './components/text.js';
 export { JOINING_SCRIPT, defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, graphemes, scrambleFrame, splitOrder, splitText, splitTimeline, splitWords } from './components/text.js';
 import { defineInteractionComponents } from './components/interaction.js';
-export { defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, expandContentAt, isExpanded, springAllDetails, springDetails, springExpand } from './components/interaction.js';
+export { defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt } from './components/interaction.js';
 import { defineFeedbackComponents } from './components/feedback.js';
 export { SPINNER_VARIANTS, defineCheck, defineProgress, defineSkeleton, defineSpinner, defineToaster, toast } from './components/feedback.js';
 import { defineBackgroundComponents } from './components/background.js';
