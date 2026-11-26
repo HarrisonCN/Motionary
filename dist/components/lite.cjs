@@ -4075,6 +4075,8 @@ function expandContentAt(p, i, n, stagger = 0.08) {
 }
 const OPEN_SPRING = { duration: 520, bounce: 0.16 };
 const CLOSE_SPRING = { duration: 360, bounce: 0 };
+/** Longest a motion may run: on a frame-starved page the spring may crawl, but the box still reaches its end state. */
+const SETTLE_LIMIT = 2000;
 const states = /*#__PURE__*/ new WeakMap();
 const isDetails = (el) => el.localName === 'details';
 const summaryOf = (el) => (isDetails(el) ? el.querySelector(':scope > summary') : null);
@@ -4123,6 +4125,7 @@ function finish(el, st) {
     el.style.removeProperty('--mo-expand-turn');
     states.delete(el);
     st.ro?.disconnect();
+    clearTimeout(st.guard);
     st.group.stop();
     const done = st.settle.splice(0);
     for (const fn of done)
@@ -4222,6 +4225,11 @@ function springExpand(el, open, opts = {}) {
     st.group.set({ p: want ? 1 : 0 }, { spring });
     st.group.set({ turn: want ? 1 : 0 }, { spring: want ? 'bouncy' : 'snappy' });
     const s = st;
+    clearTimeout(s.guard);
+    s.guard = setTimeout(() => {
+        if (states.get(el) === s)
+            finish(el, s);
+    }, SETTLE_LIMIT);
     return new Promise((resolve) => s.settle.push(resolve));
 }
 /**
