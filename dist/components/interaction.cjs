@@ -374,7 +374,7 @@ function expandContentAt(p, i, n, stagger = 0.08) {
 }
 const OPEN_SPRING = { duration: 520, bounce: 0.16 };
 const CLOSE_SPRING = { duration: 360, bounce: 0 };
-const states = new WeakMap();
+const states = /*#__PURE__*/ new WeakMap();
 const isDetails = (el) => el.localName === 'details';
 const summaryOf = (el) => (isDetails(el) ? el.querySelector(':scope > summary') : null);
 const contentOf = (el) => [...el.children].filter((c) => c.localName !== 'summary');

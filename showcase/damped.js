@@ -80,15 +80,22 @@ function rise(list) {
 
 /* A card that is still rising holds a transform, and a transform turns it into the
    containing block of any position:fixed overlay inside it (a context menu, a popover).
-   So the moment someone reaches into a card, its rise jumps to the end. */
+   So the moment someone reaches into a card, its rise jumps to the end: on the click itself
+   (never on the press, or the button would move between press and release and the click
+   would be lost), a right click, a key, or keyboard focus. */
 function settleOnReach(root = document) {
+  let pressed = false;
   const settle = (e) => {
+    if (e.type === 'focusin' && pressed) return;
     for (let n = e.target; n && n.nodeType === 1; n = n.parentElement) {
       if (!n.matches(CARDS)) continue;
       for (const a of n.getAnimations?.() || []) if (a.id === 'mo-rise') a.finish();
     }
   };
-  for (const type of ['pointerdown', 'contextmenu', 'focusin', 'keydown']) root.addEventListener(type, settle, { capture: true, passive: true });
+  const opts = { capture: true, passive: true };
+  root.addEventListener('pointerdown', () => (pressed = true), opts);
+  for (const type of ['pointerup', 'pointercancel']) root.addEventListener(type, () => setTimeout(() => (pressed = false)), opts);
+  for (const type of ['click', 'contextmenu', 'focusin', 'keydown']) root.addEventListener(type, settle, opts);
 }
 
 function revealCards(root = document) {
