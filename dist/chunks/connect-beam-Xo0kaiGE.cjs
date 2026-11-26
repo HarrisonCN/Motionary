@@ -90,4 +90,4 @@ function defineConnectBeam(tag = 'usa-connect-beam') {
 
 exports.beamPath = beamPath;
 exports.defineConnectBeam = defineConnectBeam;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/connect-beam-Xo0kaiGE.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/connect-beam-Xo0kaiGE.cjs.map

@@ -11,4 +11,4 @@ function registerBlobButton() {
 }
 
 export { effect, registerBlobButton as register, registerBlobButton };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/blob-button.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/blob-button.js.map

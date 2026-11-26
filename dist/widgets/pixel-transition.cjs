@@ -108,4 +108,4 @@ function definePixelTransition(tag = 'usa-pixel-transition') {
 }
 
 exports.definePixelTransition = definePixelTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/pixel-transition.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/pixel-transition.cjs.map

@@ -401,4 +401,4 @@ function defineGestureFx(tag = 'usa-gesture-fx') {
 }
 
 export { CURSOR_FX as C, GESTURES as G, angleDelta as a, bindGesture as b, defineGestureFx as d, flingVelocity as f };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/cursor-CAe9piPR.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/cursor-CAe9piPR.js.map

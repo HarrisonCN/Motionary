@@ -20,4 +20,4 @@ function defineInkFlow(tag = 'usa-ink-flow') {
 }
 
 export { defineInkFlow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/ink-flow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/ink-flow.js.map

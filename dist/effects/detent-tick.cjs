@@ -15,4 +15,4 @@ function registerDetentTick() {
 exports.effect = effect;
 exports.register = registerDetentTick;
 exports.registerDetentTick = registerDetentTick;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/detent-tick.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/detent-tick.cjs.map

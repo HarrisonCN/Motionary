@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-BvENHGcs.js';
-import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-BlrNyYfR.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Cbo6qw2B.js';
+import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-BWmCzvPq.js';
 
 /**
  * `motionary/runtime/format-gif` (10.4) — a complete GIF decoder written for
@@ -193,4 +193,4 @@ async function loadGif(src) {
 const formatGif = { id: 'format-gif', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };
 
 export { animatedImagePlayer, composeFrames, decodeGif, formatGif, loadGif, lzwDecode };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/runtime/format-gif.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/runtime/format-gif.js.map

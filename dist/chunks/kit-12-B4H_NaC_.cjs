@@ -83,4 +83,4 @@ exports.moveItem = moveItem;
 exports.numbers = numbers;
 exports.rovingIndex = rovingIndex;
 exports.seeded = seeded;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/kit-12-B4H_NaC_.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/kit-12-B4H_NaC_.cjs.map

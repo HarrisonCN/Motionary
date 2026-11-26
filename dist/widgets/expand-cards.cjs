@@ -95,4 +95,4 @@ function defineExpandCards(tag = 'usa-expand-cards') {
 }
 
 exports.defineExpandCards = defineExpandCards;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/expand-cards.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/expand-cards.cjs.map

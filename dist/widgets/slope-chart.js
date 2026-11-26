@@ -93,4 +93,4 @@ function defineSlopeChart(tag = 'usa-slope-chart') {
 }
 
 export { defineSlopeChart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/slope-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/slope-chart.js.map

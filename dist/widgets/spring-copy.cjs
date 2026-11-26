@@ -122,4 +122,4 @@ function defineSpringCopy(tag = 'usa-spring-copy') {
 }
 
 exports.defineSpringCopy = defineSpringCopy;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/spring-copy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-copy.cjs.map

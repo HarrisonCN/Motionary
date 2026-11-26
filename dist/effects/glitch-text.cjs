@@ -15,4 +15,4 @@ function registerGlitchText() {
 exports.effect = effect;
 exports.register = registerGlitchText;
 exports.registerGlitchText = registerGlitchText;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/glitch-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/glitch-text.cjs.map

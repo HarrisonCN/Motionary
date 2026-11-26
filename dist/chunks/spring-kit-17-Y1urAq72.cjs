@@ -190,4 +190,4 @@ exports.slotAt = slotAt;
 exports.stackLayout = stackLayout;
 exports.starFill = starFill;
 exports.swipeOpen = swipeOpen;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/spring-kit-17-Y1urAq72.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/spring-kit-17-Y1urAq72.cjs.map

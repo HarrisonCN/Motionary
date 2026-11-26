@@ -98,4 +98,4 @@ function defineSubscribe(tag = 'usa-subscribe') {
 }
 
 export { defineSubscribe as d, isEmail as i };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/subscribe-knrVYwWb.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/subscribe-knrVYwWb.js.map

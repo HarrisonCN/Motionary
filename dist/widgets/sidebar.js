@@ -114,4 +114,4 @@ function defineSidebar(tag = 'usa-sidebar') {
 }
 
 export { defineSidebar };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/sidebar.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/sidebar.js.map

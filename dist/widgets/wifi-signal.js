@@ -36,4 +36,4 @@ function defineWifiSignal(tag = 'usa-wifi-signal') {
 }
 
 export { defineWifiSignal };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/wifi-signal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/wifi-signal.js.map

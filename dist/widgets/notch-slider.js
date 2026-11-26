@@ -119,4 +119,4 @@ function defineNotchSlider(tag = 'usa-notch-slider') {
 }
 
 export { defineNotchSlider };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/notch-slider.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/notch-slider.js.map

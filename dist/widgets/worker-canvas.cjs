@@ -5,4 +5,4 @@ var widgets_workerCanvas = require('../chunks/worker-canvas-DgGkosGe.cjs');
 
 
 exports.defineWorkerCanvas = widgets_workerCanvas.defineWorkerCanvas;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/worker-canvas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/worker-canvas.cjs.map

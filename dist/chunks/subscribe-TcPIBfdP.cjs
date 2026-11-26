@@ -101,4 +101,4 @@ function defineSubscribe(tag = 'usa-subscribe') {
 
 exports.defineSubscribe = defineSubscribe;
 exports.isEmail = isEmail;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/subscribe-TcPIBfdP.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/subscribe-TcPIBfdP.cjs.map

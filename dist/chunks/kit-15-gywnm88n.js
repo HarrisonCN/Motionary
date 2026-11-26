@@ -174,4 +174,4 @@ function signedNumbers(text, max = 100) {
 const relativeChange = (before, after) => (before ? (after - before) / Math.abs(before) : 0);
 
 export { arcDash as a, frameValues as b, cellMark as c, dayText as d, radialSpots as e, formatTime as f, relativeChange as g, hour12 as h, inkOn as i, rowDiffers as j, spreadLabels as k, luminance as l, stepTime as m, parseDay as p, raceRanks as r, signedNumbers as s, timeParts as t, weekStartOf as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/kit-15-gywnm88n.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/kit-15-gywnm88n.js.map

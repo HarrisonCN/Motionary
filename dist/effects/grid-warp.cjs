@@ -15,4 +15,4 @@ function registerGridWarp() {
 exports.effect = effect;
 exports.register = registerGridWarp;
 exports.registerGridWarp = registerGridWarp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/grid-warp.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/grid-warp.cjs.map

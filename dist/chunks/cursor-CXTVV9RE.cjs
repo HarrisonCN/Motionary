@@ -408,4 +408,4 @@ exports.angleDelta = angleDelta;
 exports.bindGesture = bindGesture;
 exports.defineGestureFx = defineGestureFx;
 exports.flingVelocity = flingVelocity;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/cursor-CXTVV9RE.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/cursor-CXTVV9RE.cjs.map

@@ -180,4 +180,4 @@ function matterToolClass(Base, kind) {
 }
 
 exports.matterToolClass = matterToolClass;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/matter-tools-c9BnIwSX.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/matter-tools-c9BnIwSX.cjs.map

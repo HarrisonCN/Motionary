@@ -59,4 +59,4 @@ const uid = (prefix) => `${prefix}-${(++seq).toString(36)}`;
 const px = (n) => `${Math.round(n * 10) / 10}px`;
 
 export { holdDelays as a, edgeSprings as e, fraction as f, hostSprings as h, overdrag as o, px as p, stretch as s, tick as t, uid as u, valueAt as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/micro-kit-16-DrJflWG2.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/micro-kit-16-DrJflWG2.js.map

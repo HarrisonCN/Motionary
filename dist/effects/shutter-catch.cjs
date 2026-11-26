@@ -15,4 +15,4 @@ function registerShutterCatch() {
 exports.effect = effect;
 exports.register = registerShutterCatch;
 exports.registerShutterCatch = registerShutterCatch;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/shutter-catch.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/shutter-catch.cjs.map

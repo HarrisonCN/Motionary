@@ -49,4 +49,4 @@ function defineJellyButton(tag = 'usa-jelly-button') {
 }
 
 exports.defineJellyButton = defineJellyButton;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/jelly-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/jelly-button.cjs.map

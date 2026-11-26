@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DwHA8zW-.cjs');
-var animImage = require('../chunks/anim-image-BCsVV8dJ.cjs');
+var registry = require('../chunks/registry-D9r9pmCC.cjs');
+var animImage = require('../chunks/anim-image-DpZHMWOZ.cjs');
 
 /**
  * `motionary/runtime/format-webp` (10.4) — animated WebP loader written for
@@ -117,4 +117,4 @@ exports.loadWebp = loadWebp;
 exports.parseWebp = parseWebp;
 exports.riffChunks = riffChunks;
 exports.webpFrameFiles = webpFrameFiles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/runtime/format-webp.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/runtime/format-webp.cjs.map

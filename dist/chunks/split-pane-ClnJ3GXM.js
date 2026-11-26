@@ -125,4 +125,4 @@ function defineSplitPane(tag = 'usa-split-pane') {
 }
 
 export { clampSplit as c, defineSplitPane as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/split-pane-ClnJ3GXM.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/split-pane-ClnJ3GXM.js.map

@@ -119,4 +119,4 @@ function definePricing(tag = 'usa-pricing') {
 }
 
 exports.definePricing = definePricing;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/pricing.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/pricing.cjs.map

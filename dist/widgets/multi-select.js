@@ -58,4 +58,4 @@ function defineMultiSelect(tag = 'usa-multi-select') {
 }
 
 export { defineMultiSelect };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/multi-select.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/multi-select.js.map

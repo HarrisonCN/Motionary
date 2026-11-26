@@ -181,4 +181,4 @@ function definePathMotion(tag = 'usa-path-motion') {
 
 exports.cleanPathData = cleanPathData;
 exports.definePathMotion = definePathMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/path-motion-BJ5jD7yj.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/path-motion-BJ5jD7yj.cjs.map

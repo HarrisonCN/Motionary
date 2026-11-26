@@ -141,4 +141,4 @@ function defineMicroCheckbox(tag = 'usa-micro-checkbox') {
 }
 
 exports.defineMicroCheckbox = defineMicroCheckbox;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/micro-checkbox.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/micro-checkbox.cjs.map

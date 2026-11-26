@@ -138,4 +138,4 @@ function defineShareButton(tag = 'usa-share-button') {
 }
 
 export { SHARE_TARGETS as S, defineShareButton as d, shareUrl as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/share-button-BnuXTmub.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/share-button-BnuXTmub.js.map

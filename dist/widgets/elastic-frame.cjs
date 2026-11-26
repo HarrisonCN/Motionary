@@ -5,4 +5,4 @@ var widgets_elasticFrame = require('../chunks/elastic-frame-Bgj6xpbW.cjs');
 
 
 exports.defineElasticFrame = widgets_elasticFrame.defineElasticFrame;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/elastic-frame.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/elastic-frame.cjs.map

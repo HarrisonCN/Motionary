@@ -216,4 +216,4 @@ function defineSignaturePad(tag = 'usa-signature-pad') {
 }
 
 export { defineSignaturePad };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/signature-pad.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/signature-pad.js.map

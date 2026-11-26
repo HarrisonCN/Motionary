@@ -15,4 +15,4 @@ function registerErrorUnderline() {
 exports.effect = effect;
 exports.register = registerErrorUnderline;
 exports.registerErrorUnderline = registerErrorUnderline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/effects/error-underline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/error-underline.cjs.map

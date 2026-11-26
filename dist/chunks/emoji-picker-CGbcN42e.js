@@ -174,4 +174,4 @@ function defineEmojiPicker(tag = 'usa-emoji-picker') {
 }
 
 export { EMOJI as E, defineEmojiPicker as d, filterEmoji as f };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/emoji-picker-CGbcN42e.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/emoji-picker-CGbcN42e.js.map

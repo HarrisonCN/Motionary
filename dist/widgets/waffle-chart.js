@@ -77,4 +77,4 @@ function defineWaffleChart(tag = 'usa-waffle-chart') {
 }
 
 export { defineWaffleChart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/waffle-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/waffle-chart.js.map

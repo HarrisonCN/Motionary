@@ -52,4 +52,4 @@ function defineBounceButton(tag = 'usa-bounce-button') {
 }
 
 export { defineBounceButton };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/bounce-button.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/bounce-button.js.map

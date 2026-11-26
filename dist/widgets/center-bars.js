@@ -18,4 +18,4 @@ function defineCenterBars(tag = 'usa-center-bars') {
 }
 
 export { defineCenterBars };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/center-bars.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/center-bars.js.map

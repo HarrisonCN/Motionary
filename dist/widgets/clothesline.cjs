@@ -5,4 +5,4 @@ var widgets_clothesline = require('../chunks/clothesline-D8r1ZFGO.cjs');
 
 
 exports.defineClothesline = widgets_clothesline.defineClothesline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/clothesline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/clothesline.cjs.map

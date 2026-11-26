@@ -579,4 +579,4 @@ exports.microTransform = microTransform;
 exports.parseMicro = parseMicro;
 exports.readFeel = readFeel;
 exports.readSpeed = readSpeed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/micro-3qfNbgwt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/micro-3qfNbgwt.cjs.map

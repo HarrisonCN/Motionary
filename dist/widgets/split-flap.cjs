@@ -121,4 +121,4 @@ function defineSplitFlap(tag = 'usa-split-flap') {
 }
 
 exports.defineSplitFlap = defineSplitFlap;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/widgets/split-flap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/split-flap.cjs.map
