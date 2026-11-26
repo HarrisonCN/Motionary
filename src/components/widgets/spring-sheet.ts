@@ -146,6 +146,15 @@ export function defineSpringSheet(tag = 'usa-spring-sheet'): CustomElementConstr
         if (!grab.contains(t) && (t.closest?.('a, input, textarea, select, button, [contenteditable]') || body.scrollTop > 0)) return;
         measure();
         drag = { id: e.pointerId, y0: e.clientY, x0: e.clientX, from: group.get('y'), last: e.clientY, t: e.timeStamp, v: 0, live: false };
+        // the grabber is short: a quick pull leaves it before the first move, so it holds the pointer from the press
+        // (its own click still lands on it, since the capture stays on the grabber)
+        if (grab.contains(t)) {
+          try {
+            grab.setPointerCapture?.(e.pointerId);
+          } catch {
+            /* synthetic */
+          }
+        }
       });
       this.listen(sheet, 'pointermove', (e: PointerEvent) => {
         if (!drag || e.pointerId !== drag.id) return;
@@ -155,7 +164,7 @@ export function defineSpringSheet(tag = 'usa-spring-sheet'): CustomElementConstr
           drag.live = true;
           sheet.setAttribute('data-dragging', '');
           try {
-            sheet.setPointerCapture?.(e.pointerId);
+            if (!grab.hasPointerCapture?.(e.pointerId)) sheet.setPointerCapture?.(e.pointerId);
           } catch {
             /* synthetic */
           }
