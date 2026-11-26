@@ -34,7 +34,7 @@ var springSolver = require('./chunks/spring-solver-CS4saXm-.cjs');
 var spring = require('./chunks/spring-DoapHVAk.cjs');
 var core = require('./chunks/core-D6--jjZC.cjs');
 var categoryForTag = require('./chunks/category-for-tag-D_QJPwpZ.cjs');
-var expand = require('./chunks/expand-3nhPCACv.cjs');
+var expand = require('./chunks/expand-DGN801sQ.cjs');
 var core$1 = require('./chunks/core-CLKnlWY8.cjs');
 var fx = require('./chunks/fx-BLAi-SpO.cjs');
 
