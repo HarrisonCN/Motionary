@@ -2027,6 +2027,19 @@ Pull a spring mesh and release it to settle back to its rest positions.
 <mo-elastic-mesh animated></mo-elastic-mesh>
 ```
 
+### <mo-elastic-scroll> (legacy <usa-elastic-scroll>) — Elastic scroll
+
+A native scroll area whose ends stretch like rubber on wheel and touch and spring back with a damped settle; fires an edge event for pull-to-refresh.
+
+- Import: `import { defineElasticScroll } from 'motionary/components/widgets'; defineElasticScroll();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `height`, `label`, `feel`, `haptics`
+- Events: `usa:edge`
+
+```html
+<mo-elastic-scroll height="180px"><p>Scroll to the end, then keep going.</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p></mo-elastic-scroll>
+```
+
 ### <mo-elastic-slider> (legacy <usa-elastic-slider>) — Elastic slider
 
 The value bubble trails the thumb on a spring and leans with its speed.
@@ -4728,6 +4741,19 @@ Real Gray–Scott chemistry, with dot and contour rendering and shape masks.
 <usa-reactions emojis="👍,❤️,😂,🎉" counts="3,1,0,2"></usa-reactions>
 ```
 
+### <mo-read-more> (legacy <usa-read-more>) — Read more
+
+Long text clamped to a few lines that unfolds on a damped spring while the fade melts away; no button when the text already fits.
+
+- Import: `import { defineReadMore } from 'motionary/components/widgets'; defineReadMore();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `lines`, `more`, `less`, `open`, `feel`
+- Events: `usa:toggle`
+
+```html
+<mo-read-more lines="2"><p>Springs carry their speed into every change, so a panel that opens, closes and opens again never jumps. The height overshoots by a hair and settles, which reads as weight rather than as a stop. Under reduced motion it simply switches.</p></mo-read-more>
+```
+
 ### <mo-red-envelope> (legacy <usa-red-envelope>) — Red envelope (红包)
 
 8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.
@@ -5674,6 +5700,20 @@ One-time-code boxes: characters pop in, focus hops along, paste fills in a rippl
 <mo-spring-code length="6" group="3"></mo-spring-code>
 ```
 
+### <mo-spring-collapse> (legacy <usa-spring-collapse>) — Spring collapse
+
+One collapsible panel whose height opens on a damped spring with a short settle; the content drifts in and a second click reverses from where it is.
+
+- Import: `import { defineSpringCollapse } from 'motionary/components/widgets'; defineSpringCollapse();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `open`, `disabled`, `feel`, `haptics`
+- Events: `usa:toggle`
+- Methods: `toggle()`
+
+```html
+<mo-spring-collapse label="What does damped mean?"><p>The motion overshoots a little, then settles instead of stopping dead.</p></mo-spring-collapse>
+```
+
 ### <mo-spring-copy> (legacy <usa-spring-copy>) — Spring copy
 
 Copies text to the clipboard: the icon springs away and a tick pops in, or the button shakes with a cross when it cannot.
@@ -5743,6 +5783,20 @@ Drag the handles to reorder: the picked item lifts and tilts, the others spring 
 <mo-spring-list items="Inbox|Today|Upcoming|Someday"></mo-spring-list>
 ```
 
+### <mo-spring-pager> (legacy <usa-spring-pager>) — Spring pager
+
+Pages that slide on a damped spring: rubber-band ends, one page per flick, dots that stretch toward the page they head for.
+
+- Import: `import { defineSpringPager } from 'motionary/components/widgets'; defineSpringPager();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `index`, `label`, `feel`, `haptics`
+- Events: `usa:change`
+- Methods: `next()`, `prev()`
+
+```html
+<mo-spring-pager label="Tips"><div style="padding:28px;background:#eef2ff;border-radius:14px">Drag me</div><div style="padding:28px;background:#ecfdf5;border-radius:14px">Flick to turn</div><div style="padding:28px;background:#fff7ed;border-radius:14px">Ends stretch</div></mo-spring-pager>
+```
+
 ### <mo-spring-rating> (legacy <usa-spring-rating>) — Spring rating
 
 Stars that lift on hover and pop up one after another when chosen; halves, read-only and full keyboard support.
@@ -5754,6 +5808,33 @@ Stars that lift on hover and pop up one after another when chosen; halves, read-
 
 ```html
 <mo-spring-rating value="4" show-value></mo-spring-rating>
+```
+
+### <mo-spring-sheet> (legacy <usa-spring-sheet>) — Spring sheet
+
+A bottom sheet with snap points: it follows the finger, stretches past its top, and a release is carried by its speed to a snap or closed.
+
+- Import: `import { defineSpringSheet } from 'motionary/components/widgets'; defineSpringSheet();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `snaps`, `open`, `label`, `trigger`, `feel`, `haptics`
+- Events: `usa:snap`
+- Methods: `show()`, `close()`
+
+```html
+<mo-spring-sheet snaps="0.45, 0.9" style="--usa-dsheet-height:300px"><p>Page content</p><div data-sheet><h3>Filters</h3><p>Drag the handle, or flick it down to close.</p></div></mo-spring-sheet>
+```
+
+### <mo-spring-stack> (legacy <usa-spring-stack>) — Spring stack
+
+A pile of cards that unrolls into a list in a soft cascade, each card on its own slightly later spring, and gathers back behind the first.
+
+- Import: `import { defineSpringStack } from 'motionary/components/widgets'; defineSpringStack();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `open`, `more`, `less`, `peek`, `gap`, `feel`, `haptics`
+- Events: `usa:toggle`
+
+```html
+<mo-spring-stack><div><strong>Build passed</strong><br><small>2 min ago</small></div><div><strong>New comment</strong><br><small>5 min ago</small></div><div><strong>Deploy queued</strong><br><small>8 min ago</small></div></mo-spring-stack>
 ```
 
 ### <mo-spring-swipe> (legacy <usa-spring-swipe>) — Spring swipe

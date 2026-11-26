@@ -1587,6 +1587,84 @@
  },
  {
   "kind": "widget",
+  "name": "spring-collapse",
+  "entry": "motionary/widgets/spring-collapse",
+  "src": "src/entries/widgets/spring-collapse.ts",
+  "tag": "usa-spring-collapse",
+  "define": "defineSpringCollapse",
+  "types": [
+   "UsaSpringCollapseElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-collapse"
+ },
+ {
+  "kind": "widget",
+  "name": "read-more",
+  "entry": "motionary/widgets/read-more",
+  "src": "src/entries/widgets/read-more.ts",
+  "tag": "usa-read-more",
+  "define": "defineReadMore",
+  "types": [
+   "UsaReadMoreElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/read-more"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-sheet",
+  "entry": "motionary/widgets/spring-sheet",
+  "src": "src/entries/widgets/spring-sheet.ts",
+  "tag": "usa-spring-sheet",
+  "define": "defineSpringSheet",
+  "types": [
+   "UsaSpringSheetElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-sheet"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-pager",
+  "entry": "motionary/widgets/spring-pager",
+  "src": "src/entries/widgets/spring-pager.ts",
+  "tag": "usa-spring-pager",
+  "define": "defineSpringPager",
+  "types": [
+   "UsaSpringPagerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-pager"
+ },
+ {
+  "kind": "widget",
+  "name": "elastic-scroll",
+  "entry": "motionary/widgets/elastic-scroll",
+  "src": "src/entries/widgets/elastic-scroll.ts",
+  "tag": "usa-elastic-scroll",
+  "define": "defineElasticScroll",
+  "types": [
+   "UsaElasticScrollElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/elastic-scroll"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-stack",
+  "entry": "motionary/widgets/spring-stack",
+  "src": "src/entries/widgets/spring-stack.ts",
+  "tag": "usa-spring-stack",
+  "define": "defineSpringStack",
+  "types": [
+   "UsaSpringStackElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-stack"
+ },
+ {
+  "kind": "widget",
   "name": "spring-like",
   "entry": "motionary/widgets/spring-like",
   "src": "src/entries/widgets/spring-like.ts",

@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (319)
+## Widgets (325)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,12 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-spring-collapse>` | `motionary/widgets/spring-collapse` | `defineSpringCollapse()` |
+| `<usa-read-more>` | `motionary/widgets/read-more` | `defineReadMore()` |
+| `<usa-spring-sheet>` | `motionary/widgets/spring-sheet` | `defineSpringSheet()` |
+| `<usa-spring-pager>` | `motionary/widgets/spring-pager` | `defineSpringPager()` |
+| `<usa-elastic-scroll>` | `motionary/widgets/elastic-scroll` | `defineElasticScroll()` |
+| `<usa-spring-stack>` | `motionary/widgets/spring-stack` | `defineSpringStack()` |
 | `<usa-spring-like>` | `motionary/widgets/spring-like` | `defineSpringLike()` |
 | `<usa-spring-rating>` | `motionary/widgets/spring-rating` | `defineSpringRating()` |
 | `<usa-spring-copy>` | `motionary/widgets/spring-copy` | `defineSpringCopy()` |

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>阻尼部件 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 24px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:52px 0 16px}
+    p {max-width:46em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .feelbar {position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; background:color-mix(in srgb,#f1f0ec 88%,transparent); backdrop-filter:blur(8px)}
+    .feelbar span {font-size:.85rem; color:#55544e}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:16px; min-height:210px; padding:22px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:110px; min-width:0}
+    article .stage.block {display:block}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .wide {grid-column:1/-1}
+    .row {display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+    .row button {padding:8px 14px; border-radius:999px; border:1px solid #d6d4cc; background:#fff; font:inherit; font-size:.85rem; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .card-pg {min-height:150px; padding:22px; border-radius:14px; display:grid; align-content:end; gap:6px}
+    .card-pg strong {font-size:1.15rem}
+    details.native {border:1px solid #e2e0d8; border-radius:14px; background:#fff; padding:0 16px; width:100%}
+    details.native summary {padding:14px 0; font-weight:600; cursor:pointer}
+    details.native p {padding-bottom:14px}
+    .stack {display:grid; gap:12px; width:100%}
+    .looks {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px}
+    .look {display:grid; gap:16px; justify-items:start; padding:22px; border-radius:22px; background:var(--mo-kit-paper,#fff); color:var(--mo-kit-ink,#18181b)}
+    .look small {font:12px ui-monospace,monospace; opacity:.7}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="springs.html">弹簧部件</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>阻尼部件</h1><p>六个带阻尼滑动感的部件，全部跑在 17.16 的弹簧核心上：折叠面板展开时轻轻冲过头再回稳，长文本顺着弹簧展开，底部抽屉跟手拖动、拉过顶部有橡皮筋阻力、松手按速度停到吸附点，分页器一次轻甩翻一页，滚动区两端可以拉长再弹回，卡片堆依次展开成列表。中途打断会带着当前速度转向，键盘和读屏都能用；开启“减少动态效果”后直接切换。</p></header>
+
+    <div class="feelbar"><span>整页手感</span><mo-micro-segmented id="feel" label="整页手感" options="默认,利落,干脆,顺滑,弹性,俏皮,沉稳,厚重" values="default,crisp,snappy,smooth,bouncy,playful,calm,heavy" value="default"></mo-micro-segmented></div>
+
+    <h2 id="expand">展开</h2>
+    <section class="grid" aria-label="展开">
+      <article><div class="stage block"><div class="stack"><mo-spring-collapse label="阻尼是什么意思？" open><p>弹簧会稍微冲过目标一点，再慢慢回稳，而不是一下子停住，所以看起来有分量。</p></mo-spring-collapse><mo-spring-collapse label="连点会怎样？"><p>第二次点击会从当前高度、带着当前速度反向，不会跳回起点。</p></mo-spring-collapse></div></div><p>单个折叠面板：高度沿阻尼弹簧展开，内容随后飘入，箭头沿另一根更弹的弹簧翻转。标题是真按钮，带 aria-expanded。</p><output class="log" data-log="collapse"></output></article>
+      <article><div class="stage block"><mo-read-more lines="3" more="展开全文" less="收起"><p>弹簧只有目标和速度，没有固定时长。展开到一半再点“收起”，它会从当前高度带着速度掉头，不会先跳回起点再重来。展开时高度会轻轻冲过一点再回稳，底部的渐隐随之消失；收起时用一根不回弹的弹簧，安静地收回到三行。文字本来就能放下时不会出现按钮，完整文字始终留在页面里，读屏和页内搜索都能找到。</p></mo-read-more></div><p>长文本先显示几行，沿阻尼弹簧展开，底部渐隐随之融化；文字放得下时不显示按钮。</p><output class="log" data-log="more"></output></article>
+      <article><div class="stage block"><details class="native"><summary>原生 &lt;details&gt; 也一样</summary><p>页面调用 springAllDetails() 之后，普通的 details 也会阻尼展开、收起，语义和原生一致。</p></details></div><p>库里的 <code>springExpand()</code> 和 <code>springAllDetails()</code> 能给任何盒子或 &lt;details&gt; 同样的阻尼展开。</p></article>
+    </section>
+
+    <h2 id="slide">抽屉与分页</h2>
+    <section class="grid" aria-label="抽屉与分页">
+      <article><div class="stage block"><mo-spring-sheet snaps="0.45, 0.9" label="筛选" trigger="打开筛选"><p><strong>商品列表</strong></p><p>点按钮打开底部抽屉。拖动顶部把手在两个高度之间切换，向下一甩关闭。</p><div data-sheet><h3 style="margin:0 0 8px">筛选</h3><p>拉过顶部会像橡皮一样有阻力，松手按速度停到最近的吸附点。把手是按钮：回车切换高度，上下方向键调整，Esc 关闭并把焦点还给按钮。</p><p>价格 · 品牌 · 评分 · 距离</p></div></mo-spring-sheet></div><p>带吸附点的底部抽屉，背景遮罩跟着高度变暗。</p><output class="log" data-log="sheet"></output></article>
+      <article><div class="stage block"><mo-spring-pager label="使用提示"><div class="card-pg" style="background:#eef2ff"><strong>拖动翻页</strong><span>跟手滑动，松手按速度决定停在哪页</span></div><div class="card-pg" style="background:#ecfdf5"><strong>一次一页</strong><span>甩得再快也只翻一页，和手机一样</span></div><div class="card-pg" style="background:#fff7ed"><strong>两端有阻力</strong><span>第一页往右、最后一页往左会像橡皮一样拉长</span></div><div class="card-pg" style="background:#fdf2f8"><strong>键盘可用</strong><span>左右方向键、Home、End 都能翻页</span></div></mo-spring-pager></div><p>分页器：两端橡皮筋阻力，一次轻甩翻一页，圆点朝目标页拉长。</p><output class="log" data-log="pager"></output></article>
+    </section>
+
+    <h2 id="scroll">滚动与堆叠</h2>
+    <section class="grid" aria-label="滚动与堆叠">
+      <article><div class="stage block"><mo-elastic-scroll height="220px" label="弹性滚动示例"><p><strong>滚到底再继续滚</strong></p><p>两端会像橡皮一样被拉长，松开后阻尼回弹。滚动本身仍是原生的：滚轮、触摸、键盘和滚动条照常工作。</p><p>第 1 条</p><p>第 2 条</p><p>第 3 条</p><p>第 4 条</p><p>第 5 条</p><p>第 6 条</p><p>第 7 条</p><p>第 8 条</p><p>到底了，再往下拉一拉。</p></mo-elastic-scroll></div><p>拉过 56 像素会发出 <code>usa:edge</code>，可以用来做下拉刷新。iOS 自带回弹，这里交给系统。</p><output class="log" data-log="edge"></output></article>
+      <article><div class="stage block"><mo-spring-stack more="查看全部" less="收起"><div><strong>构建通过</strong><br><small>2 分钟前</small></div><div><strong>有人评论了你的设计稿</strong><br><small>5 分钟前</small></div><div><strong>部署已排队</strong><br><small>8 分钟前</small></div><div><strong>周报已生成</strong><br><small>1 小时前</small></div></mo-spring-stack></div><p>叠成一摞的卡片，点一下依次展开成列表，每张沿各自稍慢一点的弹簧落位；收起时收回到第一张后面，Esc 也能收起。</p><output class="log" data-log="stack"></output></article>
+    </section>
+
+    <h2 id="looks">外观与手感</h2>
+    <p>颜色、圆角和描边来自外观令牌，每种外观还带一种手感：同样的折叠面板，在粗野风里落得沉，在黏土风里弹得欢。</p>
+    <section class="looks" aria-label="外观示例" id="looksRow"></section>
+  </main>
+  <!-- every card gets the code drawer (HTML, ES module, React, Vue, desktop) with a copy button; it reads the markup before the elements are defined -->
+  <script type="module" src="./code-drawer.js" data-auto></script>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineWidgets, adoptLooks, applyLook, lookNames, lookInfo } from '../dist/components/widgets.js';
+    defineMoAliases();
+    defineWidgets('17.16');
+    defineWidgets('17.18');
+    adoptLooks('ui');
+
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail, el)));
+    const PARTS = 'mo-spring-collapse, mo-read-more, mo-spring-sheet, mo-spring-pager, mo-elastic-scroll, mo-spring-stack';
+
+    document.getElementById('feel').addEventListener('usa:change', (e) => {
+      const f = e.detail.value === 'default' ? null : e.detail.value;
+      document.querySelectorAll(PARTS).forEach((el) => (f ? el.setAttribute('feel', f) : el.removeAttribute('feel')));
+    });
+
+    on('mo-spring-collapse', 'toggle', (d, el) => log('collapse', `${el.getAttribute('label')}：${d.open ? '展开' : '收起'}`));
+    on('mo-read-more', 'toggle', (d) => log('more', d.open ? '已展开全文' : '已收起'));
+    on('mo-spring-sheet', 'snap', (d) => log('sheet', d.index < 0 ? '已关闭' : `停在第 ${d.index + 1} 个吸附点`));
+    on('mo-spring-pager', 'change', (d) => log('pager', `第 ${d.index + 1} 页`));
+    on('mo-elastic-scroll', 'edge', (d) => log('edge', d.edge === 'top' ? '拉过顶部：可以刷新了' : '拉过底部：可以加载更多'));
+    on('mo-spring-stack', 'toggle', (d) => log('stack', d.open ? '已展开' : '已收起'));
+
+    const names = lookNames('ui');
+    const picks = ['solid-indigo', 'brutal-jade', 'clay-flamingo'].filter((n) => names.includes(n));
+    const row = document.getElementById('looksRow');
+    for (const name of picks) {
+      const box = document.createElement('div');
+      box.className = 'look';
+      box.style.justifyItems = 'stretch';
+      box.innerHTML = `<small>look="${name}" · 手感 ${lookInfo(name).feel}</small><mo-spring-collapse label="点我展开" open><p>同样的弹簧，不同的手感。</p></mo-spring-collapse><mo-spring-stack more="查看全部" less="收起"><div>第一张</div><div>第二张</div><div>第三张</div></mo-spring-stack>`;
+      applyLook(box, name);
+      row.append(box);
+    }
+  </script>
+</body>
+</html>

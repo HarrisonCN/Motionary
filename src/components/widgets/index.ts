@@ -149,6 +149,12 @@ import { defineSpringSwipe, type UsaSpringSwipeElement } from './spring-swipe';
 import { defineSpringToasts, type UsaSpringToastsElement, type SpringToastOptions } from './spring-toasts';
 import { defineSpringAccordion, type UsaSpringAccordionElement } from './spring-accordion';
 import { defineSpringCounter, type UsaSpringCounterElement } from './spring-counter';
+import { defineSpringCollapse, type UsaSpringCollapseElement } from './spring-collapse';
+import { defineReadMore, type UsaReadMoreElement } from './read-more';
+import { defineSpringSheet, type UsaSpringSheetElement } from './spring-sheet';
+import { defineSpringPager, type UsaSpringPagerElement } from './spring-pager';
+import { defineElasticScroll, type UsaElasticScrollElement } from './elastic-scroll';
+import { defineSpringStack, type UsaSpringStackElement } from './spring-stack';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -476,6 +482,13 @@ export { defineSpringSwipe, type UsaSpringSwipeElement };
 export { defineSpringToasts, type UsaSpringToastsElement, type SpringToastOptions };
 export { defineSpringAccordion, type UsaSpringAccordionElement };
 export { defineSpringCounter, type UsaSpringCounterElement };
+export { defineSpringCollapse, type UsaSpringCollapseElement };
+export { defineReadMore, type UsaReadMoreElement };
+export { defineSpringSheet, type UsaSpringSheetElement };
+export { defineSpringPager, type UsaSpringPagerElement };
+export { defineElasticScroll, type UsaElasticScrollElement };
+export { defineSpringStack, type UsaSpringStackElement };
+export { parseSnaps, sheetRest, pageAfter, dampedAt, pilePose, linesHeight } from './damped-kit-18';
 export { burstPoints, compactCount, ratingAt, starFill, parseTags, addTags, codeChars, slotAt, shiftFor, swipeOpen, stackLayout, counterText, alignDigits, openSet } from './spring-kit-17';
 export { rovingIndex, copyText, seeded, moveItem, numbers } from './kit-12';
 export { shareUrl, SHARE_TARGETS, type ShareTarget } from './share-button';
@@ -760,6 +773,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.18': { 'usa-spring-collapse': defineSpringCollapse, 'usa-read-more': defineReadMore, 'usa-spring-sheet': defineSpringSheet, 'usa-spring-pager': defineSpringPager, 'usa-elastic-scroll': defineElasticScroll, 'usa-spring-stack': defineSpringStack },
   '17.17': { 'usa-spring-like': defineSpringLike, 'usa-spring-rating': defineSpringRating, 'usa-spring-copy': defineSpringCopy, 'usa-spring-tags': defineSpringTags, 'usa-spring-code': defineSpringCode, 'usa-spring-list': defineSpringList, 'usa-spring-swipe': defineSpringSwipe, 'usa-spring-toasts': defineSpringToasts, 'usa-spring-accordion': defineSpringAccordion, 'usa-spring-counter': defineSpringCounter },
   '17.16': { 'usa-micro': defineMicro, 'usa-micro-switch': defineMicroSwitch, 'usa-micro-checkbox': defineMicroCheckbox, 'usa-micro-input': defineMicroInput, 'usa-micro-button': defineMicroButton, 'usa-micro-slider': defineMicroSlider, 'usa-micro-segmented': defineMicroSegmented, 'usa-micro-stepper': defineMicroStepper },
   '17.15': { 'usa-radial-menu': defineRadialMenu, 'usa-hover-card': defineHoverCard, 'usa-toggle-group': defineToggleGroup, 'usa-time-picker': defineTimePicker, 'usa-color-swatches': defineColorSwatches, 'usa-calendar-strip': defineCalendarStrip, 'usa-comparison-table': defineComparisonTable, 'usa-radial-bars': defineRadialBars, 'usa-bar-race': defineBarRace, 'usa-bullet-chart': defineBulletChart, 'usa-slope-chart': defineSlopeChart, 'usa-dot-plot': defineDotPlot },
@@ -1080,6 +1094,18 @@ declare global {
     'mo-spring-accordion': UsaSpringAccordionElement;
     'usa-spring-counter': UsaSpringCounterElement;
     'mo-spring-counter': UsaSpringCounterElement;
+    'usa-spring-collapse': UsaSpringCollapseElement;
+    'mo-spring-collapse': UsaSpringCollapseElement;
+    'usa-read-more': UsaReadMoreElement;
+    'mo-read-more': UsaReadMoreElement;
+    'usa-spring-sheet': UsaSpringSheetElement;
+    'mo-spring-sheet': UsaSpringSheetElement;
+    'usa-spring-pager': UsaSpringPagerElement;
+    'mo-spring-pager': UsaSpringPagerElement;
+    'usa-elastic-scroll': UsaElasticScrollElement;
+    'mo-elastic-scroll': UsaElasticScrollElement;
+    'usa-spring-stack': UsaSpringStackElement;
+    'mo-spring-stack': UsaSpringStackElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

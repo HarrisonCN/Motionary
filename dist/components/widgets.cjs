@@ -148,6 +148,12 @@ var widgets_springSwipe = require('../widgets/spring-swipe.cjs');
 var widgets_springToasts = require('../widgets/spring-toasts.cjs');
 var widgets_springAccordion = require('../widgets/spring-accordion.cjs');
 var widgets_springCounter = require('../widgets/spring-counter.cjs');
+var widgets_springCollapse = require('../widgets/spring-collapse.cjs');
+var widgets_readMore = require('../widgets/read-more.cjs');
+var widgets_springSheet = require('../widgets/spring-sheet.cjs');
+var widgets_springPager = require('../widgets/spring-pager.cjs');
+var widgets_elasticScroll = require('../widgets/elastic-scroll.cjs');
+var widgets_springStack = require('../widgets/spring-stack.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -314,6 +320,7 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var dampedKit18 = require('../chunks/damped-kit-18-CM0mPVmn.cjs');
 var springKit17 = require('../chunks/spring-kit-17-Y1urAq72.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
 var kit15 = require('../chunks/kit-15-D1Ovwhys.cjs');
@@ -800,6 +807,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.18': { 'usa-spring-collapse': widgets_springCollapse.defineSpringCollapse, 'usa-read-more': widgets_readMore.defineReadMore, 'usa-spring-sheet': widgets_springSheet.defineSpringSheet, 'usa-spring-pager': widgets_springPager.defineSpringPager, 'usa-elastic-scroll': widgets_elasticScroll.defineElasticScroll, 'usa-spring-stack': widgets_springStack.defineSpringStack },
     '17.17': { 'usa-spring-like': widgets_springLike.defineSpringLike, 'usa-spring-rating': widgets_springRating.defineSpringRating, 'usa-spring-copy': widgets_springCopy.defineSpringCopy, 'usa-spring-tags': widgets_springTags.defineSpringTags, 'usa-spring-code': widgets_springCode.defineSpringCode, 'usa-spring-list': widgets_springList.defineSpringList, 'usa-spring-swipe': widgets_springSwipe.defineSpringSwipe, 'usa-spring-toasts': widgets_springToasts.defineSpringToasts, 'usa-spring-accordion': widgets_springAccordion.defineSpringAccordion, 'usa-spring-counter': widgets_springCounter.defineSpringCounter },
     '17.16': { 'usa-micro': widgets_micro.defineMicro, 'usa-micro-switch': widgets_microSwitch.defineMicroSwitch, 'usa-micro-checkbox': widgets_microCheckbox.defineMicroCheckbox, 'usa-micro-input': widgets_microInput.defineMicroInput, 'usa-micro-button': widgets_microButton.defineMicroButton, 'usa-micro-slider': widgets_microSlider.defineMicroSlider, 'usa-micro-segmented': widgets_microSegmented.defineMicroSegmented, 'usa-micro-stepper': widgets_microStepper.defineMicroStepper },
     '17.15': { 'usa-radial-menu': widgets_radialMenu.defineRadialMenu, 'usa-hover-card': widgets_hoverCard.defineHoverCard, 'usa-toggle-group': widgets_toggleGroup.defineToggleGroup, 'usa-time-picker': widgets_timePicker.defineTimePicker, 'usa-color-swatches': widgets_colorSwatches.defineColorSwatches, 'usa-calendar-strip': widgets_calendarStrip.defineCalendarStrip, 'usa-comparison-table': widgets_comparisonTable.defineComparisonTable, 'usa-radial-bars': widgets_radialBars.defineRadialBars, 'usa-bar-race': widgets_barRace.defineBarRace, 'usa-bullet-chart': widgets_bulletChart.defineBulletChart, 'usa-slope-chart': widgets_slopeChart.defineSlopeChart, 'usa-dot-plot': widgets_dotPlot.defineDotPlot },
@@ -1052,6 +1060,12 @@ exports.defineSpringSwipe = widgets_springSwipe.defineSpringSwipe;
 exports.defineSpringToasts = widgets_springToasts.defineSpringToasts;
 exports.defineSpringAccordion = widgets_springAccordion.defineSpringAccordion;
 exports.defineSpringCounter = widgets_springCounter.defineSpringCounter;
+exports.defineSpringCollapse = widgets_springCollapse.defineSpringCollapse;
+exports.defineReadMore = widgets_readMore.defineReadMore;
+exports.defineSpringSheet = widgets_springSheet.defineSpringSheet;
+exports.defineSpringPager = widgets_springPager.defineSpringPager;
+exports.defineElasticScroll = widgets_elasticScroll.defineElasticScroll;
+exports.defineSpringStack = widgets_springStack.defineSpringStack;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1287,6 +1301,12 @@ exports.defineParticleButton = widgets_particleButton.defineParticleButton;
 exports.defineHaloSegmented = widgets_haloSegmented.defineHaloSegmented;
 exports.defineHaloSlider = widgets_haloSlider.defineHaloSlider;
 exports.defineOrbitProgress = widgets_orbitProgress.defineOrbitProgress;
+exports.dampedAt = dampedKit18.dampedAt;
+exports.linesHeight = dampedKit18.linesHeight;
+exports.pageAfter = dampedKit18.pageAfter;
+exports.parseSnaps = dampedKit18.parseSnaps;
+exports.pilePose = dampedKit18.pilePose;
+exports.sheetRest = dampedKit18.sheetRest;
 exports.addTags = springKit17.addTags;
 exports.alignDigits = springKit17.alignDigits;
 exports.burstPoints = springKit17.burstPoints;
