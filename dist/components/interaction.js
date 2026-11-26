@@ -419,6 +419,7 @@ function finish(el, st) {
     // at rest the box's own CSS decides (e.g. `details[open] { --mo-expand-turn: 1 }`)
     el.style.removeProperty('--mo-expand-turn');
     states.delete(el);
+    st.ro?.disconnect();
     st.group.stop();
     const done = st.settle.splice(0);
     for (const fn of done)
@@ -459,7 +460,32 @@ function springExpand(el, open, opts = {}) {
         const start = wasOpen ? 1 : 0;
         const drift = Number.isFinite(opts.drift) ? Math.max(0, opts.drift) : 10;
         const stagger = opts.stagger ?? 0.08;
-        let full = 0;
+        // The open height is measured when the motion starts and again only when the content resizes
+        // (code drawers and lazy panels paint after `open` flips): reading it every frame forced a layout
+        // of the whole page per frame, which stalls long pages (a gallery grid of hundreds of cards).
+        const measure = () => {
+            const was = el.style.height;
+            el.style.height = 'auto';
+            const h = fullHeight(el);
+            el.style.height = was;
+            return h;
+        };
+        let full = measure();
+        let last = { p: start, turn: start };
+        const paint = (v) => {
+            last = v;
+            const p = v.p;
+            const to = Math.max(full, s.closed);
+            el.style.height = `${Math.round((s.closed + Math.max(0, p) * (to - s.closed)) * 10) / 10}px`;
+            el.style.setProperty('--mo-expand', String(Math.round(Math.min(1, Math.max(0, p)) * 1000) / 1000));
+            el.style.setProperty('--mo-expand-turn', String(Math.round(v.turn * 1000) / 1000));
+            const kids = contentOf(el);
+            kids.forEach((c, i) => {
+                const [o, f] = expandContentAt(p, i, kids.length, stagger);
+                c.style.opacity = String(o);
+                c.style.translate = drift ? `0 ${Math.round(-f * drift * 10) / 10}px` : '';
+            });
+        };
         const s = {
             open: want,
             closed: closed < 0 ? closedHeight(el) : closed,
@@ -468,27 +494,23 @@ function springExpand(el, open, opts = {}) {
             group: createSpringGroup({ p: start, turn: start }, {
                 feel: opts.feel,
                 owner: el,
-                onUpdate: (v) => {
-                    // re-measure each frame: code drawers and lazy panels paint their content after `open` flips
-                    el.style.height = 'auto';
-                    full = Math.max(fullHeight(el), s.closed);
-                    const p = v.p;
-                    el.style.height = `${Math.round((s.closed + Math.max(0, p) * (full - s.closed)) * 10) / 10}px`;
-                    el.style.setProperty('--mo-expand', String(Math.round(Math.min(1, Math.max(0, p)) * 1000) / 1000));
-                    el.style.setProperty('--mo-expand-turn', String(Math.round(v.turn * 1000) / 1000));
-                    const kids = contentOf(el);
-                    kids.forEach((c, i) => {
-                        const [o, f] = expandContentAt(p, i, kids.length, stagger);
-                        c.style.opacity = String(o);
-                        c.style.translate = drift ? `0 ${Math.round(-f * drift * 10) / 10}px` : '';
-                    });
-                },
+                onUpdate: (v) => paint(v),
                 onRest: () => {
                     if (states.get(el) === s)
                         finish(el, s);
                 },
             }),
         };
+        if (typeof ResizeObserver === 'function') {
+            s.ro = new ResizeObserver(() => {
+                if (states.get(el) !== s)
+                    return;
+                full = measure();
+                paint(last);
+            });
+            for (const c of contentOf(el))
+                s.ro.observe(c);
+        }
         states.set(el, s);
         st = s;
     }
