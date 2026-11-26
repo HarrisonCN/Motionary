@@ -386,9 +386,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 79.58 KB | 79.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 96.49 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 120.15 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 79.61 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 96.52 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 120.18 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 既定ではスクロールリスナーを使わず（IntersectionObserver を使用）、アニメーションはコンポジタ上で動くプロパティ（`transform`、`opacity`、`filter`、`clip-path`）だけを使います。
