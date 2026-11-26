@@ -139,12 +139,13 @@ function defineSpringPager(tag = 'usa-spring-pager') {
                 e.preventDefault();
                 go(keys[e.key], true);
             });
+            // `from` is where the track is when grabbed (it may still be moving); `base` is the page it was heading to, which a drag turns by one at most
             let drag = null;
             this.listen(view, 'pointerdown', (e) => {
                 if ((e.pointerType === 'mouse' && e.button !== 0) || e.target.closest?.('a, button, input, textarea, select, [contenteditable]'))
                     return;
                 measure();
-                drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, from: group.get('x'), last: e.clientX, t: e.timeStamp, v: 0, live: false };
+                drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, from: group.get('x'), base: this._index, last: e.clientX, t: e.timeStamp, v: 0, live: false };
             });
             this.listen(view, 'pointermove', (e) => {
                 if (!drag || e.pointerId !== drag.id)
@@ -177,7 +178,7 @@ function defineSpringPager(tag = 'usa-spring-pager') {
                 root.removeAttribute('data-dragging');
                 if (!d.live)
                     return;
-                go(dampedKit18$1.pageAfter(group.get('x') * w, d.v, w, n, Math.round(d.from)), true, d.v / w);
+                go(dampedKit18$1.pageAfter(group.get('x') * w, d.v, w, n, d.base), true, d.v / w);
             };
             this.listen(view, 'pointerup', end);
             this.listen(view, 'pointercancel', end);
