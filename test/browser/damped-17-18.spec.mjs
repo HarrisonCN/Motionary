@@ -32,7 +32,7 @@ test('17.18 damped motion: drawers spring open and closed, the code box reverses
   const box = card.locator('.ccard-code');
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'true');
-  await expect(box).toBeVisible();
+  await expect(box, errors.join('\n')).toBeVisible();
   await expect(box.locator('pre')).not.toBeEmpty();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'false');

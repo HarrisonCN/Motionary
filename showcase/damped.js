@@ -52,11 +52,16 @@ async function prime(lib, springs) {
 /** Open or close a box toggled with `hidden` on the damped spring (instant before the library loads). */
 export async function expandBox(box, open) {
   const lib = await damped();
-  if (!lib || reduced() || optedOut()) {
+  if (!lib || typeof lib.springExpand !== 'function' || reduced() || optedOut()) {
     box.hidden = !open;
     return open;
   }
-  return lib.springExpand(box, open);
+  try {
+    return await lib.springExpand(box, open);
+  } catch {
+    box.hidden = !open;
+    return open;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -69,8 +74,21 @@ const RISE = [{ opacity: 0, translate: '0 26px', scale: '0.97' }, { opacity: 1, 
 function rise(list) {
   const { easing, duration } = springEase({ duration: 620, bounce: 0.18 });
   list.slice(0, 24).forEach((node, i) => {
-    node.animate(RISE, { duration, easing, delay: Math.min(i, 8) * 55, fill: 'backwards' });
+    node.animate(RISE, { id: 'mo-rise', duration, easing, delay: Math.min(i, 8) * 55, fill: 'backwards' });
   });
+}
+
+/* A card that is still rising holds a transform, and a transform turns it into the
+   containing block of any position:fixed overlay inside it (a context menu, a popover).
+   So the moment someone reaches into a card, its rise jumps to the end. */
+function settleOnReach(root = document) {
+  const settle = (e) => {
+    for (let n = e.target; n && n.nodeType === 1; n = n.parentElement) {
+      if (!n.matches(CARDS)) continue;
+      for (const a of n.getAnimations?.() || []) if (a.id === 'mo-rise') a.finish();
+    }
+  };
+  for (const type of ['pointerdown', 'contextmenu', 'focusin', 'keydown']) root.addEventListener(type, settle, { capture: true, passive: true });
 }
 
 function revealCards(root = document) {
@@ -104,6 +122,7 @@ function revealCards(root = document) {
     }
   };
   watch(root);
+  settleOnReach(root);
   new MutationObserver((records) => {
     for (const r of records) {
       // a Collections tab that opens again: its cards spring in once more

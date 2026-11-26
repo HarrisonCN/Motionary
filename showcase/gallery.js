@@ -222,13 +222,26 @@ async function toggleCode(item, el) {
     return lib?.flip ? lib.flip(grid, mutate, { duration: 380 }) : mutate();
   };
   if (open) {
-    renderCode(item, box);
-    const reflow = widen(true);
-    await Promise.all([reflow, expandBox(box, true)]);
+    // the box starts opening first, so a failure below never leaves it shut with the button saying "open"
+    const shown = expandBox(box, true);
+    let reflow;
+    try {
+      renderCode(item, box);
+      reflow = widen(true);
+    } catch (e) {
+      console.error(e);
+    }
+    await Promise.all([reflow?.finished ?? reflow, shown]).catch(() => undefined);
     if (btn.getAttribute('aria-expanded') === 'true') el.scrollIntoView({ block: 'nearest', behavior: rmq.matches ? 'auto' : 'smooth' });
   } else {
     await expandBox(box, false);
-    if (btn.getAttribute('aria-expanded') === 'false') await widen(false);
+    if (btn.getAttribute('aria-expanded') === 'false') {
+      try {
+        await (widen(false)?.finished ?? undefined);
+      } catch {
+        el.classList.remove('is-open');
+      }
+    }
   }
 }
 

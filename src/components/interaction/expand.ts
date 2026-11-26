@@ -47,7 +47,7 @@ interface State {
   opts: SpringExpandOptions;
 }
 
-const states = new WeakMap<HTMLElement, State>();
+const states = /*#__PURE__*/ new WeakMap<HTMLElement, State>();
 const isDetails = (el: HTMLElement): el is HTMLDetailsElement => el.localName === 'details';
 const summaryOf = (el: HTMLElement): HTMLElement | null => (isDetails(el) ? el.querySelector(':scope > summary') : null);
 const contentOf = (el: HTMLElement): HTMLElement[] => [...el.children].filter((c) => c.localName !== 'summary') as HTMLElement[];
