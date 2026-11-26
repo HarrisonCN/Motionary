@@ -2285,6 +2285,12 @@ interface LegacyAttributes {
         paused?: string | boolean | number;
         strength?: string | boolean | number;
     };
+    'usa-elastic-scroll': {
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        height?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-elastic-slider': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
@@ -3485,6 +3491,13 @@ interface LegacyAttributes {
         emojis?: string | boolean | number;
         picker?: string | boolean | number;
     };
+    'usa-read-more': {
+        feel?: string | boolean | number;
+        less?: string | boolean | number;
+        lines?: string | boolean | number;
+        more?: string | boolean | number;
+        open?: string | boolean | number;
+    };
     'usa-red-envelope': {
         amount?: string | boolean | number;
         currency?: string | boolean | number;
@@ -3920,6 +3933,13 @@ interface LegacyAttributes {
         name?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-spring-collapse': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        open?: string | boolean | number;
+    };
     'usa-spring-copy': {
         'copied-label'?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -3969,6 +3989,12 @@ interface LegacyAttributes {
         items?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-spring-pager': {
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-spring-rating': {
         clearable?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -3981,6 +4007,23 @@ interface LegacyAttributes {
         'show-value'?: string | boolean | number;
         size?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-spring-sheet': {
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        open?: string | boolean | number;
+        snaps?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    'usa-spring-stack': {
+        feel?: string | boolean | number;
+        gap?: string | boolean | number;
+        haptics?: string | boolean | number;
+        less?: string | boolean | number;
+        more?: string | boolean | number;
+        open?: string | boolean | number;
+        peek?: string | boolean | number;
     };
     'usa-spring-swipe': {
         actions?: string | boolean | number;
@@ -4751,6 +4794,9 @@ interface LegacyEvents {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
+    'usa-elastic-scroll': {
+        'usa:edge': CustomEvent<any>;
+    };
     'usa-elastic-slider': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
@@ -5283,6 +5329,9 @@ interface LegacyEvents {
     'usa-reactions': {
         'usa:react': CustomEvent<any>;
     };
+    'usa-read-more': {
+        'usa:toggle': CustomEvent<any>;
+    };
     'usa-red-envelope': {
         'usa:open': CustomEvent<any>;
     };
@@ -5466,6 +5515,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
     };
+    'usa-spring-collapse': {
+        'usa:toggle': CustomEvent<any>;
+    };
     'usa-spring-copy': {
         'usa:copy': CustomEvent<any>;
     };
@@ -5482,8 +5534,17 @@ interface LegacyEvents {
     'usa-spring-list': {
         'usa:reorder': CustomEvent<any>;
     };
+    'usa-spring-pager': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-spring-rating': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-sheet': {
+        'usa:snap': CustomEvent<any>;
+    };
+    'usa-spring-stack': {
+        'usa:toggle': CustomEvent<any>;
     };
     'usa-spring-swipe': {
         'usa:action': CustomEvent<any>;
