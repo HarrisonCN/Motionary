@@ -315,9 +315,22 @@ const indent = (s, n) => s.split('\n').map((l) => (l ? ' '.repeat(n) + l : l)).j
 const stripScripts = (html) => html.replace(/<script[\s\S]*?<\/script>\n?/g, '').trim();
 
 /** HTML → JSX for the React tab (custom elements keep their attribute names). */
+/** 17.17: an inline style="a:b; c-d:e" becomes style={{ a: 'b', cD: 'e' }} (React wants an object). */
+const jsxStyle = (css) => {
+  const parts = css.split(';').map((d) => d.trim()).filter(Boolean).map((d) => {
+    const i = d.indexOf(':');
+    if (i < 0) return null;
+    const key = d.slice(0, i).trim();
+    const prop = key.startsWith('--') ? `'${key}'` : key.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+    return `${prop}: '${d.slice(i + 1).trim().replace(/'/g, "\\'")}'`;
+  }).filter(Boolean);
+  return `style={{ ${parts.join(', ')} }}`;
+};
+
 export const toJsx = (html) =>
   stripScripts(html)
     .replace(/\bclass="/g, 'className="')
+    .replace(/(\s)style="([^"]*)"/g, (_, sp, css) => sp + jsxStyle(css))
     .replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}')
     .replace(/ onclick="([^"]*)"/g, ' onClick={() => document.getElementById(\'dlg\').show()}');
 

@@ -88,6 +88,7 @@
   </main>
   <script type="module">
     import { defineWidgets, ICON_CATEGORIES, ICON_MOTIONS, iconNames } from '../dist/components/widgets.js';
+    import { createDrawer } from './code-drawer.js';
     defineWidgets('17.14');
     defineWidgets('17.16');
 
@@ -95,6 +96,9 @@
     const SAMPLE = { spin: 'refresh', pulse: 'bell', beat: 'heart', bounce: 'arrow-down', wiggle: 'hand', shake: 'lock', ring: 'bell', float: 'send', flip: 'credit-card', draw: 'star', pop: 'check', blink: 'eye' };
 
     const picker = document.querySelector('mo-icon-picker');
+    // 17.17: the code drawer (HTML, ES module, React, Vue, desktop) under the picker and under the preview
+    const pickerDrawer = createDrawer({ id: 'icon-picker', markup: picker.cloneNode(false).outerHTML });
+    document.querySelector('[data-log="pick"]').after(pickerDrawer.el);
     const preview = document.querySelector('[data-preview]');
     const code = document.querySelector('[data-code]');
     const motions = document.querySelector('[data-motions]');
@@ -105,7 +109,10 @@
       const size = preview.getAttribute('size');
       const stroke = preview.getAttribute('stroke') || '2';
       code.textContent = `<mo-icon name="${name}" motion="${motion}" trigger="hover"${size !== '24' ? ` size="${size}"` : ''}${stroke !== '2' ? ` stroke="${stroke}"` : ''}></mo-icon>`;
+      iconDrawer.update(code.textContent);
     };
+    const iconDrawer = createDrawer({ id: 'icon', markup: '<mo-icon name="heart"></mo-icon>' });
+    code.after(iconDrawer.el);
 
     for (const m of ['none', ...ICON_MOTIONS]) {
       const l = document.createElement('label');
@@ -150,6 +157,8 @@
       m.innerHTML = `<button type="button" data-spring="${name}"><mo-icon name="${name}" size="36"></mo-icon><span>${ICON_CATEGORIES.find((c) => c.id === cat).zh}</span><small>${feel}</small></button>`;
       springRow.append(m);
     }
+    const springDrawer = createDrawer({ id: 'micro', markup: SPRING.map(([, name, feel]) => `<mo-micro fx="press hover lift" feel="${feel}">\n  <button type="button"><mo-icon name="${name}" size="36"></mo-icon></button>\n</mo-micro>`).join('\n') });
+    document.querySelector('[data-log="spring"]').after(springDrawer.el);
     springRow.addEventListener('click', (e) => {
       const b = e.target.closest('button[data-spring]');
       if (!b) return;

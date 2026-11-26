@@ -74,7 +74,8 @@
     <div class="grid" data-grid aria-live="polite"></div>
   </main>
   <script type="module">
-    import { defineWidgets, adoptLooks, lookNames, lookInfo, LOOK_PALETTES } from '../dist/components/widgets.js';
+    import { defineWidgets, adoptLooks, lookNames, lookInfo, lookTokens, LOOK_PALETTES } from '../dist/components/widgets.js';
+    import { createDrawer, lookSnippets, LOOK_TABS } from './code-drawer.js';
     defineWidgets('17.11');
     adoptLooks();
 
@@ -99,6 +100,12 @@
     for (const f of ['ui', 'parts', 'motion']) document.querySelector(`[data-count="${f}"]`).textContent = `(${lookNames(f).length})`;
 
     const label = (l) => `${TREAT[l.treatment]} · ${PAL[l.palette]}`;
+
+    // 17.17: the code for the look on the stage, in four flavours, with a copy button
+    const lookCode = (name) => lookSnippets({ name, info: lookInfo(name), tokens: lookTokens(name), count: lookNames(lookInfo(name).family).length });
+    const lookDrawer = createDrawer({ tabs: LOOK_TABS, snippets: lookCode(FIRST.ui) });
+    stage.querySelector('.stage-head').after(lookDrawer.el);
+    lookDrawer.el.style.gridColumn = '1 / -1';
     const select = (name) => {
       const l = lookInfo(name);
       if (!l) return;
@@ -108,6 +115,7 @@
       stage.querySelector('[data-current-name]').textContent = name;
       stage.querySelector('[data-current-desc]').textContent = label(l) + (l.dark ? ' · 深色' : '');
       for (const t of grid.children) t.toggleAttribute('data-current', t.dataset.moLook === name);
+      lookDrawer.update(lookCode(name));
     };
 
     const sample = (f) => f === 'ui'

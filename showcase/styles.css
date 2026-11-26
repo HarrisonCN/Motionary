@@ -493,3 +493,8 @@ code, kbd, pre { font-family: var(--mono); }
 .col-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .col-links a { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font-size: 0.84rem; text-decoration: none; transition: transform 0.2s var(--ease-out); }
 .col-links a:hover { transform: translateY(-1px); }
+
+/* 17.17: a Collections card or look tile with its code drawer open takes the whole row, like the gallery's cards */
+.col-card:has(> .col-meta > .mo-code[open]), .col-look:has(> .mo-code[open]) { grid-column: 1 / -1; }
+.col-meta > .mo-code { margin-top: 10px; }
+.col-look > .mo-code { background: rgb(255 255 255 / 0.82); color: #121521; }

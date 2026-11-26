@@ -6,6 +6,9 @@
  * the home page. The full pages stay as deep links. Nothing is loaded until the section comes near the screen: then only
  * the open tab's widget entries are imported from ../dist (or the CDN build as a fallback), one module per widget, and
  * the other tabs load when they are opened.
+ *
+ * 17.17: every card (and every look tile) has the code drawer of the component gallery and the Store: it opens
+ * into HTML / ES module / React / Vue / desktop code with a copy button.
  */
 import { components as springs } from './catalog/springs.js';
 import { components as micro } from './catalog/micro.js';
@@ -21,6 +24,7 @@ import { components as forms, wire as formsWire } from './catalog/forms.js';
 import { components as matter } from './catalog/matter.js';
 import { components as activity } from './catalog/activity.js';
 import { components as luminous } from './catalog/luminous.js';
+import { createDrawer, lookSnippets, LOOK_TABS } from './code-drawer.js';
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
 const CDN = 'https://unpkg.com/motionary@17/dist/';
@@ -285,6 +289,8 @@ export function mountCollections(section) {
         tile.innerHTML = '<div class="col-look-stage"><mo-download-button duration="1200"></mo-download-button><mo-search-bar label="Search" shortcut="none"></mo-search-bar></div>';
         const cap = el('figcaption', 'col-look-name', name);
         tile.append(cap);
+        const drawer = createDrawer({ tabs: LOOK_TABS, snippets: lookSnippets({ name, info, tokens: w.lookTokens?.(name) || {}, count: w.lookNames?.(info.family).length }) });
+        if (drawer) tile.append(drawer.el);
         grid.append(tile);
       }
     } catch {
@@ -308,6 +314,8 @@ export function mountCollections(section) {
       const tag = el('code', 'col-tag', `<mo-${item.id}>`);
       const desc = el('p', 'col-desc', item.desc[L]);
       meta.append(nm, tag, desc);
+      const drawer = createDrawer({ id: item.id });
+      if (drawer) meta.append(drawer.el);
       card.append(stage, meta);
       s.grid.append(card);
       return { item, stage };
