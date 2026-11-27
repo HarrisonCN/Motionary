@@ -15,4 +15,4 @@ function registerMosaicFlip() {
 exports.effect = effect;
 exports.register = registerMosaicFlip;
 exports.registerMosaicFlip = registerMosaicFlip;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/mosaic-flip.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/mosaic-flip.cjs.map

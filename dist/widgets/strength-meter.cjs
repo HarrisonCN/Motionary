@@ -5,4 +5,4 @@ var widgets_strengthMeter = require('../chunks/strength-meter-B1ESwLkU.cjs');
 
 
 exports.defineStrengthMeter = widgets_strengthMeter.defineStrengthMeter;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/strength-meter.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/strength-meter.cjs.map

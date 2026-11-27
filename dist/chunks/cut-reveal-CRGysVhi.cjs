@@ -117,4 +117,4 @@ function defineCutReveal(tag = 'usa-cut-reveal') {
 
 exports.defineCutReveal = defineCutReveal;
 exports.stripClips = stripClips;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/cut-reveal-CRGysVhi.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/cut-reveal-CRGysVhi.cjs.map

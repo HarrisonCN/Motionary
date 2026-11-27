@@ -174,4 +174,4 @@ function defineSlideConfirm(tag = 'usa-slide-confirm') {
 }
 
 export { defineSlideConfirm };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/slide-confirm.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/slide-confirm.js.map

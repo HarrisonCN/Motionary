@@ -15,4 +15,4 @@ function registerWaterDrop() {
 exports.effect = effect;
 exports.register = registerWaterDrop;
 exports.registerWaterDrop = registerWaterDrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/water-drop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/water-drop.cjs.map

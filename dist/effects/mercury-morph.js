@@ -11,4 +11,4 @@ function registerMercuryMorph() {
 }
 
 export { effect, registerMercuryMorph as register, registerMercuryMorph };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/mercury-morph.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/mercury-morph.js.map

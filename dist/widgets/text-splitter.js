@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
-import { r as runtimeModule } from '../chunks/runtime-link-MMUsON9J.js';
-import { r as requireModule } from '../chunks/registry-Cbo6qw2B.js';
+import { r as runtimeModule } from '../chunks/runtime-link-BQOcEOVq.js';
+import { r as requireModule } from '../chunks/registry-C3HvF5ae.js';
 
 var css = "usa-text-splitter{display:block;max-width:100%}usa-text-splitter .usa-split-word{white-space:nowrap}usa-text-splitter .usa-split-char,usa-text-splitter .usa-split-word,usa-text-splitter .usa-split-line{will-change:transform,opacity}usa-text-splitter .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 
@@ -82,4 +82,4 @@ function defineTextSplitter(tag = 'usa-text-splitter') {
 }
 
 export { defineTextSplitter };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/text-splitter.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/text-splitter.js.map

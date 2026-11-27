@@ -84,4 +84,4 @@ function defineSquishIndicator(tag = 'usa-squish-indicator') {
 }
 
 export { defineSquishIndicator as d, parseOptions as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/squish-indicator-DMxb-OFq.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/squish-indicator-DMxb-OFq.js.map

@@ -201,4 +201,4 @@ function defineSpringPager(tag = 'usa-spring-pager') {
 }
 
 export { defineSpringPager };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-pager.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-pager.js.map

@@ -50,4 +50,4 @@ function defineTextReveal(tag = 'usa-text-reveal') {
 }
 
 export { defineTextReveal as d, revealPieces as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/text-reveal-7bCJpF8m.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/text-reveal-7bCJpF8m.js.map

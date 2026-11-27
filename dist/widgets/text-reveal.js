@@ -1,2 +1,2 @@
 export { d as defineTextReveal } from '../chunks/text-reveal-7bCJpF8m.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/text-reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/text-reveal.js.map

@@ -175,4 +175,4 @@ function defineDiffViewer(tag = 'usa-diff-viewer') {
 }
 
 exports.defineDiffViewer = defineDiffViewer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/diff-viewer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/diff-viewer.cjs.map

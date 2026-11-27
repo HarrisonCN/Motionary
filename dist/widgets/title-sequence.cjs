@@ -30,4 +30,4 @@ function defineTitleSequence(tag = 'usa-title-sequence') {
 }
 
 exports.defineTitleSequence = defineTitleSequence;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/title-sequence.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/title-sequence.cjs.map

@@ -208,4 +208,4 @@ function defineIconPicker(tag = 'usa-icon-picker') {
 }
 
 export { defineIconPicker as d, gridStep as g, iconCopyText as i };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/icon-picker-DZVVQ2PA.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/icon-picker-DZVVQ2PA.js.map

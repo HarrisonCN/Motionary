@@ -130,4 +130,4 @@ function defineBarRace(tag = 'usa-bar-race') {
 }
 
 export { defineBarRace };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/bar-race.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/bar-race.js.map

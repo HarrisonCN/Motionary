@@ -185,4 +185,4 @@ function defineSpringScrollbar(tag = 'usa-spring-scrollbar') {
 }
 
 export { defineSpringScrollbar };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-scrollbar.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-scrollbar.js.map

@@ -5,4 +5,4 @@ var widgets_tip = require('../chunks/tip-C4ZmZX3u.cjs');
 
 
 exports.defineTip = widgets_tip.defineTip;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/tip.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/tip.cjs.map

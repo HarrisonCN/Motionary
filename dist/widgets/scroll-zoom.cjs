@@ -5,4 +5,4 @@ var widgets_scrollZoom = require('../chunks/scroll-zoom-TExkR9AQ.cjs');
 
 
 exports.defineScrollZoom = widgets_scrollZoom.defineScrollZoom;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/scroll-zoom.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/scroll-zoom.cjs.map

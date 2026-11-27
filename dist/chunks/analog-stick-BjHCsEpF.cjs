@@ -142,4 +142,4 @@ function defineAnalogStick(tag = 'usa-analog-stick') {
 
 exports.deadZone = deadZone;
 exports.defineAnalogStick = defineAnalogStick;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/analog-stick-BjHCsEpF.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/analog-stick-BjHCsEpF.cjs.map

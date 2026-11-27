@@ -47,4 +47,4 @@ function defineSquishKey(tag = 'usa-squish-key') {
 }
 
 export { defineSquishKey };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/squish-key.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/squish-key.js.map

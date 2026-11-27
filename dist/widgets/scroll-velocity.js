@@ -1,2 +1,2 @@
 export { d as defineScrollVelocity } from '../chunks/scroll-velocity-_jHQaDlb.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/scroll-velocity.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/scroll-velocity.js.map

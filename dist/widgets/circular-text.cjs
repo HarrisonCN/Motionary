@@ -5,4 +5,4 @@ var widgets_circularText = require('../chunks/circular-text-BU1a47tg.cjs');
 
 
 exports.defineCircularText = widgets_circularText.defineCircularText;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/circular-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/circular-text.cjs.map

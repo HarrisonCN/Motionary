@@ -1,4 +1,4 @@
-# Motionary 17.17.0
+# Motionary 17.18.0
 
 > Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 423 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 

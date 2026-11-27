@@ -76,4 +76,4 @@ function defineStepTrack(tag = 'usa-step-track') {
 }
 
 exports.defineStepTrack = defineStepTrack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/step-track.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/step-track.cjs.map

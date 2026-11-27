@@ -42,4 +42,4 @@ function tap(press) {
 
 exports.pressSpring = pressSpring;
 exports.tap = tap;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/tactile-Dfg7b_8s.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/tactile-Dfg7b_8s.cjs.map

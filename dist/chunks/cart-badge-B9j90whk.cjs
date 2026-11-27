@@ -80,4 +80,4 @@ function defineCartBadge(tag = 'usa-cart-badge') {
 
 exports.badgeText = badgeText;
 exports.defineCartBadge = defineCartBadge;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/cart-badge-B9j90whk.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/cart-badge-B9j90whk.cjs.map

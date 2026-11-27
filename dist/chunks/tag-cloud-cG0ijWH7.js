@@ -55,4 +55,4 @@ function defineTagCloud(tag = 'usa-tag-cloud') {
 }
 
 export { defineTagCloud as d, tagSize as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/tag-cloud-cG0ijWH7.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/tag-cloud-cG0ijWH7.js.map

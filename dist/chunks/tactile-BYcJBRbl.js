@@ -39,4 +39,4 @@ function tap(press) {
 }
 
 export { pressSpring as p, tap as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/tactile-BYcJBRbl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/tactile-BYcJBRbl.js.map

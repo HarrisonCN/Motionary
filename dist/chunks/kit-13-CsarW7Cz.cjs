@@ -310,4 +310,4 @@ exports.tourPlace = tourPlace;
 exports.waffleCells = waffleCells;
 exports.wheelIndex = wheelIndex;
 exports.wheelTilt = wheelTilt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/kit-13-CsarW7Cz.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/kit-13-CsarW7Cz.cjs.map

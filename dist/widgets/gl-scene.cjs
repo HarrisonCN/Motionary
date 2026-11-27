@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_glScene = require('../chunks/gl-scene-CQQ0Qw4A.cjs');
+var widgets_glScene = require('../chunks/gl-scene-dTdLmEDF.cjs');
 
 
 
 exports.defineGlScene = widgets_glScene.defineGlScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/gl-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/gl-scene.cjs.map

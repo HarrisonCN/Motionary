@@ -22,4 +22,4 @@ function defineMagneticField(tag = 'usa-magnetic-field') {
 }
 
 exports.defineMagneticField = defineMagneticField;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/magnetic-field.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/magnetic-field.cjs.map

@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D9r9pmCC.cjs');
+var registry = require('../chunks/registry-DtrFPep7.cjs');
 
 /**
  * @license
@@ -47307,4 +47307,4 @@ const spatialInstruments = {
 
 exports.createInstrument = createInstrument;
 exports.spatialInstruments = spatialInstruments;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/runtime/spatial-instruments.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/runtime/spatial-instruments.cjs.map

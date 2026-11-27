@@ -162,4 +162,4 @@ function defineSortableList(tag = 'usa-sortable-list') {
 }
 
 export { dropIndex as a, defineSortableList as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/sortable-list-D4ayYQzk.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/sortable-list-D4ayYQzk.js.map

@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Cbo6qw2B.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-C3HvF5ae.js';
 
 /**
  * `motionary/runtime/text` (10.3) — split text into characters, words and
@@ -140,4 +140,4 @@ function splitText(el, o = {}) {
 const text = { id: 'text', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { segment, splitText } };
 
 export { segment, splitText, text };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/runtime/text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/runtime/text.js.map

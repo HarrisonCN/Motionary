@@ -431,4 +431,4 @@ function definePhysicsComponents() {
 }
 
 export { SPRING_EFFECTS, createSpring, defineDraggable, defineOverscroll, definePhysicsComponents, defineSpring, projectInertia, rubberBand, snapTo, springEasing, springEffectKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/components/physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/components/physics.js.map

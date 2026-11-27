@@ -215,4 +215,4 @@ function defineFlingMarquee(tag = 'usa-fling-marquee') {
 }
 
 export { defineFlingMarquee };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/fling-marquee.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/fling-marquee.js.map

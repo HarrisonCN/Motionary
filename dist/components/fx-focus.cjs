@@ -122,4 +122,4 @@ function registerFocusPack() {
 
 exports.FOCUS_FX = FOCUS_FX;
 exports.registerFocusPack = registerFocusPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/components/fx-focus.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/components/fx-focus.cjs.map

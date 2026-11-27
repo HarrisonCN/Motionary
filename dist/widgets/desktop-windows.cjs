@@ -5,4 +5,4 @@ var widgets_desktopWindows = require('../chunks/desktop-windows-DF6eUzSU.cjs');
 
 
 exports.defineDesktopWindows = widgets_desktopWindows.defineDesktopWindows;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/desktop-windows.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/desktop-windows.cjs.map

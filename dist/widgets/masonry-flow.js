@@ -126,4 +126,4 @@ function defineMasonryFlow(tag = 'usa-masonry-flow') {
 }
 
 export { defineMasonryFlow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/masonry-flow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/masonry-flow.js.map

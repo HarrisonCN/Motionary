@@ -20,4 +20,4 @@ function defineThreeDotBounce(tag = 'usa-three-dot-bounce') {
 }
 
 exports.defineThreeDotBounce = defineThreeDotBounce;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/three-dot-bounce.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/three-dot-bounce.cjs.map

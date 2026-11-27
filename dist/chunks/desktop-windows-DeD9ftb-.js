@@ -173,4 +173,4 @@ function defineDesktopWindows(tag = 'usa-desktop-windows') {
 }
 
 export { clampWindow as c, defineDesktopWindows as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/desktop-windows-DeD9ftb-.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/desktop-windows-DeD9ftb-.js.map

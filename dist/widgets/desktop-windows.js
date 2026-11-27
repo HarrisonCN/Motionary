@@ -1,2 +1,2 @@
 export { d as defineDesktopWindows } from '../chunks/desktop-windows-DeD9ftb-.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/desktop-windows.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/desktop-windows.js.map

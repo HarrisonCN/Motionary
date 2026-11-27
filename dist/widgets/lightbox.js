@@ -216,4 +216,4 @@ function defineLightbox(tag = 'usa-lightbox') {
 }
 
 export { defineLightbox };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/lightbox.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/lightbox.js.map

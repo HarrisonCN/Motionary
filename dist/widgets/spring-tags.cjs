@@ -251,4 +251,4 @@ function defineSpringTags(tag = 'usa-spring-tags') {
 }
 
 exports.defineSpringTags = defineSpringTags;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-tags.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-tags.cjs.map

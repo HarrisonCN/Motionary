@@ -59,4 +59,4 @@ function defineBento(tag = 'usa-bento') {
 }
 
 export { defineBento };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/bento.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/bento.js.map

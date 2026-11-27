@@ -568,4 +568,4 @@ function applyMicro(root = document) {
 }
 
 export { MICRO_BEHAVIORS as M, MICRO_FEEDBACK as a, applyMicro as b, microOf as c, microTransform as d, readSpeed as e, feedback as f, micro as m, parseMicro as p, readFeel as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/micro-DxpcOO8J.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/micro-DxpcOO8J.js.map

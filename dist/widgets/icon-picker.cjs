@@ -5,4 +5,4 @@ var widgets_iconPicker = require('../chunks/icon-picker-BH1MftbE.cjs');
 
 
 exports.defineIconPicker = widgets_iconPicker.defineIconPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/icon-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/icon-picker.cjs.map

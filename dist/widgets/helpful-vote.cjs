@@ -90,4 +90,4 @@ function defineHelpfulVote(tag = 'usa-helpful-vote') {
 }
 
 exports.defineHelpfulVote = defineHelpfulVote;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/helpful-vote.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/helpful-vote.cjs.map

@@ -152,4 +152,4 @@ exports.isFlashSafe = isFlashSafe;
 exports.loadMotionPreferences = loadMotionPreferences;
 exports.registerSafePack = registerSafePack;
 exports.vestibularSafe = vestibularSafe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/components/fx-safe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/components/fx-safe.cjs.map

@@ -103,4 +103,4 @@ function defineInstallButton(tag = 'usa-install-button') {
 }
 
 export { defineInstallButton };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/install-button.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/install-button.js.map

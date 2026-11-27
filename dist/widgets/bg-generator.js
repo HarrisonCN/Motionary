@@ -1,2 +1,2 @@
 export { d as defineBgGenerator } from '../chunks/bg-generator-BjUrAeO1.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/bg-generator.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/bg-generator.js.map

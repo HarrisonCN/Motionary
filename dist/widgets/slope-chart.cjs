@@ -95,4 +95,4 @@ function defineSlopeChart(tag = 'usa-slope-chart') {
 }
 
 exports.defineSlopeChart = defineSlopeChart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/slope-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/slope-chart.cjs.map

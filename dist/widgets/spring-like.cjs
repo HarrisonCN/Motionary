@@ -135,4 +135,4 @@ function defineSpringLike(tag = 'usa-spring-like') {
 }
 
 exports.defineSpringLike = defineSpringLike;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-like.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-like.cjs.map

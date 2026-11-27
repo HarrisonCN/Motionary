@@ -1,2 +1,2 @@
 export { d as defineDownloadButton } from '../chunks/download-button-DT_TDv2n.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/download-button.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/download-button.js.map

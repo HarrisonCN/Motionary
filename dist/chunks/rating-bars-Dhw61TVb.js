@@ -78,4 +78,4 @@ function defineRatingBars(tag = 'usa-rating-bars') {
 }
 
 export { defineRatingBars as d, ratingSummary as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/rating-bars-Dhw61TVb.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/rating-bars-Dhw61TVb.js.map

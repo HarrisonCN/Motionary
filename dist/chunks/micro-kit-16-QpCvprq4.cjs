@@ -70,4 +70,4 @@ exports.stretch = stretch;
 exports.tick = tick;
 exports.uid = uid;
 exports.valueAt = valueAt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/micro-kit-16-QpCvprq4.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/micro-kit-16-QpCvprq4.cjs.map

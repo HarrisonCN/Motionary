@@ -217,4 +217,4 @@ function springAllDetails(root = document, opts = {}) {
 }
 
 export { springDetails as a, springExpand as b, expandContentAt as e, isExpanded as i, springAllDetails as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/expand-DR_ipRf6.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/expand-DR_ipRf6.js.map

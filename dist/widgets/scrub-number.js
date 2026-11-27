@@ -120,4 +120,4 @@ function defineScrubNumber(tag = 'usa-scrub-number') {
 }
 
 export { defineScrubNumber };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/scrub-number.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/scrub-number.js.map
