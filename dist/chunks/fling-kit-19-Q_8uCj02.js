@@ -1,8 +1,10 @@
 import { p as projectInertia } from './spring-Bu3AwUgu.js';
+import { b as caf, r as raf } from './base-SPDwWyB1.js';
 
 /**
  * 17.19 helpers shared by the fling parts (spring-pip, spring-island, spring-peek, spring-scrollbar, slide-confirm,
- * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test. The motion itself comes
+ * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test (`frameOnce` aside, a
+ * small scheduling helper the parts share). The motion itself comes
  * from the 17.16 spring core (`createSpringGroup`) and the shared frame scheduler. Original implementations; see
  * docs/fling-parts-17-19.md.
  */
@@ -144,6 +146,29 @@ function cruise(v, target, dt, tau = 650) {
     const out = fin(v, 0) + (fin(target, 0) - fin(v, 0)) * k;
     return Math.abs(out - target) < 0.01 ? target : out;
 }
+/**
+ * Runs `fn` once on the next frame of the shared scheduler, however often it is asked before then. The parts hand
+ * their ResizeObserver work to it: that work moves and resizes what is observed, and doing it inside the observer's
+ * callback makes WebKit report "ResizeObserver loop completed with undelivered notifications".
+ */
+function frameOnce(fn, owner) {
+    let id = 0;
+    return {
+        ask: () => {
+            if (id)
+                return;
+            id = raf(() => {
+                id = 0;
+                fn();
+            }, owner);
+        },
+        cancel: () => {
+            if (id)
+                caf(id);
+            id = 0;
+        },
+    };
+}
 
-export { PIP_CORNERS as P, cornerPoint as a, cornerStep as b, chainPath as c, cruise as d, linkSize as e, pipCorner as f, slideOutcome as g, islandShape as i, labelAt as l, parseCorner as p, scrollForThumb as s, thumbMetrics as t, wrapOffset as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fling-kit-19-BDnFLTfF.js.map
+export { PIP_CORNERS as P, cornerPoint as a, cornerStep as b, chainPath as c, cruise as d, linkSize as e, pipCorner as f, slideOutcome as g, frameOnce as h, islandShape as i, labelAt as l, parseCorner as p, scrollForThumb as s, thumbMetrics as t, wrapOffset as w };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fling-kit-19-Q_8uCj02.js.map

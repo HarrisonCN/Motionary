@@ -4,7 +4,7 @@ var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var microKit16 = require('../chunks/micro-kit-16-QpCvprq4.cjs');
-var flingKit19$1 = require('../chunks/fling-kit-19-C9zMxm76.cjs');
+var flingKit19$1 = require('../chunks/fling-kit-19-BgC3V4FD.cjs');
 var flingKit19 = require('../chunks/fling-kit-19-Cojn_2Zy.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -193,13 +193,17 @@ function defineFlingMarquee(tag = 'usa-fling-marquee') {
             this.listen(view, 'pointerup', end);
             this.listen(view, 'pointercancel', end);
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = flingKit19$1.frameOnce(() => {
                     fill();
                     place();
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(view);
                 ro.observe(run);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 loop(false);

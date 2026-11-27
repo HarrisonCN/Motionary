@@ -2,7 +2,7 @@ import { f as defineElement, o as onFrame } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { t as tick } from '../chunks/micro-kit-16-DrJflWG2.js';
-import { w as wrapOffset, d as cruise } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { w as wrapOffset, h as frameOnce, d as cruise } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -191,13 +191,17 @@ function defineFlingMarquee(tag = 'usa-fling-marquee') {
             this.listen(view, 'pointerup', end);
             this.listen(view, 'pointercancel', end);
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     fill();
                     place();
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(view);
                 ro.observe(run);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 loop(false);

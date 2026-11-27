@@ -1,10 +1,12 @@
 'use strict';
 
 var spring = require('./spring-DoapHVAk.cjs');
+var base = require('./base-DzZEJhQB.cjs');
 
 /**
  * 17.19 helpers shared by the fling parts (spring-pip, spring-island, spring-peek, spring-scrollbar, slide-confirm,
- * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test. The motion itself comes
+ * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test (`frameOnce` aside, a
+ * small scheduling helper the parts share). The motion itself comes
  * from the 17.16 spring core (`createSpringGroup`) and the shared frame scheduler. Original implementations; see
  * docs/fling-parts-17-19.md.
  */
@@ -146,12 +148,36 @@ function cruise(v, target, dt, tau = 650) {
     const out = fin(v, 0) + (fin(target, 0) - fin(v, 0)) * k;
     return Math.abs(out - target) < 0.01 ? target : out;
 }
+/**
+ * Runs `fn` once on the next frame of the shared scheduler, however often it is asked before then. The parts hand
+ * their ResizeObserver work to it: that work moves and resizes what is observed, and doing it inside the observer's
+ * callback makes WebKit report "ResizeObserver loop completed with undelivered notifications".
+ */
+function frameOnce(fn, owner) {
+    let id = 0;
+    return {
+        ask: () => {
+            if (id)
+                return;
+            id = base.raf(() => {
+                id = 0;
+                fn();
+            }, owner);
+        },
+        cancel: () => {
+            if (id)
+                base.caf(id);
+            id = 0;
+        },
+    };
+}
 
 exports.PIP_CORNERS = PIP_CORNERS;
 exports.chainPath = chainPath;
 exports.cornerPoint = cornerPoint;
 exports.cornerStep = cornerStep;
 exports.cruise = cruise;
+exports.frameOnce = frameOnce;
 exports.islandShape = islandShape;
 exports.labelAt = labelAt;
 exports.linkSize = linkSize;
@@ -161,4 +187,4 @@ exports.scrollForThumb = scrollForThumb;
 exports.slideOutcome = slideOutcome;
 exports.thumbMetrics = thumbMetrics;
 exports.wrapOffset = wrapOffset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fling-kit-19-C9zMxm76.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fling-kit-19-BgC3V4FD.cjs.map

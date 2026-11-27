@@ -3,7 +3,7 @@ import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { h as hostSprings, t as tick } from '../chunks/micro-kit-16-DrJflWG2.js';
 import { d as dampedAt } from '../chunks/damped-kit-18-ykWuNSDE.js';
-import { g as slideOutcome } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { g as slideOutcome, h as frameOnce } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -150,13 +150,17 @@ function defineSlideConfirm(tag = 'usa-slide-confirm') {
             this.listen(knob, 'pointerup', end);
             this.listen(knob, 'pointercancel', end);
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     measure();
                     if (!group.animating && !drag)
                         group.jump({ x: this._done ? max : 0 });
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(root);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 group.stop();

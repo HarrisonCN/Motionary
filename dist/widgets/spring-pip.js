@@ -3,7 +3,7 @@ import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { h as hostSprings, t as tick } from '../chunks/micro-kit-16-DrJflWG2.js';
 import { d as dampedAt } from '../chunks/damped-kit-18-ykWuNSDE.js';
-import { p as parseCorner, a as cornerPoint, b as cornerStep, f as pipCorner } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { p as parseCorner, a as cornerPoint, b as cornerStep, f as pipCorner, h as frameOnce } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 function defineSpringPip(tag = 'usa-spring-pip') {
@@ -129,16 +129,20 @@ function defineSpringPip(tag = 'usa-spring-pip') {
             this.listen(win, 'pointerup', end);
             this.listen(win, 'pointercancel', end);
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     if (drag)
                         return;
                     box = size();
                     if (!group.animating)
                         group.jump(cornerPoint(this._corner, box.w, box.h, box.fw, box.fh, inset));
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(root);
                 ro.observe(win);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 group.stop();
