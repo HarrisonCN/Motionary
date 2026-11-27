@@ -2,7 +2,7 @@ import { defineElement, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { hostSprings, tick, uid } from './micro-kit-16';
-import { islandShape } from './fling-kit-19';
+import { islandShape, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 /**
@@ -147,13 +147,17 @@ export function defineSpringIsland(tag = 'usa-spring-island'): CustomElementCons
         if (this._open && !this.contains(e.target as Node)) set(false, false);
       });
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           measure();
           if (!group.animating) group.jump({ t: this._open ? 1 : 0 });
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(root);
         ro.observe(panel);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         group.stop();

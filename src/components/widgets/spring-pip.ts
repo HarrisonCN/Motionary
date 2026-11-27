@@ -3,7 +3,7 @@ import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { hostSprings, tick } from './micro-kit-16';
 import { dampedAt } from './damped-kit-18';
-import { cornerPoint, cornerStep, parseCorner, pipCorner, type PipCorner } from './fling-kit-19';
+import { cornerPoint, cornerStep, parseCorner, pipCorner, type PipCorner, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 /**
@@ -135,14 +135,18 @@ export function defineSpringPip(tag = 'usa-spring-pip'): CustomElementConstructo
       this.listen(win, 'pointerup', end);
       this.listen(win, 'pointercancel', end);
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           if (drag) return;
           box = size();
           if (!group.animating) group.jump(cornerPoint(this._corner, box.w, box.h, box.fw, box.fh, inset));
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(root);
         ro.observe(win);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         group.stop();

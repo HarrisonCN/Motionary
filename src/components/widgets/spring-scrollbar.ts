@@ -2,7 +2,7 @@ import { defineElement, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { hostSprings } from './micro-kit-16';
-import { scrollForThumb, labelAt, thumbMetrics } from './fling-kit-19';
+import { scrollForThumb, labelAt, thumbMetrics, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 /**
@@ -163,14 +163,18 @@ export function defineSpringScrollbar(tag = 'usa-spring-scrollbar'): CustomEleme
         box.scrollBy({ top: (below ? 1 : -1) * box.clientHeight * 0.9, behavior: this.reduced ? 'auto' : 'smooth' });
       });
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           marks = labelled();
           readTops();
           follow(true);
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(box);
         ro.observe(content);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         if (idle) clearTimeout(idle);

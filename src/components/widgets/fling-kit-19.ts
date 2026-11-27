@@ -1,10 +1,12 @@
 /**
  * 17.19 helpers shared by the fling parts (spring-pip, spring-island, spring-peek, spring-scrollbar, slide-confirm,
- * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test. The motion itself comes
+ * spring-chain, fling-marquee). Pure functions with no DOM access, so they are easy to test (`frameOnce` aside, a
+ * small scheduling helper the parts share). The motion itself comes
  * from the 17.16 spring core (`createSpringGroup`) and the shared frame scheduler. Original implementations; see
  * docs/fling-parts-17-19.md.
  */
 import { projectInertia } from '../physics/spring';
+import { raf, caf } from '../base';
 
 const fin = (n: unknown, d: number): number => (typeof n === 'number' && Number.isFinite(n) ? n : d);
 const clamp = (n: number, lo: number, hi: number): number => Math.min(hi, Math.max(lo, n));
@@ -145,4 +147,26 @@ export function cruise(v: number, target: number, dt: number, tau = 650): number
   const k = 1 - Math.exp(-Math.max(0, fin(dt, 0)) / Math.max(1, fin(tau, 650)));
   const out = fin(v, 0) + (fin(target, 0) - fin(v, 0)) * k;
   return Math.abs(out - target) < 0.01 ? target : out;
+}
+
+/**
+ * Runs `fn` once on the next frame of the shared scheduler, however often it is asked before then. The parts hand
+ * their ResizeObserver work to it: that work moves and resizes what is observed, and doing it inside the observer's
+ * callback makes WebKit report "ResizeObserver loop completed with undelivered notifications".
+ */
+export function frameOnce(fn: () => void, owner?: Element): { ask: () => void; cancel: () => void } {
+  let id = 0;
+  return {
+    ask: () => {
+      if (id) return;
+      id = raf(() => {
+        id = 0;
+        fn();
+      }, owner);
+    },
+    cancel: () => {
+      if (id) caf(id);
+      id = 0;
+    },
+  };
 }

@@ -2,7 +2,7 @@ import { defineElement, onFrame, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { tick } from './micro-kit-16';
-import { cruise, wrapOffset } from './fling-kit-19';
+import { cruise, wrapOffset, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -192,13 +192,17 @@ export function defineFlingMarquee(tag = 'usa-fling-marquee'): CustomElementCons
       this.listen(view, 'pointerup', end);
       this.listen(view, 'pointercancel', end);
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           fill();
           place();
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(view);
         ro.observe(run);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         loop(false);

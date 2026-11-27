@@ -3,7 +3,7 @@ import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { hostSprings, tick } from './micro-kit-16';
 import { dampedAt } from './damped-kit-18';
-import { slideOutcome } from './fling-kit-19';
+import { slideOutcome, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -155,12 +155,16 @@ export function defineSlideConfirm(tag = 'usa-slide-confirm'): CustomElementCons
       this.listen(knob, 'pointerup', end);
       this.listen(knob, 'pointercancel', end);
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           measure();
           if (!group.animating && !drag) group.jump({ x: this._done ? max : 0 });
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(root);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         group.stop();

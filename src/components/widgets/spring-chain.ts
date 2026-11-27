@@ -3,7 +3,7 @@ import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { microSpring } from '../physics/spring-solver';
 import { readFeel, readSpeed } from '../interaction/micro';
-import { chainPath, linkSize } from './fling-kit-19';
+import { chainPath, linkSize, frameOnce } from './fling-kit-19';
 import css from './fling-kit-19.css?raw';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -125,7 +125,7 @@ export function defineSpringChain(tag = 'usa-spring-chain'): CustomElementConstr
       });
       this.listen(root, 'pointerleave', () => (pointer = null));
       if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(() => {
+        const later = frameOnce(() => {
           measure();
           if (this.reduced) {
             pts.forEach((p, i) => {
@@ -135,9 +135,13 @@ export function defineSpringChain(tag = 'usa-spring-chain'): CustomElementConstr
             });
             draw();
           }
-        });
+        }, this);
+        const ro = new ResizeObserver(() => later.ask());
         ro.observe(root);
-        this.onCleanup(() => ro.disconnect());
+        this.onCleanup(() => {
+          ro.disconnect();
+          later.cancel();
+        });
       }
       this.onCleanup(() => {
         run(false);
