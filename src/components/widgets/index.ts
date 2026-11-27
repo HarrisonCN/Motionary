@@ -155,6 +155,13 @@ import { defineSpringSheet, type UsaSpringSheetElement } from './spring-sheet';
 import { defineSpringPager, type UsaSpringPagerElement } from './spring-pager';
 import { defineElasticScroll, type UsaElasticScrollElement } from './elastic-scroll';
 import { defineSpringStack, type UsaSpringStackElement } from './spring-stack';
+import { defineSpringPip, type UsaSpringPipElement } from './spring-pip';
+import { defineSpringIsland, type UsaSpringIslandElement } from './spring-island';
+import { defineSpringPeek, type UsaSpringPeekElement } from './spring-peek';
+import { defineSpringScrollbar, type UsaSpringScrollbarElement } from './spring-scrollbar';
+import { defineSlideConfirm, type UsaSlideConfirmElement } from './slide-confirm';
+import { defineSpringChain, type UsaSpringChainElement } from './spring-chain';
+import { defineFlingMarquee, type UsaFlingMarqueeElement } from './fling-marquee';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -488,6 +495,14 @@ export { defineSpringSheet, type UsaSpringSheetElement };
 export { defineSpringPager, type UsaSpringPagerElement };
 export { defineElasticScroll, type UsaElasticScrollElement };
 export { defineSpringStack, type UsaSpringStackElement };
+export { defineSpringPip, type UsaSpringPipElement };
+export { defineSpringIsland, type UsaSpringIslandElement };
+export { defineSpringPeek, type UsaSpringPeekElement };
+export { defineSpringScrollbar, type UsaSpringScrollbarElement };
+export { defineSlideConfirm, type UsaSlideConfirmElement };
+export { defineSpringChain, type UsaSpringChainElement };
+export { defineFlingMarquee, type UsaFlingMarqueeElement };
+export { parseCorner, cornerPoint, pipCorner, cornerStep, islandShape, thumbMetrics, scrollForThumb, labelAt, slideOutcome, chainPath, linkSize, wrapOffset, cruise, PIP_CORNERS, type PipCorner } from './fling-kit-19';
 export { parseSnaps, sheetRest, pageAfter, dampedAt, pilePose, linesHeight } from './damped-kit-18';
 export { burstPoints, compactCount, ratingAt, starFill, parseTags, addTags, codeChars, slotAt, shiftFor, swipeOpen, stackLayout, counterText, alignDigits, openSet } from './spring-kit-17';
 export { rovingIndex, copyText, seeded, moveItem, numbers } from './kit-12';
@@ -773,6 +788,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.19': { 'usa-spring-pip': defineSpringPip, 'usa-spring-island': defineSpringIsland, 'usa-spring-peek': defineSpringPeek, 'usa-spring-scrollbar': defineSpringScrollbar, 'usa-slide-confirm': defineSlideConfirm, 'usa-spring-chain': defineSpringChain, 'usa-fling-marquee': defineFlingMarquee },
   '17.18': { 'usa-spring-collapse': defineSpringCollapse, 'usa-read-more': defineReadMore, 'usa-spring-sheet': defineSpringSheet, 'usa-spring-pager': defineSpringPager, 'usa-elastic-scroll': defineElasticScroll, 'usa-spring-stack': defineSpringStack },
   '17.17': { 'usa-spring-like': defineSpringLike, 'usa-spring-rating': defineSpringRating, 'usa-spring-copy': defineSpringCopy, 'usa-spring-tags': defineSpringTags, 'usa-spring-code': defineSpringCode, 'usa-spring-list': defineSpringList, 'usa-spring-swipe': defineSpringSwipe, 'usa-spring-toasts': defineSpringToasts, 'usa-spring-accordion': defineSpringAccordion, 'usa-spring-counter': defineSpringCounter },
   '17.16': { 'usa-micro': defineMicro, 'usa-micro-switch': defineMicroSwitch, 'usa-micro-checkbox': defineMicroCheckbox, 'usa-micro-input': defineMicroInput, 'usa-micro-button': defineMicroButton, 'usa-micro-slider': defineMicroSlider, 'usa-micro-segmented': defineMicroSegmented, 'usa-micro-stepper': defineMicroStepper },
@@ -1106,6 +1122,20 @@ declare global {
     'mo-elastic-scroll': UsaElasticScrollElement;
     'usa-spring-stack': UsaSpringStackElement;
     'mo-spring-stack': UsaSpringStackElement;
+    'usa-spring-pip': UsaSpringPipElement;
+    'mo-spring-pip': UsaSpringPipElement;
+    'usa-spring-island': UsaSpringIslandElement;
+    'mo-spring-island': UsaSpringIslandElement;
+    'usa-spring-peek': UsaSpringPeekElement;
+    'mo-spring-peek': UsaSpringPeekElement;
+    'usa-spring-scrollbar': UsaSpringScrollbarElement;
+    'mo-spring-scrollbar': UsaSpringScrollbarElement;
+    'usa-slide-confirm': UsaSlideConfirmElement;
+    'mo-slide-confirm': UsaSlideConfirmElement;
+    'usa-spring-chain': UsaSpringChainElement;
+    'mo-spring-chain': UsaSpringChainElement;
+    'usa-fling-marquee': UsaFlingMarqueeElement;
+    'mo-fling-marquee': UsaFlingMarqueeElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

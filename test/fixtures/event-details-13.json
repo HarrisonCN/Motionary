@@ -2249,6 +2249,42 @@
       "usa:toggle": [
         "{open}"
       ]
+    },
+    "usa-fling-marquee": {
+      "usa:pause": [
+        "{paused}"
+      ]
+    },
+    "usa-slide-confirm": {
+      "usa:confirm": [
+        "{}"
+      ],
+      "usa:reset": [
+        "{}"
+      ]
+    },
+    "usa-spring-island": {
+      "usa:toggle": [
+        "{expanded}"
+      ]
+    },
+    "usa-spring-peek": {
+      "usa:tap": [
+        "{}"
+      ],
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-spring-pip": {
+      "usa:corner": [
+        "{corner}"
+      ]
+    },
+    "usa-spring-scrollbar": {
+      "usa:section": [
+        "{index, label}"
+      ]
     }
   }
 }

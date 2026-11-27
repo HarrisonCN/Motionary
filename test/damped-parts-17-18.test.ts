@@ -118,7 +118,7 @@ describe('17.18 damped parts', () => {
     expect(page).toContain("defineWidgets('17.18')");
     expect(page).toContain('<script type="module" src="./code-drawer.js" data-auto></script>');
     expect(read('showcase/index.html')).toContain('./damped.html');
-    const tab = (COLLECTIONS as any[])[0];
+    const tab = (COLLECTIONS as any[]).find((c) => c.id === 'damped');
     expect(tab.id).toBe('damped');
     expect(tab.page).toBe('./damped.html');
     expect(tab.items.length).toBeGreaterThanOrEqual(6);

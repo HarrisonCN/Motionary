@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.17.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 416 animated Web Components (91 core, 325 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 423 animated Web Components (91 core, 332 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,76 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/spring-pip": {
+      "import": {
+        "types": "./dist/widgets/spring-pip.d.ts",
+        "default": "./dist/widgets/spring-pip.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-pip.d.cts",
+        "default": "./dist/widgets/spring-pip.cjs"
+      }
+    },
+    "./widgets/spring-island": {
+      "import": {
+        "types": "./dist/widgets/spring-island.d.ts",
+        "default": "./dist/widgets/spring-island.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-island.d.cts",
+        "default": "./dist/widgets/spring-island.cjs"
+      }
+    },
+    "./widgets/spring-peek": {
+      "import": {
+        "types": "./dist/widgets/spring-peek.d.ts",
+        "default": "./dist/widgets/spring-peek.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-peek.d.cts",
+        "default": "./dist/widgets/spring-peek.cjs"
+      }
+    },
+    "./widgets/spring-scrollbar": {
+      "import": {
+        "types": "./dist/widgets/spring-scrollbar.d.ts",
+        "default": "./dist/widgets/spring-scrollbar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-scrollbar.d.cts",
+        "default": "./dist/widgets/spring-scrollbar.cjs"
+      }
+    },
+    "./widgets/slide-confirm": {
+      "import": {
+        "types": "./dist/widgets/slide-confirm.d.ts",
+        "default": "./dist/widgets/slide-confirm.js"
+      },
+      "require": {
+        "types": "./dist/widgets/slide-confirm.d.cts",
+        "default": "./dist/widgets/slide-confirm.cjs"
+      }
+    },
+    "./widgets/spring-chain": {
+      "import": {
+        "types": "./dist/widgets/spring-chain.d.ts",
+        "default": "./dist/widgets/spring-chain.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-chain.d.cts",
+        "default": "./dist/widgets/spring-chain.cjs"
+      }
+    },
+    "./widgets/fling-marquee": {
+      "import": {
+        "types": "./dist/widgets/fling-marquee.d.ts",
+        "default": "./dist/widgets/fling-marquee.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fling-marquee.d.cts",
+        "default": "./dist/widgets/fling-marquee.cjs"
       }
     },
     "./widgets/spring-collapse": {

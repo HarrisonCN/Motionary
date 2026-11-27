@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>甩动回弹 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 24px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:52px 0 16px}
+    p {max-width:46em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .feelbar {position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; background:color-mix(in srgb,#f1f0ec 88%,transparent); backdrop-filter:blur(8px)}
+    .feelbar span {font-size:.85rem; color:#55544e}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:16px; min-height:210px; padding:22px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:110px; min-width:0}
+    article .stage.block {display:block}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .wide {grid-column:1/-1}
+    .row {display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+    .row button {padding:8px 14px; border-radius:999px; border:1px solid #d6d4cc; background:#fff; font:inherit; font-size:.85rem; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .card-pg {min-height:150px; padding:22px; border-radius:14px; display:grid; align-content:end; gap:6px}
+    .card-pg strong {font-size:1.15rem}
+    details.native {border:1px solid #e2e0d8; border-radius:14px; background:#fff; padding:0 16px; width:100%}
+    details.native summary {padding:14px 0; font-weight:600; cursor:pointer}
+    details.native p {padding-bottom:14px}
+    .stack {display:grid; gap:12px; width:100%}
+    .looks {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px}
+    .look {display:grid; gap:16px; justify-items:start; padding:22px; border-radius:22px; background:var(--mo-kit-paper,#fff); color:var(--mo-kit-ink,#18181b)}
+    .look small {font:12px ui-monospace,monospace; opacity:.7}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+      .pill {display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; background:#fff; border:1px solid #e2e0d8; font-weight:600; white-space:nowrap}
+    .pipwin {padding:12px 14px; display:grid; gap:4px}
+    .pipwin small {color:#6b6a62}
+    .sec-h {margin:0 0 6px; font-size:1rem}
+</style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="damped.html">阻尼部件</a> · <a href="springs.html">弹簧部件</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>甩动回弹</h1><p>七个能抓住、甩出去再回稳的部件，全部跑在 17.16 的弹簧核心上：悬浮小窗按松手速度飞到最近的角落，灵动岛胶囊沿一根弹簧变成卡片，长按卡片从原位长出预览，滚动条滑块稍稍落后再回稳，滑动确认太早松手会晃一下弹回，弹簧链像绳子一样追着指针，跑马灯被甩一下后慢慢回到巡航速度。中途打断会带着当前速度转向，键盘和读屏都能用；开启“减少动态效果”后直接切换。</p></header>
+
+    <div class="feelbar"><span>整页手感</span><mo-micro-segmented id="feel" label="整页手感" options="默认,利落,干脆,顺滑,弹性,俏皮,沉稳,厚重" values="default,crisp,snappy,smooth,bouncy,playful,calm,heavy" value="default"></mo-micro-segmented></div>
+
+    <h2 id="float">小窗与灵动岛</h2>
+    <section class="grid" aria-label="小窗与灵动岛">
+      <article class="wide"><div class="stage block"><mo-spring-pip corner="bottom-right" label="正在播放" style="--usa-pip-height:280px; --usa-pip-width:200px"><p><strong>视频页面</strong></p><p>把右下角的小窗拖到别的角落，或者用力一甩：松手时的速度决定它飞去哪个角，拉出边框会有橡皮筋阻力。小窗可以获得焦点，方向键也能把它送到相邻的角落。</p><div data-pip class="pipwin"><strong>正在播放</strong><small>第 3 集 · 12:40</small></div></mo-spring-pip></div><p>悬浮小窗：跟手拖动，按甩出的速度停靠到四个角之一，到位时轻轻回稳。</p><output class="log" data-log="pip"></output></article>
+      <article><div class="stage block"><mo-spring-island id="island" style="--usa-island-width:300px"><span data-compact>● 录音中 02:14</span><h3 style="margin:0 0 6px">语音备忘录</h3><p style="margin:0">点空白处、按 Esc 或右上角按钮，就会沿弹簧缩回胶囊。</p></mo-spring-island><div class="row" style="margin-top:14px"><button type="button" id="pulse">来一条消息</button></div></div><p>灵动岛：宽、高、圆角走同一根弹簧，两面内容交叉淡入。胶囊是真按钮，带 aria-expanded。</p><output class="log" data-log="island"></output></article>
+    </section>
+
+    <h2 id="press">按住与滑动</h2>
+    <section class="grid" aria-label="按住与滑动">
+      <article><div class="stage block"><mo-spring-peek label="文章预览"><strong>弹簧为什么不需要时长</strong><br><small>按住预览 · 键盘按回车</small><div data-peek><h3 class="sec-h">弹簧为什么不需要时长</h3><p>弹簧只有目标和速度。打断它时，它带着当前速度转向新目标，所以从不跳变。往下拉这张预览，它会缩回原来的卡片。</p></div></mo-spring-peek></div><p>长按预览：卡片先下沉，再从原位长出预览，背景变暗模糊；往下拉、点外面或按 Esc 收回。</p><output class="log" data-log="peek"></output></article>
+      <article><div class="stage block"><mo-slide-confirm id="pay" label="滑动支付 ¥128" done="已支付"></mo-slide-confirm><div class="row" style="margin-top:14px"><button type="button" id="again">重来</button></div></div><p>滑动确认：过了八成或用力一甩就滑到底确认，太早松手会晃一下弹回。滑块是真按钮，回车直接确认。</p><output class="log" data-log="slide"></output></article>
+    </section>
+
+    <h2 id="scroll">滚动、跑马灯与弹簧链</h2>
+    <section class="grid" aria-label="滚动、跑马灯与弹簧链">
+      <article><div class="stage block"><mo-spring-scrollbar height="240px" label="阻尼滚动条示例"><h3 class="sec-h">开始</h3><p>滚动这个区域，右边会出现一根细滚动条，滑块稍稍落后再回稳。</p><h3 class="sec-h">拖动</h3><p>按住滑块拖动可以快速滚动，旁边的气泡会显示当前小节的标题。</p><h3 class="sec-h">两端</h3><p>滚到底再继续滚，滑块会被压扁一下再弹回。</p><h3 class="sec-h">静止</h3><p>停下来不动，滚动条会淡出。滚动本身是原生的：滚轮、触摸、键盘和页内搜索照常工作。</p><h3 class="sec-h">结尾</h3><p>到底了。</p></mo-spring-scrollbar></div><p>阻尼滚动条：滑块跟着弹簧走，拖动时显示小节气泡；点轨道翻一屏。</p><output class="log" data-log="sbar"></output></article>
+      <article class="wide"><div class="stage block"><mo-fling-marquee label="合作伙伴"><span class="pill">极光</span><span class="pill">罗勒</span><span class="pill">钴蓝</span><span class="pill">沙丘</span><span class="pill">萤火</span><span class="pill">潮汐</span><span class="pill">雪松</span></mo-fling-marquee></div><p>可甩动跑马灯：抓住拖动，用力一甩会保留速度，再沿阻尼曲线回到巡航速度；指针悬停时减速，左右方向键推一把，右侧按钮暂停。</p><output class="log" data-log="marquee"></output></article>
+      <article class="wide"><div class="stage block"><mo-spring-chain links="16" label="追着指针的弹簧链" style="--usa-chain-height:220px"></mo-spring-chain></div><p>弹簧链：每一节追着前一节，尾巴像绳子一样甩动；按一下会被拨动，指针离开后沿 8 字形慢慢漂。纯装饰，离开视口自动暂停。</p></article>
+    </section>
+
+    <h2 id="looks">外观与手感</h2>
+    <p>颜色、圆角和描边来自外观令牌，每种外观还带一种手感：同样的滑动确认，在粗野风里回弹得沉，在黏土风里晃得欢。</p>
+    <section class="looks" aria-label="外观示例" id="looksRow"></section>
+  </main>
+  <!-- every card gets the code drawer (HTML, ES module, React, Vue, desktop) with a copy button; it reads the markup before the elements are defined -->
+  <script type="module" src="./code-drawer.js" data-auto></script>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineWidgets, adoptLooks, applyLook, lookNames, lookInfo } from '../dist/components/widgets.js';
+    defineMoAliases();
+    defineWidgets('17.16');
+    defineWidgets('17.19');
+    adoptLooks('ui');
+
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail, el)));
+    const PARTS = 'mo-spring-pip, mo-spring-island, mo-spring-peek, mo-spring-scrollbar, mo-slide-confirm, mo-spring-chain, mo-fling-marquee';
+    const CORNERS = { 'top-left': '左上角', 'top-right': '右上角', 'bottom-left': '左下角', 'bottom-right': '右下角' };
+
+    document.getElementById('feel').addEventListener('usa:change', (e) => {
+      const f = e.detail.value === 'default' ? null : e.detail.value;
+      document.querySelectorAll(PARTS).forEach((el) => (f ? el.setAttribute('feel', f) : el.removeAttribute('feel')));
+    });
+
+    on('mo-spring-pip', 'corner', (d) => log('pip', `停靠在${CORNERS[d.corner] || d.corner}`));
+    on('mo-spring-island', 'toggle', (d) => log('island', d.expanded ? '已展开' : '已收起'));
+    on('mo-spring-peek', 'toggle', (d) => log('peek', d.open ? '预览已打开' : '预览已收起'));
+    on('mo-spring-peek', 'tap', () => log('peek', '轻点：交给页面处理（比如打开文章）'));
+    on('mo-slide-confirm', 'confirm', () => log('slide', '已确认'));
+    on('mo-slide-confirm', 'reset', () => log('slide', '已重置'));
+    on('mo-spring-scrollbar', 'section', (d) => log('sbar', `当前小节：${d.label}`));
+    on('mo-fling-marquee', 'pause', (d) => log('marquee', d.paused ? '已暂停' : '继续滚动'));
+    document.getElementById('pulse').addEventListener('click', () => { const el = document.getElementById('island'); el.pulse(); log('island', '来消息了'); });
+    document.getElementById('again').addEventListener('click', () => document.getElementById('pay').reset());
+
+    const names = lookNames('ui');
+    const picks = ['solid-indigo', 'brutal-jade', 'clay-flamingo'].filter((n) => names.includes(n));
+    const row = document.getElementById('looksRow');
+    for (const name of picks) {
+      const box = document.createElement('div');
+      box.className = 'look';
+      box.style.justifyItems = 'stretch';
+      box.innerHTML = `<small>look="${name}" · 手感 ${lookInfo(name).feel}</small><mo-slide-confirm label="滑动确认" done="完成"></mo-slide-confirm><mo-spring-peek label="预览"><strong>按住我</strong><div data-peek><p>同样的弹簧，不同的手感。</p></div></mo-spring-peek>`;
+      applyLook(box, name);
+      row.append(box);
+    }
+  </script>
+</body>
+</html>

@@ -33,6 +33,8 @@ test('17.18 damped motion: code drawers spring open and closed and a quick doubl
 });
 
 test('17.18 damped motion: the gallery code box opens and closes on the spring', async ({ page }) => {
+  // the gallery mounts every public part live (430 with 17.19); WebKit on CI already took 50 s of the default 60 s here
+  test.setTimeout(120_000);
   const errors = watchErrors(page);
   await page.goto('/showcase/components.html');
   const card = page.locator('article.ccard').first();
@@ -45,7 +47,7 @@ test('17.18 damped motion: the gallery code box opens and closes on the spring',
   await expect(box.locator('pre')).not.toBeEmpty();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'false');
-  await expect(box).toBeHidden({ timeout: 4000 });
+  await expect(box).toBeHidden({ timeout: 10000 });
   expect(errors).toEqual([]);
 });
 

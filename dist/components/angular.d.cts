@@ -2399,6 +2399,13 @@ interface LegacyAttributes {
         to?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-fling-marquee': {
+        gap?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
     'usa-fluid-type': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -3828,6 +3835,15 @@ interface LegacyAttributes {
         type?: string | boolean | number;
         values?: string | boolean | number;
     };
+    'usa-slide-confirm': {
+        confirmed?: string | boolean | number;
+        disabled?: string | boolean | number;
+        done?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
     'usa-slider': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
@@ -3940,6 +3956,12 @@ interface LegacyAttributes {
         multiple?: string | boolean | number;
         open?: string | boolean | number;
     };
+    'usa-spring-chain': {
+        feel?: string | boolean | number;
+        label?: string | boolean | number;
+        links?: string | boolean | number;
+        size?: string | boolean | number;
+    };
     'usa-spring-code': {
         disabled?: string | boolean | number;
         feel?: string | boolean | number;
@@ -3982,6 +4004,13 @@ interface LegacyAttributes {
         suffix?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-spring-island': {
+        close?: string | boolean | number;
+        expanded?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-spring-lab': {
         damping?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -4014,6 +4043,20 @@ interface LegacyAttributes {
         index?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-spring-peek': {
+        close?: string | boolean | number;
+        delay?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    'usa-spring-pip': {
+        corner?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        inset?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-spring-rating': {
         clearable?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -4026,6 +4069,11 @@ interface LegacyAttributes {
         'show-value'?: string | boolean | number;
         size?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-spring-scrollbar': {
+        feel?: string | boolean | number;
+        height?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-spring-sheet': {
         feel?: string | boolean | number;
@@ -4856,6 +4904,9 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
     };
+    'usa-fling-marquee': {
+        'usa:pause': CustomEvent<any>;
+    };
     'usa-fluid-type': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
@@ -5487,6 +5538,10 @@ interface LegacyEvents {
     'usa-sketch-chart': {
         'usa:drawn': CustomEvent<any>;
     };
+    'usa-slide-confirm': {
+        'usa:confirm': CustomEvent<any>;
+        'usa:reset': CustomEvent<any>;
+    };
     'usa-slider': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
@@ -5530,6 +5585,7 @@ interface LegacyEvents {
     'usa-spring-accordion': {
         'usa:toggle': CustomEvent<any>;
     };
+    'usa-spring-chain': {};
     'usa-spring-code': {
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
@@ -5542,6 +5598,9 @@ interface LegacyEvents {
     };
     'usa-spring-counter': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-island': {
+        'usa:toggle': CustomEvent<any>;
     };
     'usa-spring-lab': {
         'usa:action': CustomEvent<any>;
@@ -5556,8 +5615,18 @@ interface LegacyEvents {
     'usa-spring-pager': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-spring-peek': {
+        'usa:tap': CustomEvent<any>;
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-spring-pip': {
+        'usa:corner': CustomEvent<any>;
+    };
     'usa-spring-rating': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-spring-scrollbar': {
+        'usa:section': CustomEvent<any>;
     };
     'usa-spring-sheet': {
         'usa:snap': CustomEvent<any>;
