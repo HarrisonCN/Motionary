@@ -1587,6 +1587,97 @@
  },
  {
   "kind": "widget",
+  "name": "spring-pip",
+  "entry": "motionary/widgets/spring-pip",
+  "src": "src/entries/widgets/spring-pip.ts",
+  "tag": "usa-spring-pip",
+  "define": "defineSpringPip",
+  "types": [
+   "UsaSpringPipElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-pip"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-island",
+  "entry": "motionary/widgets/spring-island",
+  "src": "src/entries/widgets/spring-island.ts",
+  "tag": "usa-spring-island",
+  "define": "defineSpringIsland",
+  "types": [
+   "UsaSpringIslandElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-island"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-peek",
+  "entry": "motionary/widgets/spring-peek",
+  "src": "src/entries/widgets/spring-peek.ts",
+  "tag": "usa-spring-peek",
+  "define": "defineSpringPeek",
+  "types": [
+   "UsaSpringPeekElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-peek"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-scrollbar",
+  "entry": "motionary/widgets/spring-scrollbar",
+  "src": "src/entries/widgets/spring-scrollbar.ts",
+  "tag": "usa-spring-scrollbar",
+  "define": "defineSpringScrollbar",
+  "types": [
+   "UsaSpringScrollbarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-scrollbar"
+ },
+ {
+  "kind": "widget",
+  "name": "slide-confirm",
+  "entry": "motionary/widgets/slide-confirm",
+  "src": "src/entries/widgets/slide-confirm.ts",
+  "tag": "usa-slide-confirm",
+  "define": "defineSlideConfirm",
+  "types": [
+   "UsaSlideConfirmElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/slide-confirm"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-chain",
+  "entry": "motionary/widgets/spring-chain",
+  "src": "src/entries/widgets/spring-chain.ts",
+  "tag": "usa-spring-chain",
+  "define": "defineSpringChain",
+  "types": [
+   "UsaSpringChainElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-chain"
+ },
+ {
+  "kind": "widget",
+  "name": "fling-marquee",
+  "entry": "motionary/widgets/fling-marquee",
+  "src": "src/entries/widgets/fling-marquee.ts",
+  "tag": "usa-fling-marquee",
+  "define": "defineFlingMarquee",
+  "types": [
+   "UsaFlingMarqueeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fling-marquee"
+ },
+ {
+  "kind": "widget",
   "name": "spring-collapse",
   "entry": "motionary/widgets/spring-collapse",
   "src": "src/entries/widgets/spring-collapse.ts",

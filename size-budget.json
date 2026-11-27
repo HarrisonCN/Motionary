@@ -3372,6 +3372,41 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/spring-pip' (per-entry, fixed)",
+    "import": "import { defineSpringPip } from 'pkg/widgets/spring-pip'; console.log(defineSpringPip);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-island' (per-entry, fixed)",
+    "import": "import { defineSpringIsland } from 'pkg/widgets/spring-island'; console.log(defineSpringIsland);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-peek' (per-entry, fixed)",
+    "import": "import { defineSpringPeek } from 'pkg/widgets/spring-peek'; console.log(defineSpringPeek);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-scrollbar' (per-entry, fixed)",
+    "import": "import { defineSpringScrollbar } from 'pkg/widgets/spring-scrollbar'; console.log(defineSpringScrollbar);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/slide-confirm' (per-entry, fixed)",
+    "import": "import { defineSlideConfirm } from 'pkg/widgets/slide-confirm'; console.log(defineSlideConfirm);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-chain' (per-entry, fixed)",
+    "import": "import { defineSpringChain } from 'pkg/widgets/spring-chain'; console.log(defineSpringChain);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/fling-marquee' (per-entry, fixed)",
+    "import": "import { defineFlingMarquee } from 'pkg/widgets/fling-marquee'; console.log(defineFlingMarquee);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

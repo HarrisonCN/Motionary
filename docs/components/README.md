@@ -1,4 +1,4 @@
-# Motionary components (416)
+# Motionary components (423)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -84,6 +84,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-field>`](usa-field.md) — Animated field
 - [`<mo-file-tree>`](usa-file-tree.md) — File tree
 - [`<mo-flight-status>`](usa-flight-status.md) — Flight status
+- [`<mo-fling-marquee>`](usa-fling-marquee.md) — Fling marquee
 - [`<mo-form-stepper>`](usa-form-stepper.md) — Validated form steps
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
@@ -191,19 +192,25 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-sidebar>`](usa-sidebar.md) — Collapsible sidebar
 - [`<mo-six-dot-orbit>`](usa-six-dot-orbit.md) — Six dot orbit
 - [`<mo-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
+- [`<mo-slide-confirm>`](usa-slide-confirm.md) — Slide to confirm
 - [`<mo-slider>`](usa-slider.md) — Slider
 - [`<mo-snap-carousel>`](usa-snap-carousel.md) — Snap carousel (drag · inertia · snap) · Requires: motionary/runtime/drag-snap
 - [`<mo-sparkline>`](usa-sparkline.md) — Sparkline
 - [`<mo-spatial-card>`](usa-spatial-card.md) — Spatial card
 - [`<mo-spring-accordion>`](usa-spring-accordion.md) — Spring accordion
+- [`<mo-spring-chain>`](usa-spring-chain.md) — Spring chain
 - [`<mo-spring-code>`](usa-spring-code.md) — Spring code
 - [`<mo-spring-collapse>`](usa-spring-collapse.md) — Spring collapse
 - [`<mo-spring-copy>`](usa-spring-copy.md) — Spring copy
 - [`<mo-spring-counter>`](usa-spring-counter.md) — Spring counter
+- [`<mo-spring-island>`](usa-spring-island.md) — Spring island
 - [`<mo-spring-like>`](usa-spring-like.md) — Spring like
 - [`<mo-spring-list>`](usa-spring-list.md) — Spring list
 - [`<mo-spring-pager>`](usa-spring-pager.md) — Spring pager
+- [`<mo-spring-peek>`](usa-spring-peek.md) — Spring peek
+- [`<mo-spring-pip>`](usa-spring-pip.md) — Spring PiP window
 - [`<mo-spring-rating>`](usa-spring-rating.md) — Spring rating
+- [`<mo-spring-scrollbar>`](usa-spring-scrollbar.md) — Spring scrollbar
 - [`<mo-spring-sheet>`](usa-spring-sheet.md) — Spring sheet
 - [`<mo-spring-stack>`](usa-spring-stack.md) — Spring stack
 - [`<mo-spring-swipe>`](usa-spring-swipe.md) — Spring swipe

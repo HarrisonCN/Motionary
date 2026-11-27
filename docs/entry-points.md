@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (325)
+## Widgets (332)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,13 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-spring-pip>` | `motionary/widgets/spring-pip` | `defineSpringPip()` |
+| `<usa-spring-island>` | `motionary/widgets/spring-island` | `defineSpringIsland()` |
+| `<usa-spring-peek>` | `motionary/widgets/spring-peek` | `defineSpringPeek()` |
+| `<usa-spring-scrollbar>` | `motionary/widgets/spring-scrollbar` | `defineSpringScrollbar()` |
+| `<usa-slide-confirm>` | `motionary/widgets/slide-confirm` | `defineSlideConfirm()` |
+| `<usa-spring-chain>` | `motionary/widgets/spring-chain` | `defineSpringChain()` |
+| `<usa-fling-marquee>` | `motionary/widgets/fling-marquee` | `defineFlingMarquee()` |
 | `<usa-spring-collapse>` | `motionary/widgets/spring-collapse` | `defineSpringCollapse()` |
 | `<usa-read-more>` | `motionary/widgets/read-more` | `defineReadMore()` |
 | `<usa-spring-sheet>` | `motionary/widgets/spring-sheet` | `defineSpringSheet()` |

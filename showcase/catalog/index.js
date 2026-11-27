@@ -30,8 +30,9 @@ import * as toolkit from './toolkit.js';
 import * as micro from './micro.js';
 import * as springs from './springs.js';
 import * as damped from './damped.js';
+import * as fling from './fling.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit, blocks, parts, studio, icons, toolkit, micro, springs, damped];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms, instruments, moments, tactile, kit, blocks, parts, studio, icons, toolkit, micro, springs, damped, fling];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));
