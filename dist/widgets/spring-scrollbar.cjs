@@ -4,7 +4,7 @@ var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var microKit16 = require('../chunks/micro-kit-16-QpCvprq4.cjs');
-var flingKit19$1 = require('../chunks/fling-kit-19-C9zMxm76.cjs');
+var flingKit19$1 = require('../chunks/fling-kit-19-BgC3V4FD.cjs');
 var flingKit19 = require('../chunks/fling-kit-19-Cojn_2Zy.cjs');
 
 function defineSpringScrollbar(tag = 'usa-spring-scrollbar') {
@@ -159,14 +159,18 @@ function defineSpringScrollbar(tag = 'usa-spring-scrollbar') {
                 box.scrollBy({ top: (below ? 1 : -1) * box.clientHeight * 0.9, behavior: this.reduced ? 'auto' : 'smooth' });
             });
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = flingKit19$1.frameOnce(() => {
                     marks = labelled();
                     readTops();
                     follow(true);
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(box);
                 ro.observe(content);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 if (idle)

@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { u as uid, h as hostSprings, t as tick } from '../chunks/micro-kit-16-DrJflWG2.js';
-import { i as islandShape } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { h as frameOnce, i as islandShape } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 function defineSpringIsland(tag = 'usa-spring-island') {
@@ -135,14 +135,18 @@ function defineSpringIsland(tag = 'usa-spring-island') {
                     set(false, false);
             });
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     measure();
                     if (!group.animating)
                         group.jump({ t: this._open ? 1 : 0 });
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(root);
                 ro.observe(panel);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 group.stop();

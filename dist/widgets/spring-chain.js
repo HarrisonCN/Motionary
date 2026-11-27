@@ -3,7 +3,7 @@ import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { b as microSpring } from '../chunks/spring-solver-CQNBJPRE.js';
 import { r as readFeel, e as readSpeed } from '../chunks/micro-DxpcOO8J.js';
-import { e as linkSize, c as chainPath } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { e as linkSize, c as chainPath, h as frameOnce } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -113,7 +113,7 @@ function defineSpringChain(tag = 'usa-spring-chain') {
             });
             this.listen(root, 'pointerleave', () => (pointer = null));
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     measure();
                     if (this.reduced) {
                         pts.forEach((p, i) => {
@@ -123,9 +123,13 @@ function defineSpringChain(tag = 'usa-spring-chain') {
                         });
                         draw();
                     }
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(root);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 run(false);

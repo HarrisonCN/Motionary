@@ -5,7 +5,7 @@ var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var microKit16 = require('../chunks/micro-kit-16-QpCvprq4.cjs');
 var dampedKit18 = require('../chunks/damped-kit-18-CM0mPVmn.cjs');
-var flingKit19$1 = require('../chunks/fling-kit-19-C9zMxm76.cjs');
+var flingKit19$1 = require('../chunks/fling-kit-19-BgC3V4FD.cjs');
 var flingKit19 = require('../chunks/fling-kit-19-Cojn_2Zy.cjs');
 
 function defineSpringPip(tag = 'usa-spring-pip') {
@@ -131,16 +131,20 @@ function defineSpringPip(tag = 'usa-spring-pip') {
             this.listen(win, 'pointerup', end);
             this.listen(win, 'pointercancel', end);
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = flingKit19$1.frameOnce(() => {
                     if (drag)
                         return;
                     box = size();
                     if (!group.animating)
                         group.jump(flingKit19$1.cornerPoint(this._corner, box.w, box.h, box.fw, box.fh, inset));
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(root);
                 ro.observe(win);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 group.stop();

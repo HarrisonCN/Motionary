@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { h as hostSprings } from '../chunks/micro-kit-16-DrJflWG2.js';
-import { s as scrollForThumb, t as thumbMetrics, l as labelAt } from '../chunks/fling-kit-19-BDnFLTfF.js';
+import { s as scrollForThumb, t as thumbMetrics, l as labelAt, h as frameOnce } from '../chunks/fling-kit-19-Q_8uCj02.js';
 import { c as css } from '../chunks/fling-kit-19-5HLYwuL1.js';
 
 function defineSpringScrollbar(tag = 'usa-spring-scrollbar') {
@@ -157,14 +157,18 @@ function defineSpringScrollbar(tag = 'usa-spring-scrollbar') {
                 box.scrollBy({ top: (below ? 1 : -1) * box.clientHeight * 0.9, behavior: this.reduced ? 'auto' : 'smooth' });
             });
             if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => {
+                const later = frameOnce(() => {
                     marks = labelled();
                     readTops();
                     follow(true);
-                });
+                }, this);
+                const ro = new ResizeObserver(() => later.ask());
                 ro.observe(box);
                 ro.observe(content);
-                this.onCleanup(() => ro.disconnect());
+                this.onCleanup(() => {
+                    ro.disconnect();
+                    later.cancel();
+                });
             }
             this.onCleanup(() => {
                 if (idle)
