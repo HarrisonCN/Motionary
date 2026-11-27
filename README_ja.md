@@ -402,7 +402,7 @@ el.animate(intent.keyframes, intent.options);
 
 ## バージョンとアップグレード
 
-- **npm dist-tags：** `latest` は現在のメジャーの最新リリースです（<!--ver:version-->17.17.0<!--/ver-->。14.1 からはマイナーリリースでも更新されます）。各マイナーには専用のタグ `v<major>-<minor>`（例：`v15-0`）があり、`v15-line` は 15.x 系、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで公開されます。
+- **npm dist-tags：** `latest` は現在のメジャーの最新リリースです（<!--ver:version-->17.18.0<!--/ver-->。14.1 からはマイナーリリースでも更新されます）。各マイナーには専用のタグ `v<major>-<minor>`（例：`v15-0`）があり、`v15-line` は 15.x 系、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで公開されます。
 - **CDN：** URL はメジャーに固定されます（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）も引き続き使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーでのみ行い、移行ガイドと codemod を用意します。非推奨の API は次のメジャーまで残り、`@deprecated` の型が付きますが、実行時の警告は出ません。
 - **安定版と実験的機能：** スクロール API、`motionary/core`、プリセット、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` コンポーネントとウィジェット、フレームワークアダプター、CLI は安定版です。Motion Studio（`motionary/studio/*`）、AI アシスタントと provider、MCP サーバー、Figma プラグイン、クロスプラットフォームの書き出しは実験的で、マイナーリリースで変わることがあります（[docs/stability.md](./docs/stability.md)）。
