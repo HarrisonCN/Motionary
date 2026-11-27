@@ -2225,6 +2225,20 @@ Origin and destination codes, a moving aircraft and an arrival estimate.
 <mo-flight-status value="68"></mo-flight-status>
 ```
 
+### <mo-fling-marquee> (legacy <usa-fling-marquee>) — Fling marquee
+
+A marquee you can grab and fling: it keeps the flick's momentum, then eases back to its cruise speed with no seam. Slows under the pointer, with a pause button.
+
+- Import: `import { defineFlingMarquee } from 'motionary/components/widgets'; defineFlingMarquee();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `speed`, `gap`, `paused`, `label`, `haptics`
+- Events: `usa:pause`
+- Methods: `fling()`
+
+```html
+<mo-fling-marquee label="Partners"><span style="padding:10px 18px;border-radius:99px;background:#eef2ff">Aurora</span><span style="padding:10px 18px;border-radius:99px;background:#ecfdf5">Basil</span><span style="padding:10px 18px;border-radius:99px;background:#fff7ed">Cobalt</span><span style="padding:10px 18px;border-radius:99px;background:#fdf2f8">Dune</span></mo-fling-marquee>
+```
+
 ### <mo-fluid-type> (legacy <usa-fluid-type>) — Fluid type
 
 Supplied text becomes a halftone vessel with a tilting liquid surface.
@@ -5428,6 +5442,20 @@ Shimmering placeholders while loading; remove loading and the real content fades
 <usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>
 ```
 
+### <mo-slide-confirm> (legacy <usa-slide-confirm>) — Slide to confirm
+
+A knob that follows the finger with rubber past the end, wobbles back if let go early and rides to the end past the threshold or on a hard flick. Enter confirms from the keyboard.
+
+- Import: `import { defineSlideConfirm } from 'motionary/components/widgets'; defineSlideConfirm();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `done`, `threshold`, `confirmed`, `disabled`, `feel`, `haptics`
+- Events: `usa:confirm`, `usa:reset`
+- Methods: `confirm()`, `reset()`
+
+```html
+<mo-slide-confirm label="Slide to pay" done="Paid"></mo-slide-confirm>
+```
+
 ### <mo-slider> (legacy <usa-slider>) — Slider
 
 A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).
@@ -5686,6 +5714,19 @@ Panels open on a spring that reverses smoothly mid-way, the content drifts in af
 <mo-spring-accordion open="0"><section data-title="What is a spring?"><p>A target and a velocity, nothing else.</p></section><section data-title="Reduced motion"><p>Values jump to their targets.</p></section></mo-spring-accordion>
 ```
 
+### <mo-spring-chain> (legacy <usa-spring-chain>) — Spring chain
+
+A chain of links on damped springs that chases the pointer, each link chasing the one before, so the tail swings and settles like a rope. A press plucks it.
+
+- Import: `import { defineSpringChain } from 'motionary/components/widgets'; defineSpringChain();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `links`, `size`, `label`, `feel`
+- Methods: `pluck()`
+
+```html
+<mo-spring-chain links="14" style="--usa-chain-height:180px"></mo-spring-chain>
+```
+
 ### <mo-spring-code> (legacy <usa-spring-code>) — Spring code
 
 One-time-code boxes: characters pop in, focus hops along, paste fills in a ripple; reject() shakes the row, accept() nods.
@@ -5739,6 +5780,20 @@ Digits roll on springs to each new value, new columns grow in, and screen reader
 
 ```html
 <mo-spring-counter value="1280" group="," from-zero></mo-spring-counter>
+```
+
+### <mo-spring-island> (legacy <usa-spring-island>) — Spring island
+
+A pill that morphs into a card and back on one spring: size and corners overshoot together while the faces cross-fade. pulse() plays a notification squash.
+
+- Import: `import { defineSpringIsland } from 'motionary/components/widgets'; defineSpringIsland();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `expanded`, `label`, `close`, `feel`, `haptics`
+- Events: `usa:toggle`
+- Methods: `expand()`, `collapse()`, `toggle()`, `pulse()`
+
+```html
+<mo-spring-island><span data-compact>● Recording 02:14</span><h3>Voice memo</h3><p>Tap outside or press Escape to fold it back.</p></mo-spring-island>
 ```
 
 ### <mo-spring-lab> (legacy <usa-spring-lab>) — Spring laboratory
@@ -5797,6 +5852,33 @@ Pages that slide on a damped spring: rubber-band ends, one page per flick, dots 
 <mo-spring-pager label="Tips"><div style="padding:28px;background:#eef2ff;border-radius:14px">Drag me</div><div style="padding:28px;background:#ecfdf5;border-radius:14px">Flick to turn</div><div style="padding:28px;background:#fff7ed;border-radius:14px">Ends stretch</div></mo-spring-pager>
 ```
 
+### <mo-spring-peek> (legacy <usa-spring-peek>) — Spring peek
+
+Press and hold a card to peek: it sinks, then a preview grows out of it over a blurred page. Pull it down to send it back; Enter opens it from the keyboard.
+
+- Import: `import { defineSpringPeek } from 'motionary/components/widgets'; defineSpringPeek();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `delay`, `label`, `close`, `feel`, `haptics`
+- Events: `usa:toggle`, `usa:tap`
+- Methods: `show()`, `close()`
+
+```html
+<mo-spring-peek label="Article preview"><strong>Spring physics, explained</strong><br><small>Hold to preview</small><div data-peek><h3>Spring physics, explained</h3><p>A spring has a target and a speed, never a fixed duration.</p></div></mo-spring-peek>
+```
+
+### <mo-spring-pip> (legacy <usa-spring-pip>) — Spring PiP window
+
+A floating window you fling into a corner: it follows the finger, stretches past the frame's edges and its release speed picks the corner it settles in. Arrow keys move it too.
+
+- Import: `import { defineSpringPip } from 'motionary/components/widgets'; defineSpringPip();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `corner`, `inset`, `label`, `feel`, `haptics`
+- Events: `usa:corner`
+
+```html
+<mo-spring-pip corner="bottom-right" style="--usa-pip-height:240px"><p>Page behind the window</p><div data-pip style="padding:14px">Now playing · drag me</div></mo-spring-pip>
+```
+
 ### <mo-spring-rating> (legacy <usa-spring-rating>) — Spring rating
 
 Stars that lift on hover and pop up one after another when chosen; halves, read-only and full keyboard support.
@@ -5808,6 +5890,19 @@ Stars that lift on hover and pop up one after another when chosen; halves, read-
 
 ```html
 <mo-spring-rating value="4" show-value></mo-spring-rating>
+```
+
+### <mo-spring-scrollbar> (legacy <usa-spring-scrollbar>) — Spring scrollbar
+
+A scroll area with a slim thumb on a spring: it trails the scroll, squashes at the ends and fades when idle. Drag it to scroll fast with a bubble naming the section.
+
+- Import: `import { defineSpringScrollbar } from 'motionary/components/widgets'; defineSpringScrollbar();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `height`, `label`, `feel`
+- Events: `usa:section`
+
+```html
+<mo-spring-scrollbar height="200px"><h3>Intro</h3><p>Scroll, then drag the thin bar on the right.</p><h3>Springs</h3><p>The thumb trails a moment and settles.</p><h3>Ends</h3><p>Push past an end and it squashes.</p><h3>Idle</h3><p>It fades out when you stop.</p></mo-spring-scrollbar>
 ```
 
 ### <mo-spring-sheet> (legacy <usa-spring-sheet>) — Spring sheet

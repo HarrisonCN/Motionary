@@ -726,6 +726,13 @@ interface LegacyAttributes {
         to?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-fling-marquee': {
+        gap?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
     'usa-fluid-type': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2155,6 +2162,15 @@ interface LegacyAttributes {
         type?: string | boolean | number;
         values?: string | boolean | number;
     };
+    'usa-slide-confirm': {
+        confirmed?: string | boolean | number;
+        disabled?: string | boolean | number;
+        done?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
     'usa-slider': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
@@ -2267,6 +2283,12 @@ interface LegacyAttributes {
         multiple?: string | boolean | number;
         open?: string | boolean | number;
     };
+    'usa-spring-chain': {
+        feel?: string | boolean | number;
+        label?: string | boolean | number;
+        links?: string | boolean | number;
+        size?: string | boolean | number;
+    };
     'usa-spring-code': {
         disabled?: string | boolean | number;
         feel?: string | boolean | number;
@@ -2309,6 +2331,13 @@ interface LegacyAttributes {
         suffix?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-spring-island': {
+        close?: string | boolean | number;
+        expanded?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-spring-lab': {
         damping?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -2341,6 +2370,20 @@ interface LegacyAttributes {
         index?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-spring-peek': {
+        close?: string | boolean | number;
+        delay?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    'usa-spring-pip': {
+        corner?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        inset?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-spring-rating': {
         clearable?: string | boolean | number;
         disabled?: string | boolean | number;
@@ -2353,6 +2396,11 @@ interface LegacyAttributes {
         'show-value'?: string | boolean | number;
         size?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-spring-scrollbar': {
+        feel?: string | boolean | number;
+        height?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-spring-sheet': {
         feel?: string | boolean | number;

@@ -154,6 +154,13 @@ var widgets_springSheet = require('../widgets/spring-sheet.cjs');
 var widgets_springPager = require('../widgets/spring-pager.cjs');
 var widgets_elasticScroll = require('../widgets/elastic-scroll.cjs');
 var widgets_springStack = require('../widgets/spring-stack.cjs');
+var widgets_springPip = require('../widgets/spring-pip.cjs');
+var widgets_springIsland = require('../widgets/spring-island.cjs');
+var widgets_springPeek = require('../widgets/spring-peek.cjs');
+var widgets_springScrollbar = require('../widgets/spring-scrollbar.cjs');
+var widgets_slideConfirm = require('../widgets/slide-confirm.cjs');
+var widgets_springChain = require('../widgets/spring-chain.cjs');
+var widgets_flingMarquee = require('../widgets/fling-marquee.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -320,6 +327,7 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var flingKit19 = require('../chunks/fling-kit-19-C9zMxm76.cjs');
 var dampedKit18 = require('../chunks/damped-kit-18-CM0mPVmn.cjs');
 var springKit17 = require('../chunks/spring-kit-17-Y1urAq72.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
@@ -807,6 +815,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.19': { 'usa-spring-pip': widgets_springPip.defineSpringPip, 'usa-spring-island': widgets_springIsland.defineSpringIsland, 'usa-spring-peek': widgets_springPeek.defineSpringPeek, 'usa-spring-scrollbar': widgets_springScrollbar.defineSpringScrollbar, 'usa-slide-confirm': widgets_slideConfirm.defineSlideConfirm, 'usa-spring-chain': widgets_springChain.defineSpringChain, 'usa-fling-marquee': widgets_flingMarquee.defineFlingMarquee },
     '17.18': { 'usa-spring-collapse': widgets_springCollapse.defineSpringCollapse, 'usa-read-more': widgets_readMore.defineReadMore, 'usa-spring-sheet': widgets_springSheet.defineSpringSheet, 'usa-spring-pager': widgets_springPager.defineSpringPager, 'usa-elastic-scroll': widgets_elasticScroll.defineElasticScroll, 'usa-spring-stack': widgets_springStack.defineSpringStack },
     '17.17': { 'usa-spring-like': widgets_springLike.defineSpringLike, 'usa-spring-rating': widgets_springRating.defineSpringRating, 'usa-spring-copy': widgets_springCopy.defineSpringCopy, 'usa-spring-tags': widgets_springTags.defineSpringTags, 'usa-spring-code': widgets_springCode.defineSpringCode, 'usa-spring-list': widgets_springList.defineSpringList, 'usa-spring-swipe': widgets_springSwipe.defineSpringSwipe, 'usa-spring-toasts': widgets_springToasts.defineSpringToasts, 'usa-spring-accordion': widgets_springAccordion.defineSpringAccordion, 'usa-spring-counter': widgets_springCounter.defineSpringCounter },
     '17.16': { 'usa-micro': widgets_micro.defineMicro, 'usa-micro-switch': widgets_microSwitch.defineMicroSwitch, 'usa-micro-checkbox': widgets_microCheckbox.defineMicroCheckbox, 'usa-micro-input': widgets_microInput.defineMicroInput, 'usa-micro-button': widgets_microButton.defineMicroButton, 'usa-micro-slider': widgets_microSlider.defineMicroSlider, 'usa-micro-segmented': widgets_microSegmented.defineMicroSegmented, 'usa-micro-stepper': widgets_microStepper.defineMicroStepper },
@@ -1066,6 +1075,13 @@ exports.defineSpringSheet = widgets_springSheet.defineSpringSheet;
 exports.defineSpringPager = widgets_springPager.defineSpringPager;
 exports.defineElasticScroll = widgets_elasticScroll.defineElasticScroll;
 exports.defineSpringStack = widgets_springStack.defineSpringStack;
+exports.defineSpringPip = widgets_springPip.defineSpringPip;
+exports.defineSpringIsland = widgets_springIsland.defineSpringIsland;
+exports.defineSpringPeek = widgets_springPeek.defineSpringPeek;
+exports.defineSpringScrollbar = widgets_springScrollbar.defineSpringScrollbar;
+exports.defineSlideConfirm = widgets_slideConfirm.defineSlideConfirm;
+exports.defineSpringChain = widgets_springChain.defineSpringChain;
+exports.defineFlingMarquee = widgets_flingMarquee.defineFlingMarquee;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1301,6 +1317,20 @@ exports.defineParticleButton = widgets_particleButton.defineParticleButton;
 exports.defineHaloSegmented = widgets_haloSegmented.defineHaloSegmented;
 exports.defineHaloSlider = widgets_haloSlider.defineHaloSlider;
 exports.defineOrbitProgress = widgets_orbitProgress.defineOrbitProgress;
+exports.PIP_CORNERS = flingKit19.PIP_CORNERS;
+exports.chainPath = flingKit19.chainPath;
+exports.cornerPoint = flingKit19.cornerPoint;
+exports.cornerStep = flingKit19.cornerStep;
+exports.cruise = flingKit19.cruise;
+exports.islandShape = flingKit19.islandShape;
+exports.labelAt = flingKit19.labelAt;
+exports.linkSize = flingKit19.linkSize;
+exports.parseCorner = flingKit19.parseCorner;
+exports.pipCorner = flingKit19.pipCorner;
+exports.scrollForThumb = flingKit19.scrollForThumb;
+exports.slideOutcome = flingKit19.slideOutcome;
+exports.thumbMetrics = flingKit19.thumbMetrics;
+exports.wrapOffset = flingKit19.wrapOffset;
 exports.dampedAt = dampedKit18.dampedAt;
 exports.linesHeight = dampedKit18.linesHeight;
 exports.pageAfter = dampedKit18.pageAfter;
