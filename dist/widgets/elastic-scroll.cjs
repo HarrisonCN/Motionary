@@ -128,4 +128,4 @@ function defineElasticScroll(tag = 'usa-elastic-scroll') {
 }
 
 exports.defineElasticScroll = defineElasticScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/elastic-scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/elastic-scroll.cjs.map

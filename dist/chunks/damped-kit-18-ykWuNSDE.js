@@ -89,4 +89,4 @@ function pilePose(i, heights, t, peek = 10, gap = 10) {
 const linesHeight = (lines, lineHeight) => Math.max(1, Math.floor(fin(lines, 3))) * Math.max(1, fin(lineHeight, 20));
 
 export { parseSnaps as a, pilePose as b, dampedAt as d, linesHeight as l, pageAfter as p, sheetRest as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/damped-kit-18-ykWuNSDE.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/damped-kit-18-ykWuNSDE.js.map

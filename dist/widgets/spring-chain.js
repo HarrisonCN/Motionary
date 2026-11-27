@@ -143,4 +143,4 @@ function defineSpringChain(tag = 'usa-spring-chain') {
 }
 
 export { defineSpringChain };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-chain.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-chain.js.map

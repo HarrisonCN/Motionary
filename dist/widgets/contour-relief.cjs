@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var instrumentPanel = require('../chunks/instrument-panel-PfifQtqN.cjs');
+var instrumentPanel = require('../chunks/instrument-panel-1z4S_l0a.cjs');
 
 function defineContourRelief(tag = 'usa-contour-relief') {
     const ctor = base.defineElement(tag, Base => class ContourRelief extends Base {
@@ -20,4 +20,4 @@ function defineContourRelief(tag = 'usa-contour-relief') {
 }
 
 exports.defineContourRelief = defineContourRelief;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/contour-relief.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/contour-relief.cjs.map

@@ -110,4 +110,4 @@ function defineFilterChips(tag = 'usa-filter-chips') {
 }
 
 export { defineFilterChips };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/filter-chips.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/filter-chips.js.map

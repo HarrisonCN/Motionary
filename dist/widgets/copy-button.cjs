@@ -92,4 +92,4 @@ function defineCopyButton(tag = 'usa-copy-button') {
 }
 
 exports.defineCopyButton = defineCopyButton;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/copy-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/copy-button.cjs.map

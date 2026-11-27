@@ -136,4 +136,4 @@ function defineSpringStack(tag = 'usa-spring-stack') {
 }
 
 export { defineSpringStack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-stack.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-stack.js.map

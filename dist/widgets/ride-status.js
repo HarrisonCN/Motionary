@@ -24,4 +24,4 @@ function defineRideStatus(tag = 'usa-ride-status') {
 }
 
 export { defineRideStatus };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/ride-status.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/ride-status.js.map

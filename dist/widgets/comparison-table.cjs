@@ -94,4 +94,4 @@ function defineComparisonTable(tag = 'usa-comparison-table') {
 }
 
 exports.defineComparisonTable = defineComparisonTable;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/comparison-table.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/comparison-table.cjs.map

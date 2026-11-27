@@ -209,4 +209,4 @@ function defineSpringSheet(tag = 'usa-spring-sheet') {
 }
 
 export { defineSpringSheet };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-sheet.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-sheet.js.map

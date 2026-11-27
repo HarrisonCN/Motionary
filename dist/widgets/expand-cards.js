@@ -93,4 +93,4 @@ function defineExpandCards(tag = 'usa-expand-cards') {
 }
 
 export { defineExpandCards };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/expand-cards.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/expand-cards.js.map

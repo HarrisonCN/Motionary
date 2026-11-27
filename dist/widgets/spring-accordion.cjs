@@ -165,4 +165,4 @@ function defineSpringAccordion(tag = 'usa-spring-accordion') {
 }
 
 exports.defineSpringAccordion = defineSpringAccordion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-accordion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-accordion.cjs.map

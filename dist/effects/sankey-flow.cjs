@@ -15,4 +15,4 @@ function registerSankeyFlow() {
 exports.effect = effect;
 exports.register = registerSankeyFlow;
 exports.registerSankeyFlow = registerSankeyFlow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/sankey-flow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/sankey-flow.cjs.map

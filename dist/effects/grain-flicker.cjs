@@ -15,4 +15,4 @@ function registerGrainFlicker() {
 exports.effect = effect;
 exports.register = registerGrainFlicker;
 exports.registerGrainFlicker = registerGrainFlicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/grain-flicker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/grain-flicker.cjs.map

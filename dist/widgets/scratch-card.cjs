@@ -5,4 +5,4 @@ var widgets_scratchCard = require('../chunks/scratch-card-CKGkO0fI.cjs');
 
 
 exports.defineScratchCard = widgets_scratchCard.defineScratchCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/scratch-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/scratch-card.cjs.map

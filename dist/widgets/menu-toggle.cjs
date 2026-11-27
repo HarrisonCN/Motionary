@@ -5,4 +5,4 @@ var widgets_menuToggle = require('../chunks/menu-toggle-DcMQeRDt.cjs');
 
 
 exports.defineMenuToggle = widgets_menuToggle.defineMenuToggle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/menu-toggle.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/menu-toggle.cjs.map

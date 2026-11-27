@@ -73,4 +73,4 @@ function defineAlignSwitch(tag = 'usa-align-switch') {
 }
 
 export { ALIGNMENTS as A, defineAlignSwitch as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/align-switch-CVOAOx-M.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/align-switch-CVOAOx-M.js.map

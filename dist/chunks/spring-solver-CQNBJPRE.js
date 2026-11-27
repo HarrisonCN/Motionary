@@ -304,4 +304,4 @@ function createSpringGroup(initial, opts = {}) {
 }
 
 export { MICRO_FEELS as M, MICRO_SPRINGS as a, microSpring as b, createSpringGroup as c, springFeel as d, springFromFeel as e, springSolution as f, microEasing as m, settleTime as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/spring-solver-CQNBJPRE.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/spring-solver-CQNBJPRE.js.map

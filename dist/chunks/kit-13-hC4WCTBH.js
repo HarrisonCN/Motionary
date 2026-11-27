@@ -289,4 +289,4 @@ const angleTo = (x, y, px, py) => Math.round((Math.atan2(py - y, px - x) * 180) 
 const strokeWidth = (speed, base = 2.5) => clampTo(base * (1.6 - clampTo(speed, 0, 3) * 0.4), base * 0.45, base * 1.6);
 
 export { angleTo as a, clampTo as b, changedSpan as c, dayNumber as d, diffLines as e, flapSteps as f, funnelRows as g, ganttSpan as h, mentionQuery as i, squarify as j, strokeWidth as k, linePath as l, matchNames as m, niceTicks as n, wheelIndex as o, pressureAt as p, wheelTilt as q, shuffleOrder as s, tourPlace as t, waffleCells as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/kit-13-hC4WCTBH.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/kit-13-hC4WCTBH.js.map

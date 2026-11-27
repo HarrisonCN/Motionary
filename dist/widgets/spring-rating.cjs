@@ -204,4 +204,4 @@ function defineSpringRating(tag = 'usa-spring-rating') {
 }
 
 exports.defineSpringRating = defineSpringRating;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-rating.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-rating.cjs.map

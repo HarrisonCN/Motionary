@@ -51,4 +51,4 @@ function defineMeteors(tag = 'usa-meteors') {
 }
 
 export { defineMeteors as d, meteorAt as m };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/meteors-CpgtGQSu.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/meteors-CpgtGQSu.js.map

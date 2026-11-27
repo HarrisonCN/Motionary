@@ -223,4 +223,4 @@ exports.isExpanded = isExpanded;
 exports.springAllDetails = springAllDetails;
 exports.springDetails = springDetails;
 exports.springExpand = springExpand;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/expand-DGN801sQ.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/expand-DGN801sQ.cjs.map

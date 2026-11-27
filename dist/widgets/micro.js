@@ -70,4 +70,4 @@ function defineMicro(tag = 'usa-micro') {
 }
 
 export { defineMicro };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/micro.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/micro.js.map

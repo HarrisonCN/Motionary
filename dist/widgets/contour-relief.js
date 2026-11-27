@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-BZCWilKK.js';
+import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-DnfKKNNj.js';
 
 function defineContourRelief(tag = 'usa-contour-relief') {
     const ctor = defineElement(tag, Base => class ContourRelief extends Base {
@@ -18,4 +18,4 @@ function defineContourRelief(tag = 'usa-contour-relief') {
 }
 
 export { defineContourRelief };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/contour-relief.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/contour-relief.js.map

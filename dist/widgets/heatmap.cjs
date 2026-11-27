@@ -5,4 +5,4 @@ var widgets_heatmap = require('../chunks/heatmap-CkBFS5Lo.cjs');
 
 
 exports.defineHeatmap = widgets_heatmap.defineHeatmap;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/heatmap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/heatmap.cjs.map

@@ -101,4 +101,4 @@ function defineSwitch(tag = 'usa-switch') {
 
 exports.SWITCH_VARIANTS = SWITCH_VARIANTS;
 exports.defineSwitch = defineSwitch;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/switch-Cs6mszUY.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/switch-Cs6mszUY.cjs.map

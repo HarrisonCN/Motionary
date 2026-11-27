@@ -107,4 +107,4 @@ function defineHoverRevealList(tag = 'usa-hover-reveal-list') {
 }
 
 export { defineHoverRevealList };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/hover-reveal-list.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/hover-reveal-list.js.map

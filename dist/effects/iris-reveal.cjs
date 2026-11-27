@@ -15,4 +15,4 @@ function registerIrisReveal() {
 exports.effect = effect;
 exports.register = registerIrisReveal;
 exports.registerIrisReveal = registerIrisReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/effects/iris-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/effects/iris-reveal.cjs.map

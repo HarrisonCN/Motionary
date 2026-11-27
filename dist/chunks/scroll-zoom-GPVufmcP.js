@@ -91,4 +91,4 @@ function defineScrollZoom(tag = 'usa-scroll-zoom') {
 }
 
 export { defineScrollZoom as d, zoomAt as z };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/scroll-zoom-GPVufmcP.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/scroll-zoom-GPVufmcP.js.map

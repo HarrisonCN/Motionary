@@ -375,7 +375,7 @@ el.animate(intent.keyframes, intent.options);
 コンポーネント数と成果物のサイズに上限はありません。[`size-budget.json`](./size-budget.json) は過去の参考値を残し、CI は実測サイズを報告します。参考値を超えても CI は失敗しません（[サイズポリシー](./docs/size-policy.md)）。
 
 <!-- size-table:start -->
-17.17.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.18.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 参考値 |
 |---|---:|---:|

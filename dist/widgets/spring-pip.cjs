@@ -158,4 +158,4 @@ function defineSpringPip(tag = 'usa-spring-pip') {
 }
 
 exports.defineSpringPip = defineSpringPip;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-pip.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-pip.cjs.map

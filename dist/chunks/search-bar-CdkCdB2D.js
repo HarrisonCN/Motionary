@@ -184,4 +184,4 @@ function defineSearchBar(tag = 'usa-search-bar') {
 }
 
 export { defineSearchBar as d, matchSuggestions as m };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/search-bar-CdkCdB2D.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/search-bar-CdkCdB2D.js.map

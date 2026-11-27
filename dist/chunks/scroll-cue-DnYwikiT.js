@@ -62,4 +62,4 @@ function defineScrollCue(tag = 'usa-scroll-cue') {
 }
 
 export { CUE_KINDS as C, defineScrollCue as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/scroll-cue-DnYwikiT.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/scroll-cue-DnYwikiT.js.map

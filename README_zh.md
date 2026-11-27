@@ -375,7 +375,7 @@ el.animate(intent.keyframes, intent.options);
 组件数量和产物体积都不设上限。[`size-budget.json`](./size-budget.json) 保留历史参考值，CI 报告实测体积；超过参考值不会让 CI 失败（[体积策略](./docs/size-policy.md)）。
 
 <!-- size-table:start -->
-17.17.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.18.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 历史参考 |
 |---|---:|---:|

@@ -162,4 +162,4 @@ function defineStackSlider(tag = 'usa-stack-slider') {
 }
 
 export { defineStackSlider as d, stackPose as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/stack-slider-FQaCv86d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/stack-slider-FQaCv86d.js.map

@@ -83,4 +83,4 @@ function defineMagnetLines(tag = 'usa-magnet-lines') {
 }
 
 exports.defineMagnetLines = defineMagnetLines;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/magnet-lines.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/magnet-lines.cjs.map

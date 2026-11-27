@@ -126,4 +126,4 @@ function defineMorphCard(tag = 'usa-morph-card') {
 }
 
 export { defineMorphCard as d, invertRect as i };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/morph-card-CSDwTW7n.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/morph-card-CSDwTW7n.js.map

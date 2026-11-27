@@ -77,4 +77,4 @@ function numbers(text, max = 1000) {
 }
 
 export { copyText as c, moveItem as m, numbers as n, rovingIndex as r, seeded as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/kit-12-C5AMRg3h.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/kit-12-C5AMRg3h.js.map

@@ -111,4 +111,4 @@ function defineRadialMenu(tag = 'usa-radial-menu') {
 }
 
 exports.defineRadialMenu = defineRadialMenu;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/radial-menu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/radial-menu.cjs.map

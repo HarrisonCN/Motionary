@@ -85,4 +85,4 @@ function defineElasticAccordion(tag = 'usa-elastic-accordion') {
 }
 
 export { defineElasticAccordion };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/elastic-accordion.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/elastic-accordion.js.map

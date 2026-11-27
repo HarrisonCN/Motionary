@@ -96,4 +96,4 @@ exports.pageAfter = pageAfter;
 exports.parseSnaps = parseSnaps;
 exports.pilePose = pilePose;
 exports.sheetRest = sheetRest;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/damped-kit-18-CM0mPVmn.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/damped-kit-18-CM0mPVmn.cjs.map

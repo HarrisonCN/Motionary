@@ -69,4 +69,4 @@ function defineOrbitRings(tag = 'usa-orbit-rings') {
 
 exports.defineOrbitRings = defineOrbitRings;
 exports.orbitAngle = orbitAngle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/orbit-rings-DYdUJWwU.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/orbit-rings-DYdUJWwU.cjs.map

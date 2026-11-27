@@ -74,4 +74,4 @@ function defineTreemap(tag = 'usa-treemap') {
 }
 
 exports.defineTreemap = defineTreemap;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/treemap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/treemap.cjs.map

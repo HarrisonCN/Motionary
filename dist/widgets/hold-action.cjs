@@ -115,4 +115,4 @@ function defineHoldAction(tag = 'usa-hold-action') {
 }
 
 exports.defineHoldAction = defineHoldAction;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/hold-action.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/hold-action.cjs.map

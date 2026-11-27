@@ -99,4 +99,4 @@ function defineHorizontalScroll(tag = 'usa-horizontal-scroll') {
 }
 
 export { defineHorizontalScroll as d, trackOffset as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/horizontal-scroll-DcyF-4Fv.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/horizontal-scroll-DcyF-4Fv.js.map

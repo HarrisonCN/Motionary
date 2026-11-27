@@ -171,4 +171,4 @@ function frameOnce(fn, owner) {
 }
 
 export { PIP_CORNERS as P, cornerPoint as a, cornerStep as b, chainPath as c, cruise as d, linkSize as e, pipCorner as f, slideOutcome as g, frameOnce as h, islandShape as i, labelAt as l, parseCorner as p, scrollForThumb as s, thumbMetrics as t, wrapOffset as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/fling-kit-19-Q_8uCj02.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/fling-kit-19-Q_8uCj02.js.map

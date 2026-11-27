@@ -36,4 +36,4 @@ function defineInfinityLoop(tag = 'usa-infinity-loop') {
 }
 
 exports.defineInfinityLoop = defineInfinityLoop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/infinity-loop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/infinity-loop.cjs.map

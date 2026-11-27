@@ -78,4 +78,4 @@ function defineLocationCard(tag = 'usa-location-card') {
 }
 
 export { defineLocationCard as d, formatDistance as f, haversine as h };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/location-card-DlVRckSa.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/location-card-DlVRckSa.js.map

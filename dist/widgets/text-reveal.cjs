@@ -5,4 +5,4 @@ var widgets_textReveal = require('../chunks/text-reveal-BHA_e_r_.cjs');
 
 
 exports.defineTextReveal = widgets_textReveal.defineTextReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/text-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/text-reveal.cjs.map

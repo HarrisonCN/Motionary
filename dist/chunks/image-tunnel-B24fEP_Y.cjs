@@ -106,4 +106,4 @@ function defineImageTunnel(tag = 'usa-image-tunnel') {
 
 exports.defineImageTunnel = defineImageTunnel;
 exports.tunnelPose = tunnelPose;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/image-tunnel-B24fEP_Y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/image-tunnel-B24fEP_Y.cjs.map

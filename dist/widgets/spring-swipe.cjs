@@ -196,4 +196,4 @@ function defineSpringSwipe(tag = 'usa-spring-swipe') {
 }
 
 exports.defineSpringSwipe = defineSpringSwipe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/spring-swipe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/spring-swipe.cjs.map

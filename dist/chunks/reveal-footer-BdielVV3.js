@@ -62,4 +62,4 @@ function defineRevealFooter(tag = 'usa-reveal-footer') {
 }
 
 export { defineRevealFooter as d, riseProgress as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/reveal-footer-BdielVV3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/reveal-footer-BdielVV3.js.map

@@ -66,4 +66,4 @@ function defineScrollBg(tag = 'usa-scroll-bg') {
 }
 
 export { defineScrollBg as d, sectionAt as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/chunks/scroll-bg-BcmElQ0I.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/chunks/scroll-bg-BcmElQ0I.js.map

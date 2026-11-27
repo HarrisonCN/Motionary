@@ -172,4 +172,4 @@ function defineTour(tag = 'usa-tour') {
 }
 
 exports.defineTour = defineTour;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/tour.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/tour.cjs.map

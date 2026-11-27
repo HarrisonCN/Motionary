@@ -5,4 +5,4 @@ var widgets_emojiPicker = require('../chunks/emoji-picker-Cxbnq_yU.cjs');
 
 
 exports.defineEmojiPicker = widgets_emojiPicker.defineEmojiPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.17.0/dist/widgets/emoji-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.18.0/dist/widgets/emoji-picker.cjs.map
