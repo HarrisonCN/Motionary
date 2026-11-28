@@ -176,6 +176,12 @@ export function defineSwingSign(tag = 'usa-swing-sign'): CustomElementConstructo
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         dragged = false;
         drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, off: aimAt(e.clientX, e.clientY) - angle, last: angle, t: e.timeStamp, v: 0, live: false };
+        // capture now: the card swings away under the pointer, so a quick first move would otherwise miss it
+        try {
+          card.setPointerCapture?.(e.pointerId);
+        } catch {
+          /* synthetic */
+        }
       });
       this.listen(card, 'pointermove', (e: PointerEvent) => {
         if (!drag || e.pointerId !== drag.id) return;
@@ -186,11 +192,6 @@ export function defineSwingSign(tag = 'usa-swing-sign'): CustomElementConstructo
           held = true;
           rest();
           root.setAttribute('data-dragging', '');
-          try {
-            card.setPointerCapture?.(e.pointerId);
-          } catch {
-            /* synthetic */
-          }
         }
         if (this.reduced) return;
         const a = Math.max(-1.1, Math.min(1.1, aimAt(e.clientX, e.clientY) - drag.off));

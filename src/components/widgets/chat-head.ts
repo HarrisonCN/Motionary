@@ -186,6 +186,12 @@ export function defineChatHead(tag = 'usa-chat-head'): CustomElementConstructor 
         const r = root.getBoundingClientRect();
         moved = false;
         drag = { id: e.pointerId, dx: e.clientX - r.left - head.get('x'), dy: e.clientY - r.top - head.get('y'), x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY, t: e.timeStamp, vx: 0, vy: 0, live: false, caught: false };
+        // capture now: the head is small, so a quick first move would otherwise land outside it and never start the drag
+        try {
+          btn.setPointerCapture?.(e.pointerId);
+        } catch {
+          /* synthetic */
+        }
       });
       this.listen(btn, 'pointermove', (e: PointerEvent) => {
         if (!drag || e.pointerId !== drag.id) return;
@@ -196,11 +202,6 @@ export function defineChatHead(tag = 'usa-chat-head'): CustomElementConstructor 
           root.setAttribute('data-dragging', '');
           head.set({ s: 1.08 }, { spring: 'snappy' });
           aim.set({ t: 1 }, { spring: { duration: 420, bounce: 0.2 } });
-          try {
-            btn.setPointerCapture?.(e.pointerId);
-          } catch {
-            /* synthetic */
-          }
         }
         const dt = Math.max(1, e.timeStamp - drag.t);
         drag.vx = drag.vx * 0.4 + (((e.clientX - drag.lx) / dt) * 1000) * 0.6;
