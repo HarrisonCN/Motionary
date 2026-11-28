@@ -166,7 +166,7 @@ describe('17.19 fling parts', () => {
     expect(page).toContain("defineWidgets('17.19')");
     expect(page).toContain('<script type="module" src="./code-drawer.js" data-auto></script>');
     expect(read('showcase/index.html')).toContain('./fling.html');
-    const tab = (COLLECTIONS as any[])[0];
+    const tab = (COLLECTIONS as any[]).find((c) => c.id === 'fling');
     expect(tab.id).toBe('fling');
     expect(tab.page).toBe('./fling.html');
     expect(tab.items.length).toBe(7);

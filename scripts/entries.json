@@ -1587,6 +1587,84 @@
  },
  {
   "kind": "widget",
+  "name": "fling-ruler",
+  "entry": "motionary/widgets/fling-ruler",
+  "src": "src/entries/widgets/fling-ruler.ts",
+  "tag": "usa-fling-ruler",
+  "define": "defineFlingRuler",
+  "types": [
+   "UsaFlingRulerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fling-ruler"
+ },
+ {
+  "kind": "widget",
+  "name": "fling-dial",
+  "entry": "motionary/widgets/fling-dial",
+  "src": "src/entries/widgets/fling-dial.ts",
+  "tag": "usa-fling-dial",
+  "define": "defineFlingDial",
+  "types": [
+   "UsaFlingDialElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fling-dial"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-grid",
+  "entry": "motionary/widgets/spring-grid",
+  "src": "src/entries/widgets/spring-grid.ts",
+  "tag": "usa-spring-grid",
+  "define": "defineSpringGrid",
+  "types": [
+   "UsaSpringGridElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-grid"
+ },
+ {
+  "kind": "widget",
+  "name": "chat-head",
+  "entry": "motionary/widgets/chat-head",
+  "src": "src/entries/widgets/chat-head.ts",
+  "tag": "usa-chat-head",
+  "define": "defineChatHead",
+  "types": [
+   "UsaChatHeadElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/chat-head"
+ },
+ {
+  "kind": "widget",
+  "name": "fling-tabs",
+  "entry": "motionary/widgets/fling-tabs",
+  "src": "src/entries/widgets/fling-tabs.ts",
+  "tag": "usa-fling-tabs",
+  "define": "defineFlingTabs",
+  "types": [
+   "UsaFlingTabsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fling-tabs"
+ },
+ {
+  "kind": "widget",
+  "name": "swing-sign",
+  "entry": "motionary/widgets/swing-sign",
+  "src": "src/entries/widgets/swing-sign.ts",
+  "tag": "usa-swing-sign",
+  "define": "defineSwingSign",
+  "types": [
+   "UsaSwingSignElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/swing-sign"
+ },
+ {
+  "kind": "widget",
   "name": "spring-pip",
   "entry": "motionary/widgets/spring-pip",
   "src": "src/entries/widgets/spring-pip.ts",

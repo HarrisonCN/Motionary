@@ -1186,6 +1186,20 @@ Five bars grow and shrink from the middle line in a wave.
 <script>const composer = document.querySelector('usa-chat-composer'); composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
 ```
 
+### <mo-chat-head> (legacy <usa-chat-head>) — Chat head
+
+A floating chat head you drag anywhere: let go and it is thrown to the nearer edge and docks with a spring. Drag it to the close target that rises and it is pulled in like a magnet and dismissed.
+
+- Import: `import { defineChatHead } from 'motionary/components/widgets'; defineChatHead();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `side`, `count`, `label`, `inset`, `feel`, `haptics`
+- Events: `usa:dock`, `usa:dismiss`, `usa:restore`, `usa:tap`
+- Methods: `dismiss()`, `restore()`
+
+```html
+<mo-chat-head count="3" label="Chat with Ada" style="--usa-chead-height:260px"><p style="padding:16px">The page behind the head. Drag the head around, or drop it on the × to dismiss it.</p><span data-head>AL</span></mo-chat-head>
+```
+
 ### <mo-check> (legacy <usa-check>) — Result icon
 
 The circle draws itself, then a check, cross or exclamation strokes in with a pop. Great after a payment or upload.
@@ -2225,6 +2239,19 @@ Origin and destination codes, a moving aircraft and an arrival estimate.
 <mo-flight-status value="68"></mo-flight-status>
 ```
 
+### <mo-fling-dial> (legacy <usa-fling-dial>) — Fling dial
+
+A round dial you spin with a finger: a flick keeps it turning, then it clicks into the nearest detent with a short spring and a tick. Options are any list; the arrow keys turn it one detent.
+
+- Import: `import { defineFlingDial } from 'motionary/components/widgets'; defineFlingDial();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `options`, `value`, `label`, `disabled`, `feel`, `haptics`
+- Events: `usa:input`, `usa:change`
+
+```html
+<mo-fling-dial options="XS, S, M, L, XL, XXL" value="M" label="Size"></mo-fling-dial>
+```
+
 ### <mo-fling-marquee> (legacy <usa-fling-marquee>) — Fling marquee
 
 A marquee you can grab and fling: it keeps the flick's momentum, then eases back to its cruise speed with no seam. Slows under the pointer, with a pause button.
@@ -2237,6 +2264,32 @@ A marquee you can grab and fling: it keeps the flick's momentum, then eases back
 
 ```html
 <mo-fling-marquee label="Partners"><span style="padding:10px 18px;border-radius:99px;background:#eef2ff">Aurora</span><span style="padding:10px 18px;border-radius:99px;background:#ecfdf5">Basil</span><span style="padding:10px 18px;border-radius:99px;background:#fff7ed">Cobalt</span><span style="padding:10px 18px;border-radius:99px;background:#fdf2f8">Dune</span></mo-fling-marquee>
+```
+
+### <mo-fling-ruler> (legacy <usa-fling-ruler>) — Fling ruler
+
+A ruler you fling under a fixed needle to pick a value, as health apps pick a weight: it coasts with the flick's speed, stretches past the ends and snaps to the nearest step. Arrow keys and Page Up / Down too.
+
+- Import: `import { defineFlingRuler } from 'motionary/components/widgets'; defineFlingRuler();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `min`, `max`, `step`, `value`, `major`, `spacing`, `unit`, `label`, `disabled`, `feel`, `haptics`
+- Events: `usa:input`, `usa:change`
+
+```html
+<mo-fling-ruler min="30" max="150" step="0.5" value="62.5" unit="kg" label="Weight"></mo-fling-ruler>
+```
+
+### <mo-fling-tabs> (legacy <usa-fling-tabs>) — Fling tabs
+
+Tabs whose panels you swipe between: the pill under the tab names follows the swipe, stretching between two tabs, and the panel height eases to the next panel's. A real tab list with arrow keys, Home and End.
+
+- Import: `import { defineFlingTabs } from 'motionary/components/widgets'; defineFlingTabs();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `index`, `label`, `feel`, `haptics`
+- Events: `usa:change`
+
+```html
+<mo-fling-tabs label="Sections"><div data-tab="Overview"><p>Swipe the panel sideways, or tap a tab.</p></div><div data-tab="Specs"><p>The pill stretches between two tabs while you swipe.</p><p>And the height eases to fit.</p></div><div data-tab="Reviews"><p>Past the last tab the panel resists like rubber.</p></div></mo-fling-tabs>
 ```
 
 ### <mo-fluid-type> (legacy <usa-fluid-type>) — Fluid type
@@ -5782,6 +5835,19 @@ Digits roll on springs to each new value, new columns grow in, and screen reader
 <mo-spring-counter value="1280" group="," from-zero></mo-spring-counter>
 ```
 
+### <mo-spring-grid> (legacy <usa-spring-grid>) — Spring grid
+
+A grid of tiles you rearrange by dragging, like a phone's home screen: the lifted tile follows the finger and the others slide out of its way on springs. Touch holds to lift; Space picks up and arrows move from the keyboard.
+
+- Import: `import { defineSpringGrid } from 'motionary/components/widgets'; defineSpringGrid();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `columns`, `gap`, `row-height`, `label`, `feel`, `haptics`
+- Events: `usa:reorder`
+
+```html
+<mo-spring-grid columns="4" label="Apps"><div data-key="mail" data-label="Mail">✉️</div><div data-key="maps" data-label="Maps">🗺️</div><div data-key="music" data-label="Music">🎵</div><div data-key="photos" data-label="Photos">🖼️</div><div data-key="notes" data-label="Notes">📝</div><div data-key="clock" data-label="Clock">⏰</div><div data-key="camera" data-label="Camera">📷</div><div data-key="games" data-label="Games">🎮</div></mo-spring-grid>
+```
+
 ### <mo-spring-island> (legacy <usa-spring-island>) — Spring island
 
 A pill that morphs into a card and back on one spring: size and corners overshoot together while the faces cross-fade. pulse() plays a notification squash.
@@ -6255,6 +6321,20 @@ Thin lines sweep across a bar one after another, an indeterminate progress bar.
 
 ```html
 <mo-sweep-lines></mo-sweep-lines>
+```
+
+### <mo-swing-sign> (legacy <usa-swing-sign>) — Swing sign
+
+A sign hanging from a nail on two strings that swings as a real pendulum: drag it and let go, or brush past it with the mouse. A click turns it over to the back with a flip and a small swing.
+
+- Import: `import { defineSwingSign } from 'motionary/components/widgets'; defineSwingSign();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `flipped`, `length`, `label`, `feel`, `haptics`
+- Events: `usa:flip`
+- Methods: `swing()`
+
+```html
+<mo-swing-sign label="Shop sign"><strong style="font-size:1.4rem">OPEN</strong><strong data-back style="font-size:1.4rem">CLOSED</strong></mo-swing-sign>
 ```
 
 ### <mo-swipe-deck> (legacy <usa-swipe-deck>) — Swipe cards deck

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>吸附与摆动 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 24px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:52px 0 16px}
+    p {max-width:46em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .feelbar {position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; background:color-mix(in srgb,#f1f0ec 88%,transparent); backdrop-filter:blur(8px)}
+    .feelbar span {font-size:.85rem; color:#55544e}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:16px; min-height:210px; padding:22px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:110px; min-width:0}
+    article .stage.block {display:block}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .wide {grid-column:1/-1}
+    .row {display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+    .row button {padding:8px 14px; border-radius:999px; border:1px solid #d6d4cc; background:#fff; font:inherit; font-size:.85rem; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .looks {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px}
+    .look {display:grid; gap:16px; justify-items:stretch; padding:22px; border-radius:22px; background:var(--mo-kit-paper,#fff); color:var(--mo-kit-ink,#18181b)}
+    .look small {font:12px ui-monospace,monospace; opacity:.7}
+    .feed {padding:16px; display:grid; gap:10px}
+    .feed div {height:14px; border-radius:7px; background:#e8e6df}
+    .feed div:nth-child(3n) {width:70%}
+    .avatar {display:grid; place-items:center; width:100%; height:100%; border-radius:50%; background:linear-gradient(135deg,#6366f1,#ec4899); color:#fff; font-weight:700}
+    .sign {font:700 1.5rem/1.1 Georgia,'Songti SC',serif; letter-spacing:.04em}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+</style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="fling.html">甩动回弹</a> · <a href="damped.html">阻尼部件</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>吸附与摆动</h1><p>六个能甩、能转、能拖的部件：刻度尺在固定指针下滑行再吸附到刻度，拨盘转起来后卡进最近的档位，网格里的图块被拿起时其他图块沿弹簧让位，悬浮头像松手后飞到一侧停靠、拖到关闭圈会被磁吸进去，标签页滑动时下面的胶囊跟着拉长，挂牌像真正的钟摆一样摆动。它们都跑在 17.16 的弹簧核心上，键盘和读屏都能用；开启“减少动态效果”后直接到位，挂牌不再摆动。</p></header>
+
+    <div class="feelbar"><span>整页手感</span><mo-micro-segmented id="feel" label="整页手感" options="默认,利落,干脆,顺滑,弹性,俏皮,沉稳,厚重" values="default,crisp,snappy,smooth,bouncy,playful,calm,heavy" value="default"></mo-micro-segmented></div>
+
+    <h2 id="pick">刻度尺与拨盘</h2>
+    <section class="grid" aria-label="刻度尺与拨盘">
+      <article class="wide"><div class="stage block"><mo-fling-ruler id="ruler" min="30" max="150" step="0.5" value="62.5" major="10" unit="kg" label="体重"></mo-fling-ruler></div><p>甩动刻度尺：拖动或用力一甩，刻度带着速度继续滑行，最后吸附到最近的 0.5 kg；拉过两端有橡皮筋阻力，点一下刻度直接跳过去。它是真正的滑块：方向键一格，Page Up / Down 一大格。</p><output class="log" data-log="ruler"></output></article>
+      <article><div class="stage"><mo-fling-dial options="XS, S, M, L, XL, XXL" value="M" label="尺码"></mo-fling-dial></div><p>甩动拨盘：绕圈拖动，甩一下会继续转，然后卡进最近的档位轻轻回弹；点外圈的选项直接转过去，方向键一档一档转。</p><output class="log" data-log="dial"></output></article>
+      <article><div class="stage"><mo-fling-dial options="0, 1, 2, 3, 4, 5, 6, 7, 8, 9" value="7" label="密码第一位" style="--usa-dial-size:180px"></mo-fling-dial></div><p>同一个拨盘做成密码锁：十个档位，转过每个数字都会轻轻一震（设备支持时）。</p><output class="log" data-log="lock"></output></article>
+    </section>
+
+    <h2 id="arrange">拖拽网格与悬浮头像</h2>
+    <section class="grid" aria-label="拖拽网格与悬浮头像">
+      <article><div class="stage block"><mo-spring-grid columns="4" label="应用" style="font-size:1.6rem"><div data-key="mail" data-label="邮件">✉️</div><div data-key="maps" data-label="地图">🗺️</div><div data-key="music" data-label="音乐">🎵</div><div data-key="photos" data-label="照片">🖼️</div><div data-key="notes" data-label="备忘录">📝</div><div data-key="clock" data-label="时钟">⏰</div><div data-key="camera" data-label="相机">📷</div><div data-key="games" data-label="游戏">🎮</div></mo-spring-grid></div><p>弹簧网格：鼠标直接拖，触屏长按拿起；其他图块沿弹簧让位，松手按甩出的速度落位。键盘用空格拿起、方向键移动、空格放下、Esc 取消。</p><output class="log" data-log="grid"></output></article>
+      <article><div class="stage block"><mo-chat-head id="head" count="3" label="和 Ada 聊天" style="--usa-chead-height:300px"><div class="feed"><strong>消息列表</strong><div></div><div></div><div></div><div></div><div></div><div></div></div><span data-head class="avatar">AL</span></mo-chat-head><div class="row" style="margin-top:14px"><button type="button" id="restore">找回头像</button></div></div><p>悬浮头像：拖到任意位置，松手按速度飞到左边或右边停靠；拖动时底部升起关闭圈，靠近会被磁吸，松手就关掉。方向键换边，Delete 关闭。</p><output class="log" data-log="head"></output></article>
+    </section>
+
+    <h2 id="swipe">滑动标签与挂牌</h2>
+    <section class="grid" aria-label="滑动标签与挂牌">
+      <article class="wide"><div class="stage block"><mo-fling-tabs label="商品详情"><div data-tab="概览"><p>左右滑动这块面板，或者点上面的标签。标签下面的胶囊会跟着手指走，在两个标签之间先拉长再收拢。</p></div><div data-tab="参数"><p>每一页的高度不一样，切换时外框高度也会平滑过渡。</p><p>重量 1.2 kg · 续航 18 小时 · 支持快充。</p><p>颜色：雾灰、海蓝、松绿。</p></div><div data-tab="评价"><p>“手感很顺。” —— 已购用户</p></div><div data-tab="问答"><p>滑过最后一页，面板会像橡皮筋一样被拉住再弹回。</p></div></mo-fling-tabs></div><p>滑动联动标签页：用力一甩就去下一页，键盘用方向键、Home、End；看不见的面板是 inert 的。</p><output class="log" data-log="tabs"></output></article>
+      <article><div class="stage block"><mo-swing-sign id="sign" label="店门挂牌" length="56"><span class="sign">营业中</span><span data-back class="sign">休息中</span></mo-swing-sign><div class="row" style="margin-top:14px"><button type="button" id="push">推一下</button></div></div><p>摆动挂牌：拖住往一边拉再松手，它按真实钟摆摆几下慢慢停下；鼠标掠过会被带动。点击（或回车、空格）翻到背面，再轻轻晃一下。</p><output class="log" data-log="sign"></output></article>
+    </section>
+
+    <h2 id="looks">外观与手感</h2>
+    <p>颜色、圆角和描边来自外观令牌，每种外观还带一种手感：同样的刻度尺，在粗野风里停得干脆，在黏土风里晃得欢。</p>
+    <section class="looks" aria-label="外观示例" id="looksRow"></section>
+  </main>
+  <!-- every card gets the code drawer (HTML, ES module, React, Vue, desktop) with a copy button; it reads the markup before the elements are defined -->
+  <script type="module" src="./code-drawer.js" data-auto></script>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineWidgets, adoptLooks, applyLook, lookNames, lookInfo } from '../dist/components/widgets.js';
+    defineMoAliases();
+    defineWidgets('17.16');
+    defineWidgets('17.20');
+    adoptLooks('ui');
+
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelectorAll(sel).forEach((el) => el.addEventListener(`usa:${type}`, (e) => fn(e.detail, el)));
+    const PARTS = 'mo-fling-ruler, mo-fling-dial, mo-spring-grid, mo-chat-head, mo-fling-tabs, mo-swing-sign';
+
+    document.getElementById('feel').addEventListener('usa:change', (e) => {
+      const f = e.detail.value === 'default' ? null : e.detail.value;
+      document.querySelectorAll(PARTS).forEach((el) => (f ? el.setAttribute('feel', f) : el.removeAttribute('feel')));
+    });
+
+    on('#ruler', 'change', (d) => log('ruler', `选中 ${d.value} kg`));
+    on('mo-fling-dial[label="尺码"]', 'change', (d) => log('dial', `尺码 ${d.value}`));
+    on('mo-fling-dial[label="密码第一位"]', 'change', (d) => log('lock', `第一位：${d.value}`));
+    on('mo-spring-grid', 'reorder', (d) => log('grid', `第 ${d.from + 1} 个移到第 ${d.to + 1} 位：${d.order.join(' · ')}`));
+    on('mo-chat-head', 'dock', (d) => log('head', d.side === 'left' ? '停靠在左边' : '停靠在右边'));
+    on('mo-chat-head', 'dismiss', () => log('head', '已关闭'));
+    on('mo-chat-head', 'restore', () => log('head', '已找回'));
+    on('mo-chat-head', 'tap', () => log('head', '轻点：交给页面处理（比如打开对话）'));
+    on('mo-fling-tabs', 'change', (d) => log('tabs', `当前：${d.label}`));
+    on('mo-swing-sign', 'flip', (d) => log('sign', d.flipped ? '翻到背面：休息中' : '翻到正面：营业中'));
+    document.getElementById('restore').addEventListener('click', () => document.getElementById('head').restore());
+    document.getElementById('push').addEventListener('click', () => document.getElementById('sign').swing(1));
+
+    const names = lookNames('ui');
+    const picks = ['solid-indigo', 'brutal-jade', 'clay-flamingo'].filter((n) => names.includes(n));
+    const row = document.getElementById('looksRow');
+    for (const name of picks) {
+      const box = document.createElement('div');
+      box.className = 'look';
+      box.innerHTML = `<small>look="${name}" · 手感 ${lookInfo(name).feel}</small><mo-fling-ruler min="0" max="40" value="18" unit="°C" label="温度"></mo-fling-ruler><mo-fling-tabs label="示例"><div data-tab="一"><p>同样的弹簧。</p></div><div data-tab="二"><p>不同的手感。</p></div></mo-fling-tabs>`;
+      applyLook(box, name);
+      row.append(box);
+    }
+  </script>
+</body>
+</html>

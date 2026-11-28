@@ -289,6 +289,14 @@ interface LegacyAttributes {
         rows?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-chat-head': {
+        count?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        inset?: string | boolean | number;
+        label?: string | boolean | number;
+        side?: string | boolean | number;
+    };
     'usa-check': {
         kind?: string | boolean | number;
         label?: string | boolean | number;
@@ -749,12 +757,39 @@ interface LegacyAttributes {
         to?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-fling-dial': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        options?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-fling-marquee': {
         gap?: string | boolean | number;
         haptics?: string | boolean | number;
         label?: string | boolean | number;
         paused?: string | boolean | number;
         speed?: string | boolean | number;
+    };
+    'usa-fling-ruler': {
+        disabled?: string | boolean | number;
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        major?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        spacing?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-fling-tabs': {
+        feel?: string | boolean | number;
+        haptics?: string | boolean | number;
+        index?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-fluid-type': {
         accent?: string | boolean | number;
@@ -2354,6 +2389,14 @@ interface LegacyAttributes {
         suffix?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-spring-grid': {
+        columns?: string | boolean | number;
+        feel?: string | boolean | number;
+        gap?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        'row-height'?: string | boolean | number;
+    };
     'usa-spring-island': {
         close?: string | boolean | number;
         expanded?: string | boolean | number;
@@ -2599,6 +2642,13 @@ interface LegacyAttributes {
         duration?: string | boolean | number;
         label?: string | boolean | number;
         paused?: string | boolean | number;
+    };
+    'usa-swing-sign': {
+        feel?: string | boolean | number;
+        flipped?: string | boolean | number;
+        haptics?: string | boolean | number;
+        label?: string | boolean | number;
+        length?: string | boolean | number;
     };
     'usa-swipe-deck': {
         label?: string | boolean | number;
@@ -3031,6 +3081,12 @@ interface LegacyEvents {
         'usa:send': CustomEvent<any>;
         'usa:stop': CustomEvent<any>;
     };
+    'usa-chat-head': {
+        'usa:dismiss': CustomEvent<any>;
+        'usa:dock': CustomEvent<any>;
+        'usa:restore': CustomEvent<any>;
+        'usa:tap': CustomEvent<any>;
+    };
     'usa-check': {
         'usa:complete': CustomEvent<any>;
     };
@@ -3254,8 +3310,19 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
     };
+    'usa-fling-dial': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-fling-marquee': {
         'usa:pause': CustomEvent<any>;
+    };
+    'usa-fling-ruler': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
+    'usa-fling-tabs': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-fluid-type': {
         'usa:action': CustomEvent<any>;
@@ -3949,6 +4016,9 @@ interface LegacyEvents {
     'usa-spring-counter': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-spring-grid': {
+        'usa:reorder': CustomEvent<any>;
+    };
     'usa-spring-island': {
         'usa:toggle': CustomEvent<any>;
     };
@@ -4060,6 +4130,9 @@ interface LegacyEvents {
         'usa:tick': CustomEvent<any>;
     };
     'usa-sweep-lines': {};
+    'usa-swing-sign': {
+        'usa:flip': CustomEvent<any>;
+    };
     'usa-swipe-deck': {
         'usa:empty': CustomEvent<any>;
         'usa:swipe': CustomEvent<any>;

@@ -1,4 +1,4 @@
-# Motionary components (423)
+# Motionary components (429)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -51,6 +51,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-center-bars>`](usa-center-bars.md) — Center bars
 - [`<mo-chapter-nav>`](usa-chapter-nav.md) — Chapter nav
 - [`<mo-chat-composer>`](usa-chat-composer.md) — AI chat composer
+- [`<mo-chat-head>`](usa-chat-head.md) — Chat head
 - [`<mo-checklist>`](usa-checklist.md) — Onboarding checklist
 - [`<mo-chip-input>`](usa-chip-input.md) — Chip input
 - [`<mo-clock-control>`](usa-clock-control.md) — Motion clock control
@@ -84,7 +85,10 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-field>`](usa-field.md) — Animated field
 - [`<mo-file-tree>`](usa-file-tree.md) — File tree
 - [`<mo-flight-status>`](usa-flight-status.md) — Flight status
+- [`<mo-fling-dial>`](usa-fling-dial.md) — Fling dial
 - [`<mo-fling-marquee>`](usa-fling-marquee.md) — Fling marquee
+- [`<mo-fling-ruler>`](usa-fling-ruler.md) — Fling ruler
+- [`<mo-fling-tabs>`](usa-fling-tabs.md) — Fling tabs
 - [`<mo-form-stepper>`](usa-form-stepper.md) — Validated form steps
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
@@ -203,6 +207,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-spring-collapse>`](usa-spring-collapse.md) — Spring collapse
 - [`<mo-spring-copy>`](usa-spring-copy.md) — Spring copy
 - [`<mo-spring-counter>`](usa-spring-counter.md) — Spring counter
+- [`<mo-spring-grid>`](usa-spring-grid.md) — Spring grid
 - [`<mo-spring-island>`](usa-spring-island.md) — Spring island
 - [`<mo-spring-like>`](usa-spring-like.md) — Spring like
 - [`<mo-spring-list>`](usa-spring-list.md) — Spring list
@@ -226,6 +231,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-suggestion-chips>`](usa-suggestion-chips.md) — Suggestion chips
 - [`<mo-sun-timeline>`](usa-sun-timeline.md) — Sun timeline
 - [`<mo-sweep-lines>`](usa-sweep-lines.md) — Sweep lines
+- [`<mo-swing-sign>`](usa-swing-sign.md) — Swing sign
 - [`<mo-tab-bar>`](usa-tab-bar.md) — Tabs with animated indicator
 - [`<mo-tabs>`](usa-tabs.md) — Tabs
 - [`<mo-tada-button>`](usa-tada-button.md) — Tada button

@@ -3407,6 +3407,36 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/fling-ruler' (per-entry, fixed)",
+    "import": "import { defineFlingRuler } from 'pkg/widgets/fling-ruler'; console.log(defineFlingRuler);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/fling-dial' (per-entry, fixed)",
+    "import": "import { defineFlingDial } from 'pkg/widgets/fling-dial'; console.log(defineFlingDial);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-grid' (per-entry, fixed)",
+    "import": "import { defineSpringGrid } from 'pkg/widgets/spring-grid'; console.log(defineSpringGrid);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/chat-head' (per-entry, fixed)",
+    "import": "import { defineChatHead } from 'pkg/widgets/chat-head'; console.log(defineChatHead);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/fling-tabs' (per-entry, fixed)",
+    "import": "import { defineFlingTabs } from 'pkg/widgets/fling-tabs'; console.log(defineFlingTabs);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/swing-sign' (per-entry, fixed)",
+    "import": "import { defineSwingSign } from 'pkg/widgets/swing-sign'; console.log(defineSwingSign);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

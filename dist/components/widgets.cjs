@@ -161,6 +161,12 @@ var widgets_springScrollbar = require('../widgets/spring-scrollbar.cjs');
 var widgets_slideConfirm = require('../widgets/slide-confirm.cjs');
 var widgets_springChain = require('../widgets/spring-chain.cjs');
 var widgets_flingMarquee = require('../widgets/fling-marquee.cjs');
+var widgets_flingRuler = require('../widgets/fling-ruler.cjs');
+var widgets_flingDial = require('../widgets/fling-dial.cjs');
+var widgets_springGrid = require('../widgets/spring-grid.cjs');
+var widgets_chatHead = require('../widgets/chat-head.cjs');
+var widgets_flingTabs = require('../widgets/fling-tabs.cjs');
+var widgets_swingSign = require('../widgets/swing-sign.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
 var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
@@ -327,6 +333,7 @@ var widgets_particleButton = require('../widgets/particle-button.cjs');
 var widgets_haloSegmented = require('../widgets/halo-segmented.cjs');
 var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
+var snapKit20 = require('../chunks/snap-kit-20-CfLyvsrA.cjs');
 var flingKit19 = require('../chunks/fling-kit-19-BgC3V4FD.cjs');
 var dampedKit18 = require('../chunks/damped-kit-18-CM0mPVmn.cjs');
 var springKit17 = require('../chunks/spring-kit-17-Y1urAq72.cjs');
@@ -815,6 +822,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.20': { 'usa-fling-ruler': widgets_flingRuler.defineFlingRuler, 'usa-fling-dial': widgets_flingDial.defineFlingDial, 'usa-spring-grid': widgets_springGrid.defineSpringGrid, 'usa-chat-head': widgets_chatHead.defineChatHead, 'usa-fling-tabs': widgets_flingTabs.defineFlingTabs, 'usa-swing-sign': widgets_swingSign.defineSwingSign },
     '17.19': { 'usa-spring-pip': widgets_springPip.defineSpringPip, 'usa-spring-island': widgets_springIsland.defineSpringIsland, 'usa-spring-peek': widgets_springPeek.defineSpringPeek, 'usa-spring-scrollbar': widgets_springScrollbar.defineSpringScrollbar, 'usa-slide-confirm': widgets_slideConfirm.defineSlideConfirm, 'usa-spring-chain': widgets_springChain.defineSpringChain, 'usa-fling-marquee': widgets_flingMarquee.defineFlingMarquee },
     '17.18': { 'usa-spring-collapse': widgets_springCollapse.defineSpringCollapse, 'usa-read-more': widgets_readMore.defineReadMore, 'usa-spring-sheet': widgets_springSheet.defineSpringSheet, 'usa-spring-pager': widgets_springPager.defineSpringPager, 'usa-elastic-scroll': widgets_elasticScroll.defineElasticScroll, 'usa-spring-stack': widgets_springStack.defineSpringStack },
     '17.17': { 'usa-spring-like': widgets_springLike.defineSpringLike, 'usa-spring-rating': widgets_springRating.defineSpringRating, 'usa-spring-copy': widgets_springCopy.defineSpringCopy, 'usa-spring-tags': widgets_springTags.defineSpringTags, 'usa-spring-code': widgets_springCode.defineSpringCode, 'usa-spring-list': widgets_springList.defineSpringList, 'usa-spring-swipe': widgets_springSwipe.defineSpringSwipe, 'usa-spring-toasts': widgets_springToasts.defineSpringToasts, 'usa-spring-accordion': widgets_springAccordion.defineSpringAccordion, 'usa-spring-counter': widgets_springCounter.defineSpringCounter },
@@ -1082,6 +1090,12 @@ exports.defineSpringScrollbar = widgets_springScrollbar.defineSpringScrollbar;
 exports.defineSlideConfirm = widgets_slideConfirm.defineSlideConfirm;
 exports.defineSpringChain = widgets_springChain.defineSpringChain;
 exports.defineFlingMarquee = widgets_flingMarquee.defineFlingMarquee;
+exports.defineFlingRuler = widgets_flingRuler.defineFlingRuler;
+exports.defineFlingDial = widgets_flingDial.defineFlingDial;
+exports.defineSpringGrid = widgets_springGrid.defineSpringGrid;
+exports.defineChatHead = widgets_chatHead.defineChatHead;
+exports.defineFlingTabs = widgets_flingTabs.defineFlingTabs;
+exports.defineSwingSign = widgets_swingSign.defineSwingSign;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
@@ -1317,6 +1331,28 @@ exports.defineParticleButton = widgets_particleButton.defineParticleButton;
 exports.defineHaloSegmented = widgets_haloSegmented.defineHaloSegmented;
 exports.defineHaloSlider = widgets_haloSlider.defineHaloSlider;
 exports.defineOrbitProgress = widgets_orbitProgress.defineOrbitProgress;
+exports.RULER_MAX_STEPS = snapKit20.RULER_MAX_STEPS;
+exports.detentAt = snapKit20.detentAt;
+exports.detentRotation = snapKit20.detentRotation;
+exports.dialAngle = snapKit20.dialAngle;
+exports.dialDelta = snapKit20.dialDelta;
+exports.dialRest = snapKit20.dialRest;
+exports.gridReorder = snapKit20.gridReorder;
+exports.gridSlot = snapKit20.gridSlot;
+exports.headRest = snapKit20.headRest;
+exports.indicatorAt = snapKit20.indicatorAt;
+exports.magnetPull = snapKit20.magnetPull;
+exports.parseDialOptions = snapKit20.parseDialOptions;
+exports.pendulumAtRest = snapKit20.pendulumAtRest;
+exports.pendulumStep = snapKit20.pendulumStep;
+exports.rulerIndex = snapKit20.rulerIndex;
+exports.rulerRange = snapKit20.rulerRange;
+exports.rulerRest = snapKit20.rulerRest;
+exports.rulerValue = snapKit20.rulerValue;
+exports.slotAtPoint = snapKit20.slotAtPoint;
+exports.slotStep = snapKit20.slotStep;
+exports.stepDecimals = snapKit20.stepDecimals;
+exports.swingImpulse = snapKit20.swingImpulse;
 exports.PIP_CORNERS = flingKit19.PIP_CORNERS;
 exports.chainPath = flingKit19.chainPath;
 exports.cornerPoint = flingKit19.cornerPoint;
