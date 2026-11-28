@@ -1,0 +1,109 @@
+/* 17.20 snap and swing parts: fling-ruler, fling-dial, spring-grid, chat-head, fling-tabs, swing-sign.
+   All motion comes from the 17.16 spring core (and a small pendulum for the sign) in script; CSS only sets the look, from the look tokens. */
+:is(usa-fling-ruler, mo-fling-ruler, usa-fling-dial, mo-fling-dial, usa-spring-grid, mo-spring-grid, usa-chat-head, mo-chat-head, usa-fling-tabs, mo-fling-tabs, usa-swing-sign, mo-swing-sign) {display:block; min-width:0}
+.usa-snkit {
+  --sn-ink: var(--mo-kit-ink, #18181b);
+  --sn-paper: var(--mo-kit-paper, #ffffff);
+  --sn-accent: var(--mo-kit-accent, #4f46e5);
+  --sn-on-accent: var(--mo-kit-on-accent, #ffffff);
+  --sn-soft: var(--mo-kit-soft, color-mix(in srgb, var(--sn-ink) 7%, var(--sn-paper)));
+  --sn-line: var(--mo-kit-line, color-mix(in srgb, var(--sn-ink) 16%, transparent));
+  --sn-mute: color-mix(in srgb, var(--sn-ink) 60%, transparent);
+  --sn-radius: var(--mo-kit-radius, 14px);
+  --sn-shadow: var(--mo-kit-shadow, 0 14px 36px -14px color-mix(in srgb, var(--sn-ink) 45%, transparent));
+  --sn-bw: var(--mo-kit-border-width, 1px);
+  --sn-bs: var(--mo-kit-border-style, solid);
+  box-sizing:border-box; color:var(--sn-ink); font:inherit;
+}
+.usa-snkit *, .usa-snkit *::before, .usa-snkit *::after {box-sizing:border-box}
+:where(.usa-snkit) button {font:inherit; color:inherit; -webkit-appearance:none; appearance:none; background:none; border:0; margin:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent}
+.usa-snkit :focus-visible {outline:2px solid var(--sn-accent); outline-offset:3px}
+.usa-snkit svg {display:block}
+
+/* fling-ruler */
+.usa-ruler {display:grid; gap:10px; justify-items:center}
+.usa-ruler-value {font-size:var(--usa-ruler-value-size, 2.2rem); font-weight:650; letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1}
+.usa-ruler-value small {font-size:.45em; font-weight:600; color:var(--sn-mute); margin-inline-start:.25em; letter-spacing:0}
+.usa-ruler-view {position:relative; width:100%; height:var(--usa-ruler-height, 76px); overflow:hidden; border-radius:var(--sn-radius); background:var(--sn-soft); border:var(--sn-bw) var(--sn-bs) var(--sn-line); cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; -webkit-mask-image:linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image:linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)}
+.usa-ruler[data-dragging] .usa-ruler-view {cursor:grabbing}
+.usa-ruler[data-disabled] .usa-ruler-view {cursor:not-allowed; opacity:.5}
+.usa-ruler-view:focus-visible {outline-offset:2px}
+.usa-ruler-strip {position:absolute; left:0; bottom:0; height:100%; will-change:transform;
+  background-image:linear-gradient(90deg, color-mix(in srgb, var(--sn-ink) 70%, transparent) 2px, transparent 2px), linear-gradient(90deg, color-mix(in srgb, var(--sn-ink) 34%, transparent) 1px, transparent 1px);
+  background-size:var(--usa-ruler-major-px, 100px) 46%, var(--usa-ruler-step-px, 10px) 24%;
+  background-repeat:repeat-x; background-position:-1px 100%, 0 100%}
+.usa-ruler-label {position:absolute; top:8px; transform:translateX(-50%); font-size:11px; font-weight:600; color:var(--sn-mute); font-variant-numeric:tabular-nums; white-space:nowrap; pointer-events:none}
+.usa-ruler-needle {position:absolute; left:50%; top:6px; bottom:0; width:3px; margin-left:-1.5px; border-radius:3px; background:var(--sn-accent); pointer-events:none; box-shadow:0 0 0 3px color-mix(in srgb, var(--sn-accent) 18%, transparent)}
+.usa-ruler-needle::before {content:''; position:absolute; left:50%; top:-6px; width:11px; height:11px; margin-left:-5.5px; border-radius:50%; background:var(--sn-accent)}
+
+/* fling-dial */
+.usa-fdial {position:relative; width:var(--usa-dial-size, 220px); aspect-ratio:1; margin-inline:auto}
+.usa-fdial-wheel {position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 50% 38%, var(--sn-paper), var(--sn-soft) 72%); border:var(--sn-bw) var(--sn-bs) var(--sn-line); box-shadow:var(--sn-shadow), inset 0 -10px 24px -16px color-mix(in srgb, var(--sn-ink) 40%, transparent); cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none}
+.usa-fdial[data-dragging] .usa-fdial-wheel {cursor:grabbing}
+.usa-fdial[data-disabled] .usa-fdial-wheel {cursor:not-allowed; opacity:.5}
+.usa-fdial-wheel:focus-visible {outline-offset:4px}
+.usa-fdial-face {position:absolute; inset:0; will-change:transform}
+.usa-fdial-face svg {position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.usa-fdial-tick {stroke:color-mix(in srgb, var(--sn-ink) 32%, transparent); stroke-width:1.4; stroke-linecap:round}
+.usa-fdial-tick[data-major] {stroke:color-mix(in srgb, var(--sn-ink) 70%, transparent); stroke-width:2.4}
+.usa-fdial-opt {position:absolute; left:50%; top:50%; font-size:13px; font-weight:650; white-space:nowrap; color:var(--sn-mute); pointer-events:none}
+.usa-fdial-opt[data-on] {color:var(--sn-ink)}
+.usa-fdial-hub {position:absolute; inset:31%; border-radius:50%; display:grid; place-items:center; text-align:center; background:var(--sn-paper); border:var(--sn-bw) var(--sn-bs) var(--sn-line); box-shadow:0 6px 16px -10px color-mix(in srgb, var(--sn-ink) 50%, transparent); pointer-events:none; font-weight:700; font-size:var(--usa-dial-value-size, 1.25rem); line-height:1.1; padding:6px; overflow:hidden}
+.usa-fdial-mark {position:absolute; left:50%; top:-4px; width:0; height:0; margin-left:-8px; border:8px solid transparent; border-top:12px solid var(--sn-accent); border-bottom:0; pointer-events:none; filter:drop-shadow(0 2px 3px color-mix(in srgb, var(--sn-ink) 30%, transparent))}
+
+/* spring-grid */
+.usa-sgrid {position:relative; width:100%; touch-action:manipulation}
+.usa-sgrid-item {position:absolute; left:0; top:0; display:grid; place-items:center; border-radius:var(--sn-radius); background:var(--sn-paper); border:var(--sn-bw) var(--sn-bs) var(--sn-line); cursor:grab; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; will-change:transform; text-align:center; overflow:hidden}
+.usa-sgrid-item > :first-child {margin-top:0}
+.usa-sgrid-item > :last-child {margin-bottom:0}
+.usa-sgrid-item[data-lifted] {z-index:3; cursor:grabbing; box-shadow:var(--sn-shadow); border-color:var(--sn-accent)}
+.usa-sgrid[data-editing] .usa-sgrid-item:not([data-lifted]) {animation:usa-sgrid-jiggle .26s ease-in-out infinite alternate}
+.usa-sgrid[data-editing] .usa-sgrid-item:nth-child(2n):not([data-lifted]) {animation-delay:-.13s}
+@keyframes usa-sgrid-jiggle {from {rotate:-1.2deg} to {rotate:1.2deg}}
+
+/* chat-head */
+.usa-chead {position:relative; height:var(--usa-chead-height, 320px); overflow:hidden; border-radius:var(--sn-radius); border:var(--sn-bw) var(--sn-bs) var(--sn-line); background:var(--sn-soft); isolation:isolate}
+.usa-chead-page {height:100%; padding:18px; overflow:auto}
+.usa-chead-page > :first-child {margin-top:0}
+.usa-chead-btn {position:absolute; left:0; top:0; z-index:3; width:var(--usa-chead-size, 56px); height:var(--usa-chead-size, 56px); border-radius:50%; background:var(--sn-accent); color:var(--sn-on-accent); display:grid; place-items:center; font-weight:700; box-shadow:0 10px 24px -8px color-mix(in srgb, var(--sn-ink) 55%, transparent); touch-action:none; will-change:transform; user-select:none; -webkit-user-select:none; overflow:visible}
+.usa-chead-btn > span:first-child {display:grid; place-items:center; width:100%; height:100%; border-radius:50%; overflow:hidden}
+.usa-chead[data-dragging] .usa-chead-btn {cursor:grabbing}
+.usa-chead[data-dismissed] .usa-chead-btn {visibility:hidden}
+.usa-chead-badge {position:absolute; right:-3px; top:-3px; min-width:20px; height:20px; padding:0 6px; border-radius:999px; background:#ef4444; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; box-shadow:0 0 0 2px var(--sn-paper)}
+.usa-chead-target {position:absolute; left:50%; bottom:22px; z-index:2; width:60px; height:60px; margin-left:-30px; border-radius:50%; display:grid; place-items:center; background:color-mix(in srgb, var(--sn-ink) 78%, transparent); color:var(--sn-paper); font-size:24px; line-height:1; pointer-events:none; opacity:0; will-change:transform, opacity}
+.usa-chead-shade {position:absolute; inset:auto 0 0 0; height:45%; z-index:1; background:linear-gradient(transparent, color-mix(in srgb, var(--sn-ink) 30%, transparent)); pointer-events:none; opacity:0}
+
+/* fling-tabs */
+.usa-ftabs {display:grid; gap:12px; min-width:0}
+.usa-ftabs-bar {position:relative; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; padding:4px; border-radius:999px; background:var(--sn-soft); border:var(--sn-bw) var(--sn-bs) var(--sn-line)}
+.usa-ftabs-bar::-webkit-scrollbar {display:none}
+.usa-ftabs-tab {position:relative; z-index:1; flex:1 0 auto; padding:8px 16px; border-radius:999px; font-weight:600; font-size:.92rem; white-space:nowrap; color:var(--sn-mute); transition:color .2s}
+.usa-ftabs-tab[aria-selected="true"] {color:var(--sn-on-accent)}
+.usa-ftabs-ink {position:absolute; left:0; top:4px; bottom:4px; width:0; border-radius:999px; background:var(--sn-accent); will-change:transform, width; pointer-events:none}
+.usa-ftabs-view {position:relative; overflow:hidden; touch-action:pan-y; border-radius:var(--sn-radius)}
+.usa-ftabs[data-dragging] .usa-ftabs-view {user-select:none; -webkit-user-select:none; cursor:grabbing}
+.usa-ftabs-track {display:flex; align-items:flex-start; will-change:transform}
+.usa-ftabs-panel {flex:0 0 100%; min-width:0; padding:16px 18px; border-radius:var(--sn-radius); background:var(--sn-paper); border:var(--sn-bw) var(--sn-bs) var(--sn-line)}
+.usa-ftabs-panel > :first-child {margin-top:0}
+.usa-ftabs-panel > :last-child {margin-bottom:0}
+
+/* swing-sign */
+.usa-swing {position:relative; display:grid; justify-items:center; padding-top:10px; min-height:calc(var(--usa-swing-length, 60px) + 130px); perspective:900px}
+.usa-swing-nail {position:absolute; top:4px; left:50%; width:14px; height:14px; margin-left:-7px; border-radius:50%; z-index:2; background:radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--sn-paper) 80%, #999), color-mix(in srgb, var(--sn-ink) 70%, transparent)); box-shadow:0 2px 4px color-mix(in srgb, var(--sn-ink) 40%, transparent)}
+.usa-swing-rig {position:relative; display:grid; justify-items:center; transform-origin:50% 1px; will-change:transform; padding-top:var(--usa-swing-length, 60px)}
+.usa-swing-rig svg {position:absolute; left:0; top:0; width:100%; height:var(--usa-swing-length, 60px); overflow:visible; pointer-events:none}
+.usa-swing-rig line {stroke:color-mix(in srgb, var(--sn-ink) 55%, transparent); stroke-width:1.6; stroke-linecap:round}
+.usa-swing-card {position:relative; display:grid; min-width:var(--usa-swing-width, 180px); transform-style:preserve-3d; will-change:transform; cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none}
+.usa-swing[data-dragging] .usa-swing-card {cursor:grabbing}
+.usa-swing-face {grid-area:1/1; display:grid; place-items:center; text-align:center; padding:18px 22px; border-radius:var(--sn-radius); background:var(--sn-paper); border:var(--sn-bw) var(--sn-bs) var(--sn-line); box-shadow:var(--sn-shadow); -webkit-backface-visibility:hidden; backface-visibility:hidden}
+.usa-swing-face > :first-child {margin-top:0}
+.usa-swing-face > :last-child {margin-bottom:0}
+.usa-swing-back {transform:rotateY(180deg); background:var(--sn-ink); color:var(--sn-paper)}
+.usa-swing-card::before, .usa-swing-card::after {content:''; position:absolute; top:10px; width:8px; height:8px; margin-left:-4px; border-radius:50%; background:color-mix(in srgb, var(--sn-ink) 45%, transparent); z-index:1; transform:translateZ(1px)}
+.usa-swing-card::before {left:24%}
+.usa-swing-card::after {left:76%}
+
+@media (prefers-reduced-motion: reduce) {
+  .usa-sgrid[data-editing] .usa-sgrid-item:not([data-lifted]) {animation:none}
+  .usa-ftabs-tab {transition:none}
+}

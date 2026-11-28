@@ -8,6 +8,7 @@ import { components as instruments } from './catalog/instruments.js';
 // 17.17: the release pages from 17.4 on had a live demo in the gallery but no Store card, so they could not be
 // opened into the Store's code tabs. Every one of them is a Store card now, newest release first.
 import { components as springs } from './catalog/springs.js';
+import { components as snap } from './catalog/snap.js';
 import { components as fling } from './catalog/fling.js';
 import { components as damped } from './catalog/damped.js';
 import { components as micro } from './catalog/micro.js';
@@ -33,7 +34,7 @@ const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories:
 const svelte = (esm, html) => `<script>\n  ${esm.split('\n/*')[0].trim().replace(/\n/g, '\n  ')}\n</script>\n\n${html}`;
 
 /** The 17.4–17.17 release catalogs, newest first (each is also a tab of the home page Collections). */
-export const RELEASE_COMPONENTS = [...fling, ...damped, ...springs, ...micro, ...toolkit, ...icons, ...studio, ...parts, ...blocks, ...kit, ...moments, ...tactile, ...forms, ...matter, ...activity, ...luminous].filter((c) => c.kind === 'element');
+export const RELEASE_COMPONENTS = [...snap, ...fling, ...damped, ...springs, ...micro, ...toolkit, ...icons, ...studio, ...parts, ...blocks, ...kit, ...moments, ...tactile, ...forms, ...matter, ...activity, ...luminous].filter((c) => c.kind === 'element');
 
 export const COMPONENT_ITEMS = [...widgets, ...instruments, ...RELEASE_COMPONENTS].map((c) => {
   const s = componentSnippets(c);

@@ -162,6 +162,12 @@ import { defineSpringScrollbar, type UsaSpringScrollbarElement } from './spring-
 import { defineSlideConfirm, type UsaSlideConfirmElement } from './slide-confirm';
 import { defineSpringChain, type UsaSpringChainElement } from './spring-chain';
 import { defineFlingMarquee, type UsaFlingMarqueeElement } from './fling-marquee';
+import { defineFlingRuler, type UsaFlingRulerElement } from './fling-ruler';
+import { defineFlingDial, type UsaFlingDialElement } from './fling-dial';
+import { defineSpringGrid, type UsaSpringGridElement } from './spring-grid';
+import { defineChatHead, type UsaChatHeadElement } from './chat-head';
+import { defineFlingTabs, type UsaFlingTabsElement } from './fling-tabs';
+import { defineSwingSign, type UsaSwingSignElement } from './swing-sign';
 import { defineSquishStepper, type UsaSquishStepperElement } from './squish-stepper';
 import { defineAnalogStick, type UsaAnalogStickElement } from './analog-stick';
 import { defineTransferButton, type UsaTransferButtonElement } from './transfer-button';
@@ -502,6 +508,13 @@ export { defineSpringScrollbar, type UsaSpringScrollbarElement };
 export { defineSlideConfirm, type UsaSlideConfirmElement };
 export { defineSpringChain, type UsaSpringChainElement };
 export { defineFlingMarquee, type UsaFlingMarqueeElement };
+export { defineFlingRuler, type UsaFlingRulerElement };
+export { defineFlingDial, type UsaFlingDialElement };
+export { defineSpringGrid, type UsaSpringGridElement };
+export { defineChatHead, type UsaChatHeadElement };
+export { defineFlingTabs, type UsaFlingTabsElement };
+export { defineSwingSign, type UsaSwingSignElement };
+export { stepDecimals, rulerRange, rulerValue, rulerIndex, rulerRest, parseDialOptions, dialAngle, dialDelta, detentAt, detentRotation, dialRest, gridSlot, slotAtPoint, slotStep, gridReorder, headRest, magnetPull, indicatorAt, pendulumStep, swingImpulse, pendulumAtRest, RULER_MAX_STEPS, type HeadSide } from './snap-kit-20';
 export { parseCorner, cornerPoint, pipCorner, cornerStep, islandShape, thumbMetrics, scrollForThumb, labelAt, slideOutcome, chainPath, linkSize, wrapOffset, cruise, PIP_CORNERS, type PipCorner } from './fling-kit-19';
 export { parseSnaps, sheetRest, pageAfter, dampedAt, pilePose, linesHeight } from './damped-kit-18';
 export { burstPoints, compactCount, ratingAt, starFill, parseTags, addTags, codeChars, slotAt, shiftFor, swipeOpen, stackLayout, counterText, alignDigits, openSet } from './spring-kit-17';
@@ -788,6 +801,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.20': { 'usa-fling-ruler': defineFlingRuler, 'usa-fling-dial': defineFlingDial, 'usa-spring-grid': defineSpringGrid, 'usa-chat-head': defineChatHead, 'usa-fling-tabs': defineFlingTabs, 'usa-swing-sign': defineSwingSign },
   '17.19': { 'usa-spring-pip': defineSpringPip, 'usa-spring-island': defineSpringIsland, 'usa-spring-peek': defineSpringPeek, 'usa-spring-scrollbar': defineSpringScrollbar, 'usa-slide-confirm': defineSlideConfirm, 'usa-spring-chain': defineSpringChain, 'usa-fling-marquee': defineFlingMarquee },
   '17.18': { 'usa-spring-collapse': defineSpringCollapse, 'usa-read-more': defineReadMore, 'usa-spring-sheet': defineSpringSheet, 'usa-spring-pager': defineSpringPager, 'usa-elastic-scroll': defineElasticScroll, 'usa-spring-stack': defineSpringStack },
   '17.17': { 'usa-spring-like': defineSpringLike, 'usa-spring-rating': defineSpringRating, 'usa-spring-copy': defineSpringCopy, 'usa-spring-tags': defineSpringTags, 'usa-spring-code': defineSpringCode, 'usa-spring-list': defineSpringList, 'usa-spring-swipe': defineSpringSwipe, 'usa-spring-toasts': defineSpringToasts, 'usa-spring-accordion': defineSpringAccordion, 'usa-spring-counter': defineSpringCounter },
@@ -1136,6 +1150,18 @@ declare global {
     'mo-spring-chain': UsaSpringChainElement;
     'usa-fling-marquee': UsaFlingMarqueeElement;
     'mo-fling-marquee': UsaFlingMarqueeElement;
+    'usa-fling-ruler': UsaFlingRulerElement;
+    'mo-fling-ruler': UsaFlingRulerElement;
+    'usa-fling-dial': UsaFlingDialElement;
+    'mo-fling-dial': UsaFlingDialElement;
+    'usa-spring-grid': UsaSpringGridElement;
+    'mo-spring-grid': UsaSpringGridElement;
+    'usa-chat-head': UsaChatHeadElement;
+    'mo-chat-head': UsaChatHeadElement;
+    'usa-fling-tabs': UsaFlingTabsElement;
+    'mo-fling-tabs': UsaFlingTabsElement;
+    'usa-swing-sign': UsaSwingSignElement;
+    'mo-swing-sign': UsaSwingSignElement;
     'usa-lens-stack': UsaLensStackElement;
     'mo-lens-stack': UsaLensStackElement;
     'usa-iris-diaphragm': UsaIrisDiaphragmElement;

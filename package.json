@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.18.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 423 animated Web Components (91 core, 332 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 429 animated Web Components (91 core, 338 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,66 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/fling-ruler": {
+      "import": {
+        "types": "./dist/widgets/fling-ruler.d.ts",
+        "default": "./dist/widgets/fling-ruler.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fling-ruler.d.cts",
+        "default": "./dist/widgets/fling-ruler.cjs"
+      }
+    },
+    "./widgets/fling-dial": {
+      "import": {
+        "types": "./dist/widgets/fling-dial.d.ts",
+        "default": "./dist/widgets/fling-dial.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fling-dial.d.cts",
+        "default": "./dist/widgets/fling-dial.cjs"
+      }
+    },
+    "./widgets/spring-grid": {
+      "import": {
+        "types": "./dist/widgets/spring-grid.d.ts",
+        "default": "./dist/widgets/spring-grid.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-grid.d.cts",
+        "default": "./dist/widgets/spring-grid.cjs"
+      }
+    },
+    "./widgets/chat-head": {
+      "import": {
+        "types": "./dist/widgets/chat-head.d.ts",
+        "default": "./dist/widgets/chat-head.js"
+      },
+      "require": {
+        "types": "./dist/widgets/chat-head.d.cts",
+        "default": "./dist/widgets/chat-head.cjs"
+      }
+    },
+    "./widgets/fling-tabs": {
+      "import": {
+        "types": "./dist/widgets/fling-tabs.d.ts",
+        "default": "./dist/widgets/fling-tabs.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fling-tabs.d.cts",
+        "default": "./dist/widgets/fling-tabs.cjs"
+      }
+    },
+    "./widgets/swing-sign": {
+      "import": {
+        "types": "./dist/widgets/swing-sign.d.ts",
+        "default": "./dist/widgets/swing-sign.js"
+      },
+      "require": {
+        "types": "./dist/widgets/swing-sign.d.cts",
+        "default": "./dist/widgets/swing-sign.cjs"
       }
     },
     "./widgets/spring-pip": {

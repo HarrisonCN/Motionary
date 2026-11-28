@@ -1,5 +1,5 @@
 /**
- * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab, 17.17 the spring parts tab, 17.18 the damped parts tab, 17.19 the fling parts tab).
+ * motionary showcase — the "Collections" section of the store page (17.12; 17.13 adds the studio tab, 17.14 the icons tab, 17.16 the micro-interaction tab, 17.17 the spring parts tab, 17.18 the damped parts tab, 17.19 the fling parts tab, 17.20 the snap and swing tab).
  *
  * Every release page (17.14 icons, 17.13 studio, 17.12 parts, 17.11 blocks, looks, 17.10 kit, 17.9 moments, 17.7 forms, 17.6 matter, 17.5 activity,
  * 17.4 luminous) gets a tab with a handful of its widgets running live, so most of them can be tried without leaving
@@ -11,6 +11,7 @@
  * into HTML / ES module / React / Vue / desktop code with a copy button.
  */
 import { components as springs } from './catalog/springs.js';
+import { components as snap } from './catalog/snap.js';
 import { components as fling } from './catalog/fling.js';
 import { components as damped } from './catalog/damped.js';
 import { components as micro } from './catalog/micro.js';
@@ -36,6 +37,13 @@ const pick = (list, ids) => ids.split(' ').map((id) => list.find((c) => c.id ===
 
 /** The tabs, newest first. `page` is the full demo page each one links to. */
 export const COLLECTIONS = [
+  {
+    id: 'snap', since: '17.20', page: './snap.html',
+    title: { en: 'Snap & swing', zh: '吸附与摆动' },
+    blurb: { en: 'Rulers, dials, grids, tabs, a chat head and a hanging sign you can fling, spin and drag: they keep your speed, then snap into place or swing to a stop on real physics.', zh: '刻度尺、拨盘、网格、标签页、悬浮头像和挂牌都能甩、转、拖：保留手上的速度，再吸附到位，或按真实物理摆动后停下。' },
+    items: pick(snap, 'fling-ruler fling-dial spring-grid chat-head fling-tabs swing-sign'),
+    total: snap.length,
+  },
   {
     id: 'fling', since: '17.19', page: './fling.html',
     title: { en: 'Fling & settle', zh: '甩动回弹' },
@@ -178,7 +186,7 @@ const STR = {
 };
 
 /** Demos that need more room than one grid column. */
-const WIDE = new Set(['spring-pip', 'fling-marquee', 'spring-chain', 'spring-sheet', 'spring-pager', 'spring-list', 'spring-accordion', 'bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
+const WIDE = new Set(['fling-tabs', 'chat-head', 'spring-pip', 'fling-marquee', 'spring-chain', 'spring-sheet', 'spring-pager', 'spring-list', 'spring-accordion', 'bar-race', 'comparison-table', 'calendar-strip', 'icon-picker', 'line-chart', 'gantt', 'diff-viewer', 'comment-thread', 'progress-tabs', 'heatmap', 'connect-beam', 'pricing', 'bento', 'data-table', 'expand-cards', 'orbit-gallery', 'split-pane', 'form-stepper', 'sun-timeline', 'workout-player']);
 
 const LOOK_PICKS = ['solid-indigo', 'glass-ocean', 'neon-midnight', 'paper-amber', 'brutal-coral', 'terminal-forest', 'gradient-sunset', 'soft-rose', 'clay-cherry', 'neumorph-cobalt', 'retro-teal', 'synth-velvet', 'luxe-sand', 'editorial-olive', 'sketch-plum', 'pill-aurora'];
 

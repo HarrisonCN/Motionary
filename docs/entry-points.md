@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (332)
+## Widgets (338)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,12 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-fling-ruler>` | `motionary/widgets/fling-ruler` | `defineFlingRuler()` |
+| `<usa-fling-dial>` | `motionary/widgets/fling-dial` | `defineFlingDial()` |
+| `<usa-spring-grid>` | `motionary/widgets/spring-grid` | `defineSpringGrid()` |
+| `<usa-chat-head>` | `motionary/widgets/chat-head` | `defineChatHead()` |
+| `<usa-fling-tabs>` | `motionary/widgets/fling-tabs` | `defineFlingTabs()` |
+| `<usa-swing-sign>` | `motionary/widgets/swing-sign` | `defineSwingSign()` |
 | `<usa-spring-pip>` | `motionary/widgets/spring-pip` | `defineSpringPip()` |
 | `<usa-spring-island>` | `motionary/widgets/spring-island` | `defineSpringIsland()` |
 | `<usa-spring-peek>` | `motionary/widgets/spring-peek` | `defineSpringPeek()` |

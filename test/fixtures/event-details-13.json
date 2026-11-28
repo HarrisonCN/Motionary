@@ -2285,6 +2285,51 @@
       "usa:section": [
         "{index, label}"
       ]
+    },
+    "usa-chat-head": {
+      "usa:dismiss": [
+        "{}"
+      ],
+      "usa:dock": [
+        "{side}"
+      ],
+      "usa:restore": [
+        "{}"
+      ],
+      "usa:tap": [
+        "{}"
+      ]
+    },
+    "usa-fling-dial": {
+      "usa:change": [
+        "{index, value}"
+      ],
+      "usa:input": [
+        "{index, value}"
+      ]
+    },
+    "usa-fling-ruler": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-fling-tabs": {
+      "usa:change": [
+        "{index, label}"
+      ]
+    },
+    "usa-spring-grid": {
+      "usa:reorder": [
+        "{from, order, to}"
+      ]
+    },
+    "usa-swing-sign": {
+      "usa:flip": [
+        "{flipped}"
+      ]
     }
   }
 }
