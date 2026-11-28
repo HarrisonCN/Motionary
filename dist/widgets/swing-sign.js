@@ -164,6 +164,13 @@ function defineSwingSign(tag = 'usa-swing-sign') {
                     return;
                 dragged = false;
                 drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, off: aimAt(e.clientX, e.clientY) - angle, last: angle, t: e.timeStamp, v: 0, live: false };
+                // capture now: the card swings away under the pointer, so a quick first move would otherwise miss it
+                try {
+                    card.setPointerCapture?.(e.pointerId);
+                }
+                catch {
+                    /* synthetic */
+                }
             });
             this.listen(card, 'pointermove', (e) => {
                 if (!drag || e.pointerId !== drag.id)
@@ -176,12 +183,6 @@ function defineSwingSign(tag = 'usa-swing-sign') {
                     held = true;
                     rest();
                     root.setAttribute('data-dragging', '');
-                    try {
-                        card.setPointerCapture?.(e.pointerId);
-                    }
-                    catch {
-                        /* synthetic */
-                    }
                 }
                 if (this.reduced)
                     return;
